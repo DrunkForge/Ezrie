@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<RootNamespace>Ezrie.AdministrationService</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore.Migrations\Ezrie.EntityFrameworkCore.Migrations.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore\Ezrie.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\Ezrie.AdministrationService.Domain\Ezrie.AdministrationService.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

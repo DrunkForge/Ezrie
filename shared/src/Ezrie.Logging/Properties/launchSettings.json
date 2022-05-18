@@ -1,0 +1,10 @@
+{
+	"profiles": {
+		"Ezrie.Logging": {
+			"commandName": "Project",
+			"environmentVariables": {
+				"DOTNET_ENVIRONMENT": "Development"
+			}
+		}
+	}
+}

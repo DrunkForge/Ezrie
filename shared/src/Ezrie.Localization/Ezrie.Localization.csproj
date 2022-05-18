@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Localization\Ezrie\en-GB.json" />
+		<None Remove="Localization\Ezrie\en.json" />
+		<None Remove="Localization\Ezrie\es.json" />
+		<None Remove="Localization\Ezrie\fr.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Localization\Ezrie\en-GB.json" />
+		<EmbeddedResource Include="Localization\Ezrie\en.json" />
+		<EmbeddedResource Include="Localization\Ezrie\es.json" />
+		<EmbeddedResource Include="Localization\Ezrie\fr.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="$(MicrosoftPackageVersion)">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="Volo.Abp.AspNetCore" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.Localization" Version="$(VoloAbpPackageVersion)">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="Volo.Abp.Validation" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
+
+</Project>

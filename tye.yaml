@@ -1,0 +1,44 @@
+name: ezrie
+services:
+
+# Account Management Client
+- name: ezrie-account-admin
+  project: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.Admin\Ezrie.AccountManagement.Admin.csproj
+  bindings:
+    - protocol: https
+      port: 5000
+
+# Account Managment API
+- name: ezrie-account-api
+  project: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.HttpApi.Host\Ezrie.AccountManagement.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 5001
+
+# Account STS API
+- name: ezrie-account-sts
+  project: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.STS\Ezrie.AccountManagement.STS.csproj
+  bindings:
+    - protocol: https
+      port: 5200
+
+# Administration Blazor Client
+- name: ezrie-administration-blazor
+  project: services\Ezrie.AdministrationService\host\Ezrie.AdministrationService.Blazor.Host\Ezrie.AdministrationService.Blazor.Host.csproj
+  bindings:
+    - protocol: https
+      port: 5100
+
+# API Gateway
+- name: public-httpapi-gateway
+  project: gateways\Ezrie.Gateway.Public\Ezrie.Gateway.Public.csproj
+  bindings:
+    - protocol: https
+      port: 7000
+
+# Administration API
+- name: ezrie-administration-httpapi-host
+  project: services\Ezrie.AdministrationService\host\Ezrie.AdministrationService.HttpApi.Host\Ezrie.AdministrationService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 7001

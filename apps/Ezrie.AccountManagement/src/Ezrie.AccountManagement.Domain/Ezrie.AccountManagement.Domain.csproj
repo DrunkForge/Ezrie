@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<RootNamespace>Ezrie.AccountManagement</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Skoruba.IdentityServer4.Admin.EntityFramework.Configuration" Version="2.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Ezrie.AccountManagement.Domain.Shared\Ezrie.AccountManagement.Domain.Shared.csproj" />
+	</ItemGroup>
+	
+</Project>

@@ -1,0 +1,34 @@
+{
+	"ReverseProxy": {
+		"Routes": {
+			"Ezrie Administration Serivce": {
+				"ClusterId": "ezrie-administration-httpapi-host",
+				"Match": {
+					"Path": "/api/administration/{**everything}"
+				}
+			},
+			"Ezrie Account Management": {
+				"ClusterId": "ezrie-account-httpapi-host",
+				"Match": {
+					"Path": "/api/account/{**everything}"
+				}
+			}
+		},
+		"Clusters": {
+			"ezrie-administration-httpapi-host": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:7001"
+					}
+				}
+			},
+			"ezrie-account-httpapi-host": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:5001"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\common.build.props" />
+
+	<PropertyGroup>
+		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<UserSecretsId>Ezrie.Gateway.Public-216dd4b2-19d1-4738-9d00-f3fb514296cd</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\shared\src\Ezrie.Hosting.Gateways\Ezrie.Hosting.Gateways.csproj" />
+	  <ProjectReference Include="..\..\shared\src\Ezrie.Hosting.Microservices\Ezrie.Hosting.Microservices.csproj" />
+	  <ProjectReference Include="..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
+	</ItemGroup>
+
+</Project>

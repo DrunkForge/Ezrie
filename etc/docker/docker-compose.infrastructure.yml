@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+
+  rabbitmq:
+    container_name: ezrie_rabbitmq
+    image: rabbitmq:management-alpine
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    networks:
+      - ezrie-crm-network
+
+  redis:
+    container_name: ezrie_redis
+    image: redis:alpine
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+    networks:
+      - ezrie-crm-network
+
+  db:
+    container_name: ezrie_postgres
+    image: postgres:latest
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U root" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ezrie_postgres_data:/var/lib/postgresql/data
+    networks:
+      - ezrie-crm-network
+
+  pgadmin:
+    container_name: ezrie_pgadmin_container
+    image: dpage/pgadmin4:latest
+    volumes:
+      - ezrie_pgadmin_data:/var/lib/pgadmin
+    networks:
+      - ezrie-crm-network
+
+  seq:
+    container_name: ezrie_seq
+    image: datalust/seq:latest
+    volumes:
+      - ezrie_seq_data:/data
+    networks:
+      - ezrie-crm-network
+
+volumes:
+  ezrie_postgres_data:
+  ezrie_pgadmin_data:
+  ezrie_seq_data:
+
+
+networks:
+  ezrie-crm-network:
+    external: true

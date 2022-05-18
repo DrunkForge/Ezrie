@@ -1,0 +1,187 @@
+{
+	"IdentityServerData": {
+		"IdentityResources": [
+			{
+				"Name": "roles",
+				"Enabled": true,
+				"DisplayName": "Roles",
+				"UserClaims": [
+					"role"
+				]
+			},
+			{
+				"Name": "openid",
+				"Enabled": true,
+				"Required": true,
+				"DisplayName": "Your user identifier",
+				"UserClaims": [
+					"sub"
+				]
+			},
+			{
+				"Name": "profile",
+				"Enabled": true,
+				"DisplayName": "User profile",
+				"Description": "Your user profile information (first name, last name, etc.)",
+				"Emphasize": true,
+				"UserClaims": [
+					"name",
+					"family_name",
+					"given_name",
+					"middle_name",
+					"nickname",
+					"preferred_username",
+					"profile",
+					"picture",
+					"website",
+					"gender",
+					"birthdate",
+					"zoneinfo",
+					"locale",
+					"updated_at"
+				]
+			},
+			{
+				"Name": "email",
+				"Enabled": true,
+				"DisplayName": "Your email address",
+				"Emphasize": true,
+				"UserClaims": [
+					"email",
+					"email_verified"
+				]
+			},
+			{
+				"Name": "address",
+				"Enabled": true,
+				"DisplayName": "Your address",
+				"Emphasize": true,
+				"UserClaims": [
+					"address"
+				]
+			}
+		],
+		"ApiScopes": [
+			{
+				"Name": "ezrie_account_management_api",
+				"DisplayName": "Ezrie Account Management API",
+				"Required": true,
+				"UserClaims": [
+					"role",
+					"name"
+				]
+			},
+			{
+				"Name": "ezrie_administration_service_api",
+				"DisplayName": "Ezrie Administration Service API",
+				"Required": true,
+				"UserClaims": [
+					"role",
+					"name"
+				]
+			}
+		],
+		"ApiResources": [
+			{
+				"Name": "ezrie_account_management_api",
+				"Scopes": [
+					"ezrie_account_management_api"
+				]
+			},
+			{
+				"Name": "AdministrationService",
+				"Scopes": [
+					"AdministrationService"
+				]
+			}
+		],
+		"Clients": [
+			{
+				"ClientId": "ezrie_account_management",
+				"ClientName": "ezrie_account_management",
+				"ClientUri": "https://localhost:5000",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequirePkce": true,
+				"ClientSecrets": [
+					{
+						"Value": "e2c06464-d26d-4518-b6e8-6b0c271d1da7"
+					}
+				],
+				"RedirectUris": [
+					"https://localhost:5000/signin-oidc"
+				],
+				"FrontChannelLogoutUri": "https://localhost:5000/signout-oidc",
+				"PostLogoutRedirectUris": [
+					"https://localhost:5000/signout-callback-oidc"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:5000"
+				],
+				"AllowedScopes": [
+					"openid",
+					"email",
+					"profile",
+					"roles"
+				]
+			},
+			{
+				"ClientId": "ezrie_account_management_api_swaggerui",
+				"ClientName": "ezrie_account_management_api_swaggerui",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:5001/swagger/oauth2-redirect.html"
+				],
+				"AllowedScopes": [
+					"ezrie_account_management_api"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:5001"
+				]
+			},
+			{
+				"ClientId": "ezrie_administration_service_blazor",
+				"ClientName": "ezrie_administration_service_blazor",
+				"AllowedGrantTypes": [
+					"code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:5100/swagger/oauth2-redirect.html"
+				],
+				"AllowedScopes": [
+					"ezrie_account_management_api"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:5100"
+				]
+			},
+			{
+				"ClientId": "ezrie_administration_service_swaggerui",
+				"ClientName": "Ezrie Administration Service Swagger UI",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": false,
+				"RedirectUris": [
+					"https://localhost:7000/api/administration/swagger/oauth2-redirect.html",
+					"https://localhost:7001/swagger/oauth2-redirect.html"
+				],
+				"AllowedScopes": [
+					"ezrie_administration_service_api"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:7000",
+					"https://localhost:7001"
+				]
+			}
+		]
+	}
+}

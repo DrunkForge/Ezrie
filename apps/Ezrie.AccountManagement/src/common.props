@@ -1,0 +1,9 @@
+<Project>
+
+  <Import Project="..\common.props" />
+
+	<PropertyGroup>
+		<AbpProjectType>app</AbpProjectType>
+	</PropertyGroup>
+
+</Project>

@@ -1,0 +1,346 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>774</x><y>318</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Subscription
+--
+PlanUID: Guid
+Start: DateOnly
+End: DateOnly</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>614</x><y>78</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;AggregateRoot&gt;&gt;
+Tenant
+--
+*PK: TenantID*
+*FK: LedgerID*
+Organization: String
+BillingContact: Contact
+Created: DateOnly
+--
+ChangePlan(Plan)
+
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>284</x><y>28</y><w>210</w><h>150</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
+Plan
+--
+*UID: PlanUID*
+Name: String
+Amount: Money
+Discount: Decimal
+Period: Period
+Custom: Boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>284</x><y>258</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Feature
+--
+Identifier: String
+Display: String
+UIOrder: Int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>374</x><y>168</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=-
+m1=
+m2=*
+</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>714</x><y>260</y><w>80</w><h>120</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;10;100;60;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1044</x><y>320</y><w>210</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+LedgerEntry
+--
+Date: DateOnly
+Debit: Decimal
+Credt: Decimal
+Description: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>180</y><w>30</w><h>160</h></coordinates><panel_attributes>lt=-
+m2=*</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>500</y><w>210</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
+User
+--
+UID: Guid
+Name: Name
+EmailAddress: EmailAddress
+Tenants</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>740</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Name
+--
+Title: String
+First: String
+Middle: String
+Last: String
+PostNominals: String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>650</y><w>210</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Email
+--
+Address: String
+LastVerified: Instant</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1044</x><y>70</y><w>210</w><h>120</h></coordinates><panel_attributes>&lt;&lt;AggregateRoot&gt;&gt;
+Ledger
+--
+*Owner: Entity*
+Date: DateOnly
+Debit: Decimal
+Credt: Decimal
+Description: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>410</y><w>210</w><h>30</h></coordinates><panel_attributes>/ClaimsIdentity/
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>94</x><y>430</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>284</x><y>500</y><w>210</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
+Session
+--
+UID: SessionUID
+StartUtcDateTime: Instant
+IpAddress: IPAddress
+UserAgent: String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>204</x><y>530</y><w>100</w><h>40</h></coordinates><panel_attributes>lt=-
+m2=*</panel_attributes><additional_attributes>10;10;80;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>634</x><y>630</y><w>240</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Contact : Person
+--
+Address
+PhoneNumbers : ISet&lt;TelephoneNumber&gt;
+Email: Email
+Notes: String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>900</y><w>210</w><h>150</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Address
+--
+Line1
+Line2
+Line3
+City
+ProvState
+PostalZip
+Country: Country</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>1080</y><w>210</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Country
+--
+Name
+ISO3166Alpha2Code
+ISO3166Alpha3Code
+ISO3166NumericCode
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>1340</y><w>210</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Money
+--
+Value: Decimal
+Currency: Currency</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>1210</y><w>210</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Currency
+--
+Name
+Code
+Number
+DecimalPlaces</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>4</x><y>1450</y><w>210</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+TelephoneNumber
+--
+Number: String
+Type: TelephoneNumberType
+SupportsSMS: Boolean
+Country</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>1450</y><w>210</w><h>200</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+TelephoneNumberType
+--
+Mobile 
+Home
+Work
+School
+Fax
+Main
+Home Fax
+Work Fax
+Pager
+Other
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1170</x><y>630</y><w>240</w><h>490</h></coordinates><panel_attributes>&lt;&lt;AggregateRoot&gt;&gt;
+Client : Person
+--
+DateOfBirth: LocalDate
+HomeAddress: Address
+Email: Email
+TelephoneNumbers: ISet&lt;ClientTelephone&gt;
+Contact: ISet&lt;ClientContact&gt;
+Employment: String
+Goals: ISet&lt;PersonalGoal&gt;
+Objectives: ISet&lt;PersonalObjective&gt;
+PresentingProblem 
+PresentHousehold: ISet&lt;ClientContact&gt;
+Profile: ICollection&lt;ProfileEntry&gt;
+Childhood: Markdown
+MedicalInformation: MedicalInformation
+SuicideRiskAssessment: ISet&lt;SuicideRiskAssessment&gt;
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>1640</y><w>210</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+ClientTelephone : TelephoneNumber
+--
+Shared: Boolean
+AllowVoice: Boolean
+AllowVoicemail: Boolean
+AllowSMS: Boolean
+Notes: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>100</x><y>1580</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2120</x><y>260</y><w>240</w><h>160</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
+Appointment : Event
+--
+Priority: High | Normal | Low
+Agenda: ISet&lt;AgendaItem&gt;
+Notes: Markdown
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2430</x><y>0</y><w>210</w><h>140</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Package::FatClass
+Attendee
+--
+Appointment
+Person
+Status: AttendeeStatus
+Reminders: ISet&lt;Reminder&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1240</x><y>1150</y><w>100</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+AttendeeStatus
+--
+Unconfirmed
+Tentative
+Confirmed
+Declined</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1040</x><y>460</y><w>220</w><h>100</h></coordinates><panel_attributes>/Person/
+--
+Name: Name
+TimeZone: DateTimeZone</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>630</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;AggregateRoot&gt;&gt;
+Counsellor : Person
+--
+DateOfBirth: LocalDate
+Schedule
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1690</x><y>0</y><w>340</w><h>190</h></coordinates><panel_attributes>&lt;&lt;AggregateRoot&gt;&gt;
+Schedule
+--
+UID: ScheduleID
+--
++AddEvent(Event)
+Boolean OcurrsOn(String eventArg, ZonedDateTime aDate)
+List Dates (String eventArg, Interval during)
+Instant NextOccurence (String eventArg, Date aDate)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2120</x><y>0</y><w>240</w><h>210</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
+/Event/
+--
+*UID : EventID*
+Title: String
+Location: Address | Telephone | Video | Room
+Category: Category
+TimeZone: DateTimeZone
+Starts: LocalTime
+Duration: Duration
+Ends: Starts + Duration
+AllDay: Boolean
+Occurs: TemporalExpression
+Attendees: ISet&lt;Attendee&gt;
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2670</x><y>260</y><w>210</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+EventOccurence
+--
+Sequence: Int
+Name
+Starts: ZonedDateTime
+Duration: Duration
+
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2430</x><y>530</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+/TemporalExpression/
+--
+
+Duration: Duration
+--
++Boolean Includes(ZonedDateTime theDate)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>780</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+MonthlyDays : TemporalExpression
+--
+Months: 
+Days: ISet&lt;Int&gt;
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>1480</y><w>250</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+YearlyRange : TemporalExpression
+--
+StartMonth: Month
+StartDay: Int
+EndMonth: Month
+EndDay: Int
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>920</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Daily : TemporalExpression
+--
+Interval: Int
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>1060</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Weekly : TemporalExpression
+--
+Interval: Int
+DaysOfWeek: 
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>1200</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Monthly : TemporalExpression
+--
+Months: Int
+Days: 
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>1340</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+MonthlyOrdinal : TemporalExpression
+--
+Months: Int
+Ordinal: Int
+Days: DayOfWeek
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1420</x><y>1340</y><w>160</w><h>180</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+DaysOfWeek : BitField
+--
+None = 0
+Sunday = 1
+Monday = 2
+Tuesday = 4
+Wednesday = 8
+Thursday = 16
+Friday = 32
+Saturday = 64
+All = 127</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1240</x><y>1340</y><w>160</w><h>150</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+DayOfWeek
+--
+Sunday
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1420</x><y>1540</y><w>160</w><h>260</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Months : BitField
+--
+None = 0
+January = 1 
+February = 2
+March = 4
+April = 8
+May = 16
+June = 32
+July = 64
+August = 128
+September = 256
+October = 512
+November = 1024
+December = 2048
+All = 4095
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1240</x><y>1540</y><w>160</w><h>260</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Month
+--
+January
+February
+March
+April
+May
+June
+July
+August
+September
+October
+November
+December
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>650</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Range: TemporalExpression
+--
+Starts: ZonedDateTime
+Ends: ZonedDateTime
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>2070</x><y>520</y><w>250</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Annual : TemporalExpression
+--
+Month: Month
+Duration: Duration
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2230</x><y>200</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1590</x><y>810</y><w>210</w><h>190</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+MedicalInformation
+--
+Contacts: ISet&lt;Contact&gt;
+Medications: ISet&lt;Medication&gt;
+History: Markdown
+Notes: ISet&lt;Note&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>634</x><y>770</y><w>240</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+ClientContact : Contact
+--
+Role: String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>648</y><w>220</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+Note
+--
+Timestamp: LocalDateTime
+Author: User
+Content: Markdown</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1590</x><y>630</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
+ProfileEntry
+--
+Title: String
+UIOrder: Int
+Notes: IList&lt;Note&gt;
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1590</x><y>1050</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Value&gt;&gt;
+SuicideRiskAssessment
+--
+Timestamp: LocalDateTime
+Author: User
+Content: Markdown
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1130</x><y>548</y><w>170</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;150;80</additional_attributes></element></diagram>

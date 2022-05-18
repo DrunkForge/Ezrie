@@ -1,0 +1,25 @@
+﻿{
+  "IdentityData": {
+    "Roles": [
+      {
+        "Name": "System Administrators"
+      }
+    ],
+    "Users": [
+      {
+        "Username": "admin",
+        "Password": "nji(0okM",
+        "Email": "root@ezrie.ca",
+        "Roles": [
+          "System Administrators"
+        ],
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "admin"
+          }
+        ]
+      }
+    ]
+  }
+}

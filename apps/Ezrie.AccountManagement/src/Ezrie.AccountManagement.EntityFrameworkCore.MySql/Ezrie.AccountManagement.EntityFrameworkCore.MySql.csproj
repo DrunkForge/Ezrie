@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<RootNamespace>Ezrie.AccountManagement.EntityFrameworkCore.MySql</RootNamespace>
+		<Description>Entity Framework layer for the administration of the IdentityServer4 and Asp.Net Core Identity with MySql support</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore\Ezrie.AccountManagement.EntityFrameworkCore.csproj" />
+	</ItemGroup>
+
+</Project>
+
+
+
+
+
+
+
+

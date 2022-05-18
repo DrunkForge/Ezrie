@@ -1,0 +1,22 @@
+{
+	"culture": "en",
+	"texts": {
+		"Enum:AddressType:0": "None",
+		"Enum:AddressType:1": "Mailing Address",
+		"Enum:AddressType:2": "Billing Address",
+		"Enum:AddressType:4": "Shipping Address",
+		"Enum:AddressType:8": "Home Address",
+		"Enum:AddressType:16": "Work Address",
+		"Enum:AddressType:32": "Other Address",
+		"Name:Label:Honorific": "Title",
+		"Name:Label:First": "First Name",
+		"Name:Label:Initials": "Middle Initials",
+		"Name:Label:Last": "Last Name",
+		"Name:Label:PostNominals": "Post Nominals",
+		"Name:Placeholder:Honorific": "Mz.",
+		"Name:Placeholder:First": "Pat",
+		"Name:Placeholder:Initials": "",
+		"Name:Placeholder:Last": "Doe",
+		"Name:Placeholder:PostNominals": "MPCC-S"
+	}
+}

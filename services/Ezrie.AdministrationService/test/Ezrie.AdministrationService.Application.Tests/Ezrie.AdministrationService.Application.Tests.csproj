@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<RootNamespace>Ezrie.AdministrationService</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.Application\Ezrie.AdministrationService.Application.csproj" />
+		<ProjectReference Include="..\Ezrie.AdministrationService.Domain.Tests\Ezrie.AdministrationService.Domain.Tests.csproj" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+	</ItemGroup>
+
+</Project>
