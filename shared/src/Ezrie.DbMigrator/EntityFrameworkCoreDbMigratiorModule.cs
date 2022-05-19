@@ -17,12 +17,10 @@
 using Ezrie.AdministrationService;
 using Ezrie.AdministrationService.EntityFrameworkCore;
 using Ezrie.EntityFrameworkCore.Migrations;
-using Ezrie.Logging;
 using Ezrie.MultiTenancy;
 using Ezrie.Seeding;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Data;

@@ -34,10 +34,9 @@ public class AppConfiguration
 	public String ClientSecret { get; set; } = String.Empty;
 
 	// Cors
-	public Boolean EnableCors { get; set; } = true;
 	public Boolean CorsAllowAnyOrigin { get; set; }
 	[SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "Arrays play nice with IConfiguration")]
-	public String[] CorsAllowOrigins { get; } = Array.Empty<String>();
+	public String[] CorsAllowOrigins { get; set; } = Array.Empty<String>();
 
 	// Identity
 	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "System.Uri doesn't play nice with IConfiguration")]

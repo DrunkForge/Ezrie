@@ -1,3 +1,5 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -5,22 +7,28 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/Ezrie.AccountManagement.Admin.Api/Ezrie.AccountManagement.Admin.Api.csproj", "src/Ezrie.AccountManagement.Admin.Api/"]
-COPY ["src/Ezrie.AccountManagement.Admin.EntityFramework.Shared/Ezrie.AccountManagement.Admin.EntityFramework.Shared.csproj", "src/Ezrie.AccountManagement.Admin.EntityFramework.Shared/"]
-COPY ["src/Ezrie.AccountManagement.Admin.EntityFramework.SqlServer/Ezrie.AccountManagement.Admin.EntityFramework.SqlServer.csproj", "src/Ezrie.AccountManagement.Admin.EntityFramework.SqlServer/"]
-COPY ["src/Ezrie.AccountManagement.Domain.Shared/Ezrie.AccountManagement.Domain.Shared.csproj", "src/Ezrie.AccountManagement.Domain.Shared/"]
-COPY ["src/Ezrie.AccountManagement.Admin.EntityFramework.PostgreSQL/Ezrie.AccountManagement.Admin.EntityFramework.PostgreSQL.csproj", "src/Ezrie.AccountManagement.Admin.EntityFramework.PostgreSQL/"]
-COPY ["src/Ezrie.AccountManagement.Admin.EntityFramework.MySql/Ezrie.AccountManagement.Admin.EntityFramework.MySql.csproj", "src/Ezrie.AccountManagement.Admin.EntityFramework.MySql/"]
-RUN dotnet restore "src/Ezrie.AccountManagement.Admin.Api/Ezrie.AccountManagement.Admin.Api.csproj"
+COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.HttpApi.Host/Ezrie.AccountManagement.HttpApi.Host.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.HttpApi.Host/"]
+COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Domain.Shared/Ezrie.AccountManagement.Domain.Shared.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Domain.Shared/"]
+COPY ["shared/src/Ezrie.Logging/Ezrie.Logging.csproj", "shared/src/Ezrie.Logging/"]
+COPY ["shared/src/Ezrie.Domain/Ezrie.Domain.csproj", "shared/src/Ezrie.Domain/"]
+COPY ["shared/src/Ezrie.Domain.Shared/Ezrie.Domain.Shared.csproj", "shared/src/Ezrie.Domain.Shared/"]
+COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore.MySql/Ezrie.AccountManagement.EntityFrameworkCore.MySql.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore.MySql/"]
+COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore/Ezrie.AccountManagement.EntityFrameworkCore.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore/"]
+COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Domain/Ezrie.AccountManagement.Domain.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Domain/"]
+COPY ["shared/src/Ezrie.Hosting.Microservices/Ezrie.Hosting.Microservices.csproj", "shared/src/Ezrie.Hosting.Microservices/"]
+COPY ["shared/src/Ezrie.Hosting.AspNetCore/Ezrie.Hosting.AspNetCore.csproj", "shared/src/Ezrie.Hosting.AspNetCore/"]
+COPY ["shared/src/Ezrie.Hosting/Ezrie.Hosting.csproj", "shared/src/Ezrie.Hosting/"]
+COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore.SqlServer/Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore.SqlServer/"]
+COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL/Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL/"]
+RUN dotnet restore "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.HttpApi.Host/Ezrie.AccountManagement.HttpApi.Host.csproj"
 COPY . .
-WORKDIR "/src/src/Ezrie.AccountManagement.Admin.Api"
-RUN dotnet build "Ezrie.AccountManagement.Admin.Api.csproj" -c Release -o /app/build
+WORKDIR "/src/apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.HttpApi.Host"
+RUN dotnet build "Ezrie.AccountManagement.HttpApi.Host.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Ezrie.AccountManagement.Admin.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Ezrie.AccountManagement.HttpApi.Host.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENV ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
-ENTRYPOINT ["dotnet", "Ezrie.AccountManagement.Admin.Api.dll"]
+ENTRYPOINT ["dotnet", "Ezrie.AccountManagement.HttpApi.Host.dll"]

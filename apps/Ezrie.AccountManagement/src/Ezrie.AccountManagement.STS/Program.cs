@@ -54,5 +54,10 @@ internal static class Program
 			configApp.AddEnvironmentVariables();
 			configApp.AddCommandLine(args);
 		})
-		.ConfigureWebHostDefaults(webBuilder => webBuilder.ConfigureKestrel(options => options.AddServerHeader = false).UseStartup<Startup>());
+		.ConfigureWebHostDefaults(webBuilder =>
+		{
+			webBuilder
+				.ConfigureKestrel(options => options.AddServerHeader = false)
+				.UseStartup<Startup>();
+		});
 }

@@ -55,5 +55,14 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
 					"..{0}..{0}src{0}Ezrie.AdministrationService.Application", Path.DirectorySeparatorChar)));
 			});
 		}
+
+		Configure<AbpEndpointRouterOptions>(options =>
+		{
+			options.EndpointConfigureActions.Add(endpointContext =>
+			{
+				endpointContext.Endpoints.MapControllers();
+				endpointContext.Endpoints.MapDefaultControllerRoute();
+			});
+		});
 	}
 }

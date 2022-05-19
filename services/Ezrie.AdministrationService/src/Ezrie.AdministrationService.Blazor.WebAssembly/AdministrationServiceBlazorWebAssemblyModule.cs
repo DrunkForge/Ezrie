@@ -17,7 +17,7 @@
 using Volo.Abp.AspNetCore.Components.WebAssembly.Theming;
 using Volo.Abp.Modularity;
 
-namespace Ezrie.AdministrationService.Blazor.WebAssembly;
+namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(AdministrationServiceBlazorModule))]
 [DependsOn(typeof(AdministrationServiceHttpApiClientModule))]

@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.IdentityServerGrants
 {
-    public partial class DbInit : Migration
+	public partial class DbInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

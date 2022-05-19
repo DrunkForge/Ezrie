@@ -9,7 +9,6 @@ using Ezrie.AccountManagement.STS.Helpers;
 using Ezrie.AccountManagement.STS.Configuration.Interfaces;
 using Ezrie.AccountManagement.STS.Configuration.Constants;
 using Ezrie.Hosting.AspNetCore;
-using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement.STS;
 
@@ -78,16 +77,9 @@ public class Startup
 
 		// Add custom security headers
 		app.UseSecurityHeaders(Configuration);
-
 		app.UseMvcLocalizationServices();
-
 		app.UseRouting();
-
-		if (app.ApplicationServices.GetApiConfiguration().EnableCors)
-		{
-			app.UseCors();
-		}
-
+		app.UseCors();
 		app.UseAuthorization();
 		app.UseEndpoints(endpoint =>
 		{

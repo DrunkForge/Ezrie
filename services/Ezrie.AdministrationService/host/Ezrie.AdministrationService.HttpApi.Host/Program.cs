@@ -14,6 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.Hosting.AspNetCore;
 using Ezrie.Logging;
 using Serilog;
 
@@ -26,19 +27,11 @@ internal static class Program
 	{
 		try
 		{
-			var builder = WebApplication.CreateBuilder(args);
-
-			builder.Host.AddAppSettingsSecretsJson()
-				.UseAutofac()
-				.UseEzrieLogging< AdministrationServiceHttpApiHostModule>();
-
-			await builder.AddApplicationAsync<AdministrationServiceHttpApiHostModule>();
+			var builder = CreateHostBuilder(args);
 
 			var app = builder.Build();
 
-			await app.InitializeApplicationAsync();
-
-			await app.RunAsync();
+			await app.RunAsync().ConfigureAwait(false);
 
 			return 0;
 		}
@@ -52,4 +45,15 @@ internal static class Program
 			Log.CloseAndFlush();
 		}
 	}
+
+	public static IHostBuilder CreateHostBuilder(String[] args) => Host
+		.CreateDefaultBuilder(args)
+		.UseAutofac()
+		.AddAppSettingsSecretsJson()
+		.UseEzrieLogging<AdministrationServiceHttpApiHostModule>()
+		.ConfigureWebHostDefaults(webBuilder =>
+		{
+			webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
+			webBuilder.UseStartup<Startup<AdministrationServiceHttpApiHostModule>>();
+		});
 }

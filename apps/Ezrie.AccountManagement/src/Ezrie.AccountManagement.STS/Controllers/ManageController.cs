@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 using Ezrie.AccountManagement.STS.Helpers;
 using Ezrie.AccountManagement.STS.ViewModels.Manage;
 using Ezrie.AccountManagement.STS.Helpers.Localization;
-using Ezrie.AccountManagement.STS.Helpers;
 
 namespace Ezrie.AccountManagement.STS.Controllers;
 

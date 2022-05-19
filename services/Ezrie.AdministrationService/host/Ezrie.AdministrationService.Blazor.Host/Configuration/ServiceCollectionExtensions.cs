@@ -14,20 +14,16 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Ezrie.Configuration;
 
-namespace Ezrie.Configuration;
+namespace Ezrie.AdministrationService.Configuration;
 
 public static class ServiceCollectionExtensions
 {
 	public static void ConfigureCors(this IServiceCollection services)
 	{
 		var apiConfiguration = services.GetConfiguration().GetApiConfiguration();
+		var origins = apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray();
 		services.AddCors(options =>
 		{
 			options.AddDefaultPolicy(builder =>
@@ -40,7 +36,7 @@ public static class ServiceCollectionExtensions
 				else
 				{
 					builder
-						.WithOrigins(apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray())
+						.WithOrigins(origins)
 						.SetIsOriginAllowedToAllowWildcardSubdomains();
 				}
 

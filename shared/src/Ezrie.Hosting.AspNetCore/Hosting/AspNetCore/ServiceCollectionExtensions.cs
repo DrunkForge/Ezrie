@@ -17,11 +17,6 @@
 using Ezrie.Configuration;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ezrie.Hosting.AspNetCore;
 
@@ -30,31 +25,31 @@ public static class ServiceCollectionExtensions
 	public static void ConfigureCors(this IServiceCollection services, Action<CorsPolicyBuilder>? defaultPolicy = null)
 	{
 		var apiConfiguration = services.GetConfiguration().GetApiConfiguration();
-		if (apiConfiguration.EnableCors)
+		var origins = apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray();
+
+		services.AddCors(options =>
 		{
-			services.AddCors(options =>
+			options.AddDefaultPolicy(builder =>
 			{
-				options.AddDefaultPolicy(builder =>
+				if (apiConfiguration.CorsAllowAnyOrigin)
 				{
-					if (apiConfiguration.CorsAllowAnyOrigin)
-					{
-						builder
-							.AllowAnyOrigin();
-					}
-					else
-					{
-						builder
-							.WithOrigins(apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray())
-							.SetIsOriginAllowedToAllowWildcardSubdomains();
-					}
-
 					builder
-						.AllowAnyHeader()
-						.AllowAnyMethod();
+						.AllowAnyOrigin();
+				}
+				else
+				{
+					builder
+						.WithOrigins(origins)
+						.SetIsOriginAllowedToAllowWildcardSubdomains()
+						.AllowCredentials();
+				}
 
-					defaultPolicy?.Invoke(builder);
-				});
+				builder
+					.AllowAnyHeader()
+					.AllowAnyMethod();
+
+				defaultPolicy?.Invoke(builder);
 			});
-		}
+		});
 	}
 }

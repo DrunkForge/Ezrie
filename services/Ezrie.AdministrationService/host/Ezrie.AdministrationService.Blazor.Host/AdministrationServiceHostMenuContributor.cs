@@ -19,7 +19,7 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.Account.Localization;
 using Ezrie.Configuration;
 
-namespace Ezrie.AdministrationService.Blazor.Host;
+namespace Ezrie.AdministrationService;
 
 public class AdministrationServiceHostMenuContributor : IMenuContributor
 {

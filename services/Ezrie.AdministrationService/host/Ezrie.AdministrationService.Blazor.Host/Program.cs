@@ -17,7 +17,7 @@
 using Ezrie.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-namespace Ezrie.AdministrationService.Blazor.Host;
+namespace Ezrie.AdministrationService;
 
 public static class Program
 {

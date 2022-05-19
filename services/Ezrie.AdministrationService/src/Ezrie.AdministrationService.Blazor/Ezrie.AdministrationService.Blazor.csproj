@@ -4,7 +4,8 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
-    </PropertyGroup>
+		<RootNamespace>Ezrie.AdministrationService</RootNamespace>
+	</PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Volo.Abp.AutoMapper" Version="$(VoloAbpPackageVersion)" />

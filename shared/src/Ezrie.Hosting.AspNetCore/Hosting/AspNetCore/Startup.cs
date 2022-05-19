@@ -15,23 +15,21 @@
 *********************************************************************************************/
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Volo.Abp.Modularity;
 
 namespace Ezrie.Hosting.AspNetCore;
 
-public static class ApplicationBuilderHelper
+public class Startup<T> where T : AbpModule
 {
-	public static async Task<WebApplication> BuildApplicationAsync<TStartupModule>(String[] args)
-		where TStartupModule : IAbpModule
+	public virtual void ConfigureServices(IServiceCollection services)
 	{
-		var builder = WebApplication.CreateBuilder(args);
-		builder.Host
-			.AddAppSettingsSecretsJson()
-			.UseAutofac();
+		services.AddApplication<T>();
+	}
 
-		await builder.AddApplicationAsync<TStartupModule>();
-		return builder.Build();
+	public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+	{
+		app.InitializeApplication();
 	}
 }

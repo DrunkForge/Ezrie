@@ -14,24 +14,8 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Volo.Abp.Modularity;
-
-namespace Ezrie.Hosting.AspNetCore;
-
-public static class ApplicationBuilderHelper
+namespace Ezrie.Configuration;
+public class RemoteServices
 {
-	public static async Task<WebApplication> BuildApplicationAsync<TStartupModule>(String[] args)
-		where TStartupModule : IAbpModule
-	{
-		var builder = WebApplication.CreateBuilder(args);
-		builder.Host
-			.AddAppSettingsSecretsJson()
-			.UseAutofac();
-
-		await builder.AddApplicationAsync<TStartupModule>();
-		return builder.Build();
-	}
+	public String AdministrationService { get; set; }
 }

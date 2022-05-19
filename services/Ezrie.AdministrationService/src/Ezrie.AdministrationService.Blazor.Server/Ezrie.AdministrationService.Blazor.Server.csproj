@@ -4,6 +4,7 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<RootNamespace>Ezrie.AdministrationService</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

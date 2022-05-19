@@ -16,7 +16,7 @@
 
 using Volo.Abp.Bundling;
 
-namespace Ezrie.AdministrationService.Blazor.Host;
+namespace Ezrie.AdministrationService;
 
 public class AdministrationServiceBlazorHostBundleContributor : IBundleContributor
 {

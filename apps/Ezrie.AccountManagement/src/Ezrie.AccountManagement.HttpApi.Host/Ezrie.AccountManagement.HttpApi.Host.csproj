@@ -9,7 +9,7 @@
 		<UserSecretsId>1cc472a2-4e4b-48ce-846b-5219f71fc643</UserSecretsId>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerfileContext>..\..</DockerfileContext>
+		<DockerfileContext>..\..\..\..</DockerfileContext>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -38,6 +38,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Domain.Shared\Ezrie.Domain.Shared.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.Microservices\Ezrie.Hosting.Microservices.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore.MySql\Ezrie.AccountManagement.EntityFrameworkCore.MySql.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL\Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL.csproj" />

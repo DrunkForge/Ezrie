@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL.Migrations.IdentityServerConfiguration
 {
-    public partial class DbInit : Migration
+	public partial class DbInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

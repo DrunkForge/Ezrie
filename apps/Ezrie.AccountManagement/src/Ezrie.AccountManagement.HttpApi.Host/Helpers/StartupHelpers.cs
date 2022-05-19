@@ -35,7 +35,6 @@ using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.PostgreSQL;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.SqlServer;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Helpers;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
-using Ezrie.AccountManagement.Configuration;
 using Ezrie.AccountManagement.Configuration.Constants;
 using Ezrie.AccountManagement.Helpers.Localization;
 using Ezrie.AccountManagement.Configuration.AuditLogging;
@@ -61,37 +60,6 @@ public static class StartupHelpers
 		services
 			.AddTransient<IAuditLoggingRepository<TAuditLog>,
 				AuditLoggingRepository<TAuditLoggingDbContext, TAuditLog>>();
-
-		return services;
-	}
-
-	public static IServiceCollection AddAdminApiCors(this IServiceCollection services, AppConfiguration apiConfiguration)
-	{
-		if (apiConfiguration.EnableCors)
-		{
-			services.AddCors(options =>
-			{
-				options.AddDefaultPolicy(
-					builder =>
-					{
-						if (apiConfiguration.CorsAllowAnyOrigin)
-						{
-							builder
-								.AllowAnyOrigin();
-						}
-						else
-						{
-							builder
-								.WithOrigins(apiConfiguration.CorsAllowOrigins)
-								.SetIsOriginAllowedToAllowWildcardSubdomains();
-						}
-
-						builder
-							.AllowAnyHeader()
-							.AllowAnyMethod();
-					});
-			});
-		}
 
 		return services;
 	}

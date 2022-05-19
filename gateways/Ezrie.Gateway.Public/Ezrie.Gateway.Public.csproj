@@ -6,7 +6,14 @@
 	<PropertyGroup>
 		<PreserveCompilationReferences>true</PreserveCompilationReferences>
 		<UserSecretsId>Ezrie.Gateway.Public-216dd4b2-19d1-4738-9d00-f3fb514296cd</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
+		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\shared\src\Ezrie.Hosting.Gateways\Ezrie.Hosting.Gateways.csproj" />

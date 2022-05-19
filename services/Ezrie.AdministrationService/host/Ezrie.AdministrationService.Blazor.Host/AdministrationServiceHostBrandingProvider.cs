@@ -16,7 +16,7 @@
 
 using Volo.Abp.Ui.Branding;
 
-namespace Ezrie.AdministrationService.Blazor.Host;
+namespace Ezrie.AdministrationService;
 
 public class AdministrationServiceHostBrandingProvider : DefaultBrandingProvider
 {

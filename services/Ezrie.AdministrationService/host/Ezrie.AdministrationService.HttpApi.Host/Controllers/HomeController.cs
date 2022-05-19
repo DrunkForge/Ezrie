@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -21,8 +21,5 @@ namespace Ezrie.AdministrationService.Controllers;
 
 public class HomeController : AbpController
 {
-	public ActionResult Index()
-	{
-		return Redirect("~/swagger");
-	}
+	public ActionResult Index() => Redirect("~/swagger/index.html");
 }

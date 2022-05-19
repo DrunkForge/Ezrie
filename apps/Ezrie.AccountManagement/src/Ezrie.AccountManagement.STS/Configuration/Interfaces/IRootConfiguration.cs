@@ -1,4 +1,3 @@
-using Ezrie.AccountManagement.STS.Configuration;
 using Skoruba.IdentityServer4.Shared.Configuration.Configuration.Identity;
 
 namespace Ezrie.AccountManagement.STS.Configuration.Interfaces;

@@ -16,7 +16,7 @@
 
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
-using Ezrie.AdministrationService.Blazor.WebAssembly;
+using Ezrie.AdministrationService.Configuration;
 using Ezrie.Configuration;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Volo.Abp.Account;
@@ -31,7 +31,7 @@ using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
 
-namespace Ezrie.AdministrationService.Blazor.Host;
+namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(AbpAutofacWebAssemblyModule))]
 [DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule))]
@@ -44,18 +44,17 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
-		var environment = context.Services.GetSingletonInstance<IWebAssemblyHostEnvironment>();
 		var builder = context.Services.GetSingletonInstance<WebAssemblyHostBuilder>();
 
 		ConfigureAuthentication(builder);
-		ConfigureHttpClient(context, environment);
+		ConfigureHttpClient(context);
 		ConfigureBlazorise(context);
 		ConfigureRouter(context);
 		ConfigureUI(builder);
 		ConfigureMenu(context);
 		ConfigureAutoMapper(context);
 
-		//context.Services.ConfigureCors();
+		context.Services.ConfigureCors();
 	}
 
 	private void ConfigureRouter(ServiceConfigurationContext context)
@@ -98,11 +97,11 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 		builder.RootComponents.Add<App>("#ApplicationContainer");
 	}
 
-	private static void ConfigureHttpClient(ServiceConfigurationContext context, IWebAssemblyHostEnvironment environment)
+	private static void ConfigureHttpClient(ServiceConfigurationContext context)
 	{
 		context.Services.AddTransient(sp => new HttpClient
 		{
-			BaseAddress = new Uri(environment.BaseAddress)
+			BaseAddress = new Uri(context.GetRemoteServices().AdministrationService)
 		});
 	}
 

@@ -15,6 +15,7 @@
 *********************************************************************************************/
 
 using Ezrie.Configuration;
+using Ezrie.Hosting.AspNetCore;
 using Ezrie.Logging;
 using Serilog;
 
@@ -27,18 +28,9 @@ internal static class Program
 	{
 		try
 		{
-			var builder = WebApplication.CreateBuilder(args);
-			builder.Host
-				.AddAppSettingsSecretsJson()
-				.AddYarpJson()
-				.UseAutofac()
-				.UseEzrieLogging<PublicGatewayModule>();
-
-			await builder.AddApplicationAsync<PublicGatewayModule>().ConfigureAwait(false);
+			var builder = CreateHostBuilder(args);
 
 			var app = builder.Build();
-
-			await app.InitializeApplicationAsync().ConfigureAwait(false);
 
 			await app.RunAsync().ConfigureAwait(false);
 
@@ -54,4 +46,16 @@ internal static class Program
 			Log.CloseAndFlush();
 		}
 	}
+
+	public static IHostBuilder CreateHostBuilder(String[] args) => Host
+		.CreateDefaultBuilder(args)
+		.UseAutofac()
+		.AddAppSettingsSecretsJson()
+		.AddYarpJson()
+		.UseEzrieLogging<PublicGatewayModule>()
+		.ConfigureWebHostDefaults(webBuilder =>
+		{
+			webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
+			webBuilder.UseStartup<Startup<PublicGatewayModule>>();
+		});
 }

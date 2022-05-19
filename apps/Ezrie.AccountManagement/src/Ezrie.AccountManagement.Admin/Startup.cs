@@ -6,7 +6,6 @@ using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 using Serilog;
 using Ezrie.AccountManagement.Identity;
 using Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
-using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement.Admin;
 

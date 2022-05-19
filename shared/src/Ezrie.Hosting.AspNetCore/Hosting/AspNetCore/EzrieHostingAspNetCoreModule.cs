@@ -16,7 +16,6 @@
 
 using Ezrie.Configuration;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,8 +38,9 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 	{
 		ArgumentNullException.ThrowIfNull(context);
 
-		ConfigureDistributedCache(context);
 		context.ConfigureCors();
+
+		ConfigureDistributedCache(context);
 	}
 
 	private void ConfigureDistributedCache(ServiceConfigurationContext context)
@@ -76,12 +76,7 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 		app.UseStaticFiles();
 		app.UseAbpRequestLocalization();
 		app.UseRouting();
-
-		if (app.ApplicationServices.GetApiConfiguration().EnableCors)
-		{
-			app.UseCors();
-		}
-
+		app.UseCors();
 		app.UseAuthentication();
 		app.UseAuthorization();
 		app.UseAuditing();

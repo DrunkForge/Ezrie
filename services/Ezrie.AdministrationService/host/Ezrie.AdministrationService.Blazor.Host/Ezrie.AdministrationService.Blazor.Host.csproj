@@ -1,10 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
 	<Import Project="..\common.props" />
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<RootNamespace>Ezrie.AdministrationService</RootNamespace>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+		<DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+		<UserSecretsId>b7f262ee-b0a3-4784-870e-468627a687ab</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>

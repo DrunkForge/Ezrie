@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.Identity
 {
-    public partial class DbInit : Migration
+	public partial class DbInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

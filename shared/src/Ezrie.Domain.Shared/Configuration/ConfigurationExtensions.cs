@@ -63,6 +63,10 @@ public static class ConfigurationExtensions
 		=> configuration.GetOptions<AppConfiguration>()
 		?? throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
 
+	public static RemoteServices GetRemoteServices(this ServiceConfigurationContext context)
+		=> context.Services.GetConfiguration().GetOptions<RemoteServices>()
+		?? new();
+
 	private static T GetOptions<T>(this IServiceProvider serviceProvider)
 		=> serviceProvider.GetRequiredService<IConfiguration>().GetOptions<T>();
 

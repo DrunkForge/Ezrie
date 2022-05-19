@@ -25,7 +25,6 @@ using Ezrie.AccountManagement.STS.Configuration.Constants;
 using Ezrie.AccountManagement.STS.Helpers.Localization;
 using Ezrie.AccountManagement.STS.Configuration;
 using Ezrie.AccountManagement.STS.Configuration.Interfaces;
-using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement.STS.Helpers;
 

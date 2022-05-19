@@ -19,7 +19,6 @@ using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
-using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs.RabbitMQ;
 using Volo.Abp.DistributedLocking;
 using Volo.Abp.EventBus.RabbitMq;
