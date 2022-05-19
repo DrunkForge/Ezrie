@@ -17,5 +17,11 @@
 namespace Ezrie.Configuration;
 public class RemoteServices
 {
-	public String AdministrationService { get; set; }
+	public RemoteService Default { get; set; }
+	public RemoteService AdministrationService { get; set; }
+}
+
+public class RemoteService
+{
+	public String BaseUrl { get; set; }
 }

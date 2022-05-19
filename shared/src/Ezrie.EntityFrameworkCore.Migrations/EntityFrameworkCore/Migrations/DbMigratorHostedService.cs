@@ -15,6 +15,7 @@
 *********************************************************************************************/
 
 using Ezrie.EntityFrameworkCore.Seeding;
+using Ezrie.Logging;
 using Ezrie.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -17,8 +17,10 @@
 using Ezrie.AdministrationService;
 using Ezrie.AdministrationService.EntityFrameworkCore;
 using Ezrie.EntityFrameworkCore.Migrations;
+using Ezrie.Logging;
 using Ezrie.MultiTenancy;
 using Ezrie.Seeding;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Volo.Abp.Autofac;
@@ -40,6 +42,10 @@ public class DbMigratiorModule : AbpModule
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		context.Services.Replace(ServiceDescriptor.Transient<IDataSeeder, EzrieDataSeeder>());
+		context.Services.AddLogging(logging => logging
+			.ClearProviders()
+			.AddEzrieLogging<DbMigratiorModule>(context.Services.GetConfiguration())
+			);
 
 		Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
 

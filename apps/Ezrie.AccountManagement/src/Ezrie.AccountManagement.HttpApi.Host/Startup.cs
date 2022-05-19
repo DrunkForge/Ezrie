@@ -102,13 +102,14 @@ public class Startup
 					{
 						AuthorizationUrl = new Uri($"{apiConfiguration.IdentityServerBaseUrl}/connect/authorize"),
 						TokenUrl = new Uri($"{apiConfiguration.IdentityServerBaseUrl}/connect/token"),
-						Scopes = new Dictionary<String, String> {
-								{ apiConfiguration.OidcApiName, apiConfiguration.ApiName }
-						}
+						Scopes = new Dictionary<String, String> { { apiConfiguration.OidcApiName, apiConfiguration.ApiName } }
 					}
 				}
 			});
+
 			options.OperationFilter<AuthorizeCheckOperationFilter>();
+
+			options.HideAbpEndpoints();
 		});
 
 		services.AddAuditEventLogging<AdminAuditLogDbContext, AuditLog>(Configuration);

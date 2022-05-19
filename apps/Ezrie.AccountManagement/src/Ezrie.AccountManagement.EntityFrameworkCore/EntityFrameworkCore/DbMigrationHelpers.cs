@@ -153,28 +153,13 @@ public static class DbMigrationHelpers
 		where TUser : IdentityUser, new()
 		where TRole : IdentityRole, new()
 	{
-		// adding roles from seed
-		foreach (var r in identityDataConfiguration.Roles)
-		{
-			if (!await roleManager.RoleExistsAsync(r.Name))
-			{
-				var role = new TRole
-				{
-					Name = r.Name
-				};
+		await EnsureRoles(roleManager, identityDataConfiguration);
 
-				var result = await roleManager.CreateAsync(role);
+		await EnsureUsers(userManager, identityDataConfiguration);
+	}
 
-				if (result.Succeeded)
-				{
-					foreach (var claim in r.Claims)
-					{
-						await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(claim.Type, claim.Value));
-					}
-				}
-			}
-		}
-
+	private static async Task EnsureUsers<TUser>(UserManager<TUser> userManager, IdentityData identityDataConfiguration) where TUser : IdentityUser, new()
+	{
 		// adding users from seed
 		foreach (var user in identityDataConfiguration.Users)
 		{
@@ -215,58 +200,55 @@ public static class DbMigrationHelpers
 		}
 	}
 
+	private static async Task EnsureRoles<TRole>(RoleManager<TRole> roleManager, IdentityData identityDataConfiguration) where TRole : IdentityRole, new()
+	{
+		// adding roles from seed
+		foreach (var r in identityDataConfiguration.Roles)
+		{
+			if (!await roleManager.RoleExistsAsync(r.Name))
+			{
+				var role = new TRole
+				{
+					Name = r.Name
+				};
+
+				var result = await roleManager.CreateAsync(role);
+
+				if (result.Succeeded)
+				{
+					foreach (var claim in r.Claims)
+					{
+						await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(claim.Type, claim.Value));
+					}
+				}
+			}
+		}
+	}
+
 	/// <summary>
 	/// Generate default clients, identity and api resources
 	/// </summary>
 	private static async Task EnsureSeedIdentityServerData<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration)
 		where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
 	{
-		foreach (var resource in identityServerDataConfiguration.IdentityResources)
-		{
-			var exits = await context.IdentityResources.AnyAsync(a => a.Name == resource.Name);
+		await EnsureIdentityResources(context, identityServerDataConfiguration);
 
-			if (exits)
-			{
-				continue;
-			}
+		await EnsureApiScopes(context, identityServerDataConfiguration);
 
-			await context.IdentityResources.AddAsync(resource.ToEntity());
-		}
+		await EnsureApiResources(context, identityServerDataConfiguration);
 
-		foreach (var apiScope in identityServerDataConfiguration.ApiScopes)
-		{
-			var exits = await context.ApiScopes.AnyAsync(a => a.Name == apiScope.Name);
+		await EnsureClients(context, identityServerDataConfiguration);
 
-			if (exits)
-			{
-				continue;
-			}
+		await context.SaveChangesAsync();
+	}
 
-			await context.ApiScopes.AddAsync(apiScope.ToEntity());
-		}
-
-		foreach (var resource in identityServerDataConfiguration.ApiResources)
-		{
-			var exits = await context.ApiResources.AnyAsync(a => a.Name == resource.Name);
-
-			if (exits)
-			{
-				continue;
-			}
-
-			foreach (var s in resource.ApiSecrets)
-			{
-				s.Value = s.Value.ToSha256();
-			}
-
-			await context.ApiResources.AddAsync(resource.ToEntity());
-		}
-
+	private static async Task EnsureClients<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
+	{
 		foreach (var client in identityServerDataConfiguration.Clients)
 		{
-			var exits = await context.Clients.AnyAsync(a => a.ClientId == client.ClientId);
+			var exists = await context.Clients.AnyAsync(a => a.ClientId == client.ClientId);
 
-			if (exits)
+			if (exists)
 			{
 				continue;
 			}
@@ -282,8 +264,56 @@ public static class DbMigrationHelpers
 
 			await context.Clients.AddAsync(client.ToEntity());
 		}
+	}
 
-		await context.SaveChangesAsync();
+	private static async Task EnsureApiResources<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
+	{
+		foreach (var resource in identityServerDataConfiguration.ApiResources)
+		{
+			var exists = await context.ApiResources.AnyAsync(a => a.Name == resource.Name);
+
+			if (exists)
+			{
+				continue;
+			}
+
+			foreach (var s in resource.ApiSecrets)
+			{
+				s.Value = s.Value.ToSha256();
+			}
+
+			await context.ApiResources.AddAsync(resource.ToEntity());
+		}
+	}
+
+	private static async Task EnsureApiScopes<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
+	{
+		foreach (var apiScope in identityServerDataConfiguration.ApiScopes)
+		{
+			var exists = await context.ApiScopes.AnyAsync(a => a.Name == apiScope.Name);
+
+			if (exists)
+			{
+				continue;
+			}
+
+			await context.ApiScopes.AddAsync(apiScope.ToEntity());
+		}
+	}
+
+	private static async Task EnsureIdentityResources<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
+	{
+		foreach (var resource in identityServerDataConfiguration.IdentityResources)
+		{
+			var exists = await context.IdentityResources.AnyAsync(a => a.Name == resource.Name);
+
+			if (exists)
+			{
+				continue;
+			}
+
+			await context.IdentityResources.AddAsync(resource.ToEntity());
+		}
 	}
 }
 

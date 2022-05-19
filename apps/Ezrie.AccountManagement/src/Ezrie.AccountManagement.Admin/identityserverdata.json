@@ -61,6 +61,22 @@
 				]
 			}
 		],
+		"ApiResources": [
+			{
+				"Name": "ezrie_account_management_api",
+				"DisplayName": "Ezrie Account Management API",
+				"Scopes": [
+					"ezrie_account_management_api"
+				]
+			},
+			{
+				"Name": "ezrie_administration_service_api",
+				"DisplayName": "Ezrie Administration Service API",
+				"Scopes": [
+					"ezrie_administration_service_api"
+				]
+			}
+		],
 		"ApiScopes": [
 			{
 				"Name": "ezrie_account_management_api",
@@ -81,24 +97,10 @@
 				]
 			}
 		],
-		"ApiResources": [
-			{
-				"Name": "ezrie_account_management_api",
-				"Scopes": [
-					"ezrie_account_management_api"
-				]
-			},
-			{
-				"Name": "AdministrationService",
-				"Scopes": [
-					"AdministrationService"
-				]
-			}
-		],
 		"Clients": [
 			{
 				"ClientId": "ezrie_account_management",
-				"ClientName": "ezrie_account_management",
+				"ClientName": "Ezrie Account Management",
 				"ClientUri": "https://localhost:5000",
 				"AllowedGrantTypes": [
 					"authorization_code"
@@ -128,11 +130,16 @@
 			},
 			{
 				"ClientId": "ezrie_account_management_api_swaggerui",
-				"ClientName": "ezrie_account_management_api_swaggerui",
+				"ClientName": "Ezrie Account Management API Swagger UI",
+				"ClientSecret": "1q2w3E*",
 				"AllowedGrantTypes": [
 					"authorization_code"
 				],
-				"RequireClientSecret": false,
+				"ClientSecrets": [
+					{
+						"Value": "1q2w3E*"
+					}
+				],
 				"RequirePkce": true,
 				"RedirectUris": [
 					"https://localhost:5001/swagger/oauth2-redirect.html"
@@ -146,7 +153,7 @@
 			},
 			{
 				"ClientId": "ezrie_administration_service_blazor",
-				"ClientName": "ezrie_administration_service_blazor",
+				"ClientName": "Ezrie Administration Service Blazor",
 				"AllowedGrantTypes": [
 					"code"
 				],

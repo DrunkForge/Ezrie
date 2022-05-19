@@ -18,6 +18,7 @@ using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Ezrie.AdministrationService.Configuration;
 using Ezrie.Configuration;
+using Ezrie.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Volo.Abp.Account;
 using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;
@@ -30,6 +31,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
+using static IdentityModel.OidcConstants;
 
 namespace Ezrie.AdministrationService;
 
@@ -45,6 +47,8 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		var builder = context.Services.GetSingletonInstance<WebAssemblyHostBuilder>();
+
+		builder.UseEzrieLogging<AdministrationServiceBlazorModule>();
 
 		ConfigureAuthentication(builder);
 		ConfigureHttpClient(context);
@@ -88,7 +92,8 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 			options.ProviderOptions.Authority = apiConfiguration.IdentityServerBaseUrl;
 			options.ProviderOptions.ClientId = apiConfiguration.ClientId;
 			options.ProviderOptions.DefaultScopes.Add(apiConfiguration.OidcApiName);
-			options.ProviderOptions.ResponseType = "code";
+			options.ProviderOptions.ResponseType = apiConfiguration.OidcResponseType;
+			options.ProviderOptions.PostLogoutRedirectUri = apiConfiguration.PostLogoutRedirectUri;
 		});
 	}
 
@@ -101,7 +106,7 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 	{
 		context.Services.AddTransient(sp => new HttpClient
 		{
-			BaseAddress = new Uri(context.GetRemoteServices().AdministrationService)
+			BaseAddress = new Uri(context.GetRemoteServices().AdministrationService.BaseUrl)
 		});
 	}
 

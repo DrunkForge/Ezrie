@@ -37,7 +37,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Domain.Shared\Ezrie.Domain.Shared.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.Microservices\Ezrie.Hosting.Microservices.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore.MySql\Ezrie.AccountManagement.EntityFrameworkCore.MySql.csproj" />

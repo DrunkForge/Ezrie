@@ -40,6 +40,9 @@ public static class LoggingConfigurationExtensions
 				.AddEzrieLogging(context.Configuration, applicationName))
 			.UseSerilog();
 
+	public static ILoggingBuilder AddEzrieLogging<T>(this ILoggingBuilder builder, IConfiguration configuration)
+		=> builder.AddEzrieLogging(configuration, typeof(T).Assembly.GetName().Name ?? typeof(T).Name);
+
 	public static ILoggingBuilder AddEzrieLogging(this ILoggingBuilder builder, IConfiguration configuration, String applicationName)
 	{
 		if (String.IsNullOrWhiteSpace(applicationName))
@@ -71,6 +74,8 @@ public static class LoggingConfigurationExtensions
 				.WriteTo.Seq(seq);
 
 		Log.Logger = logger.CreateLogger();
+
+		builder.AddSerilog();
 
 		Log.Write(LogEventLevel.Information, "Starting: {ApplicationName} in {EnvironmentName}",
 			applicationName, RuntimeEnvironment.GetEnvironmentName());

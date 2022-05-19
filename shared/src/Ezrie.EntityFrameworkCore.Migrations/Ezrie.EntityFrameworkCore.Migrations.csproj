@@ -13,6 +13,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Ezrie.EntityFrameworkCore\Ezrie.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\Ezrie.Logging\Ezrie.Logging.csproj" />
 	</ItemGroup>
 
 </Project>

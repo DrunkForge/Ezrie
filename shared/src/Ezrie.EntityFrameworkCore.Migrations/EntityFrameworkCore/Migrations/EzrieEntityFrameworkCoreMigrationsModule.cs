@@ -14,6 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.Logging;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore.PostgreSql;
 using Volo.Abp.Modularity;
@@ -24,6 +25,7 @@ namespace Ezrie.EntityFrameworkCore.Migrations;
 
 [DependsOn(typeof(EzrieDomainSharedModule))]
 [DependsOn(typeof(EzrieEntityFrameworkCoreModule))]
+[DependsOn(typeof(EzrieLoggingModule))]
 [DependsOn(typeof(AbpDataModule))]
 [DependsOn(typeof(AbpEntityFrameworkCorePostgreSqlModule))]
 // We need to loop through tenants to migrate and seed their databases

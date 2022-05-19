@@ -16,20 +16,31 @@
 
 using Ezrie.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace Ezrie.AdministrationService.EntityFrameworkCore;
 
 [DependsOn(typeof(EzrieEntityFrameworkCoreModule))]
 [DependsOn(typeof(AdministrationServiceDomainModule))]
 [DependsOn(typeof(AbpEntityFrameworkCoreModule))]
+
+[DependsOn(typeof(AbpAuditLoggingEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpFeatureManagementEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpIdentityEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpPermissionManagementEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpSettingManagementEntityFrameworkCoreModule))]
 public class AdministrationServiceEntityFrameworkCoreModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		context.Services.AddAbpDbContext<AdministrationServiceDbContext>(options =>
-		{
+		{			
 			/* Add custom repositories here. Example:
 			 * options.AddRepository<Question, EfCoreQuestionRepository>();
 			 */

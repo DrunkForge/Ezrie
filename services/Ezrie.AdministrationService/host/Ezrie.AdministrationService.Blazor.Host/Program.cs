@@ -25,7 +25,7 @@ public static class Program
 	{
 		var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-		builder.UseEzrieLogging<AdministrationServiceApplicationContractsModule>();
+		builder.UseEzrieLogging<AdministrationServiceBlazorHostModule>();
 
 		var application = await builder.AddApplicationAsync<AdministrationServiceBlazorHostModule>(options =>
 		{
