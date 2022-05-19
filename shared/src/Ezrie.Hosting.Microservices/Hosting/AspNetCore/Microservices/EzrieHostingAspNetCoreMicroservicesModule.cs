@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AppSettings;
+using Ezrie.Configuration;
 using Ezrie.MultiTenancy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,8 +65,8 @@ public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 		app.UseAbpSwaggerUI(options =>
 		{
 			options.SwaggerEndpoint(SwaggerProperties.EndPointUrl, apiConfiguration.ApiName);
-			options.OAuthClientId(apiConfiguration.OidcSwaggerUIClientId);
-			options.OAuthClientSecret(apiConfiguration.OidcSwaggerUIClientSecret);
+			options.OAuthClientId(apiConfiguration.ClientId);
+			options.OAuthClientSecret(apiConfiguration.ClientSecret);
 			options.OAuthScopes(apiConfiguration.OidcApiName);
 		});
 

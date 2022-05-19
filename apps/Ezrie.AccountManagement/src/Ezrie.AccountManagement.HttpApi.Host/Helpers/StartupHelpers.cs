@@ -65,28 +65,33 @@ public static class StartupHelpers
 		return services;
 	}
 
-	public static IServiceCollection AddAdminApiCors(this IServiceCollection services, AdminApiConfiguration adminApiConfiguration)
+	public static IServiceCollection AddAdminApiCors(this IServiceCollection services, AppConfiguration apiConfiguration)
 	{
-		services.AddCors(options =>
+		if (apiConfiguration.EnableCors)
 		{
-			options.AddDefaultPolicy(
-				builder =>
-				{
-					if (adminApiConfiguration.CorsAllowAnyOrigin)
+			services.AddCors(options =>
+			{
+				options.AddDefaultPolicy(
+					builder =>
 					{
-						builder.AllowAnyOrigin();
-					}
-					else
-					{
-						builder
-							.WithOrigins(adminApiConfiguration.CorsAllowOrigins)
-							.SetIsOriginAllowedToAllowWildcardSubdomains();
-					}
+						if (apiConfiguration.CorsAllowAnyOrigin)
+						{
+							builder
+								.AllowAnyOrigin();
+						}
+						else
+						{
+							builder
+								.WithOrigins(apiConfiguration.CorsAllowOrigins)
+								.SetIsOriginAllowedToAllowWildcardSubdomains();
+						}
 
-					builder.AllowAnyHeader();
-					builder.AllowAnyMethod();
-				});
-		});
+						builder
+							.AllowAnyHeader()
+							.AllowAnyMethod();
+					});
+			});
+		}
 
 		return services;
 	}
@@ -193,8 +198,6 @@ public static class StartupHelpers
 		where TRole : class
 		where TUser : class
 	{
-		var adminApiConfiguration = configuration.GetSection(nameof(AdminApiConfiguration)).Get<AdminApiConfiguration>();
-
 		services
 			.AddIdentity<TUser, TRole>(options => configuration.GetSection(nameof(IdentityOptions)).Bind(options))
 			.AddEntityFrameworkStores<TIdentityDbContext>()
@@ -210,9 +213,10 @@ public static class StartupHelpers
 			})
 			.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 			{
-				options.Authority = adminApiConfiguration.IdentityServerBaseUrl;
-				options.RequireHttpsMetadata = adminApiConfiguration.RequireHttpsMetadata;
-				options.Audience = adminApiConfiguration.OidcApiName;
+				var apiConfiguration = configuration.GetApiConfiguration();
+				options.Authority = apiConfiguration.IdentityServerBaseUrl;
+				options.RequireHttpsMetadata = apiConfiguration.RequireHttpsMetadata;
+				options.Audience = apiConfiguration.OidcApiName;
 			});
 	}
 
@@ -258,24 +262,24 @@ public static class StartupHelpers
 
 	public static void AddAuthorizationPolicies(this IServiceCollection services)
 	{
-		var adminApiConfiguration = services.BuildServiceProvider().GetService<AdminApiConfiguration>();
+		var apiConfiguration = services.GetApiConfiguration();
 
-		if (adminApiConfiguration == null || String.IsNullOrWhiteSpace(adminApiConfiguration.OidcApiName))
-			throw new ConfigurationException($"The AdminApiConfiguration section is missing or invalid.");
+		if (apiConfiguration == null || String.IsNullOrWhiteSpace(apiConfiguration.OidcApiName))
+			throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
 
 		services.AddAuthorization(options =>
 		{
 			options.AddPolicy(AuthorizationConsts.AdministrationPolicy,
 				policy =>
 					policy.RequireAssertion(context => context.User.HasClaim(c =>
-							c.Type == JwtClaimTypes.Role && c.Value == adminApiConfiguration.AdministrationRole ||
-							c.Type == $"client_{JwtClaimTypes.Role}" && c.Value == adminApiConfiguration.AdministrationRole
-						) && context.User.HasClaim(c => c.Type == JwtClaimTypes.Scope && c.Value == adminApiConfiguration.OidcApiName)
+							c.Type == JwtClaimTypes.Role && c.Value == apiConfiguration.AdministrationRole ||
+							c.Type == $"client_{JwtClaimTypes.Role}" && c.Value == apiConfiguration.AdministrationRole
+						) && context.User.HasClaim(c => c.Type == JwtClaimTypes.Scope && c.Value == apiConfiguration.OidcApiName)
 					));
 		});
 	}
 
-	public static void AddIdSHealthChecks<TConfigurationDbContext, TPersistedGrantDbContext, TIdentityDbContext, TLogDbContext, TAuditLoggingDbContext, TDataProtectionDbContext>(this IServiceCollection services, IConfiguration configuration, AdminApiConfiguration adminApiConfiguration)
+	public static void AddIdSHealthChecks<TConfigurationDbContext, TPersistedGrantDbContext, TIdentityDbContext, TLogDbContext, TAuditLoggingDbContext, TDataProtectionDbContext>(this IServiceCollection services, IConfiguration configuration, AppConfiguration apiConfiguration)
 		where TConfigurationDbContext : DbContext, IAdminConfigurationDbContext
 		where TPersistedGrantDbContext : DbContext, IAdminPersistedGrantDbContext
 		where TIdentityDbContext : DbContext
@@ -290,7 +294,7 @@ public static class StartupHelpers
 		var auditLogDbConnectionString = configuration.GetConnectionString(ConfigurationConsts.AdminAuditLogDbConnectionStringKey);
 		var dataProtectionDbConnectionString = configuration.GetConnectionString(ConfigurationConsts.DataProtectionDbConnectionStringKey);
 
-		var identityServerUri = adminApiConfiguration.IdentityServerBaseUrl;
+		var identityServerUri = apiConfiguration.IdentityServerBaseUrl;
 		var healthChecksBuilder = services.AddHealthChecks()
 			.AddDbContextCheck<TConfigurationDbContext>("ConfigurationDbContext")
 			.AddDbContextCheck<TPersistedGrantDbContext>("PersistedGrantsDbContext")

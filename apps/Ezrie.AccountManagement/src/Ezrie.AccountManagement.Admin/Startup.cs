@@ -6,6 +6,7 @@ using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 using Serilog;
 using Ezrie.AccountManagement.Identity;
 using Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement.Admin;
 
@@ -59,6 +60,8 @@ public class Startup
 	{
 		// Applies configuration from appsettings.
 		options.BindConfiguration(Configuration);
+		Configuration.GetSection("AppConfiguration").Bind(options.Admin);
+
 		if (HostingEnvironment.IsDevelopment())
 		{
 			options.Security.UseDeveloperExceptionPage = true;

@@ -14,11 +14,9 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-namespace Ezrie.AppSettings;
+namespace Ezrie.Configuration;
 
-public class SmtpConfiguration
+public class HostConfiguration
 {
-	public String Host { get; set; } = "localhost";
-	public String? Login { get; set; }
-	public String? Password { get; set; }
+	public String? SelfLogPath { get; set; }
 }

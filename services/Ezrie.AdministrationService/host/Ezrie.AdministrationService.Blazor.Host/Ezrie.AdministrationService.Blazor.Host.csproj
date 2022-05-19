@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
 	<Import Project="..\common.props" />
 	<Import Project="..\..\..\..\common.build.props" />
@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<PackageReference Include="Blazorise.Bootstrap5" Version="1.0.4" />
 		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(MicrosoftPackageVersion)" />
 	</ItemGroup>

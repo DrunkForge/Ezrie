@@ -38,6 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.AspNetCore\Ezrie.Hosting.AspNetCore.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore\Ezrie.AccountManagement.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.Domain.Shared\Ezrie.AccountManagement.Domain.Shared.csproj" />

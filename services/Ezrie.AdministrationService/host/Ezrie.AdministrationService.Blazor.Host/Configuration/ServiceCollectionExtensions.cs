@@ -14,44 +14,40 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.Configuration;
-using Ezrie.Logging;
-using Serilog;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Ezrie.Crm.Gateway;
+namespace Ezrie.Configuration;
 
-internal static class Program
+public static class ServiceCollectionExtensions
 {
-	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
-	public static async Task<Int32> Main(String[] args)
+	public static void ConfigureCors(this IServiceCollection services)
 	{
-		try
+		var apiConfiguration = services.GetConfiguration().GetApiConfiguration();
+		services.AddCors(options =>
 		{
-			var builder = WebApplication.CreateBuilder(args);
-			builder.Host
-				.AddAppSettingsSecretsJson()
-				.AddYarpJson()
-				.UseAutofac()
-				.UseEzrieLogging<PublicGatewayModule>();
+			options.AddDefaultPolicy(builder =>
+			{
+				if (apiConfiguration.CorsAllowAnyOrigin)
+				{
+					builder
+						.AllowAnyOrigin();
+				}
+				else
+				{
+					builder
+						.WithOrigins(apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray())
+						.SetIsOriginAllowedToAllowWildcardSubdomains();
+				}
 
-			await builder.AddApplicationAsync<PublicGatewayModule>().ConfigureAwait(false);
-
-			var app = builder.Build();
-
-			await app.InitializeApplicationAsync().ConfigureAwait(false);
-
-			await app.RunAsync().ConfigureAwait(false);
-
-			return 0;
-		}
-		catch (Exception ex)
-		{
-			Log.Fatal(ex, "Host terminated unexpectedly");
-			return 1;
-		}
-		finally
-		{
-			Log.CloseAndFlush();
-		}
+				builder
+					.AllowAnyHeader()
+					.AllowAnyMethod();
+			});
+		});
 	}
 }

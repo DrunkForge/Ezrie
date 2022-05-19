@@ -24,7 +24,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Ezrie.AppSettings\Ezrie.AppSettings.csproj" />
 		<ProjectReference Include="..\Ezrie.Domain\Ezrie.Domain.csproj" />
 	</ItemGroup>
 

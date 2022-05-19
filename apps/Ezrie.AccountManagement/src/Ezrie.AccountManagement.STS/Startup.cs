@@ -8,6 +8,8 @@ using Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
 using Ezrie.AccountManagement.STS.Helpers;
 using Ezrie.AccountManagement.STS.Configuration.Interfaces;
 using Ezrie.AccountManagement.STS.Configuration.Constants;
+using Ezrie.Hosting.AspNetCore;
+using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement.STS;
 
@@ -50,6 +52,8 @@ public class Startup
 		RegisterAuthorization(services);
 
 		services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, IdentityServerDataProtectionDbContext>(Configuration);
+
+		services.ConfigureCors();
 	}
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -78,6 +82,12 @@ public class Startup
 		app.UseMvcLocalizationServices();
 
 		app.UseRouting();
+
+		if (app.ApplicationServices.GetApiConfiguration().EnableCors)
+		{
+			app.UseCors();
+		}
+
 		app.UseAuthorization();
 		app.UseEndpoints(endpoint =>
 		{

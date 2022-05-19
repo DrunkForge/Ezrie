@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AppSettings;
+using Ezrie.Configuration;
 using Ezrie.Logging.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +30,6 @@ namespace Ezrie.Logging;
 
 public static class LoggingConfigurationExtensions
 {
-
 	public static IHostBuilder UseEzrieLogging<T>(this IHostBuilder hostBuilder)
 		=> hostBuilder.UseEzrieLogging(typeof(T).Assembly.GetName().Name ?? typeof(T).Name);
 

@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AppSettings;
+using Ezrie.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
@@ -40,34 +40,7 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 		ArgumentNullException.ThrowIfNull(context);
 
 		ConfigureDistributedCache(context);
-		ConfigureCors(context);
-	}
-
-	private static void ConfigureCors(ServiceConfigurationContext context)
-	{
-		var apiConfiguration = context.Services.GetConfiguration().GetApiConfiguration();
-		context.Services.AddCors(options =>
-		{
-			options.AddDefaultPolicy(builder =>
-			{
-				if (apiConfiguration.CorsAllowAnyOrigin)
-				{
-					builder
-						.AllowAnyOrigin();
-				}
-				else
-				{
-					builder
-						.WithOrigins(apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray())
-						.SetIsOriginAllowedToAllowWildcardSubdomains();
-				}
-
-				builder					
-					.WithAbpExposedHeaders()
-					.AllowAnyHeader()
-					.AllowAnyMethod();
-			});
-		});
+		context.ConfigureCors();
 	}
 
 	private void ConfigureDistributedCache(ServiceConfigurationContext context)
@@ -103,7 +76,12 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 		app.UseStaticFiles();
 		app.UseAbpRequestLocalization();
 		app.UseRouting();
-		app.UseCors();
+
+		if (app.ApplicationServices.GetApiConfiguration().EnableCors)
+		{
+			app.UseCors();
+		}
+
 		app.UseAuthentication();
 		app.UseAuthorization();
 		app.UseAuditing();

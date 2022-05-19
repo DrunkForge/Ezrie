@@ -17,7 +17,7 @@
 using Serilog.Core;
 using Serilog.Events;
 
-namespace Ezrie.AppSettings;
+namespace Ezrie.Configuration;
 
 public class SeqSettings
 {

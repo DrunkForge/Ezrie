@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AppSettings;
+using Ezrie.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Volo.Abp.Modularity;
@@ -32,7 +32,7 @@ public static class SwaggerConfigurationHelper
 		if (scopes == null)
 		{
 			scopes = new Dictionary<String, String> { 
-				{ apiConfiguration.OidcSwaggerUIClientId, apiConfiguration.OidcSwaggerUIClientName ?? apiConfiguration.OidcSwaggerUIClientId } 
+				{ apiConfiguration.ClientId, apiConfiguration.ClientName ?? apiConfiguration.ClientId } 
 			};
 		}
 

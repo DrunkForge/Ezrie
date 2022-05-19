@@ -17,6 +17,7 @@
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Account.Localization;
+using Ezrie.Configuration;
 
 namespace Ezrie.AdministrationService.Blazor.Host;
 
@@ -41,12 +42,12 @@ public class AdministrationServiceHostMenuContributor : IMenuContributor
 	{
 		var accountStringLocalizer = context.GetLocalizer<AccountResource>();
 
-		var identityServerUrl = _configuration["AuthServer:Authority"] ?? "";
+		var apiConfiguration = _configuration.GetApiConfiguration();
 
 		context.Menu.AddItem(new ApplicationMenuItem(
 			"Account.Manage",
 			accountStringLocalizer["ManageYourProfile"],
-			$"{identityServerUrl.EnsureEndsWith('/')}Account/Manage?returnUrl={_configuration["App:SelfUrl"]}",
+			$"{apiConfiguration.IdentityServerBaseUrl.EnsureEndsWith('/')}Account/Manage?returnUrl={apiConfiguration.BaseUrl}",
 			icon: "fa fa-cog",
 			order: 1000,
 			null).RequireAuthenticated());

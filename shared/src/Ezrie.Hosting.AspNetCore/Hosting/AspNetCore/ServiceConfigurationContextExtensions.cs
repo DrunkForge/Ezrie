@@ -15,34 +15,36 @@
 *********************************************************************************************/
 
 using Ezrie.Configuration;
-using Medallion.Threading;
-using Medallion.Threading.Redis;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using StackExchange.Redis;
-using Volo.Abp.Autofac;
-using Volo.Abp.BackgroundJobs.RabbitMQ;
-using Volo.Abp.DistributedLocking;
-using Volo.Abp.EventBus.RabbitMq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Volo.Abp.Modularity;
 
-namespace Ezrie.Hosting;
+namespace Ezrie.Hosting.AspNetCore;
 
-[DependsOn(typeof(EzrieDomainModule))]
-[DependsOn(typeof(AbpBackgroundJobsRabbitMqModule))]
-[DependsOn(typeof(AbpDistributedLockingModule))]
-[DependsOn(typeof(AbpEventBusRabbitMqModule))]
-public partial class EzrieHostingModule : AbpModule
+public static class ServiceConfigurationContextExtensions
 {
-	public override void ConfigureServices(ServiceConfigurationContext context)
+	public static void ConfigureJwtAuthentication(this ServiceConfigurationContext context)
 	{
-		ArgumentNullException.ThrowIfNull(context);
+		var apiConfiguration = context.Services.GetConfiguration().GetApiConfiguration();
+		context.Services
+			.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+			.AddJwtBearer(options =>
+			{
+				options.Authority = apiConfiguration.IdentityServerBaseUrl;
+				options.RequireHttpsMetadata = apiConfiguration.RequireHttpsMetadata;
+				options.Audience = apiConfiguration.OidcApiName;
+			});
+	}
 
-		var redis = context.GetRedis();
-		
-		context.Services.AddSingleton<IDistributedLockProvider>(_ =>
-		{
-			var connection = ConnectionMultiplexer.Connect(redis.Configuration);
-			return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
-		});
+	public static void ConfigureCors(this ServiceConfigurationContext context)
+	{
+		context.Services.ConfigureCors(builder => builder.WithAbpExposedHeaders());
 	}
 }

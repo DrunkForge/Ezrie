@@ -20,30 +20,10 @@ using Microsoft.Extensions.Hosting;
 using Serilog.Events;
 using Volo.Abp.Modularity;
 
-namespace Ezrie.AppSettings;
+namespace Ezrie.Configuration;
 
 public static class ConfigurationExtensions
 {
-	public static T GetOptions<T>(this IConfiguration configuration)
-		where T : new()
-	{
-		ArgumentNullException.ThrowIfNull(configuration);
-
-		return configuration.GetSection(typeof(T).Name).Get<T>() ?? new();
-	}
-
-	public static HostConfiguration GetHostConfiguration(this IConfiguration configuration)
-		=> configuration.GetOptions<HostConfiguration>();
-
-	public static RedisConfiguration GetRedis(this ServiceConfigurationContext context)
-		=> context.Services.GetConfiguration().GetOptions<RedisConfiguration>();
-
-	public static RedisConfiguration GetRedis(this IConfiguration configuration)
-		=> configuration.GetOptions<RedisConfiguration>();
-
-	public static ApiConfiguration GetApiConfiguration(this IConfiguration configuration)
-		=> configuration.GetOptions<ApiConfiguration>();
-
 	public static LogEventLevel GetSerilogMinimumLevel(this IConfiguration configuration)
 	{
 		ArgumentNullException.ThrowIfNull(configuration);
@@ -58,21 +38,5 @@ public static class ConfigurationExtensions
 		ArgumentNullException.ThrowIfNull(configuration);
 
 		return configuration.GetSection(SeqSettings.SectionName).Get<SeqSettings>() ?? new();
-	}
-
-	public const String AppYarpJsonPath = "yarp.json";
-
-	public static IHostBuilder AddYarpJson(this IHostBuilder hostBuilder, Boolean optional = true, Boolean reloadOnChange = true, String? path = null)
-	{
-		ArgumentNullException.ThrowIfNull(hostBuilder);
-
-		return hostBuilder.ConfigureAppConfiguration((_, builder) =>
-		{
-			builder.AddJsonFile(
-				path: path ?? AppYarpJsonPath,
-				optional: optional,
-				reloadOnChange: reloadOnChange
-			);
-		});
 	}
 }

@@ -14,9 +14,20 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-namespace Ezrie.AppSettings;
+using Serilog.Events;
 
-public class RedisConfiguration
+namespace Ezrie.Configuration;
+
+public class SerilogConfiguration
 {
-	public String Configuration { get; set; } = "localhost";
+	public const String SectionName = "Serilog";
+	public MinimumLevel MinimumLevel { get; set; } = new();
+}
+
+public class MinimumLevel
+{
+	public LogEventLevel Default { get; set; } = LogEventLevel.Information;
+
+	[SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "Arrays play nice with IConfiguration")]
+	public String[] Override { get; set; } = Array.Empty<String>();
 }

@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AppSettings;
+using Ezrie.Configuration;
 using Volo.Abp.Modularity;
 
 namespace Ezrie.Logging;

@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AppSettings;
+using Ezrie.Configuration;
 using Ezrie.Hosting.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -60,8 +60,8 @@ public static partial class YarpSwaggerUIBuilderExtensions
 				}
 
 				options.SwaggerEndpoint($"{clusterGroup.Value.Address}{SwaggerProperties.EndPointUrl}", $"{routeConfig.RouteId} API");
-				options.OAuthClientId(apiConfiguration.OidcSwaggerUIClientId);
-				options.OAuthClientSecret(apiConfiguration.OidcSwaggerUIClientSecret);
+				options.OAuthClientId(apiConfiguration.ClientId);
+				options.OAuthClientSecret(apiConfiguration.ClientSecret);
 			}
 		});
 

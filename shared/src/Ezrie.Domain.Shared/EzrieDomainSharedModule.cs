@@ -14,10 +14,12 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 
 namespace Ezrie;
 
+[DependsOn(typeof(AbpAutofacModule))]
 public class EzrieDomainSharedModule : AbpModule
 {
 

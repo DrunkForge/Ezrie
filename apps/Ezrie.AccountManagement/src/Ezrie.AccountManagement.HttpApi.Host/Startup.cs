@@ -29,6 +29,7 @@ using Ezrie.AccountManagement.Mappers;
 using Ezrie.AccountManagement.ExceptionHandling;
 using Ezrie.AccountManagement.Helpers;
 using Ezrie.AccountManagement.Configuration.Authorization;
+using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement;
 
@@ -47,8 +48,8 @@ public class Startup
 
 	public void ConfigureServices(IServiceCollection services)
 	{
-		var adminApiConfiguration = Configuration.GetSection(nameof(AdminApiConfiguration)).Get<AdminApiConfiguration>();
-		services.AddSingleton(adminApiConfiguration);
+		var apiConfiguration = Configuration.GetApiConfiguration();
+		services.AddSingleton(apiConfiguration);
 
 		// Add DbContexts
 		RegisterDbContexts(services);
@@ -81,8 +82,6 @@ public class Startup
 
 		services.AddAdminServices<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminLogDbContext>();
 
-		services.AddAdminApiCors(adminApiConfiguration);
-
 		services.AddMvcServices<IdentityUserDto, IdentityRoleDto,
 			UserIdentity, UserIdentityRole, String, UserIdentityUserClaim, UserIdentityUserRole,
 			UserIdentityUserLogin, UserIdentityRoleClaim, UserIdentityUserToken,
@@ -92,7 +91,7 @@ public class Startup
 
 		services.AddSwaggerGen(options =>
 		{
-			options.SwaggerDoc(adminApiConfiguration.ApiVersion, new OpenApiInfo { Title = adminApiConfiguration.ApiName, Version = adminApiConfiguration.ApiVersion });
+			options.SwaggerDoc(apiConfiguration.ApiVersion, new OpenApiInfo { Title = apiConfiguration.ApiName, Version = apiConfiguration.ApiVersion });
 
 			options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
 			{
@@ -101,10 +100,10 @@ public class Startup
 				{
 					AuthorizationCode = new OpenApiOAuthFlow
 					{
-						AuthorizationUrl = new Uri($"{adminApiConfiguration.IdentityServerBaseUrl}/connect/authorize"),
-						TokenUrl = new Uri($"{adminApiConfiguration.IdentityServerBaseUrl}/connect/token"),
+						AuthorizationUrl = new Uri($"{apiConfiguration.IdentityServerBaseUrl}/connect/authorize"),
+						TokenUrl = new Uri($"{apiConfiguration.IdentityServerBaseUrl}/connect/token"),
 						Scopes = new Dictionary<String, String> {
-								{ adminApiConfiguration.OidcApiName, adminApiConfiguration.ApiName }
+								{ apiConfiguration.OidcApiName, apiConfiguration.ApiName }
 						}
 					}
 				}
@@ -114,11 +113,18 @@ public class Startup
 
 		services.AddAuditEventLogging<AdminAuditLogDbContext, AuditLog>(Configuration);
 
-		services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, AdminLogDbContext, AdminAuditLogDbContext, IdentityServerDataProtectionDbContext>(Configuration, adminApiConfiguration);
+		services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, AdminLogDbContext, AdminAuditLogDbContext, IdentityServerDataProtectionDbContext>(Configuration, apiConfiguration);
+
+		if (apiConfiguration.EnableCors)
+		{
+			services.AddAdminApiCors(apiConfiguration);
+		}
 	}
 
-	public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AdminApiConfiguration adminApiConfiguration)
+	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 	{
+		var apiConfiguration = app.ApplicationServices.GetApiConfiguration();
+
 		app.UseSerilogRequestLogging();
 		app.AddForwardHeaders();
 
@@ -130,20 +136,26 @@ public class Startup
 		app.UseSwagger();
 		app.UseSwaggerUI(c =>
 		{
-			c.SwaggerEndpoint($"{adminApiConfiguration.ApiBaseUrl}/swagger/v1/swagger.json", adminApiConfiguration.ApiName);
+			c.SwaggerEndpoint($"{apiConfiguration.ApiBaseUrl}/swagger/v1/swagger.json", apiConfiguration.ApiName);
 
-			c.OAuthClientId(adminApiConfiguration.OidcSwaggerUIClientId);
-			c.OAuthAppName(adminApiConfiguration.ApiName);
+			c.OAuthClientId(apiConfiguration.ClientId);
+			c.OAuthAppName(apiConfiguration.ApiName);
 			c.OAuthUsePkce();
 		});
 
 		app.UseRouting();
+
+		if (apiConfiguration.EnableCors)
+		{
+			app.UseCors();
+		}
+
 		UseAuthentication(app);
-		app.UseCors();
 		app.UseAuthorization();
 		app.UseEndpoints(endpoints =>
 		{
 			endpoints.MapControllers();
+			endpoints.MapDefaultControllerRoute();
 
 			endpoints.MapHealthChecks("/health", new HealthCheckOptions
 			{

@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AppSettings;
+using Ezrie.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,18 +35,5 @@ public static class ApplicationBuilderHelper
 
 		await builder.AddApplicationAsync<TStartupModule>();
 		return builder.Build();
-	}
-
-	public static void ConfigureJwtAuthentication(this ServiceConfigurationContext context)
-	{
-		var apiConfiguration = context.Services.GetConfiguration().GetApiConfiguration();
-		context.Services
-			.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-			.AddJwtBearer(options =>
-			{
-				options.Authority = apiConfiguration.IdentityServerBaseUrl;
-				options.RequireHttpsMetadata = apiConfiguration.RequireHttpsMetadata;
-				options.Audience = apiConfiguration.OidcApiName;
-			});
 	}
 }

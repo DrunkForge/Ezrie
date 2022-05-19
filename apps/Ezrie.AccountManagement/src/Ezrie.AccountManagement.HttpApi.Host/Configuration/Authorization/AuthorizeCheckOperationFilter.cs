@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -14,6 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -22,9 +23,9 @@ namespace Ezrie.AccountManagement.Configuration.Authorization;
 
 public class AuthorizeCheckOperationFilter : IOperationFilter
 {
-	private readonly AdminApiConfiguration _adminApiConfiguration;
+	private readonly AppConfiguration _adminApiConfiguration;
 
-	public AuthorizeCheckOperationFilter(AdminApiConfiguration adminApiConfiguration)
+	public AuthorizeCheckOperationFilter(AppConfiguration adminApiConfiguration)
 	{
 		_adminApiConfiguration = adminApiConfiguration;
 	}

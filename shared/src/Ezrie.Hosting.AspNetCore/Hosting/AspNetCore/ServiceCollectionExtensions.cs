@@ -15,34 +15,46 @@
 *********************************************************************************************/
 
 using Ezrie.Configuration;
-using Medallion.Threading;
-using Medallion.Threading.Redis;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using StackExchange.Redis;
-using Volo.Abp.Autofac;
-using Volo.Abp.BackgroundJobs.RabbitMQ;
-using Volo.Abp.DistributedLocking;
-using Volo.Abp.EventBus.RabbitMq;
-using Volo.Abp.Modularity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Ezrie.Hosting;
+namespace Ezrie.Hosting.AspNetCore;
 
-[DependsOn(typeof(EzrieDomainModule))]
-[DependsOn(typeof(AbpBackgroundJobsRabbitMqModule))]
-[DependsOn(typeof(AbpDistributedLockingModule))]
-[DependsOn(typeof(AbpEventBusRabbitMqModule))]
-public partial class EzrieHostingModule : AbpModule
+public static class ServiceCollectionExtensions
 {
-	public override void ConfigureServices(ServiceConfigurationContext context)
+	public static void ConfigureCors(this IServiceCollection services, Action<CorsPolicyBuilder>? defaultPolicy = null)
 	{
-		ArgumentNullException.ThrowIfNull(context);
-
-		var redis = context.GetRedis();
-		
-		context.Services.AddSingleton<IDistributedLockProvider>(_ =>
+		var apiConfiguration = services.GetConfiguration().GetApiConfiguration();
+		if (apiConfiguration.EnableCors)
 		{
-			var connection = ConnectionMultiplexer.Connect(redis.Configuration);
-			return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
-		});
+			services.AddCors(options =>
+			{
+				options.AddDefaultPolicy(builder =>
+				{
+					if (apiConfiguration.CorsAllowAnyOrigin)
+					{
+						builder
+							.AllowAnyOrigin();
+					}
+					else
+					{
+						builder
+							.WithOrigins(apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray())
+							.SetIsOriginAllowedToAllowWildcardSubdomains();
+					}
+
+					builder
+						.AllowAnyHeader()
+						.AllowAnyMethod();
+
+					defaultPolicy?.Invoke(builder);
+				});
+			});
+		}
 	}
 }

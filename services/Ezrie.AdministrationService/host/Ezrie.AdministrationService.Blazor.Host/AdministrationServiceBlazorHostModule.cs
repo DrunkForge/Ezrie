@@ -16,9 +16,10 @@
 
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
+using Ezrie.AdministrationService.Blazor.WebAssembly;
+using Ezrie.Configuration;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Volo.Abp.Account;
-using Ezrie.AdministrationService.Blazor.WebAssembly;
 using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme;
@@ -29,7 +30,6 @@ using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
-using Ezrie.AppSettings;
 
 namespace Ezrie.AdministrationService.Blazor.Host;
 
@@ -54,6 +54,8 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 		ConfigureUI(builder);
 		ConfigureMenu(context);
 		ConfigureAutoMapper(context);
+
+		//context.Services.ConfigureCors();
 	}
 
 	private void ConfigureRouter(ServiceConfigurationContext context)
@@ -84,10 +86,10 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 		builder.Services.AddOidcAuthentication(options =>
 		{
 			var apiConfiguration = builder.Configuration.GetApiConfiguration();
-			builder.Configuration.Bind("AuthServer", options.ProviderOptions);
 			options.ProviderOptions.Authority = apiConfiguration.IdentityServerBaseUrl;
-			options.ProviderOptions.ClientId = apiConfiguration.OidcSwaggerUIClientId;
+			options.ProviderOptions.ClientId = apiConfiguration.ClientId;
 			options.ProviderOptions.DefaultScopes.Add(apiConfiguration.OidcApiName);
+			options.ProviderOptions.ResponseType = "code";
 		});
 	}
 

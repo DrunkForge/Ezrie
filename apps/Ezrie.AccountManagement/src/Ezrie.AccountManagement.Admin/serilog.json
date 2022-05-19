@@ -12,10 +12,6 @@
 				"Args": {
 					"outputTemplate": "[{Level:u3}] <{SourceContext:l}> {Message}{NewLine}{Exception}"
 				}
-			},
-			{
-				"Name": "Seq",
-				"Args": { "serverUrl": "http://localhost:5341" }
 			}
 		]
 	}
