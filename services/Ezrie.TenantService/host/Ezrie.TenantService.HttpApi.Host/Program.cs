@@ -1,53 +1,72 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+/*********************************************************************************************
+* EzrieCRM
+* Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
+* 
+* This program is free software: you can redistribute it and/or modify it under the terms of
+* the GNU Affero General Public License as published by the Free Software Foundation, either
+* version 3 of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY
+* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+* See the GNU Affero General Public License for more details.
+* 
+* You should have received a copy of the GNU Affero General Public License along with this
+* program. If not, see <https://www.gnu.org/licenses/>.
+*********************************************************************************************/
+
+using Ezrie.EntityFrameworkCore.Migrations;
+using Ezrie.Hosting.AspNetCore;
+using Ezrie.Logging;
+using Ezrie.TenantService.EntityFrameworkCore.Migration;
 using Serilog;
 using Serilog.Events;
 
 namespace Ezrie.TenantService;
 
-public class Program
+internal static class Program
 {
-    public async static Task<int> Main(string[] args)
-    {
-        Log.Logger = new LoggerConfiguration()
-#if DEBUG
-            .MinimumLevel.Debug()
-#else
-            .MinimumLevel.Information()
-#endif
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
-            .Enrich.FromLogContext()
-            .WriteTo.Async(c => c.File("Logs/logs.txt"))
-#if DEBUG
-            .WriteTo.Async(c => c.Console())
-#endif
-            .CreateLogger();
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
+	public static async Task<Int32> Main(String[] args)
+	{
+		try
+		{
+			var builder = CreateHostBuilder(args);
 
-        try
-        {
-            Log.Information("Starting web host.");
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Host.AddAppSettingsSecretsJson()
-                .UseAutofac()
-                .UseSerilog();
-            await builder.AddApplicationAsync<TenantServiceHttpApiHostModule>();
-            var app = builder.Build();
-            await app.InitializeApplicationAsync();
-            await app.RunAsync();
-            return 0;
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Host terminated unexpectedly!");
-            return 1;
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
-    }
+			var app = builder.Build();
+
+			await app.MigrateAsync();
+
+			await app.RunAsync().ConfigureAwait(false);
+
+			return 0;
+		}
+		catch (Exception ex)
+		{
+			Log.Fatal(ex, "Host terminated unexpectedly!");
+			return 1;
+		}
+		finally
+		{
+			Log.CloseAndFlush();
+		}
+	}
+
+	public static IHostBuilder CreateHostBuilder(String[] args) => Host
+		.CreateDefaultBuilder(args)
+		.UseAutofac()
+		.AddAppSettingsSecretsJson()
+		.UseEzrieLogging<TenantServiceHttpApiHostModule>()
+		.ConfigureWebHostDefaults(webBuilder =>
+		{
+			webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
+			webBuilder.UseStartup<Startup<TenantServiceHttpApiHostModule>>();
+		});
+
+	private static async Task MigrateAsync(this IHost app)
+	{
+		var configuration = app.Services.GetRequiredService<IConfiguration>();
+		var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger<TenantServiceHttpApiHostModule>();
+
+		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationModule>(configuration, logger).MigrateAndSeedAsync();
+	}
 }

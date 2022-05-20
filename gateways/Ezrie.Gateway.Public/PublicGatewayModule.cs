@@ -36,12 +36,7 @@ public class PublicGatewayModule : AbpModule
 		var configuration = context.Services.GetConfiguration();
 
 		// Requested scopes for authorization code request and descriptions for swagger UI only
-		context.ConfigureSwaggerWithAuth(scopes: new Dictionary<String, String>
-			{
-				{"ezrie_administration_service_api", "Ezrie Administration Service API"},
-				{"ezrie_account_management_api", "Ezrie Account Management API"}
-			}
-		);
+		context.ConfigureSwaggerWithAuth();
 	}
 
 	public override void OnApplicationInitialization(ApplicationInitializationContext context)

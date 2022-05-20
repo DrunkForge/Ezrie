@@ -1,28 +1,39 @@
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+
+#nullable disable
 
 namespace Ezrie.TenantService.EntityFrameworkCore;
 
+[ReplaceDbContext(typeof(ITenantManagementDbContext))]
 [ConnectionStringName(TenantServiceDbProperties.ConnectionStringName)]
-public class TenantServiceDbContext : AbpDbContext<TenantServiceDbContext>, ITenantServiceDbContext
+public class TenantServiceDbContext : AbpDbContext<TenantServiceDbContext>,
+	ITenantServiceDbContext,
+	ITenantManagementDbContext
 {
-    /* Add DbSet for each Aggregate Root here. Example:
-     * public DbSet<Question> Questions { get; set; }
-     */
+	/* Add DbSet for each Aggregate Root here. Example:
+	 * public DbSet<Question> Questions { get; set; }
+	 */
 
-    public TenantServiceDbContext(DbContextOptions<TenantServiceDbContext> options)
-        : base(options)
-    {
+	public TenantServiceDbContext(DbContextOptions<TenantServiceDbContext> options)
+		: base(options)
+	{
 
-    }
+	}
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
+	// TenantManagement
+	public DbSet<Tenant> Tenants { get; set; }
+	public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
-        builder.ConfigureTenantService();
-        builder.ConfigureTenantManagement();
-        }
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		base.OnModelCreating(modelBuilder);
+
+		modelBuilder.ConfigureTenantService();
+		modelBuilder.ConfigureTenantManagement();
+	}
 }

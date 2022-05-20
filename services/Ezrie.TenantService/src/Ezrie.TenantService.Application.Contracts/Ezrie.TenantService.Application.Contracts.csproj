@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Ezrie.TenantService</RootNamespace>
+	<PropertyGroup>
+		<RootNamespace>Ezrie.TenantService</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.Authorization" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="5.2.2" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Authorization" Version="$(VoloAbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
     <ProjectReference Include="..\Ezrie.TenantService.Domain.Shared\Ezrie.TenantService.Domain.Shared.csproj" />
   </ItemGroup>
 

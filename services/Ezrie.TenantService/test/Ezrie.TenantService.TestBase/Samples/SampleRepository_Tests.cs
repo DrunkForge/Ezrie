@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 using Xunit;
 
 namespace Ezrie.TenantService.Samples;

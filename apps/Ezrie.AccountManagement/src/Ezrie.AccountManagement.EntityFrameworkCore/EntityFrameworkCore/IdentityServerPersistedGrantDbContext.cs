@@ -19,7 +19,7 @@ using IdentityServer4.EntityFramework.Options;
 using Microsoft.EntityFrameworkCore;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
 
-namespace Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+namespace Ezrie.AccountManagement.EntityFrameworkCore;
 
 public class IdentityServerPersistedGrantDbContext : PersistedGrantDbContext<IdentityServerPersistedGrantDbContext>, IAdminPersistedGrantDbContext
 {

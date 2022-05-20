@@ -67,12 +67,12 @@ public static class ConfigurationExtensions
 		=> context.Services.GetConfiguration().GetOptions<RemoteServices>()
 		?? new();
 
-	private static T GetOptions<T>(this IServiceProvider serviceProvider)
+	private static T? GetOptions<T>(this IServiceProvider serviceProvider) where T : class
 		=> serviceProvider.GetRequiredService<IConfiguration>().GetOptions<T>();
 
-	private static T GetOptions<T>(this IServiceCollection services)
+	private static T? GetOptions<T>(this IServiceCollection services) where T : class
 		=> services.BuildServiceProvider().GetRequiredService<IConfiguration>().GetOptions<T>();
 
-	private static T GetOptions<T>(this IConfiguration configuration)
-		=> configuration.GetSection(typeof(T).Name).Get<T>();
+	public static T? GetOptions<T>(this IConfiguration configuration, T? defaultValue = null) where T : class
+		=> configuration.GetSection(typeof(T).Name).Get<T>() ?? defaultValue;
 }

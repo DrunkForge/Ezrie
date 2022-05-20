@@ -1,18 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-    <Import Project="..\..\common.props" />
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
 
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-    </PropertyGroup>
-    
-    <ItemGroup>
-        <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="5.2.2" />
-    </ItemGroup>
+	<PropertyGroup>
+		<RootNamespace>Ezrie.TenantService</RootNamespace>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Ezrie.TenantService.Blazor\Ezrie.TenantService.Blazor.csproj" />
-        <ProjectReference Include="..\Ezrie.TenantService.HttpApi.Client\Ezrie.TenantService.HttpApi.Client.csproj" />
-    </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Ezrie.TenantService.Blazor\Ezrie.TenantService.Blazor.csproj" />
+		<ProjectReference Include="..\Ezrie.TenantService.HttpApi.Client\Ezrie.TenantService.HttpApi.Client.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -7,6 +7,12 @@
 					"Path": "/api/administration/{**everything}"
 				}
 			},
+			"Ezrie Tenant Serivce": {
+				"ClusterId": "ezrie-tenant-httpapi-host",
+				"Match": {
+					"Path": "/api/tenant/{**everything}"
+				}
+			},
 			"Ezrie Account Management": {
 				"ClusterId": "ezrie-account-httpapi-host",
 				"Match": {
@@ -18,7 +24,14 @@
 			"ezrie-administration-httpapi-host": {
 				"Destinations": {
 					"destination1": {
-						"Address": "https://localhost:7001"
+						"Address": "https://localhost:10001"
+					}
+				}
+			},
+			"ezrie-tenant-httpapi-host": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:11001"
 					}
 				}
 			},

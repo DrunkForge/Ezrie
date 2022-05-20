@@ -1,20 +1,18 @@
+using Ezrie.TenantService.Menus;
 using Microsoft.Extensions.DependencyInjection;
-using Ezrie.TenantService.Blazor.Menus;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
+using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.TenantManagement.Blazor.Server;
 
-namespace Ezrie.TenantService.Blazor;
+namespace Ezrie.TenantService;
 
-[DependsOn(
-    typeof(TenantServiceApplicationContractsModule),
-    typeof(AbpAspNetCoreComponentsWebThemingModule),
-    typeof(AbpAutoMapperModule)
-    )]
-[DependsOn(typeof(AbpTenantManagementBlazorServerModule))]
+[DependsOn(typeof(TenantServiceApplicationContractsModule))]
+[DependsOn(typeof(AbpAspNetCoreComponentsWebThemingModule))]
+[DependsOn(typeof(AbpAutoMapperModule))]
+[DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
     public class TenantServiceBlazorModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

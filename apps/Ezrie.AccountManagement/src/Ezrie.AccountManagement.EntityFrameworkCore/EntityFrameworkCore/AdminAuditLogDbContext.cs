@@ -20,7 +20,7 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 
 #nullable disable
 
-namespace Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+namespace Ezrie.AccountManagement.EntityFrameworkCore;
 
 public class AdminAuditLogDbContext : DbContext, IAuditLoggingDbContext<AuditLog>
 {

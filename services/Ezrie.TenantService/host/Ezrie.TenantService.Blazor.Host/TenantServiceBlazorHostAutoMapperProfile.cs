@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+using AutoMapper;
 
-namespace Ezrie.TenantService.Blazor.Host;
+namespace Ezrie.TenantService;
 
 public class TenantServiceBlazorHostAutoMapperProfile : Profile
 {
-    public TenantServiceBlazorHostAutoMapperProfile()
-    {
-        //Define your AutoMapper configuration here for the Blazor project.
-    }
+	public TenantServiceBlazorHostAutoMapperProfile()
+	{
+		//Define your AutoMapper configuration here for the Blazor project.
+	}
 }

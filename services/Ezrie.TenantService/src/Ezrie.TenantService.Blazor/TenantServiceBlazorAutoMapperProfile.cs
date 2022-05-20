@@ -1,6 +1,6 @@
-﻿using AutoMapper;
+using AutoMapper;
 
-namespace Ezrie.TenantService.Blazor;
+namespace Ezrie.TenantService;
 
 public class TenantServiceBlazorAutoMapperProfile : Profile
 {

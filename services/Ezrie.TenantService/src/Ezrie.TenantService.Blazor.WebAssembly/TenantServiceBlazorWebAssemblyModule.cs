@@ -1,13 +1,11 @@
-﻿using Volo.Abp.AspNetCore.Components.WebAssembly.Theming;
+using Volo.Abp.AspNetCore.Components.WebAssembly.Theming;
 using Volo.Abp.Modularity;
 
-namespace Ezrie.TenantService.Blazor.WebAssembly;
+namespace Ezrie.TenantService;
 
-[DependsOn(
-    typeof(TenantServiceBlazorModule),
-    typeof(TenantServiceHttpApiClientModule),
-    typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
-    )]
+[DependsOn(typeof(TenantServiceBlazorModule))]
+[DependsOn(typeof(TenantServiceHttpApiClientModule))]
+[DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule))]
 public class TenantServiceBlazorWebAssemblyModule : AbpModule
 {
 

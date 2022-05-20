@@ -22,7 +22,6 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 using Serilog;
 using Ezrie.AccountManagement.Identity;
-using Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
 using Ezrie.AccountManagement.Resources;
 using Ezrie.AccountManagement.Mappers;
 using Ezrie.AccountManagement.ExceptionHandling;
@@ -30,6 +29,7 @@ using Ezrie.AccountManagement.Helpers;
 using Ezrie.AccountManagement.Configuration.Authorization;
 using Ezrie.Configuration;
 using Ezrie.Hosting.AspNetCore;
+using Ezrie.AccountManagement.EntityFrameworkCore;
 
 namespace Ezrie.AccountManagement;
 

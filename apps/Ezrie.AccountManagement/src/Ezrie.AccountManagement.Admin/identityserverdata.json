@@ -75,6 +75,13 @@
 				"Scopes": [
 					"ezrie_administration_service_api"
 				]
+			},
+			{
+				"Name": "ezrie_tenant_service_api",
+				"DisplayName": "Ezrie Tenant Service API",
+				"Scopes": [
+					"ezrie_tenant_service_api"
+				]
 			}
 		],
 		"ApiScopes": [
@@ -90,6 +97,15 @@
 			{
 				"Name": "ezrie_administration_service_api",
 				"DisplayName": "Ezrie Administration Service API",
+				"Required": true,
+				"UserClaims": [
+					"role",
+					"name"
+				]
+			},
+			{
+				"Name": "ezrie_tenant_service_api",
+				"DisplayName": "Ezrie Tenant Service API",
 				"Required": true,
 				"UserClaims": [
 					"role",
@@ -148,7 +164,14 @@
 					"ezrie_account_management_api"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:5001"
+					"https://localhost:5000",
+					"https://localhost:5001",
+					"https://localhost:5500",
+					"https://localhost:7000",
+					"https://localhost:10000",
+					"https://localhost:10001",
+					"https://localhost:11000",
+					"https://localhost:11001"
 				]
 			},
 			{
@@ -160,13 +183,15 @@
 				"RequireClientSecret": false,
 				"RequirePkce": true,
 				"RedirectUris": [
-					"https://localhost:5100/swagger/oauth2-redirect.html"
+					"https://localhost:10000/authentication/login-callback"
 				],
 				"AllowedScopes": [
 					"ezrie_account_management_api"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:5100"
+					"https://localhost:7000",
+					"https://localhost:10000",
+					"https://localhost:10001"
 				]
 			},
 			{
@@ -179,14 +204,56 @@
 				"RequirePkce": false,
 				"RedirectUris": [
 					"https://localhost:7000/api/administration/swagger/oauth2-redirect.html",
-					"https://localhost:7001/swagger/oauth2-redirect.html"
+					"https://localhost:10001/swagger/oauth2-redirect.html"
 				],
 				"AllowedScopes": [
 					"ezrie_administration_service_api"
 				],
 				"AllowedCorsOrigins": [
 					"https://localhost:7000",
-					"https://localhost:7001"
+					"https://localhost:10000",
+					"https://localhost:10001"
+				]
+			},
+			{
+				"ClientId": "ezrie_tenant_service_blazor",
+				"ClientName": "Ezrie Tenant Service Blazor",
+				"AllowedGrantTypes": [
+					"code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:11000/authentication/login-callback"
+				],
+				"AllowedScopes": [
+					"ezrie_tenant_management_api"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:7000",
+					"https://localhost:11000",
+					"https://localhost:11001"
+				]
+			},
+			{
+				"ClientId": "ezrie_tenant_service_swaggerui",
+				"ClientName": "Ezrie Tenant Service Swagger UI",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": false,
+				"RedirectUris": [
+					"https://localhost:7000/api/tenant/swagger/oauth2-redirect.html",
+					"https://localhost:11001/swagger/oauth2-redirect.html"
+				],
+				"AllowedScopes": [
+					"ezrie_tenant_service_api"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:7000",
+					"https://localhost:11000",
+					"https://localhost:11001"
 				]
 			}
 		]

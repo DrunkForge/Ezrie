@@ -14,6 +14,11 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.AccountManagement.Configuration.ApplicationParts;
+using Ezrie.AccountManagement.Configuration.AuditLogging;
+using Ezrie.AccountManagement.Configuration.Constants;
+using Ezrie.AccountManagement.Helpers.Localization;
+using Ezrie.Configuration;
 using IdentityModel;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -27,7 +32,6 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.AuditLogging.EntityFramework.Extensions;
 using Skoruba.AuditLogging.EntityFramework.Repositories;
 using Skoruba.AuditLogging.EntityFramework.Services;
-using Ezrie.AccountManagement.Configuration.ApplicationParts;
 using Skoruba.IdentityServer4.Admin.BusinessLogic.Identity.Dtos.Identity;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.Configuration;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.MySql;
@@ -35,10 +39,6 @@ using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.PostgreSQL;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.SqlServer;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Helpers;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
-using Ezrie.AccountManagement.Configuration.Constants;
-using Ezrie.AccountManagement.Helpers.Localization;
-using Ezrie.AccountManagement.Configuration.AuditLogging;
-using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement.Helpers;
 
@@ -148,7 +148,8 @@ public static class StartupHelpers
 				services.RegisterMySqlDbContexts<TIdentityDbContext, TConfigurationDbContext, TPersistedGrantDbContext, TLogDbContext, TAuditLoggingDbContext, TDataProtectionDbContext, TAuditLog>(connectionStrings, databaseMigrations);
 				break;
 			default:
-				throw new InvalidOperationException($@"The database ProviderType value is invalid: `{databaseProvider.ProviderType}` The value must be one of {String.Join(", ", Enum.GetNames(typeof(DatabaseProviderType)))}.");
+				ExceptionHelper.ThrowInvalidEnumValueConfigurationException(databaseProvider.ProviderType);
+				break;
 		}
 	}
 
@@ -326,7 +327,7 @@ public static class StartupHelpers
 						.AddMySql(dataProtectionDbConnectionString, name: "DataProtectionDb");
 					break;
 				default:
-					throw new NotImplementedException($"Health checks not defined for database provider {databaseProvider.ProviderType}");
+					throw new NotImplementedException($"Health checks for the `{databaseProvider.ProviderType}` database provider have not been implemented.");
 			}
 		}
 	}
@@ -344,4 +345,3 @@ public static class StartupHelpers
 		app.UseForwardedHeaders(forwardingOptions);
 	}
 }
-

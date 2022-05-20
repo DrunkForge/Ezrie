@@ -209,7 +209,8 @@ public static class StartupHelpers
 				services.RegisterMySqlDbContexts<TIdentityDbContext, TConfigurationDbContext, TPersistedGrantDbContext, TDataProtectionDbContext>(identityConnectionString, configurationConnectionString, persistedGrantsConnectionString, dataProtectionConnectionString);
 				break;
 			default:
-				throw new ArgumentOutOfRangeException(nameof(databaseProvider.ProviderType), $@"The value needs to be one of {String.Join(", ", Enum.GetNames(typeof(DatabaseProviderType)))}.");
+				ExceptionHelper.ThrowInvalidEnumValueConfigurationException(databaseProvider.ProviderType);
+				break;
 		}
 	}
 
@@ -483,7 +484,7 @@ public static class StartupHelpers
 						.AddMySql(dataProtectionDbConnectionString, name: "DataProtectionDb");
 					break;
 				default:
-					throw new NotImplementedException($"Health checks not defined for database provider {databaseProvider.ProviderType}");
+					throw new NotImplementedException($"Health checks for the `{databaseProvider.ProviderType}` database provider have not been implemented.");
 			}
 		}
 	}

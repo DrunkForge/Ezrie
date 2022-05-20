@@ -3,7 +3,8 @@ using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.Configuration;
 using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 using Ezrie.Logging;
 using Ezrie.AccountManagement.Identity;
-using Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+using Ezrie.AccountManagement.EntityFrameworkCore;
+using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement.Admin;
 
@@ -27,6 +28,7 @@ internal static class Program
 			DockerHelpers.ApplyDockerConfiguration(configuration);
 
 			var migrationComplete = await ApplyDbMigrationsWithDataSeedAsync(args, configuration, host);
+
 			if (args.Any(x => x == MigrateOnlyArgs))
 			{
 				await host.StopAsync();
@@ -59,9 +61,8 @@ internal static class Program
 		if (applyDbMigrationWithDataSeedFromProgramArguments)
 			args = args.Except(new[] { SeedArgs }).ToArray();
 
-		var seedConfiguration = configuration.GetSection(nameof(SeedConfiguration)).Get<SeedConfiguration>();
-		var databaseMigrationsConfiguration = configuration.GetSection(nameof(DatabaseMigrationsConfiguration))
-			.Get<DatabaseMigrationsConfiguration>();
+		var seedConfiguration = configuration.GetOptions<SeedConfiguration>();
+		var databaseMigrationsConfiguration = configuration.GetOptions<DatabaseMigrationsConfiguration>();
 
 		return await DbMigrationHelpers
 			.ApplyDbMigrationsWithDataSeedAsync<IdentityServerConfigurationDbContext, AdminIdentityDbContext,
@@ -72,7 +73,6 @@ internal static class Program
 
 	public static IHostBuilder CreateHostBuilder(String[] args) =>
 		Host.CreateDefaultBuilder(args)
-
 			.UseEzrieLogging<Startup>()
 			.ConfigureAppConfiguration((hostContext, configApp) =>
 			{
@@ -104,4 +104,3 @@ internal static class Program
 				webBuilder.UseStartup<Startup>();
 			});
 }
-

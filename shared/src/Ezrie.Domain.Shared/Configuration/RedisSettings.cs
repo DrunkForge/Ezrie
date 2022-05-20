@@ -19,4 +19,5 @@ namespace Ezrie.Configuration;
 public class RedisConfiguration
 {
 	public String Configuration { get; set; } = "localhost";
+	public Boolean IsEnabled { get; set; } = true;
 }

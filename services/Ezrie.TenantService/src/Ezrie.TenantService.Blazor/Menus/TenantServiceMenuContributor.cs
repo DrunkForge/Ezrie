@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
 using Volo.Abp.UI.Navigation;
 
-namespace Ezrie.TenantService.Blazor.Menus;
+namespace Ezrie.TenantService.Menus;
 
 public class TenantServiceMenuContributor : IMenuContributor
 {

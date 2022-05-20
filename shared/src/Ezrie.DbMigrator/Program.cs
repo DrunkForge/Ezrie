@@ -14,16 +14,20 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.AdministrationService.EntityFrameworkCore.Migration;
 using Ezrie.EntityFrameworkCore;
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Logging;
+using Ezrie.TenantService.EntityFrameworkCore.Migration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace Ezrie.DbMigrator;
 
-internal class Program
+internal static class Program
 {
 	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
 	private static async Task<Int32> Main(String[] args)
@@ -48,11 +52,6 @@ internal class Program
 	public static IHostBuilder CreateHostBuilder(String[] args) =>
 		Host.CreateDefaultBuilder(args)
 			.AddAppSettingsSecretsJson()
-			.AddIdentitySeedJson()
-			.UseEzrieLogging<Program>()
-			.ConfigureServices(services =>
-			{
-				services.AddSingleton<IHostedServiceMonitor, HostedServiceMonitor>();
-				services.AddHostedService<DbMigratorHostedService<DbMigratiorModule>>();
-			});
+			.UseEzrieLogging<EntityFrameworkCoreDbMigratorModule>()
+			.ConfigureServices(services => services.AddHostedService<DbMigratorHostedService>());
 }

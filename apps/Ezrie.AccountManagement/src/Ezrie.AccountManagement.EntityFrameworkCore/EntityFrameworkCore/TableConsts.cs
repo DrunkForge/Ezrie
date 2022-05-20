@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-namespace Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+namespace Ezrie.AccountManagement.EntityFrameworkCore;
 
 public static class TableConsts
 {

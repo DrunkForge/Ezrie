@@ -19,7 +19,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+namespace Ezrie.AccountManagement.EntityFrameworkCore;
 
 public class IdentityServerDataProtectionDbContext : DbContext, IDataProtectionKeyContext
 {

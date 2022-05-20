@@ -1,4 +1,4 @@
-using Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+using Ezrie.AccountManagement.EntityFrameworkCore;
 using Ezrie.AccountManagement.STS.Helpers;
 
 namespace Ezrie.AccountManagement.STS.Configuration.Test;

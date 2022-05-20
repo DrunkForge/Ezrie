@@ -27,7 +27,7 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.Configuration;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
 
-namespace Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+namespace Ezrie.AccountManagement.EntityFrameworkCore;
 
 public static class DbMigrationHelpers
 {
@@ -41,8 +41,10 @@ public static class DbMigrationHelpers
 	/// <param name="databaseMigrationsConfiguration"></param>
 	public static async Task<Boolean> ApplyDbMigrationsWithDataSeedAsync<TIdentityServerDbContext, TIdentityDbContext,
 		TPersistedGrantDbContext, TLogDbContext, TAuditLogDbContext, TDataProtectionDbContext, TUser, TRole>(
-		IHost host, Boolean applyDbMigrationWithDataSeedFromProgramArguments, SeedConfiguration seedConfiguration,
-		DatabaseMigrationsConfiguration databaseMigrationsConfiguration)
+		IHost host, 
+		Boolean applyDbMigrationWithDataSeedFromProgramArguments, 
+		SeedConfiguration? seedConfiguration,
+		DatabaseMigrationsConfiguration? databaseMigrationsConfiguration)
 		where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
 		where TIdentityDbContext : DbContext
 		where TPersistedGrantDbContext : DbContext, IAdminPersistedGrantDbContext
@@ -135,12 +137,15 @@ public static class DbMigrationHelpers
 		{
 			var context = scope.ServiceProvider.GetRequiredService<TIdentityServerDbContext>();
 			var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
-			var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<TRole>>();
 			var idsDataConfiguration = scope.ServiceProvider.GetRequiredService<IdentityServerData>();
-			var idDataConfiguration = scope.ServiceProvider.GetRequiredService<IdentityData>();
 
 			await EnsureSeedIdentityServerData(context, idsDataConfiguration);
+
+			var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<TRole>>();
+			var idDataConfiguration = scope.ServiceProvider.GetRequiredService<IdentityData>();
+
 			await EnsureSeedIdentityData(userManager, roleManager, idDataConfiguration);
+
 			return true;
 		}
 	}
@@ -246,23 +251,19 @@ public static class DbMigrationHelpers
 	{
 		foreach (var client in identityServerDataConfiguration.Clients)
 		{
-			var exists = await context.Clients.AnyAsync(a => a.ClientId == client.ClientId);
-
-			if (exists)
+			if (!await context.Clients.AnyAsync(a => a.ClientId == client.ClientId))
 			{
-				continue;
+				foreach (var secret in client.ClientSecrets)
+				{
+					secret.Value = secret.Value.ToSha256();
+				}
+
+				client.Claims = client.ClientClaims
+					.Select(c => new ClientClaim(c.Type, c.Value))
+					.ToList();
+
+				await context.Clients.AddAsync(client.ToEntity());
 			}
-
-			foreach (var secret in client.ClientSecrets)
-			{
-				secret.Value = secret.Value.ToSha256();
-			}
-
-			client.Claims = client.ClientClaims
-				.Select(c => new ClientClaim(c.Type, c.Value))
-				.ToList();
-
-			await context.Clients.AddAsync(client.ToEntity());
 		}
 	}
 
@@ -270,19 +271,15 @@ public static class DbMigrationHelpers
 	{
 		foreach (var resource in identityServerDataConfiguration.ApiResources)
 		{
-			var exists = await context.ApiResources.AnyAsync(a => a.Name == resource.Name);
-
-			if (exists)
+			if (!await context.ApiResources.AnyAsync(a => a.Name == resource.Name))
 			{
-				continue;
-			}
+				foreach (var s in resource.ApiSecrets)
+				{
+					s.Value = s.Value.ToSha256();
+				}
 
-			foreach (var s in resource.ApiSecrets)
-			{
-				s.Value = s.Value.ToSha256();
+				await context.ApiResources.AddAsync(resource.ToEntity());
 			}
-
-			await context.ApiResources.AddAsync(resource.ToEntity());
 		}
 	}
 
@@ -290,14 +287,10 @@ public static class DbMigrationHelpers
 	{
 		foreach (var apiScope in identityServerDataConfiguration.ApiScopes)
 		{
-			var exists = await context.ApiScopes.AnyAsync(a => a.Name == apiScope.Name);
-
-			if (exists)
+			if (!await context.ApiScopes.AnyAsync(a => a.Name == apiScope.Name))
 			{
-				continue;
+				await context.ApiScopes.AddAsync(apiScope.ToEntity());
 			}
-
-			await context.ApiScopes.AddAsync(apiScope.ToEntity());
 		}
 	}
 
@@ -305,14 +298,10 @@ public static class DbMigrationHelpers
 	{
 		foreach (var resource in identityServerDataConfiguration.IdentityResources)
 		{
-			var exists = await context.IdentityResources.AnyAsync(a => a.Name == resource.Name);
-
-			if (exists)
+			if (!await context.IdentityResources.AnyAsync(a => a.Name == resource.Name))
 			{
-				continue;
+				await context.IdentityResources.AddAsync(resource.ToEntity());
 			}
-
-			await context.IdentityResources.AddAsync(resource.ToEntity());
 		}
 	}
 }

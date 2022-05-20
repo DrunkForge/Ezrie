@@ -7,7 +7,7 @@
 		<RootNamespace>Ezrie.AdministrationService</RootNamespace>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 		<DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
-		<UserSecretsId>b7f262ee-b0a3-4784-870e-468627a687ab</UserSecretsId>
+		<UserSecretsId>Ezrie.AdministrationService-b7f262ee-b0a3-4784-870e-468627a687ab</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>

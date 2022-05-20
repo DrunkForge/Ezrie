@@ -5,7 +5,7 @@
 
 	<PropertyGroup>
 		<RootNamespace>Ezrie.AccountManagement.Admin</RootNamespace>
-		<UserSecretsId>8fe260ca-ef4c-4fa3-9364-029146f8d339</UserSecretsId>
+		<UserSecretsId>Ezrie.AccountManagement-8fe260ca-ef4c-4fa3-9364-029146f8d339</UserSecretsId>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..\..\..</DockerfileContext>
@@ -38,6 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Domain.Shared\Ezrie.Domain.Shared.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore.MySql\Ezrie.AccountManagement.EntityFrameworkCore.MySql.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL\Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL.csproj" />

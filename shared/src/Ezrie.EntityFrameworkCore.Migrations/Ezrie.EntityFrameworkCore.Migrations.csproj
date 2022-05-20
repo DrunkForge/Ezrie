@@ -7,8 +7,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions" Version="$(VoloAbpPackageVersion)" />
 		<PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
 		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="$(MicrosoftPackageVersion)">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>

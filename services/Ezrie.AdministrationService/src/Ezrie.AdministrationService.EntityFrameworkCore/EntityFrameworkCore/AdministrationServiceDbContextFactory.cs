@@ -14,12 +14,12 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.EntityFrameworkCore;
+using Ezrie.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ezrie.AdministrationService.EntityFrameworkCore;
 
-public class AdministrationServiceDbContextFactory : DbContextFactoryBase<AdministrationServiceDbContext>
+public class AdministrationServiceDbContextFactory : MigrationDbContextFactoryBase<AdministrationServiceDbContext>
 {
 	public override String ConnectionStringName => AdministrationServiceDbProperties.ConnectionStringName;
 

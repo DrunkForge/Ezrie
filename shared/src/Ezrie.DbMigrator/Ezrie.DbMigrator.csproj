@@ -10,17 +10,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Autofac" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Application.Contracts\Ezrie.AdministrationService.Application.Contracts.csproj" />
-		<ProjectReference Include="..\..\..\services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore\Ezrie.AdministrationService.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\..\services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migration\Ezrie.AdministrationService.EntityFrameworkCore.Migration.csproj" />
+		<ProjectReference Include="..\..\..\services\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore.Migration\Ezrie.TenantService.EntityFrameworkCore.Migration.csproj" />
 		<ProjectReference Include="..\Ezrie.EntityFrameworkCore.Migrations\Ezrie.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\Ezrie.Logging\Ezrie.Logging.csproj" />
 	</ItemGroup>

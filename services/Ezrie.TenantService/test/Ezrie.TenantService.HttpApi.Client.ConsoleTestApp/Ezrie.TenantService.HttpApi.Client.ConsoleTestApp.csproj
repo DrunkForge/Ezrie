@@ -1,32 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Ezrie.TenantService</RootNamespace>
-  </PropertyGroup>
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
 
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="5.2.2" />
-    <ProjectReference Include="..\..\src\Ezrie.TenantService.HttpApi.Client\Ezrie.TenantService.HttpApi.Client.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<RootNamespace>Ezrie.TenantService</RootNamespace>
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-    <Content Include="appsettings.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Remove="appsettings.secrets.json" />
-    <Content Include="appsettings.secrets.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.Autofac" Version="$(VoloAbpPackageVersion)" />
+		<ProjectReference Include="..\..\src\Ezrie.TenantService.HttpApi.Client\Ezrie.TenantService.HttpApi.Client.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="appsettings.json" />
+		<Content Include="appsettings.json">
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<None Remove="appsettings.secrets.json" />
+		<Content Include="appsettings.secrets.json">
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+	</ItemGroup>
 
 </Project>

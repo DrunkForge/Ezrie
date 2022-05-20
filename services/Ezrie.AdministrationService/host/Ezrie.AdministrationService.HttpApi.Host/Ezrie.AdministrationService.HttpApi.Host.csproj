@@ -34,16 +34,10 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.Microservices\Ezrie.Hosting.Microservices.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
+		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.EntityFrameworkCore.Migration\Ezrie.AdministrationService.EntityFrameworkCore.Migration.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.HttpApi\Ezrie.AdministrationService.HttpApi.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.Application\Ezrie.AdministrationService.Application.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.EntityFrameworkCore\Ezrie.AdministrationService.EntityFrameworkCore.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Remove="Logs\**" />
-		<Content Remove="Logs\**" />
-		<EmbeddedResource Remove="Logs\**" />
-		<None Remove="Logs\**" />
 	</ItemGroup>
 
 </Project>

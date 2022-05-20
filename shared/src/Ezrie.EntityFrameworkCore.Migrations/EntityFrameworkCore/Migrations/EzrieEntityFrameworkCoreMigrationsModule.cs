@@ -15,22 +15,37 @@
 *********************************************************************************************/
 
 using Ezrie.Logging;
+using Ezrie.MultiTenancy;
+using Ezrie.Seeding;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Volo.Abp.Autofac;
+using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore.PostgreSql;
 using Volo.Abp.Modularity;
+using Volo.Abp.MultiTenancy;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Ezrie.EntityFrameworkCore.Migrations;
 
-[DependsOn(typeof(EzrieDomainSharedModule))]
 [DependsOn(typeof(EzrieEntityFrameworkCoreModule))]
 [DependsOn(typeof(EzrieLoggingModule))]
+[DependsOn(typeof(AbpAutofacModule))]
+[DependsOn(typeof(AbpMultiTenancyModule))]
 [DependsOn(typeof(AbpDataModule))]
-[DependsOn(typeof(AbpEntityFrameworkCorePostgreSqlModule))]
 // We need to loop through tenants to migrate and seed their databases
 [DependsOn(typeof(AbpTenantManagementApplicationContractsModule))]
 [DependsOn(typeof(AbpTenantManagementEntityFrameworkCoreModule))]
 public class EzrieEntityFrameworkCoreMigrationsModule : AbpModule
 {
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.Replace(ServiceDescriptor.Transient<IDataSeeder, EzrieDataSeeder>());
+
+		Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
+
+		Configure<AbpMultiTenancyOptions>(options => options.IsEnabled = MultiTenancyConsts.IsEnabled);
+	}
 }

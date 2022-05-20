@@ -17,9 +17,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Ezrie.AccountManagement.Identity;
-using Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
 using Ezrie.AccountManagement.Middlewares;
 using Ezrie.AccountManagement.Helpers;
+using Ezrie.AccountManagement.EntityFrameworkCore;
 
 namespace Ezrie.AccountManagement.Configuration.Test;
 

@@ -41,3 +41,10 @@ services:
       context: .
       dockerfile: services/Ezrie.AdministrationService/host/Ezrie.AdministrationService.HttpApi.Host/Dockerfile
 
+
+  ezrie.tenantservice.blazor.host:
+    image: ${DOCKER_REGISTRY-}ezrietenantserviceblazorhost
+    build:
+      context: .
+      dockerfile: services/Ezrie.TenantService/host/Ezrie.TenantService.Blazor.Host/Dockerfile
+

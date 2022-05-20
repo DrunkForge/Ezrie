@@ -1,16 +1,16 @@
-﻿using Volo.Abp.Bundling;
+using Volo.Abp.Bundling;
 
-namespace Ezrie.TenantService.Blazor.Host;
+namespace Ezrie.TenantService;
 
 public class TenantServiceBlazorHostBundleContributor : IBundleContributor
 {
-    public void AddScripts(BundleContext context)
-    {
+	public void AddScripts(BundleContext context)
+	{
 
-    }
+	}
 
-    public void AddStyles(BundleContext context)
-    {
-        context.Add("main.css", true);
-    }
+	public void AddStyles(BundleContext context)
+	{
+		context.Add("main.css", true);
+	}
 }

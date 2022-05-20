@@ -22,7 +22,7 @@ using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
 
 #nullable disable
 
-namespace Ezrie.AccountManagement.EntityFrameworkCore.EntityFrameworkCore;
+namespace Ezrie.AccountManagement.EntityFrameworkCore;
 
 public class IdentityServerConfigurationDbContext : ConfigurationDbContext<IdentityServerConfigurationDbContext>, IAdminConfigurationDbContext
 {

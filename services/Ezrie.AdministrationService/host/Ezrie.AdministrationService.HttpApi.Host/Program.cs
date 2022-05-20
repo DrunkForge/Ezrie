@@ -14,6 +14,8 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.AdministrationService.EntityFrameworkCore.Migration;
+using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Hosting.AspNetCore;
 using Ezrie.Logging;
 using Serilog;
@@ -30,6 +32,8 @@ internal static class Program
 			var builder = CreateHostBuilder(args);
 
 			var app = builder.Build();
+
+			await app.MigrateAsync();
 
 			await app.RunAsync().ConfigureAwait(false);
 
@@ -56,4 +60,12 @@ internal static class Program
 			webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
 			webBuilder.UseStartup<Startup<AdministrationServiceHttpApiHostModule>>();
 		});
+
+	private static async Task MigrateAsync(this IHost host)
+	{
+		var configuration = host.Services.GetRequiredService<IConfiguration>();
+		var logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger<AdministrationServiceHttpApiHostModule>();
+
+		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationModule>(configuration, logger).MigrateAndSeedAsync();
+	}
 }

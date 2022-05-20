@@ -1,4 +1,4 @@
-﻿namespace Ezrie.TenantService.Blazor.Menus;
+namespace Ezrie.TenantService.Menus;
 
 public class TenantServiceMenus
 {
