@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Ezrie.TenantService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.0" />
+    <ProjectReference Include="..\..\src\Ezrie.TenantService.EntityFrameworkCore\Ezrie.TenantService.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Ezrie.TenantService.TestBase\Ezrie.TenantService.TestBase.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.2.2" />
+  </ItemGroup>
+
+</Project>

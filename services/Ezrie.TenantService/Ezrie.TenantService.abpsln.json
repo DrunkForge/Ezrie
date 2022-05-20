@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Ezrie.TenantService": {
+      "path": "Ezrie.TenantService.abpmdl.json"
+    }
+  }
+}
