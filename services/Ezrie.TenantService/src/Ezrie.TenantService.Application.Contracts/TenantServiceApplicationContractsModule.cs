@@ -1,6 +1,7 @@
-﻿using Volo.Abp.Application;
+using Volo.Abp.Application;
 using Volo.Abp.Modularity;
 using Volo.Abp.Authorization;
+using Volo.Abp.TenantManagement;
 
 namespace Ezrie.TenantService;
 
@@ -9,7 +10,8 @@ namespace Ezrie.TenantService;
     typeof(AbpDddApplicationContractsModule),
     typeof(AbpAuthorizationModule)
     )]
-public class TenantServiceApplicationContractsModule : AbpModule
+[DependsOn(typeof(AbpTenantManagementApplicationContractsModule))]
+    public class TenantServiceApplicationContractsModule : AbpModule
 {
 
 }

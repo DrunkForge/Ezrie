@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
+using Volo.Abp.TenantManagement;
 
 namespace Ezrie.TenantService;
 
@@ -11,7 +12,8 @@ namespace Ezrie.TenantService;
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule)
     )]
-public class TenantServiceApplicationModule : AbpModule
+[DependsOn(typeof(AbpTenantManagementApplicationModule))]
+    public class TenantServiceApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

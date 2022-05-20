@@ -1,14 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.TenantManagement;
 
 namespace Ezrie.TenantService;
 
 [DependsOn(
     typeof(TenantServiceApplicationContractsModule),
     typeof(AbpHttpClientModule))]
-public class TenantServiceHttpApiClientModule : AbpModule
+[DependsOn(typeof(AbpTenantManagementHttpApiClientModule))]
+    public class TenantServiceHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using Ezrie.TenantService.Localization;
 using Ezrie.TenantService.Web.Menus;
@@ -9,6 +9,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using Ezrie.TenantService.Permissions;
+using Volo.Abp.TenantManagement.Web;
 
 namespace Ezrie.TenantService.Web;
 
@@ -17,7 +18,8 @@ namespace Ezrie.TenantService.Web;
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpAutoMapperModule)
     )]
-public class TenantServiceWebModule : AbpModule
+[DependsOn(typeof(AbpTenantManagementWebModule))]
+    public class TenantServiceWebModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {

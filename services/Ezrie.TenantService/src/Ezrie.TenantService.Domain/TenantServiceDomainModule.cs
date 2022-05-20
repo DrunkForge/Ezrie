@@ -1,5 +1,6 @@
-﻿using Volo.Abp.Domain;
+using Volo.Abp.Domain;
 using Volo.Abp.Modularity;
+using Volo.Abp.TenantManagement;
 
 namespace Ezrie.TenantService;
 
@@ -7,7 +8,8 @@ namespace Ezrie.TenantService;
     typeof(AbpDddDomainModule),
     typeof(TenantServiceDomainSharedModule)
 )]
-public class TenantServiceDomainModule : AbpModule
+[DependsOn(typeof(AbpTenantManagementDomainModule))]
+    public class TenantServiceDomainModule : AbpModule
 {
 
 }

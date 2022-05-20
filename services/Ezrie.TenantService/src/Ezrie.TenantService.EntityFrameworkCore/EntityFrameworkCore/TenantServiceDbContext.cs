@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Ezrie.TenantService.EntityFrameworkCore;
 
@@ -22,5 +23,6 @@ public class TenantServiceDbContext : AbpDbContext<TenantServiceDbContext>, ITen
         base.OnModelCreating(builder);
 
         builder.ConfigureTenantService();
-    }
+        builder.ConfigureTenantManagement();
+        }
 }

@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Ezrie.TenantService.EntityFrameworkCore;
 
@@ -8,7 +9,8 @@ namespace Ezrie.TenantService.EntityFrameworkCore;
     typeof(TenantServiceDomainModule),
     typeof(AbpEntityFrameworkCoreModule)
 )]
-public class TenantServiceEntityFrameworkCoreModule : AbpModule
+[DependsOn(typeof(AbpTenantManagementEntityFrameworkCoreModule))]
+    public class TenantServiceEntityFrameworkCoreModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
