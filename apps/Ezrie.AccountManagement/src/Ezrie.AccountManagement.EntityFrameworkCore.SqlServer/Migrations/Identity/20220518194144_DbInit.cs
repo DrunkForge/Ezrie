@@ -12,10 +12,10 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<String>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<String>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<String>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,21 +26,21 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<String>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<String>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<String>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<String>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<Boolean>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<Boolean>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<Boolean>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    LockoutEnabled = table.Column<Boolean>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,11 +51,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "RoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    RoleId = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<String>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,11 +72,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "UserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<String>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -93,10 +93,10 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "UserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    LoginProvider = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<String>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,8 +113,8 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "UserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<String>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -137,10 +137,10 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "UserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<String>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<String>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

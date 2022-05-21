@@ -16,22 +16,22 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ApiResources",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    Enabled = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    Name = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DisplayName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    DisplayName = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
+                    Description = table.Column<String>(type: "varchar(1000)", maxLength: 1000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    AllowedAccessTokenSigningAlgorithms = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                    AllowedAccessTokenSigningAlgorithms = table.Column<String>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShowInDiscoveryDocument = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ShowInDiscoveryDocument = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Updated = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     LastAccessed = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    NonEditable = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    NonEditable = table.Column<Boolean>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,18 +43,18 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ApiScopes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    Enabled = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    Name = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DisplayName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    DisplayName = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
+                    Description = table.Column<String>(type: "varchar(1000)", maxLength: 1000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Required = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Emphasize = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    Required = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    Emphasize = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    ShowInDiscoveryDocument = table.Column<Boolean>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,63 +66,63 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "Clients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ClientId = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    Enabled = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    ClientId = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProtocolType = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    ProtocolType = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    RequireClientSecret = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ClientName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    RequireClientSecret = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    ClientName = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
+                    Description = table.Column<String>(type: "varchar(1000)", maxLength: 1000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientUri = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: true)
+                    ClientUri = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LogoUri = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: true)
+                    LogoUri = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    RequireConsent = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AllowRememberConsent = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AlwaysIncludeUserClaimsInIdToken = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    RequirePkce = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AllowPlainTextPkce = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    RequireRequestObject = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AllowAccessTokensViaBrowser = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    FrontChannelLogoutUri = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: true)
+                    RequireConsent = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    AllowRememberConsent = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    AlwaysIncludeUserClaimsInIdToken = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    RequirePkce = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    AllowPlainTextPkce = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    RequireRequestObject = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    AllowAccessTokensViaBrowser = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    FrontChannelLogoutUri = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FrontChannelLogoutSessionRequired = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    BackChannelLogoutUri = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: true)
+                    FrontChannelLogoutSessionRequired = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    BackChannelLogoutUri = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BackChannelLogoutSessionRequired = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AllowOfflineAccess = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    IdentityTokenLifetime = table.Column<int>(type: "int", nullable: false),
-                    AllowedIdentityTokenSigningAlgorithms = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                    BackChannelLogoutSessionRequired = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    AllowOfflineAccess = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    IdentityTokenLifetime = table.Column<Int32>(type: "int", nullable: false),
+                    AllowedIdentityTokenSigningAlgorithms = table.Column<String>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    AccessTokenLifetime = table.Column<int>(type: "int", nullable: false),
-                    AuthorizationCodeLifetime = table.Column<int>(type: "int", nullable: false),
-                    ConsentLifetime = table.Column<int>(type: "int", nullable: true),
-                    AbsoluteRefreshTokenLifetime = table.Column<int>(type: "int", nullable: false),
-                    SlidingRefreshTokenLifetime = table.Column<int>(type: "int", nullable: false),
-                    RefreshTokenUsage = table.Column<int>(type: "int", nullable: false),
-                    UpdateAccessTokenClaimsOnRefresh = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    RefreshTokenExpiration = table.Column<int>(type: "int", nullable: false),
-                    AccessTokenType = table.Column<int>(type: "int", nullable: false),
-                    EnableLocalLogin = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    IncludeJwtId = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AlwaysSendClientClaims = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ClientClaimsPrefix = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    AccessTokenLifetime = table.Column<Int32>(type: "int", nullable: false),
+                    AuthorizationCodeLifetime = table.Column<Int32>(type: "int", nullable: false),
+                    ConsentLifetime = table.Column<Int32>(type: "int", nullable: true),
+                    AbsoluteRefreshTokenLifetime = table.Column<Int32>(type: "int", nullable: false),
+                    SlidingRefreshTokenLifetime = table.Column<Int32>(type: "int", nullable: false),
+                    RefreshTokenUsage = table.Column<Int32>(type: "int", nullable: false),
+                    UpdateAccessTokenClaimsOnRefresh = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    RefreshTokenExpiration = table.Column<Int32>(type: "int", nullable: false),
+                    AccessTokenType = table.Column<Int32>(type: "int", nullable: false),
+                    EnableLocalLogin = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    IncludeJwtId = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    AlwaysSendClientClaims = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    ClientClaimsPrefix = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PairWiseSubjectSalt = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    PairWiseSubjectSalt = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Updated = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     LastAccessed = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    UserSsoLifetime = table.Column<int>(type: "int", nullable: true),
-                    UserCodeType = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                    UserSsoLifetime = table.Column<Int32>(type: "int", nullable: true),
+                    UserCodeType = table.Column<String>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DeviceCodeLifetime = table.Column<int>(type: "int", nullable: false),
-                    NonEditable = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    DeviceCodeLifetime = table.Column<Int32>(type: "int", nullable: false),
+                    NonEditable = table.Column<Boolean>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,21 +134,21 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "IdentityResources",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    Enabled = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    Name = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DisplayName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    DisplayName = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
+                    Description = table.Column<String>(type: "varchar(1000)", maxLength: 1000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Required = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Emphasize = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Required = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    Emphasize = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
+                    ShowInDiscoveryDocument = table.Column<Boolean>(type: "tinyint(1)", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Updated = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    NonEditable = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    NonEditable = table.Column<Boolean>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -160,10 +160,10 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ApiResourceClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ApiResourceId = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    ApiResourceId = table.Column<Int32>(type: "int", nullable: false),
+                    Type = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -182,12 +182,12 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ApiResourceProperties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ApiResourceId = table.Column<int>(type: "int", nullable: false),
-                    Key = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    ApiResourceId = table.Column<Int32>(type: "int", nullable: false),
+                    Key = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: false)
+                    Value = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -206,11 +206,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ApiResourceScopes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Scope = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    Scope = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ApiResourceId = table.Column<int>(type: "int", nullable: false)
+                    ApiResourceId = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,15 +228,15 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ApiResourceSecrets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ApiResourceId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
+                    ApiResourceId = table.Column<Int32>(type: "int", nullable: false),
+                    Description = table.Column<String>(type: "varchar(1000)", maxLength: 1000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<string>(type: "varchar(4000)", maxLength: 4000, nullable: false)
+                    Value = table.Column<String>(type: "varchar(4000)", maxLength: 4000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Expiration = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Type = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    Type = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Created = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
@@ -256,10 +256,10 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ApiScopeClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ScopeId = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    ScopeId = table.Column<Int32>(type: "int", nullable: false),
+                    Type = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -278,12 +278,12 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ApiScopeProperties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ScopeId = table.Column<int>(type: "int", nullable: false),
-                    Key = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    ScopeId = table.Column<Int32>(type: "int", nullable: false),
+                    Key = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: false)
+                    Value = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -302,13 +302,13 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Type = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    Type = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    Value = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -326,11 +326,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientCorsOrigins",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Origin = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
+                    Origin = table.Column<String>(type: "varchar(150)", maxLength: 150, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -348,11 +348,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientGrantTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    GrantType = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    GrantType = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -370,11 +370,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientIdPRestrictions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Provider = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    Provider = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -392,11 +392,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientPostLogoutRedirectUris",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PostLogoutRedirectUri = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: false)
+                    PostLogoutRedirectUri = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -414,12 +414,12 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientProperties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClientId = table.Column<int>(type: "int", nullable: false),
-                    Key = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false),
+                    Key = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: false)
+                    Value = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -438,11 +438,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientRedirectUris",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RedirectUri = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: false)
+                    RedirectUri = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -460,11 +460,11 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientScopes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Scope = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    Scope = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<int>(type: "int", nullable: false)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -482,15 +482,15 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "ClientSecrets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClientId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: true)
+                    ClientId = table.Column<Int32>(type: "int", nullable: false),
+                    Description = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<string>(type: "varchar(4000)", maxLength: 4000, nullable: false)
+                    Value = table.Column<String>(type: "varchar(4000)", maxLength: 4000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Expiration = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Type = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    Type = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Created = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
@@ -510,10 +510,10 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "IdentityResourceClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    IdentityResourceId = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    IdentityResourceId = table.Column<Int32>(type: "int", nullable: false),
+                    Type = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -532,12 +532,12 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "IdentityResourceProperties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    IdentityResourceId = table.Column<int>(type: "int", nullable: false),
-                    Key = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                    IdentityResourceId = table.Column<Int32>(type: "int", nullable: false),
+                    Key = table.Column<String>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: false)
+                    Value = table.Column<String>(type: "varchar(2000)", maxLength: 2000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>

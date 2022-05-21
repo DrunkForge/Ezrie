@@ -4,9 +4,9 @@ namespace Ezrie.TenantService.Permissions;
 
 public class TenantServicePermissions
 {
-    public const string GroupName = "TenantService";
+    public const String GroupName = "TenantService";
 
-    public static string[] GetAll()
+    public static String[] GetAll()
     {
         return ReflectionHelper.GetPublicConstantsRecursively(typeof(TenantServicePermissions));
     }

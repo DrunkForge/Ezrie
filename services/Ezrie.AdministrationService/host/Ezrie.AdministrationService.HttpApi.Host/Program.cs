@@ -66,6 +66,6 @@ internal static class Program
 		var configuration = host.Services.GetRequiredService<IConfiguration>();
 		var logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger<AdministrationServiceHttpApiHostModule>();
 
-		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationModule>(configuration, logger).MigrateAndSeedAsync();
+		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationModule>(logger).MigrateAndSeedAsync();
 	}
 }

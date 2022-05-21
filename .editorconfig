@@ -266,4 +266,5 @@ dotnet_naming_style._camelcase.word_separator =
 dotnet_naming_style._camelcase.capitalization = camel_case
 
 # IDE0060: Remove unused parameter
-dotnet_diagnostic.IDE0060.severity = none
+dotnet_diagnostic.IDE0060.severity = none  # IDE0060: Remove unused parameter
+dotnet_diagnostic.CA1711.severity = none   # CA1711:  Identifiers should not have incorrect suffix

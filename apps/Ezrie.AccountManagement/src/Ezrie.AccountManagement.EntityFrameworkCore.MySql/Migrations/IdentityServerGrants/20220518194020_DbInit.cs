@@ -15,21 +15,21 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "DeviceCodes",
                 columns: table => new
                 {
-                    UserCode = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    UserCode = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DeviceCode = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    DeviceCode = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SubjectId = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    SubjectId = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SessionId = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                    SessionId = table.Column<String>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    ClientId = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    Description = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Data = table.Column<string>(type: "longtext", maxLength: 50000, nullable: false)
+                    Data = table.Column<String>(type: "longtext", maxLength: 50000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -42,22 +42,22 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.IdentityS
                 name: "PersistedGrants",
                 columns: table => new
                 {
-                    Key = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    Key = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Type = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    Type = table.Column<String>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SubjectId = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    SubjectId = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SessionId = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                    SessionId = table.Column<String>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientId = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    ClientId = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    Description = table.Column<String>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     ConsumedTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Data = table.Column<string>(type: "longtext", maxLength: 50000, nullable: false)
+                    Data = table.Column<String>(type: "longtext", maxLength: 50000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>

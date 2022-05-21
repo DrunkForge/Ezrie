@@ -53,7 +53,7 @@ public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 	{
 		var app = context.GetApplicationBuilder();
 		var configuration = context.GetConfiguration();
-		var apiConfiguration = configuration.GetApiConfiguration();
+		var apiConfiguration = configuration.GetAppConfiguration();
 
 		if (MultiTenancyConsts.IsEnabled)
 		{
@@ -67,7 +67,7 @@ public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 			options.SwaggerEndpoint(SwaggerProperties.EndPointUrl, apiConfiguration.ApiName);
 			options.OAuthClientId(apiConfiguration.ClientId);
 			options.OAuthClientSecret(apiConfiguration.ClientSecret);
-			options.OAuthScopes(apiConfiguration.OidcApiName);
+			options.OAuthScopes(apiConfiguration.Scopes);
 		});
 
 		app.UseConfiguredEndpoints(endpoints => {

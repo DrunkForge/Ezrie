@@ -12,17 +12,17 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Audit
                 name: "AuditLog",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Int64>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Event = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Source = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SubjectIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SubjectName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SubjectType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SubjectAdditionalData = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Action = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Event = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    Source = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    Category = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    SubjectIdentifier = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    SubjectName = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    SubjectType = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    SubjectAdditionalData = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    Action = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    Data = table.Column<String>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

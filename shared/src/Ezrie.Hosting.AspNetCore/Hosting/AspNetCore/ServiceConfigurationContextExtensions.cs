@@ -24,16 +24,22 @@ namespace Ezrie.Hosting.AspNetCore;
 
 public static class ServiceConfigurationContextExtensions
 {
-	public static void ConfigureJwtAuthentication(this ServiceConfigurationContext context)
+	public static void ConfigureJwtAuthentication(this ServiceConfigurationContext context, String audience)
 	{
-		var apiConfiguration = context.Services.GetConfiguration().GetApiConfiguration();
+		if (String.IsNullOrWhiteSpace(audience))
+		{
+			throw new ArgumentException($"'{nameof(audience)}' cannot be null or whitespace.", nameof(audience));
+		}
+
+		var apiConfiguration = context.Services.GetConfiguration().GetAppConfiguration();
+
 		context.Services
 			.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			.AddJwtBearer(options =>
 			{
 				options.Authority = apiConfiguration.IdentityServerBaseUrl;
 				options.RequireHttpsMetadata = apiConfiguration.RequireHttpsMetadata;
-				options.Audience = apiConfiguration.OidcApiName;
+				options.Audience = audience;
 			});
 	}
 

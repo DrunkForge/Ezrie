@@ -35,7 +35,6 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
 		var hostingEnvironment = context.Services.GetHostingEnvironment();
 		var configuration = context.Services.GetConfiguration();
 
-		context.ConfigureJwtAuthentication();
 
 		if (hostingEnvironment.IsDevelopment())
 		{
@@ -55,6 +54,8 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
 					"..{0}..{0}src{0}Ezrie.AdministrationService.Application", Path.DirectorySeparatorChar)));
 			});
 		}
+
+		context.ConfigureJwtAuthentication(AdministrationServiceOidcProperties.Audience);
 
 		Configure<AbpEndpointRouterOptions>(options =>
 		{

@@ -25,11 +25,73 @@ using Serilog.Configuration;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Expressions;
+using Serilog.Extensions.Hosting;
+using Serilog.Extensions.Logging;
 
 namespace Ezrie.Logging;
 
 public static class LoggingConfigurationExtensions
 {
+	public static void AddEzrieLogging<T>(this IServiceCollection services, IConfiguration configuration)
+		=> AddEzrieLogging(services, configuration, typeof(T).Assembly.GetName().Name ?? typeof(T).Name);
+
+	public static void AddEzrieLogging(this IServiceCollection services, IConfiguration configuration, String applicationName)
+	{
+		if (Log.Logger is Logger)
+		{
+			AddChildLogger(services, Log.Logger);
+			return;
+		}
+
+		ArgumentNullException.ThrowIfNull(services);
+		if (applicationName.IsNullOrWhiteSpace())
+			throw new ArgumentException($"The '{nameof(applicationName)}' parameter cannot be null or whitespace.", nameof(applicationName));
+
+		var level = configuration.GetSerilogMinimumLevel();
+		var seq = configuration.GetSeq();
+
+		// Initially include all log entries with a filter of `true`
+		var filterSwitch = new LoggingFilterSwitch("true");
+		var levelSwitch = new LoggingLevelSwitch(level);
+		seq.ControlLevelSwitch = levelSwitch;
+
+		services.AddSingleton(filterSwitch);
+		services.AddSingleton(levelSwitch);
+
+		var loggerConfiguration = new LoggerConfiguration()
+				.ReadFrom.Configuration(configuration)
+				.Enrich.FromLogContext()
+				.Enrich.WithProperty("Application", applicationName)
+				.Filter.ControlledBy(filterSwitch)
+				.MinimumLevel.ControlledBy(levelSwitch)
+				.WriteTo.Seq(seq);
+
+		Log.Logger = loggerConfiguration.CreateLogger();
+
+		AddChildLogger(services, Log.Logger);
+
+		Log.Logger.Write(LogEventLevel.Information, "Starting: {ApplicationName} in {EnvironmentName}",
+			applicationName, RuntimeEnvironment.GetEnvironmentName());
+		Log.Logger.Debug("Debug Logging Enabled");
+		Log.Logger.Verbose("Verbose Logging Enabled");
+	}
+
+	public static IServiceCollection AddChildLogger(this IServiceCollection services, Serilog.ILogger? logger = null)
+	{
+		services.AddSingleton<ILoggerFactory>(services => new SerilogLoggerFactory(logger, false));
+
+		// Registered to provide two services...
+		var diagnosticContext = new DiagnosticContext(logger ?? Log.Logger);
+
+		// Consumed by e.g. middleware
+		services.AddSingleton(diagnosticContext);
+
+		// Consumed by user code
+		services.AddSingleton<IDiagnosticContext>(diagnosticContext);
+
+		return services;
+	}
+
 	public static IHostBuilder UseEzrieLogging<T>(this IHostBuilder hostBuilder)
 		=> hostBuilder.UseEzrieLogging(typeof(T).Assembly.GetName().Name ?? typeof(T).Name);
 
@@ -45,42 +107,13 @@ public static class LoggingConfigurationExtensions
 
 	public static ILoggingBuilder AddEzrieLogging(this ILoggingBuilder builder, IConfiguration configuration, String applicationName)
 	{
-		if (String.IsNullOrWhiteSpace(applicationName))
-		{
-			throw new ArgumentException($"'{nameof(applicationName)}' cannot be null or whitespace.", nameof(applicationName));
-		}
-
-		var level = configuration.GetSerilogMinimumLevel();
 		var host = configuration.GetHostConfiguration();
-		var seq = configuration.GetSeq();
-
 		SelfLogProperties.SelfLogPath = host.SelfLogPath;
 		Serilog.Debugging.SelfLog.Enable(SelfLog.WriteLine);
 
-		// Initially include all log entries with a filter of `true`
-		var filterSwitch = new LoggingFilterSwitch("true");
-		var levelSwitch = new LoggingLevelSwitch(level);
-		seq.ControlLevelSwitch = levelSwitch;
-
-		builder.Services.AddSingleton(filterSwitch);
-		builder.Services.AddSingleton(levelSwitch);
-
-		var logger = new LoggerConfiguration()
-				.ReadFrom.Configuration(configuration)
-				.Enrich.FromLogContext()
-				.Enrich.WithProperty("Application", applicationName)
-				.Filter.ControlledBy(filterSwitch)
-				.MinimumLevel.ControlledBy(levelSwitch)
-				.WriteTo.Seq(seq);
-
-		Log.Logger = logger.CreateLogger();
+		builder.Services.AddEzrieLogging(configuration, applicationName);
 
 		builder.AddSerilog();
-
-		Log.Write(LogEventLevel.Information, "Starting: {ApplicationName} in {EnvironmentName}",
-			applicationName, RuntimeEnvironment.GetEnvironmentName());
-		Log.Debug("Debug Logging Enabled");
-		Log.Verbose("Verbose Logging Enabled");
 
 		return builder;
 	}

@@ -11,14 +11,4 @@ namespace Ezrie.TenantService.EntityFrameworkCore.Migration;
 [DependsOn(typeof(EzrieEntityFrameworkCoreMigrationsModule))]
 public class TenantServiceEntityFrameworkCoreMigrationModule : MigrationModuleBase
 {
-	public override void ConfigureServices(ServiceConfigurationContext context)
-	{
-		var configuration = context.Services.GetConfiguration();
-
-		context.Services.AddLogging(logging =>
-		{
-			logging.ClearProviders();
-			logging.AddEzrieLogging<TenantServiceEntityFrameworkCoreMigrationModule>(configuration);
-		});
-	}
 }

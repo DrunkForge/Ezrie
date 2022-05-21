@@ -27,14 +27,7 @@ public static class SwaggerConfigurationHelper
 	{
 		ArgumentNullException.ThrowIfNull(context);
 
-		var apiConfiguration = context.Services.GetConfiguration().GetApiConfiguration();
-
-		if (scopes == null)
-		{
-			scopes = new Dictionary<String, String> { 
-				{ apiConfiguration.ClientId, apiConfiguration.ClientName ?? apiConfiguration.ClientId } 
-			};
-		}
+		var apiConfiguration = context.Services.GetConfiguration().GetAppConfiguration();
 
 		context.Services.AddAbpSwaggerGenWithOAuth(
 			apiConfiguration.IdentityServerBaseUrl,

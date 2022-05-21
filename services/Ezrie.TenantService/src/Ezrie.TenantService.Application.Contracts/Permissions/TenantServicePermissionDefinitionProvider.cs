@@ -11,7 +11,7 @@ public class TenantServicePermissionDefinitionProvider : PermissionDefinitionPro
         var myGroup = context.AddGroup(TenantServicePermissions.GroupName, L("Permission:TenantService"));
     }
 
-    private static LocalizableString L(string name)
+    private static LocalizableString L(String name)
     {
         return LocalizableString.Create<TenantServiceResource>(name);
     }

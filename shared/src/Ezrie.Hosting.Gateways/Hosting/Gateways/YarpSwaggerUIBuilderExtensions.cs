@@ -33,7 +33,7 @@ public static partial class YarpSwaggerUIBuilderExtensions
 		app.UseSwaggerUI(options =>
 		{
 			var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
-			var apiConfiguration = configuration.GetApiConfiguration();
+			var apiConfiguration = configuration.GetAppConfiguration();
 			var logger = context.ServiceProvider.GetRequiredService<ILogger<ApplicationInitializationContext>>();
 			var proxyConfigProvider = context.ServiceProvider.GetRequiredService<IProxyConfigProvider>();
 			var yarpConfig = proxyConfigProvider.GetConfig();

@@ -14,7 +14,9 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.Configuration;
 using Ezrie.EntityFrameworkCore.Seeding;
+using Ezrie.Logging;
 using Ezrie.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,12 +31,10 @@ namespace Ezrie.EntityFrameworkCore.Migrations;
 public class MigrationHost<T> : ITransientDependency
 	where T : MigrationModuleBase
 {
-	private readonly IConfiguration _configuration;
 	private readonly ILogger _logger;
 
-	public MigrationHost(IConfiguration configuration, ILogger logger)
+	public MigrationHost(ILogger logger)
 	{
-		_configuration = configuration;
 		_logger = logger;
 	}
 
@@ -42,8 +42,12 @@ public class MigrationHost<T> : ITransientDependency
 	{
 		using (var application = await AbpApplicationFactory.CreateAsync<T>(options =>
 		{
-			options.Services.ReplaceConfiguration(_configuration);
+
 			options.UseAutofac();
+			var configuration = EzrieConfiguration.CreateDefault();
+			options.Services
+				.ReplaceConfiguration(configuration)
+				.AddEzrieLogging<T>(configuration);
 		}))
 		{
 			try

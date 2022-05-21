@@ -182,7 +182,7 @@ public static class StartupHelpers
 			})
 			.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 			{
-				var apiConfiguration = configuration.GetApiConfiguration();
+				var apiConfiguration = configuration.GetAppConfiguration();
 				options.Authority = apiConfiguration.IdentityServerBaseUrl;
 				options.RequireHttpsMetadata = apiConfiguration.RequireHttpsMetadata;
 				options.Audience = apiConfiguration.OidcApiName;
@@ -231,7 +231,7 @@ public static class StartupHelpers
 
 	public static void AddAuthorizationPolicies(this IServiceCollection services)
 	{
-		var apiConfiguration = services.GetApiConfiguration();
+		var apiConfiguration = services.GetAppConfiguration();
 
 		if (apiConfiguration == null || String.IsNullOrWhiteSpace(apiConfiguration.OidcApiName))
 			throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");

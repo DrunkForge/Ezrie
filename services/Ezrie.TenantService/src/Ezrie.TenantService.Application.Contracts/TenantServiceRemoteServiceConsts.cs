@@ -2,7 +2,7 @@
 
 public class TenantServiceRemoteServiceConsts
 {
-    public const string RemoteServiceName = "TenantService";
+    public const String RemoteServiceName = "TenantService";
 
-    public const string ModuleName = "tenantService";
+    public const String ModuleName = "tenantService";
 }

@@ -48,7 +48,7 @@ public class Startup
 
 	public void ConfigureServices(IServiceCollection services)
 	{
-		var apiConfiguration = Configuration.GetApiConfiguration();
+		var apiConfiguration = Configuration.GetAppConfiguration();
 		services.AddSingleton(apiConfiguration);
 
 		// Add DbContexts
@@ -121,7 +121,7 @@ public class Startup
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 	{
-		var apiConfiguration = app.ApplicationServices.GetApiConfiguration();
+		var apiConfiguration = app.ApplicationServices.GetAppConfiguration();
 
 		app.UseSerilogRequestLogging();
 		app.AddForwardHeaders();

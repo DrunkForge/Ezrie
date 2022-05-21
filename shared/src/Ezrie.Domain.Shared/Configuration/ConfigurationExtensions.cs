@@ -51,15 +51,15 @@ public static class ConfigurationExtensions
 		=> configuration.GetOptions<RedisConfiguration>()
 		?? new();
 
-	public static AppConfiguration GetApiConfiguration(this IServiceCollection services)
+	public static AppConfiguration GetAppConfiguration(this IServiceCollection services)
 		=> services.GetOptions<AppConfiguration>()
 		?? throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
 
-	public static AppConfiguration GetApiConfiguration(this IServiceProvider serviceProvider)
+	public static AppConfiguration GetAppConfiguration(this IServiceProvider serviceProvider)
 		=> serviceProvider.GetOptions<AppConfiguration>()
 		?? throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
 
-	public static AppConfiguration GetApiConfiguration(this IConfiguration configuration)
+	public static AppConfiguration GetAppConfiguration(this IConfiguration configuration)
 		=> configuration.GetOptions<AppConfiguration>()
 		?? throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
 

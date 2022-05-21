@@ -13,10 +13,10 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL.Migrations.Data
                 name: "DataProtectionKeys",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<Int32>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FriendlyName = table.Column<string>(type: "text", nullable: true),
-                    Xml = table.Column<string>(type: "text", nullable: true)
+                    FriendlyName = table.Column<String>(type: "text", nullable: true),
+                    Xml = table.Column<String>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

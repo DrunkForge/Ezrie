@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
 {
 	public static void ConfigureCors(this IServiceCollection services, Action<CorsPolicyBuilder>? defaultPolicy = null)
 	{
-		var apiConfiguration = services.GetConfiguration().GetApiConfiguration();
+		var apiConfiguration = services.GetConfiguration().GetAppConfiguration();
 		var origins = apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray();
 
 		services.AddCors(options =>

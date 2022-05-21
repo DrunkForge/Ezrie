@@ -29,22 +29,20 @@ namespace Ezrie.EntityFrameworkCore.Migrations;
 
 public class DbMigratorHostedService : BackgroundService
 {
-	private readonly IConfiguration _configuration;
 	private readonly IHostApplicationLifetime _hostApplicationLifetime;
 	private readonly ILogger<DbMigratorHostedService> _logger;
 
-	public DbMigratorHostedService(IConfiguration configuration, IHostApplicationLifetime applicationLifetime, ILogger<DbMigratorHostedService> logger)
+	public DbMigratorHostedService(IHostApplicationLifetime applicationLifetime, ILogger<DbMigratorHostedService> logger)
 	{
 		_hostApplicationLifetime = applicationLifetime;
-		_configuration = configuration;
 		_logger = logger;
 	}
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{
-		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationModule>(_configuration, _logger).MigrateAndSeedAsync(stoppingToken);
+		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationModule>(_logger).MigrateAndSeedAsync(stoppingToken);
 
-		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationModule>(_configuration, _logger).MigrateAndSeedAsync(stoppingToken);
+		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationModule>(_logger).MigrateAndSeedAsync(stoppingToken);
 
 		_hostApplicationLifetime.StopApplication();
 	}

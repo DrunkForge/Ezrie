@@ -11,14 +11,4 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore.Migration;
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreModule))]
 public class AdministrationServiceEntityFrameworkCoreMigrationModule : MigrationModuleBase
 {
-	public override void ConfigureServices(ServiceConfigurationContext context)
-	{
-		var configuration = context.Services.GetConfiguration();
-
-		context.Services.AddLogging(logging =>
-		{
-			logging.ClearProviders();
-			logging.AddEzrieLogging<AdministrationServiceEntityFrameworkCoreMigrationModule>(configuration);
-		});
-	}
 }

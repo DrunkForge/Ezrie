@@ -12,15 +12,15 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL.Migrations.Iden
                 name: "DeviceCodes",
                 columns: table => new
                 {
-                    UserCode = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    DeviceCode = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    SubjectId = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    SessionId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    ClientId = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    UserCode = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    DeviceCode = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    SubjectId = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    SessionId = table.Column<String>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    ClientId = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Expiration = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Data = table.Column<string>(type: "character varying(50000)", maxLength: 50000, nullable: false)
+                    Data = table.Column<String>(type: "character varying(50000)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,16 +31,16 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL.Migrations.Iden
                 name: "PersistedGrants",
                 columns: table => new
                 {
-                    Key = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    SubjectId = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    SessionId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    ClientId = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    Key = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Type = table.Column<String>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    SubjectId = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    SessionId = table.Column<String>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    ClientId = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<String>(type: "character varying(200)", maxLength: 200, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Expiration = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     ConsumedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Data = table.Column<string>(type: "character varying(50000)", maxLength: 50000, nullable: false)
+                    Data = table.Column<String>(type: "character varying(50000)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {

@@ -42,7 +42,7 @@ public class AdministrationServiceHostMenuContributor : IMenuContributor
 	{
 		var accountStringLocalizer = context.GetLocalizer<AccountResource>();
 
-		var apiConfiguration = _configuration.GetApiConfiguration();
+		var apiConfiguration = _configuration.GetAppConfiguration();
 
 		context.Menu.AddItem(new ApplicationMenuItem(
 			"Account.Manage",

@@ -31,39 +31,37 @@ public class DbContextMigrationRunner : IDbContextMigrationRunner, ITransientDep
 {
 	private readonly ICurrentTenant _currentTenant;
 	private readonly IEnumerable<IDbContextMigrator> _migrators;
+	private readonly ILogger<DbContextMigrationRunner> _logger;
 	private readonly ITenantRepository _tenantRepository;
 	private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-	protected ILogger<DbContextMigrationRunner> Logger { get; set; }
-
 	public DbContextMigrationRunner(
 		ICurrentTenant currentTenant,
-		IDataSeeder dataSeeder,
 		ILogger<DbContextMigrationRunner> logger,
 		IEnumerable<IDbContextMigrator> migrators,
 		ITenantRepository tenantRepository,
 		IUnitOfWorkManager unitOfWorkManager)
 	{
 		_currentTenant = currentTenant;
+		_logger = logger;
 		_migrators = migrators;
 		_tenantRepository = tenantRepository;
 		_unitOfWorkManager = unitOfWorkManager;
-		Logger = logger;
 	}
 
 	public async Task MigrateAsync(CancellationToken cancellationToken = default)
 	{
-		Logger.LogInformation("Started database migrations");
+		_logger.LogInformation("Started database migrations");
 
 		await MigrateHostAsync(cancellationToken);
 		await MigrateTenantsAsync(cancellationToken);
 
-		Logger.LogInformation("Completed database migrations");
+		_logger.LogInformation("Completed database migrations");
 	}
 
 	private async Task MigrateHostAsync(CancellationToken cancellationToken)
 	{
-		Logger.LogInformation("Starting Host migration");
+		_logger.LogInformation("Starting Host migration");
 
 		using (var uow = _unitOfWorkManager.Begin(isTransactional: true))
 		{
@@ -75,13 +73,13 @@ public class DbContextMigrationRunner : IDbContextMigrationRunner, ITransientDep
 			}
 			catch (Exception ex)
 			{
-				Logger?.LogException(ex, LogLevel.Error);
+				_logger?.LogException(ex, LogLevel.Error);
 				await uow.RollbackAsync(cancellationToken);
 				throw;
 			}
 		}
 
-		Logger.LogInformation("Completed Host migration");
+		_logger.LogInformation("Completed Host migration");
 	}
 
 	private async Task MigrateTenantsAsync(CancellationToken cancellationToken)
@@ -89,11 +87,11 @@ public class DbContextMigrationRunner : IDbContextMigrationRunner, ITransientDep
 		var tenants = await GetTenantsAsync(cancellationToken);
 		if (tenants == null || !tenants.Any())
 		{
-			Logger.LogInformation("Tenant migration will be skipped.");
+			_logger.LogInformation("Tenant migration will be skipped.");
 			return;
 		}
 
-		Logger.LogInformation("Starting Tenant migration");
+		_logger.LogInformation("Starting Tenant migration");
 
 		var migratedDatabaseSchemas = new HashSet<String>();
 
@@ -120,17 +118,18 @@ public class DbContextMigrationRunner : IDbContextMigrationRunner, ITransientDep
 					}
 					catch (Exception ex)
 					{
-						Logger?.LogException(ex, LogLevel.Error);
+						_logger?.LogException(ex, LogLevel.Error);
 						await uow.RollbackAsync(cancellationToken);
 						throw;
 					}
 				}
 			}
 
-			Logger.LogInformation("Completed Tenant migration");
+			_logger.LogInformation("Completed Tenant migration");
 		}
 	}
 
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
 	private async Task<List<Tenant>> GetTenantsAsync(CancellationToken cancellationToken)
 	{
 		try
@@ -139,11 +138,11 @@ public class DbContextMigrationRunner : IDbContextMigrationRunner, ITransientDep
 		}
 		catch (DependencyResolutionException)
 		{
-			Logger.LogWarning("Unable to resolve TenantManagementDbContext.");
+			_logger.LogWarning("Unable to resolve TenantManagementDbContext.");
 		}
 		catch (Exception ex)
 		{
-			Logger.LogWarning(ex, "Unable to retrieve Tenants.");
+			_logger.LogWarning(ex, "Unable to retrieve Tenants.");
 		}
 
 		return new List<Tenant>();
@@ -155,25 +154,25 @@ public class DbContextMigrationRunner : IDbContextMigrationRunner, ITransientDep
 
 		if (_migrators.Any())
 		{
-			Logger.LogInformation("Starting schema migration for {Name} database", name);
+			_logger.LogInformation("Starting schema migration for {Name} database", name);
 			foreach (var migrator in _migrators)
 			{
 				// TenantManagement schema should only be available in the host database (tenant == null)
 				if (tenant != null && migrator.CanMigrate<ITenantManagementDbContext>())
 				{
-					Logger.LogDebug("Skipping {Migrator} for {Name} database as it only applies to the host database", migrator.GetType().Name, name);
+					_logger.LogDebug("Skipping {Migrator} for {Name} database as it only applies to the host database", migrator.GetType().Name, name);
 					continue;
 				}
 
-				Logger.LogInformation("Applying {Migrator} to {Name} database", migrator.GetType().Name, name);
+				_logger.LogInformation("Applying {Migrator} to {Name} database", migrator.GetType().Name, name);
 				await migrator.MigrateAsync(cancellationToken);
 			}
 
-			Logger.LogInformation("Completed schema migration for {Name} database", name);
+			_logger.LogInformation("Completed schema migration for {Name} database", name);
 		}
 		else
 		{
-			Logger.LogWarning("No migrators registered for {Name} database", name);
+			_logger.LogWarning("No migrators registered for {Name} database", name);
 		}
 	}
 }

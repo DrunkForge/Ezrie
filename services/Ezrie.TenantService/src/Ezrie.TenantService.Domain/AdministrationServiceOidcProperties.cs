@@ -14,36 +14,17 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Ezrie.AdministrationService.Configuration;
+namespace Ezrie.TenantService;
 
-public static class ServiceCollectionExtensions
+public static class TenantServiceOidcProperties
 {
-	public static void ConfigureCors(this IServiceCollection services)
-	{
-		var apiConfiguration = services.GetConfiguration().GetAppConfiguration();
-		var origins = apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray();
-		services.AddCors(options =>
-		{
-			options.AddDefaultPolicy(builder =>
-			{
-				if (apiConfiguration.CorsAllowAnyOrigin)
-				{
-					builder
-						.AllowAnyOrigin();
-				}
-				else
-				{
-					builder
-						.WithOrigins(origins)
-						.SetIsOriginAllowedToAllowWildcardSubdomains();
-				}
+	public const String DefaultAudience = "tenant-service";
 
-				builder
-					.AllowAnyHeader()
-					.AllowAnyMethod();
-			});
-		});
-	}
+	public static String Audience { get; set; } = DefaultAudience;
 }

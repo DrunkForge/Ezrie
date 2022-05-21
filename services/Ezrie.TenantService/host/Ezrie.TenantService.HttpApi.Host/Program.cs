@@ -30,9 +30,7 @@ internal static class Program
 	{
 		try
 		{
-			var builder = CreateHostBuilder(args);
-
-			var app = builder.Build();
+			var app = CreateHostBuilder(args).Build();
 
 			await app.MigrateAsync();
 
@@ -67,6 +65,6 @@ internal static class Program
 		var configuration = app.Services.GetRequiredService<IConfiguration>();
 		var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger<TenantServiceHttpApiHostModule>();
 
-		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationModule>(configuration, logger).MigrateAndSeedAsync();
+		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationModule>(logger).MigrateAndSeedAsync();
 	}
 }

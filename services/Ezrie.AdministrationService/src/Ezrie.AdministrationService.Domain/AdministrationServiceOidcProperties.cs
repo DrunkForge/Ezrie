@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -14,10 +14,17 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-namespace Ezrie.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public interface IHostedServiceMonitor
+namespace Ezrie.AdministrationService;
+
+public static class AdministrationServiceOidcProperties
 {
-	void ServiceStarted();
-	void ServiceStopped();
+	public const String DefaultAudience = "administration-service";
+
+	public static String Audience { get; set; } = DefaultAudience;
 }

@@ -14,30 +14,27 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Ezrie.EntityFrameworkCore;
+namespace Ezrie.Configuration;
 
-public class HostedServiceMonitor : IHostedServiceMonitor
+public static class EzrieConfiguration
 {
-	private readonly IHostApplicationLifetime _hostApplicationLifetime;
-
-	private Int32 _padding;
-
-	public HostedServiceMonitor(IHostApplicationLifetime hostApplicationLifetime)
+	public static IConfiguration CreateDefault()
 	{
-		_hostApplicationLifetime = hostApplicationLifetime;
-	}
+		var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-	public void ServiceStarted()
-	{
-		Interlocked.Increment(ref _padding);
-	}
-
-	public void ServiceStopped()
-	{
-		var count = Interlocked.Decrement(ref _padding);
-		if (count == 0)
-			_hostApplicationLifetime.StopApplication();
+		return new ConfigurationBuilder()
+			.SetBasePath(Directory.GetCurrentDirectory())
+			.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+			.AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
+			.AddJsonFile("serilog.json", optional: true, reloadOnChange: true)
+			.AddJsonFile($"serilog.{environment}.json", optional: true, reloadOnChange: true)
+			.Build();
 	}
 }

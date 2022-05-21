@@ -13,29 +13,29 @@ namespace Ezrie.AdministrationService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ApplicationName = table.Column<string>(type: "character varying(96)", maxLength: 96, nullable: true),
+                    ApplicationName = table.Column<String>(type: "character varying(96)", maxLength: 96, nullable: true),
                     UserId = table.Column<Guid>(type: "uuid", nullable: true),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    UserName = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: true),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    TenantName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    TenantName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
                     ImpersonatorUserId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ImpersonatorUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    ImpersonatorUserName = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: true),
                     ImpersonatorTenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ImpersonatorTenantName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    ImpersonatorTenantName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
                     ExecutionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ExecutionDuration = table.Column<int>(type: "integer", nullable: false),
-                    ClientIpAddress = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ClientName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
-                    ClientId = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    CorrelationId = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    BrowserInfo = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    HttpMethod = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: true),
-                    Url = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    Exceptions = table.Column<string>(type: "text", nullable: true),
-                    Comments = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    HttpStatusCode = table.Column<int>(type: "integer", nullable: true),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true)
+                    ExecutionDuration = table.Column<Int32>(type: "integer", nullable: false),
+                    ClientIpAddress = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    ClientName = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    ClientId = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    CorrelationId = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    BrowserInfo = table.Column<String>(type: "character varying(512)", maxLength: 512, nullable: true),
+                    HttpMethod = table.Column<String>(type: "character varying(16)", maxLength: 16, nullable: true),
+                    Url = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    Exceptions = table.Column<String>(type: "text", nullable: true),
+                    Comments = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    HttpStatusCode = table.Column<Int32>(type: "integer", nullable: true),
+                    ExtraProperties = table.Column<String>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<String>(type: "character varying(40)", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,15 +47,15 @@ namespace Ezrie.AdministrationService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    Required = table.Column<bool>(type: "boolean", nullable: false),
-                    IsStatic = table.Column<bool>(type: "boolean", nullable: false),
-                    Regex = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    RegexDescription = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
-                    Description = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ValueType = table.Column<int>(type: "integer", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true)
+                    Name = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    Required = table.Column<Boolean>(type: "boolean", nullable: false),
+                    IsStatic = table.Column<Boolean>(type: "boolean", nullable: false),
+                    Regex = table.Column<String>(type: "character varying(512)", maxLength: 512, nullable: true),
+                    RegexDescription = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    Description = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    ValueType = table.Column<Int32>(type: "integer", nullable: false),
+                    ExtraProperties = table.Column<String>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<String>(type: "character varying(40)", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,10 +67,10 @@ namespace Ezrie.AdministrationService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    Value = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true)
+                    Name = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    Value = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    ProviderName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    ProviderKey = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,15 +99,15 @@ namespace Ezrie.AdministrationService.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
                     ParentId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Code = table.Column<string>(type: "character varying(95)", maxLength: 95, nullable: false),
-                    DisplayName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    Code = table.Column<String>(type: "character varying(95)", maxLength: 95, nullable: false),
+                    DisplayName = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    ExtraProperties = table.Column<String>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<String>(type: "character varying(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    IsDeleted = table.Column<Boolean>(type: "boolean", nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -127,9 +127,9 @@ namespace Ezrie.AdministrationService.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false)
+                    Name = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    ProviderName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    ProviderKey = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,13 +142,13 @@ namespace Ezrie.AdministrationService.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    IsDefault = table.Column<bool>(type: "boolean", nullable: false),
-                    IsStatic = table.Column<bool>(type: "boolean", nullable: false),
-                    IsPublic = table.Column<bool>(type: "boolean", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true)
+                    Name = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    NormalizedName = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    IsDefault = table.Column<Boolean>(type: "boolean", nullable: false),
+                    IsStatic = table.Column<Boolean>(type: "boolean", nullable: false),
+                    IsPublic = table.Column<Boolean>(type: "boolean", nullable: false),
+                    ExtraProperties = table.Column<String>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<String>(type: "character varying(40)", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -161,19 +161,19 @@ namespace Ezrie.AdministrationService.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ApplicationName = table.Column<string>(type: "character varying(96)", maxLength: 96, nullable: true),
-                    Identity = table.Column<string>(type: "character varying(96)", maxLength: 96, nullable: true),
-                    Action = table.Column<string>(type: "character varying(96)", maxLength: 96, nullable: true),
+                    ApplicationName = table.Column<String>(type: "character varying(96)", maxLength: 96, nullable: true),
+                    Identity = table.Column<String>(type: "character varying(96)", maxLength: 96, nullable: true),
+                    Action = table.Column<String>(type: "character varying(96)", maxLength: 96, nullable: true),
                     UserId = table.Column<Guid>(type: "uuid", nullable: true),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    TenantName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ClientId = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    CorrelationId = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ClientIpAddress = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    BrowserInfo = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
+                    UserName = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    TenantName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    ClientId = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    CorrelationId = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    ClientIpAddress = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    BrowserInfo = table.Column<String>(type: "character varying(512)", maxLength: 512, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true)
+                    ExtraProperties = table.Column<String>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<String>(type: "character varying(40)", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -185,10 +185,10 @@ namespace Ezrie.AdministrationService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    Value = table.Column<string>(type: "character varying(2048)", maxLength: 2048, nullable: false),
-                    ProviderName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true)
+                    Name = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    Value = table.Column<String>(type: "character varying(2048)", maxLength: 2048, nullable: false),
+                    ProviderName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    ProviderKey = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -201,30 +201,30 @@ namespace Ezrie.AdministrationService.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    Name = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    Surname = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    PasswordHash = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    SecurityStamp = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    IsExternal = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    PhoneNumber = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    UserName = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    NormalizedUserName = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    Name = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    Surname = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    Email = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    NormalizedEmail = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    EmailConfirmed = table.Column<Boolean>(type: "boolean", nullable: false, defaultValue: false),
+                    PasswordHash = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    SecurityStamp = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    IsExternal = table.Column<Boolean>(type: "boolean", nullable: false, defaultValue: false),
+                    PhoneNumber = table.Column<String>(type: "character varying(16)", maxLength: 16, nullable: true),
+                    PhoneNumberConfirmed = table.Column<Boolean>(type: "boolean", nullable: false, defaultValue: false),
+                    IsActive = table.Column<Boolean>(type: "boolean", nullable: false),
+                    TwoFactorEnabled = table.Column<Boolean>(type: "boolean", nullable: false, defaultValue: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    LockoutEnabled = table.Column<Boolean>(type: "boolean", nullable: false, defaultValue: false),
+                    AccessFailedCount = table.Column<Int32>(type: "integer", nullable: false, defaultValue: 0),
+                    ExtraProperties = table.Column<String>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<String>(type: "character varying(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    IsDeleted = table.Column<Boolean>(type: "boolean", nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -240,12 +240,12 @@ namespace Ezrie.AdministrationService.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
                     AuditLogId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ServiceName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    MethodName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
-                    Parameters = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: true),
+                    ServiceName = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    MethodName = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    Parameters = table.Column<String>(type: "character varying(2000)", maxLength: 2000, nullable: true),
                     ExecutionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ExecutionDuration = table.Column<int>(type: "integer", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true)
+                    ExecutionDuration = table.Column<Int32>(type: "integer", nullable: false),
+                    ExtraProperties = table.Column<String>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -266,11 +266,11 @@ namespace Ezrie.AdministrationService.Migrations
                     AuditLogId = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
                     ChangeTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ChangeType = table.Column<byte>(type: "smallint", nullable: false),
+                    ChangeType = table.Column<Byte>(type: "smallint", nullable: false),
                     EntityTenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    EntityId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    EntityTypeFullName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true)
+                    EntityId = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    EntityTypeFullName = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    ExtraProperties = table.Column<String>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -317,8 +317,8 @@ namespace Ezrie.AdministrationService.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     RoleId = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ClaimType = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    ClaimValue = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true)
+                    ClaimType = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    ClaimValue = table.Column<String>(type: "character varying(1024)", maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -338,8 +338,8 @@ namespace Ezrie.AdministrationService.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ClaimType = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    ClaimValue = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true)
+                    ClaimType = table.Column<String>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    ClaimValue = table.Column<String>(type: "character varying(1024)", maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -357,10 +357,10 @@ namespace Ezrie.AdministrationService.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    LoginProvider = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    LoginProvider = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ProviderKey = table.Column<string>(type: "character varying(196)", maxLength: 196, nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true)
+                    ProviderKey = table.Column<String>(type: "character varying(196)", maxLength: 196, nullable: false),
+                    ProviderDisplayName = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -430,10 +430,10 @@ namespace Ezrie.AdministrationService.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    LoginProvider = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    Name = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Value = table.Column<string>(type: "text", nullable: true)
+                    Value = table.Column<String>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -453,10 +453,10 @@ namespace Ezrie.AdministrationService.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
                     EntityChangeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    NewValue = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    OriginalValue = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    PropertyName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    PropertyTypeFullName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false)
+                    NewValue = table.Column<String>(type: "character varying(512)", maxLength: 512, nullable: true),
+                    OriginalValue = table.Column<String>(type: "character varying(512)", maxLength: 512, nullable: true),
+                    PropertyName = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    PropertyTypeFullName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {

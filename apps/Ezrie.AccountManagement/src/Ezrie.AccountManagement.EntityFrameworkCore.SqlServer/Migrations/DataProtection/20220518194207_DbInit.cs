@@ -12,10 +12,10 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.DataP
                 name: "DataProtectionKeys",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Int32>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FriendlyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Xml = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    FriendlyName = table.Column<String>(type: "nvarchar(max)", nullable: true),
+                    Xml = table.Column<String>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,5 +1,7 @@
+using Ezrie.Hosting.AspNetCore;
 using Ezrie.Hosting.AspNetCore.Microservices;
 using Ezrie.TenantService.EntityFrameworkCore;
+using System.Globalization;
 using Volo.Abp;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
@@ -22,18 +24,27 @@ public class TenantServiceHttpApiHostModule : AbpModule
 		{
 			Configure<AbpVirtualFileSystemOptions>(options =>
 			{
-				options.FileSets.ReplaceEmbeddedByPhysical<TenantServiceDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Ezrie.TenantService.Domain.Shared", Path.DirectorySeparatorChar)));
-				options.FileSets.ReplaceEmbeddedByPhysical<TenantServiceDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Ezrie.TenantService.Domain", Path.DirectorySeparatorChar)));
-				options.FileSets.ReplaceEmbeddedByPhysical<TenantServiceApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Ezrie.TenantService.Application.Contracts", Path.DirectorySeparatorChar)));
-				options.FileSets.ReplaceEmbeddedByPhysical<TenantServiceApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Ezrie.TenantService.Application", Path.DirectorySeparatorChar)));
+				options.FileSets.ReplaceEmbeddedByPhysical<TenantServiceDomainSharedModule>(
+					Path.Combine(hostingEnvironment.ContentRootPath, String.Format(CultureInfo.InvariantCulture,
+					"..{0}..{0}src{0}Ezrie.TenantService.Domain.Shared", Path.DirectorySeparatorChar)));
+				options.FileSets.ReplaceEmbeddedByPhysical<TenantServiceDomainModule>(
+					Path.Combine(hostingEnvironment.ContentRootPath, String.Format(CultureInfo.InvariantCulture,
+					"..{0}..{0}src{0}Ezrie.TenantService.Domain", Path.DirectorySeparatorChar)));
+				options.FileSets.ReplaceEmbeddedByPhysical<TenantServiceApplicationContractsModule>(
+					Path.Combine(hostingEnvironment.ContentRootPath, String.Format(CultureInfo.InvariantCulture,
+					"..{0}..{0}src{0}Ezrie.TenantService.Application.Contracts", Path.DirectorySeparatorChar)));
+				options.FileSets.ReplaceEmbeddedByPhysical<TenantServiceApplicationModule>(
+					Path.Combine(hostingEnvironment.ContentRootPath, String.Format(CultureInfo.InvariantCulture,
+					"..{0}..{0}src{0}Ezrie.TenantService.Application", Path.DirectorySeparatorChar)));
 			});
 		}
+
+		context.ConfigureJwtAuthentication(TenantServiceOidcProperties.Audience);
 
 		Configure<AbpEndpointRouterOptions>(options =>
 		{
 			options.EndpointConfigureActions.Add(endpointContext =>
 			{
-				endpointContext.Endpoints.MapControllers();
 				endpointContext.Endpoints.MapDefaultControllerRoute();
 			});
 		});

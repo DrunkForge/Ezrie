@@ -4,5 +4,5 @@ namespace Ezrie.TenantService;
 
 public class TenantServiceHostBrandingProvider : DefaultBrandingProvider
 {
-	public override string AppName => "TenantService";
+	public override String AppName => "TenantService";
 }

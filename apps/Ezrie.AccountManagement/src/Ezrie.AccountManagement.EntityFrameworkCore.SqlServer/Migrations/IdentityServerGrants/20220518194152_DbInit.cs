@@ -12,15 +12,15 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "DeviceCodes",
                 columns: table => new
                 {
-                    UserCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DeviceCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    SubjectId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    SessionId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    UserCode = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    DeviceCode = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    SubjectId = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    SessionId = table.Column<String>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ClientId = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
+                    Data = table.Column<String>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,16 +31,16 @@ namespace Ezrie.AccountManagement.EntityFrameworkCore.SqlServer.Migrations.Ident
                 name: "PersistedGrants",
                 columns: table => new
                 {
-                    Key = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SubjectId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    SessionId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Key = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Type = table.Column<String>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SubjectId = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    SessionId = table.Column<String>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ClientId = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<String>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Expiration = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ConsumedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
+                    Data = table.Column<String>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
