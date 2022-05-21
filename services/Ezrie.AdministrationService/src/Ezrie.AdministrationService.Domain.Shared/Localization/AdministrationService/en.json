@@ -1,7 +1,9 @@
 {
   "culture": "en",
-  "texts": {
-    "MyAccount":  "My account",
-    "SamplePageMessage": "A sample page for the AdministrationService module"
-  }
+	"texts": {
+		"MyAccount": "My account",
+		"SamplePageMessage": "A sample page for the AdministrationService module",
+		"Menu:ManageYourProfile": "Manage Your Profile",
+		"Menu:AdministrationService": "Administration"
+	}
 }

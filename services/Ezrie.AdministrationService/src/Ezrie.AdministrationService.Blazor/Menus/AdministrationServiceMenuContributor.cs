@@ -14,6 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.AdministrationService.Localization;
 using Volo.Abp.UI.Navigation;
 
 namespace Ezrie.AdministrationService.Menus;
@@ -30,8 +31,14 @@ public class AdministrationServiceMenuContributor : IMenuContributor
 
 	private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
 	{
+		var L = context.GetLocalizer<AdministrationServiceResource>();
+
 		//Add main menu items.
-		context.Menu.AddItem(new ApplicationMenuItem(AdministrationServiceMenus.Prefix, displayName: "AdministrationService", "/AdministrationService", icon: "fa fa-globe"));
+		context.Menu.AddItem(new ApplicationMenuItem(
+			name: AdministrationServiceMenus.Home, 
+			displayName: L["Menu:AdministrationService"], 
+			url: "/AdministrationService", 
+			icon: "fa fa-globe"));
 
 		return Task.CompletedTask;
 	}

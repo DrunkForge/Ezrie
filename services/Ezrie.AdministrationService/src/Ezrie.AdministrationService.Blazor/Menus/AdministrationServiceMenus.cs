@@ -21,5 +21,5 @@ public static class AdministrationServiceMenus
 	public const String Prefix = "AdministrationService";
 
 	//Add your menu items here...
-	public const String Home = Prefix + ".MyNewMenuItem";
+	public const String Home = Prefix + ".Home";
 }

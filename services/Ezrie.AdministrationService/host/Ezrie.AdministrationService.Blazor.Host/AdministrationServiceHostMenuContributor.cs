@@ -18,6 +18,7 @@ using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Account.Localization;
 using Ezrie.Configuration;
+using Ezrie.AdministrationService.Localization;
 
 namespace Ezrie.AdministrationService;
 
@@ -40,14 +41,14 @@ public class AdministrationServiceHostMenuContributor : IMenuContributor
 
 	private Task ConfigureUserMenuAsync(MenuConfigurationContext context)
 	{
-		var accountStringLocalizer = context.GetLocalizer<AccountResource>();
+		var L = context.GetLocalizer<AdministrationServiceResource>();
 
 		var apiConfiguration = _configuration.GetAppConfiguration();
 
 		context.Menu.AddItem(new ApplicationMenuItem(
 			"Account.Manage",
-			accountStringLocalizer["ManageYourProfile"],
-			$"{apiConfiguration.IdentityServerBaseUrl.EnsureEndsWith('/')}Account/Manage?returnUrl={apiConfiguration.BaseUrl}",
+			L["Menu:ManageYourProfile"],
+			$"{apiConfiguration.IdentityServerBaseUrl.EnsureEndsWith('/')}Manage?returnUrl={apiConfiguration.BaseUrl}",
 			icon: "fa fa-cog",
 			order: 1000,
 			null).RequireAuthenticated());

@@ -49,8 +49,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.Blazor", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Blazor\Ezrie.AdministrationService.Blazor.csproj", "{F1EF60BD-C96A-4F75-A1CC-CD8C4AFF7BE0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.Blazor.Server", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Blazor.Server\Ezrie.AdministrationService.Blazor.Server.csproj", "{F763A476-4858-4A75-B223-619EF09290CE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.Blazor.WebAssembly", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Blazor.WebAssembly\Ezrie.AdministrationService.Blazor.WebAssembly.csproj", "{845E0087-147F-47F5-A161-6D1655548634}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.Domain", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Domain\Ezrie.AdministrationService.Domain.csproj", "{E4627B7D-6DD4-45EF-B093-63A683C254A9}"
@@ -176,9 +174,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.TenantService.TestBas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.TenantService.Blazor.Server", "services\Ezrie.TenantService\src\Ezrie.TenantService.Blazor.Server\Ezrie.TenantService.Blazor.Server.csproj", "{69F1436E-9D04-4053-81F0-3EC6904F8DF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.TenantService.EntityFrameworkCore.Migration", "services\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore.Migration\Ezrie.TenantService.EntityFrameworkCore.Migration.csproj", "{01FF0D35-E630-4033-8BE8-460300F6F4A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.TenantService.EntityFrameworkCore.Migration", "services\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore.Migration\Ezrie.TenantService.EntityFrameworkCore.Migration.csproj", "{01FF0D35-E630-4033-8BE8-460300F6F4A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.AdministrationService.EntityFrameworkCore.Migration", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migration\Ezrie.AdministrationService.EntityFrameworkCore.Migration.csproj", "{3BDB578D-F70D-4449-A0C7-39257105A866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.EntityFrameworkCore.Migration", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migration\Ezrie.AdministrationService.EntityFrameworkCore.Migration.csproj", "{3BDB578D-F70D-4449-A0C7-39257105A866}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -246,10 +244,6 @@ Global
 		{F1EF60BD-C96A-4F75-A1CC-CD8C4AFF7BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1EF60BD-C96A-4F75-A1CC-CD8C4AFF7BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1EF60BD-C96A-4F75-A1CC-CD8C4AFF7BE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F763A476-4858-4A75-B223-619EF09290CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F763A476-4858-4A75-B223-619EF09290CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F763A476-4858-4A75-B223-619EF09290CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F763A476-4858-4A75-B223-619EF09290CE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{845E0087-147F-47F5-A161-6D1655548634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{845E0087-147F-47F5-A161-6D1655548634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{845E0087-147F-47F5-A161-6D1655548634}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -463,7 +457,6 @@ Global
 		{8EC5968C-A150-4E13-A06F-83270B8684F9} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
 		{62141C06-1216-409A-9ED8-E19E7C22E7CD} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
 		{F1EF60BD-C96A-4F75-A1CC-CD8C4AFF7BE0} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
-		{F763A476-4858-4A75-B223-619EF09290CE} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
 		{845E0087-147F-47F5-A161-6D1655548634} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
 		{E4627B7D-6DD4-45EF-B093-63A683C254A9} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
 		{4C295DA9-ADEE-4EEF-827D-DF57AA774FB1} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}

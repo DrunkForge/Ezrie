@@ -20,5 +20,5 @@ namespace Ezrie.AdministrationService;
 
 public class AdministrationServiceHostBrandingProvider : DefaultBrandingProvider
 {
-	public override String AppName => "AdministrationService";
+	public override String AppName => "Administration Service";
 }

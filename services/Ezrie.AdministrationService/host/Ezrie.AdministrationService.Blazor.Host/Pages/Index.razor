@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 @using Volo.Abp.Users
 @using Volo.Abp.MultiTenancy
 @using System.Security.Claims
@@ -47,12 +47,12 @@
 
 @code
 {
-    private IEnumerable<Claim> _claims;
+    private IEnumerable<Claim>? _claims;
 
     protected async override Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        if (authState.User.Identity.IsAuthenticated)
+        if (authState.User.Identity?.IsAuthenticated == true)
         {
             _claims = authState.User.Claims;
         }
