@@ -1,27 +1,20 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "https://localhost:44328",
-      "sslPort": 44328
-    }
-  },
-  "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "Ezrie.RelationshipManagement.HttpApi.Host": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:44328",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    }
-  }
+	"iisSettings": {
+		"windowsAuthentication": false,
+		"anonymousAuthentication": true,
+		"iisExpress": {
+			"applicationUrl": "https://localhost:5001",
+			"sslPort": 5001
+		}
+	},
+	"profiles": {
+		"Ezrie.RelationshipManagement.HttpApi.Host": {
+			"commandName": "Project",
+			"launchBrowser": true,
+			"applicationUrl": "https://localhost:5001",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
+		}
+	}
 }

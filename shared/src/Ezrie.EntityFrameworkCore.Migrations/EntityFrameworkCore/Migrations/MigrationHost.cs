@@ -17,7 +17,6 @@
 using Ezrie.Configuration;
 using Ezrie.EntityFrameworkCore.Seeding;
 using Ezrie.Logging;
-using Ezrie.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +28,7 @@ using Volo.Abp.Modularity;
 namespace Ezrie.EntityFrameworkCore.Migrations;
 
 public class MigrationHost<T> : ITransientDependency
-	where T : MigrationModuleBase
+	where T : MigrationsModuleBase
 {
 	private readonly ILogger _logger;
 

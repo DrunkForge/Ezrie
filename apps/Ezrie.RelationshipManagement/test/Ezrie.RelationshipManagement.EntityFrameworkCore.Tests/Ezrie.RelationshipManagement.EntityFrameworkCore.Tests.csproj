@@ -1,20 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Ezrie.RelationshipManagement</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RootNamespace>Ezrie.RelationshipManagement</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Ezrie.RelationshipManagement.EntityFrameworkCore\Ezrie.RelationshipManagement.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Ezrie.RelationshipManagement.TestBase\Ezrie.RelationshipManagement.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.2.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Ezrie.RelationshipManagement.EntityFrameworkCore\Ezrie.RelationshipManagement.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\Ezrie.RelationshipManagement.TestBase\Ezrie.RelationshipManagement.TestBase.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+	</ItemGroup>
 
 </Project>

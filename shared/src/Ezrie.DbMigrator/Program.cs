@@ -14,15 +14,9 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AdministrationService.EntityFrameworkCore.Migration;
-using Ezrie.EntityFrameworkCore;
-using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Logging;
-using Ezrie.TenantService.EntityFrameworkCore.Migration;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace Ezrie.DbMigrator;

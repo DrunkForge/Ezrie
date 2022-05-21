@@ -21,7 +21,6 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.Uow;
-using Ezrie.Migrations;
 using Volo.Abp.DependencyInjection;
 using Npgsql;
 

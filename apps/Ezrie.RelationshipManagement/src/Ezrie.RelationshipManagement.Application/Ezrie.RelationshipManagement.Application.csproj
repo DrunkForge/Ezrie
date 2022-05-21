@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Ezrie.RelationshipManagement</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RootNamespace>Ezrie.RelationshipManagement</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Ezrie.RelationshipManagement.Domain\Ezrie.RelationshipManagement.Domain.csproj" />
-    <ProjectReference Include="..\Ezrie.RelationshipManagement.Application.Contracts\Ezrie.RelationshipManagement.Application.Contracts.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Ezrie.RelationshipManagement.Domain\Ezrie.RelationshipManagement.Domain.csproj" />
+		<ProjectReference Include="..\Ezrie.RelationshipManagement.Application.Contracts\Ezrie.RelationshipManagement.Application.Contracts.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="5.2.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Account.Application" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.Identity.Application" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.TenantManagement.Application" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Application" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
 
 </Project>

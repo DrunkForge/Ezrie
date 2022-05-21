@@ -3,15 +3,15 @@
 		"windowsAuthentication": false,
 		"anonymousAuthentication": true,
 		"iisExpress": {
-			"applicationUrl": "https://localhost:11001",
-			"sslPort": 11001
+			"applicationUrl": "https://localhost:10301",
+			"sslPort": 10301
 		}
 	},
 	"profiles": {
 		"Ezrie.TenantService.HttpApi.Host": {
 			"commandName": "Project",
 			"launchBrowser": true,
-			"applicationUrl": "https://localhost:11001",
+			"applicationUrl": "https://localhost:10301",
 			"environmentVariables": {
 				"ASPNETCORE_ENVIRONMENT": "Development"
 			}

@@ -1,5 +1,9 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
+using Ezrie.EntityFrameworkCore.Migrations;
+using Ezrie.Hosting.AspNetCore;
+using Ezrie.Logging;
+using Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,46 +12,50 @@ using Serilog.Events;
 
 namespace Ezrie.RelationshipManagement;
 
-public class Program
+internal static class Program
 {
-    public async static Task<int> Main(string[] args)
-    {
-        Log.Logger = new LoggerConfiguration()
-#if DEBUG
-            .MinimumLevel.Debug()
-#else
-            .MinimumLevel.Information()
-#endif
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
-            .Enrich.FromLogContext()
-            .WriteTo.Async(c => c.File("Logs/logs.txt"))
-#if DEBUG
-            .WriteTo.Async(c => c.Console())
-#endif
-            .CreateLogger();
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
+	public async static Task<Int32> Main(String[] args)
+	{
+		try
+		{
+			var builder = CreateHostBuilder(args);
 
-        try
-        {
-            Log.Information("Starting Ezrie.RelationshipManagement.HttpApi.Host.");
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Host.AddAppSettingsSecretsJson()
-                .UseAutofac()
-                .UseSerilog();
-            await builder.AddApplicationAsync<RelationshipManagementHttpApiHostModule>();
-            var app = builder.Build();
-            await app.InitializeApplicationAsync();
-            await app.RunAsync();
-            return 0;
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Host terminated unexpectedly!");
-            return 1;
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
-    }
+			var app = builder.Build();
+
+			await app.MigrateAsync();
+
+			await app.RunAsync().ConfigureAwait(false);
+
+			return 0;
+		}
+		catch (Exception ex)
+		{
+			Log.Fatal(ex, "Host terminated unexpectedly!");
+			return 1;
+		}
+		finally
+		{
+			Log.CloseAndFlush();
+		}
+	}
+
+	public static IHostBuilder CreateHostBuilder(String[] args) => Host
+		.CreateDefaultBuilder(args)
+		.UseAutofac()
+		.AddAppSettingsSecretsJson()
+		.UseEzrieLogging<RelationshipManagementHttpApiHostModule>()
+		.ConfigureWebHostDefaults(webBuilder =>
+		{
+			webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
+			webBuilder.UseStartup<Startup<RelationshipManagementHttpApiHostModule>>();
+		});
+
+	private static async Task MigrateAsync(this IHost host)
+	{
+		var configuration = host.Services.GetRequiredService<IConfiguration>();
+		var logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger<RelationshipManagementHttpApiHostModule>();
+
+		await new MigrationHost<RelationshipManagementEntityFrameworkCoreMigrationsModule>(logger).MigrateAndSeedAsync();
+	}
 }

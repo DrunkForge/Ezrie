@@ -123,9 +123,9 @@ function Update-Solution() {
 Export-ModuleMember -Function Update-Solution
 
 function Add-Migration($migration, $name, $base) {
-	$Path = "$location\$base\$root.$name\src\$root.$name.EntityFrameworkCore"
-	$Context = $name + "DbContext"
-	$CsProj = "$Path\$root.$name.EntityFrameworkCore.csproj"
+	$Path = "$location\$base\$root.$name\src\$root.$name.EntityFrameworkCore.Migrations"
+	$Context = $name + "MigrationsDbContext"
+	$CsProj = "$Path\$root.$name.EntityFrameworkCore.Migrations.csproj"
 
 	if ("CreateDatabase" -eq $migration){
 		Remove-Item -Recurse -Force "$Path\Migrations" -ErrorAction SilentlyContinue

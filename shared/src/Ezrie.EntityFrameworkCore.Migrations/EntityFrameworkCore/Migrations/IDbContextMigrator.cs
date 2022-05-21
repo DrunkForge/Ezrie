@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-namespace Ezrie.Migrations;
+namespace Ezrie.EntityFrameworkCore.Migrations;
 
 public interface IDbContextMigrator
 {

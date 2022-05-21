@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  ezrie.accountmanagement.admin:
+    image: ${DOCKER_REGISTRY-}ezrieaccountmanagementadmin
+    build:
+      context: .
+      dockerfile: ../apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Admin/Dockerfile
+
+  ezrie.accountmanagement.httpapi.host:
+    image: ${DOCKER_REGISTRY-}ezrieaccountmanagementhttpapihost
+    build:
+      context: .
+      dockerfile: ../apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.HttpApi.Host/Dockerfile
+
+
+  ezrie.accountmanagement.sts:
+    image: ${DOCKER_REGISTRY-}ezrieaccountmanagementsts
+    build:
+      context: .
+      dockerfile: ../apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.STS/Dockerfile
+
+
+  ezrie.gateway.public:
+    image: ${DOCKER_REGISTRY-}ezriegatewaypublic
+    build:
+      context: .
+      dockerfile: ../gateways/Ezrie.Gateway.Public/Dockerfile
+
+
+  ezrie.administrationservice.blazor.host:
+    image: ${DOCKER_REGISTRY-}ezrieadministrationserviceblazorhost
+    build:
+      context: .
+      dockerfile: ../services/Ezrie.AdministrationService/host/Ezrie.AdministrationService.Blazor.Host/Dockerfile
+
+
+  ezrie.administrationservice.httpapi.host:
+    image: ${DOCKER_REGISTRY-}ezrieadministrationservicehttpapihost
+    build:
+      context: .
+      dockerfile: ../services/Ezrie.AdministrationService/host/Ezrie.AdministrationService.HttpApi.Host/Dockerfile
+
+
+  ezrie.tenantservice.blazor.host:
+    image: ${DOCKER_REGISTRY-}ezrietenantserviceblazorhost
+    build:
+      context: .
+      dockerfile: ../services/Ezrie.TenantService/host/Ezrie.TenantService.Blazor.Host/Dockerfile

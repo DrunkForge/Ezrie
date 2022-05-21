@@ -14,7 +14,6 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;

@@ -14,18 +14,13 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AdministrationService.EntityFrameworkCore.Migration;
-using Ezrie.EntityFrameworkCore.Seeding;
-using Ezrie.Migrations;
-using Ezrie.TenantService.EntityFrameworkCore.Migration;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
+using Ezrie.EntityFrameworkCore.Migrations;
+using Ezrie.TenantService.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Volo.Abp;
-using Volo.Abp.Modularity;
 
-namespace Ezrie.EntityFrameworkCore.Migrations;
+namespace Ezrie.DbMigrator;
 
 public class DbMigratorHostedService : BackgroundService
 {
@@ -40,9 +35,9 @@ public class DbMigratorHostedService : BackgroundService
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{
-		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationModule>(_logger).MigrateAndSeedAsync(stoppingToken);
+		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationsModule>(_logger).MigrateAndSeedAsync(stoppingToken);
 
-		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationModule>(_logger).MigrateAndSeedAsync(stoppingToken);
+		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationsModule>(_logger).MigrateAndSeedAsync(stoppingToken);
 
 		_hostApplicationLifetime.StopApplication();
 	}

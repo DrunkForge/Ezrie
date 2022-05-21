@@ -1,7 +1,7 @@
-param([string] $migration = 'DbInit', [string] $migrationProviderName = 'All', [string] $targetContext = 'All')
+param([string] $migration = 'CreateDatabase', [string] $migrationProviderName = 'All', [string] $targetContext = 'All')
 $projectName = "Ezrie.AccountManagement";
 $currentPath = Get-Location
-Set-Location "../apps/$projectName/src/$projectName.Web"
+Set-Location "../apps/$projectName/src/$projectName.Admin"
 Copy-Item appsettings.json -Destination appsettings-backup.json
 $settings = Get-Content appsettings.json -raw
 

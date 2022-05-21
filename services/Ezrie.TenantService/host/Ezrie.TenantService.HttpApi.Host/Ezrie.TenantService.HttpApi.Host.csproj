@@ -33,7 +33,7 @@
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.TenantService.HttpApi\Ezrie.TenantService.HttpApi.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.TenantService.Application\Ezrie.TenantService.Application.csproj" />
-		<ProjectReference Include="..\..\src\Ezrie.TenantService.EntityFrameworkCore.Migration\Ezrie.TenantService.EntityFrameworkCore.Migration.csproj" />
+		<ProjectReference Include="..\..\src\Ezrie.TenantService.EntityFrameworkCore.Migrations\Ezrie.TenantService.EntityFrameworkCore.Migrations.csproj" />
 	</ItemGroup>
 
 </Project>

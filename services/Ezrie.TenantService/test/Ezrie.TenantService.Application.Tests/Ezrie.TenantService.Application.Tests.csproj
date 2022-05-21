@@ -10,7 +10,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Ezrie.TenantService.Application\Ezrie.TenantService.Application.csproj" />
 		<ProjectReference Include="..\Ezrie.TenantService.Domain.Tests\Ezrie.TenantService.Domain.Tests.csproj" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
 	</ItemGroup>
 
 </Project>

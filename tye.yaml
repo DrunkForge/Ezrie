@@ -1,16 +1,16 @@
 name: ezrie
 services:
 
-# Account Management Client
-- name: ezrie-account-admin
-  project: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.Admin\Ezrie.AccountManagement.Admin.csproj
+# Relationship Blazor Client
+- name: ezrie-relationship-blazor
+  project: apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Blazor\Ezrie.RelationshipManagement.Blazor.csproj
   bindings:
     - protocol: https
       port: 5000
 
-# Account Managment API
-- name: ezrie-account-api
-  project: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.HttpApi.Host\Ezrie.AccountManagement.HttpApi.Host.csproj
+# Relationship API
+- name: ezrie-relationship-httpapi-host
+  project: apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Host\Ezrie.RelationshipManagement.HttpApi.Host.csproj
   bindings:
     - protocol: https
       port: 5001
@@ -27,32 +27,46 @@ services:
   project: gateways\Ezrie.Gateway.Public\Ezrie.Gateway.Public.csproj
   bindings:
     - protocol: https
-      port: 7000
+      port: 10000
+
+# Account Management Client
+- name: ezrie-account-admin
+  project: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.Admin\Ezrie.AccountManagement.Admin.csproj
+  bindings:
+    - protocol: https
+      port: 10100
+
+# Account Managment API
+- name: ezrie-account-api
+  project: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.HttpApi.Host\Ezrie.AccountManagement.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 10101
 
 # Administration Blazor Client
 - name: ezrie-administration-blazor
   project: services\Ezrie.AdministrationService\host\Ezrie.AdministrationService.Blazor.Host\Ezrie.AdministrationService.Blazor.Host.csproj
   bindings:
     - protocol: https
-      port: 10000
+      port: 10200
 
 # Administration API
 - name: ezrie-administration-httpapi-host
   project: services\Ezrie.AdministrationService\host\Ezrie.AdministrationService.HttpApi.Host\Ezrie.AdministrationService.HttpApi.Host.csproj
   bindings:
     - protocol: https
-      port: 10001
+      port: 10201
 
 # Tenant Blazor Client
 - name: ezrie-tenant-blazor
   project: services\Ezrie.TenantService\host\Ezrie.TenantService.Blazor.Host\Ezrie.TenantService.Blazor.Host.csproj
   bindings:
     - protocol: https
-      port: 11000
+      port: 10300
 
 # Tenant API
 - name: ezrie-tenant-httpapi-host
   project: services\Ezrie.TenantService\host\Ezrie.TenantService.HttpApi.Host\Ezrie.TenantService.HttpApi.Host.csproj
   bindings:
     - protocol: https
-      port: 11001
+      port: 10301

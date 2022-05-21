@@ -132,7 +132,7 @@
 			{
 				"ClientId": "ezrie_account_management",
 				"ClientName": "Ezrie Account Management",
-				"ClientUri": "https://localhost:5000",
+				"ClientUri": "https://localhost:10100",
 				"AllowedGrantTypes": [
 					"authorization_code"
 				],
@@ -143,14 +143,14 @@
 					}
 				],
 				"RedirectUris": [
-					"https://localhost:5000/signin-oidc"
+					"https://localhost:10100/signin-oidc"
 				],
-				"FrontChannelLogoutUri": "https://localhost:5000/signout-oidc",
+				"FrontChannelLogoutUri": "https://localhost:10100/signout-oidc",
 				"PostLogoutRedirectUris": [
-					"https://localhost:5000/signout-callback-oidc"
+					"https://localhost:10100/signout-callback-oidc"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:5000"
+					"https://localhost:10100"
 				],
 				"AllowedScopes": [
 					"openid",
@@ -172,21 +172,21 @@
 					}
 				],
 				"RedirectUris": [
-					"https://localhost:5001/swagger/oauth2-redirect.html"
+					"https://localhost:10101/swagger/oauth2-redirect.html"
 				],
 				"AllowedScopes": [
 					"ezrie_account_management_swaggerui",
 					"ezrie_account_management_api"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:5000",
-					"https://localhost:5001",
+					"https://localhost:10100",
+					"https://localhost:10101",
 					"https://localhost:5500",
-					"https://localhost:7000",
 					"https://localhost:10000",
-					"https://localhost:10001",
-					"https://localhost:11000",
-					"https://localhost:11001"
+					"https://localhost:10200",
+					"https://localhost:10201",
+					"https://localhost:10300",
+					"https://localhost:10301"
 				]
 			},
 			{
@@ -198,7 +198,7 @@
 				"RequireClientSecret": false,
 				"RequirePkce": true,
 				"RedirectUris": [
-					"https://localhost:10000/authentication/login-callback"
+					"https://localhost:10200/authentication/login-callback"
 				],
 				"AllowedScopes": [
 					"ezrie_administration_service_api",
@@ -206,9 +206,9 @@
 					"profile"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:7000",
 					"https://localhost:10000",
-					"https://localhost:10001"
+					"https://localhost:10200",
+					"https://localhost:10201"
 				]
 			},
 			{
@@ -219,17 +219,17 @@
 				],
 				"RequireClientSecret": false,
 				"RedirectUris": [
-					"https://localhost:7000/api/administration/swagger/oauth2-redirect.html",
-					"https://localhost:10001/swagger/oauth2-redirect.html"
+					"https://localhost:10000/api/administration/swagger/oauth2-redirect.html",
+					"https://localhost:10201/swagger/oauth2-redirect.html"
 				],
 				"AllowedScopes": [
 					"ezrie_administration_service_swaggerui",
 					"ezrie_administration_service_api"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:7000",
 					"https://localhost:10000",
-					"https://localhost:10001"
+					"https://localhost:10200",
+					"https://localhost:10201"
 				]
 			},
 			{
@@ -241,15 +241,15 @@
 				"RequireClientSecret": false,
 				"RequirePkce": true,
 				"RedirectUris": [
-					"https://localhost:11000/authentication/login-callback"
+					"https://localhost:10300/authentication/login-callback"
 				],
 				"AllowedScopes": [
 					"ezrie_tenant_management_api"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:7000",
-					"https://localhost:11000",
-					"https://localhost:11001"
+					"https://localhost:10000",
+					"https://localhost:10300",
+					"https://localhost:10301"
 				]
 			},
 			{
@@ -260,17 +260,17 @@
 				],
 				"RequireClientSecret": false,
 				"RedirectUris": [
-					"https://localhost:7000/api/tenant/swagger/oauth2-redirect.html",
-					"https://localhost:11001/swagger/oauth2-redirect.html"
+					"https://localhost:10000/api/tenant/swagger/oauth2-redirect.html",
+					"https://localhost:10301/swagger/oauth2-redirect.html"
 				],
 				"AllowedScopes": [
 					"ezrie_tenant_service_swaggerui",
 					"ezrie_tenant_service_api"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:7000",
-					"https://localhost:11000",
-					"https://localhost:11001"
+					"https://localhost:10000",
+					"https://localhost:10300",
+					"https://localhost:10301"
 				]
 			}
 		]

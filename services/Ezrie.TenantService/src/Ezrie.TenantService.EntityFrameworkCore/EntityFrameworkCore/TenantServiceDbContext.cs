@@ -33,7 +33,6 @@ public class TenantServiceDbContext : AbpDbContext<TenantServiceDbContext>,
 	{
 		base.OnModelCreating(modelBuilder);
 
-		modelBuilder.ConfigureTenantService();
-		modelBuilder.ConfigureTenantManagement();
+		modelBuilder.CreateTenantServiceModel();
 	}
 }

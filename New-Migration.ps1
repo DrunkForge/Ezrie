@@ -14,11 +14,10 @@ if ($true -ne (Test-Path -Path ".\$root.sln" -IsValid -PathType Leaf))
 
 # Reset-Containers
 
+Add-Migration "$Migration" "RelationshipManagement" "apps"
 Add-Migration "$Migration" "AdministrationService" "services"
+Add-Migration "$Migration" "TenantService" "services"
 # Add-Migration "$Migration" "ClientManager" "services"
 # Add-Migration "$Migration" "Crm" "apps"
 # Add-Migration "$Migration" "Account" "apps"
 
-Set-Location "$location\shared\src\$root.DbMigrator\"
-dotnet run $dbMigrator
-Set-Location $location

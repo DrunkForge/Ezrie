@@ -130,8 +130,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		tye.yaml = tye.yaml
 	EndProjectSection
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0489F13C-3A4B-4F46-A5A8-B93D3B76994C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ezrie.TenantService", "Ezrie.TenantService", "{BABA6A92-B0BD-49C5-A812-394A50BEE427}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{2CB4BC15-D556-4C24-BF47-0037C6047396}"
@@ -174,47 +172,53 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.TenantService.TestBas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.TenantService.Blazor.Server", "services\Ezrie.TenantService\src\Ezrie.TenantService.Blazor.Server\Ezrie.TenantService.Blazor.Server.csproj", "{69F1436E-9D04-4053-81F0-3EC6904F8DF9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.TenantService.EntityFrameworkCore.Migration", "services\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore.Migration\Ezrie.TenantService.EntityFrameworkCore.Migration.csproj", "{01FF0D35-E630-4033-8BE8-460300F6F4A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.TenantService.EntityFrameworkCore.Migrations", "services\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore.Migrations\Ezrie.TenantService.EntityFrameworkCore.Migrations.csproj", "{01FF0D35-E630-4033-8BE8-460300F6F4A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.EntityFrameworkCore.Migration", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migration\Ezrie.AdministrationService.EntityFrameworkCore.Migration.csproj", "{3BDB578D-F70D-4449-A0C7-39257105A866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.EntityFrameworkCore.Migrations", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migrations\Ezrie.AdministrationService.EntityFrameworkCore.Migrations.csproj", "{3BDB578D-F70D-4449-A0C7-39257105A866}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ezrie.RelationshipManagement", "Ezrie.RelationshipManagement", "{420AF32F-F54F-4A74-B9EF-BDBE059FD4D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9B1D728E-D683-4269-B8FD-BC73C512C6E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.Application", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Application\Ezrie.RelationshipManagement.Application.csproj", "{317149CA-1857-47D0-AD1E-EB67A4B1C1AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Application", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Application\Ezrie.RelationshipManagement.Application.csproj", "{317149CA-1857-47D0-AD1E-EB67A4B1C1AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.Application.Contracts", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Application.Contracts\Ezrie.RelationshipManagement.Application.Contracts.csproj", "{DA270560-D9ED-4191-89A6-65952605CDC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Application.Contracts", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Application.Contracts\Ezrie.RelationshipManagement.Application.Contracts.csproj", "{DA270560-D9ED-4191-89A6-65952605CDC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.Blazor", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Blazor\Ezrie.RelationshipManagement.Blazor.csproj", "{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Blazor", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Blazor\Ezrie.RelationshipManagement.Blazor.csproj", "{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.DbMigrator", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.DbMigrator\Ezrie.RelationshipManagement.DbMigrator.csproj", "{6AD034BD-725D-4B78-BE76-BB7E8FC2AFA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Domain", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Domain\Ezrie.RelationshipManagement.Domain.csproj", "{A62C6353-18DD-417B-A90E-8E57DC42ED06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.Domain", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Domain\Ezrie.RelationshipManagement.Domain.csproj", "{A62C6353-18DD-417B-A90E-8E57DC42ED06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Domain.Shared", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Domain.Shared\Ezrie.RelationshipManagement.Domain.Shared.csproj", "{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.Domain.Shared", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Domain.Shared\Ezrie.RelationshipManagement.Domain.Shared.csproj", "{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.EntityFrameworkCore", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.EntityFrameworkCore\Ezrie.RelationshipManagement.EntityFrameworkCore.csproj", "{AE515D07-530A-4A21-8C25-ADFAC46F71CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.EntityFrameworkCore", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.EntityFrameworkCore\Ezrie.RelationshipManagement.EntityFrameworkCore.csproj", "{AE515D07-530A-4A21-8C25-ADFAC46F71CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi\Ezrie.RelationshipManagement.HttpApi.csproj", "{6038CC5D-6D1F-41AC-B30D-3B3859CF34FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.HttpApi", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi\Ezrie.RelationshipManagement.HttpApi.csproj", "{6038CC5D-6D1F-41AC-B30D-3B3859CF34FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi.Client", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Client\Ezrie.RelationshipManagement.HttpApi.Client.csproj", "{D44D1E69-0B02-4C22-BE8A-CDF208F8CAA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.HttpApi.Client", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Client\Ezrie.RelationshipManagement.HttpApi.Client.csproj", "{D44D1E69-0B02-4C22-BE8A-CDF208F8CAA1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.HttpApi.Host", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Host\Ezrie.RelationshipManagement.HttpApi.Host.csproj", "{5CA2FD91-0EA5-483F-9383-A220BC027CF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi.Host", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Host\Ezrie.RelationshipManagement.HttpApi.Host.csproj", "{5CA2FD91-0EA5-483F-9383-A220BC027CF5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{954F1E92-688B-4C68-B777-18D86AD574DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.Application.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.Application.Tests\Ezrie.RelationshipManagement.Application.Tests.csproj", "{FAE703D6-E30F-48BC-BCD7-2BA9345C8C7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Application.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.Application.Tests\Ezrie.RelationshipManagement.Application.Tests.csproj", "{FAE703D6-E30F-48BC-BCD7-2BA9345C8C7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.Domain.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.Domain.Tests\Ezrie.RelationshipManagement.Domain.Tests.csproj", "{A78BCEE5-523A-45C1-9C30-0734C0EA62F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Domain.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.Domain.Tests\Ezrie.RelationshipManagement.Domain.Tests.csproj", "{A78BCEE5-523A-45C1-9C30-0734C0EA62F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.EntityFrameworkCore.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.EntityFrameworkCore.Tests\Ezrie.RelationshipManagement.EntityFrameworkCore.Tests.csproj", "{39151A93-1761-4E3B-A836-AB355697BDA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.EntityFrameworkCore.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.EntityFrameworkCore.Tests\Ezrie.RelationshipManagement.EntityFrameworkCore.Tests.csproj", "{39151A93-1761-4E3B-A836-AB355697BDA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp\Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp.csproj", "{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp\Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp.csproj", "{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.RelationshipManagement.TestBase", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.TestBase\Ezrie.RelationshipManagement.TestBase.csproj", "{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.TestBase", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.TestBase\Ezrie.RelationshipManagement.TestBase.csproj", "{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.AdministrationService.Blazor.Server", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Blazor.Server\Ezrie.AdministrationService.Blazor.Server.csproj", "{A5149ECB-E0A2-4493-A414-7BC29E47715B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.Blazor.Server", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Blazor.Server\Ezrie.AdministrationService.Blazor.Server.csproj", "{A5149ECB-E0A2-4493-A414-7BC29E47715B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations\Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations.csproj", "{5968849B-FACA-4411-8CC3-FDC74FAA51C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{5085E537-F299-479A-A611-C34D82E74F8E}"
+	ProjectSection(SolutionItems) = preProject
+		docker\docker-compose.override.yml = docker\docker-compose.override.yml
+		docker\docker-compose.yml = docker\docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -390,10 +394,6 @@ Global
 		{4C43AE9C-D309-40EE-9259-B6AA935E9087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C43AE9C-D309-40EE-9259-B6AA935E9087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C43AE9C-D309-40EE-9259-B6AA935E9087}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0489F13C-3A4B-4F46-A5A8-B93D3B76994C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0489F13C-3A4B-4F46-A5A8-B93D3B76994C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0489F13C-3A4B-4F46-A5A8-B93D3B76994C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0489F13C-3A4B-4F46-A5A8-B93D3B76994C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F2C6F4DF-0247-47F6-BC31-7A663DA83DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2C6F4DF-0247-47F6-BC31-7A663DA83DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2C6F4DF-0247-47F6-BC31-7A663DA83DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -482,10 +482,6 @@ Global
 		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6AD034BD-725D-4B78-BE76-BB7E8FC2AFA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6AD034BD-725D-4B78-BE76-BB7E8FC2AFA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6AD034BD-725D-4B78-BE76-BB7E8FC2AFA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6AD034BD-725D-4B78-BE76-BB7E8FC2AFA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A62C6353-18DD-417B-A90E-8E57DC42ED06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A62C6353-18DD-417B-A90E-8E57DC42ED06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A62C6353-18DD-417B-A90E-8E57DC42ED06}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -534,6 +530,10 @@ Global
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5968849B-FACA-4411-8CC3-FDC74FAA51C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5968849B-FACA-4411-8CC3-FDC74FAA51C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5968849B-FACA-4411-8CC3-FDC74FAA51C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5968849B-FACA-4411-8CC3-FDC74FAA51C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -617,7 +617,6 @@ Global
 		{317149CA-1857-47D0-AD1E-EB67A4B1C1AA} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
 		{DA270560-D9ED-4191-89A6-65952605CDC9} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
 		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{6AD034BD-725D-4B78-BE76-BB7E8FC2AFA6} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
 		{A62C6353-18DD-417B-A90E-8E57DC42ED06} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
 		{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
 		{AE515D07-530A-4A21-8C25-ADFAC46F71CB} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
@@ -631,6 +630,7 @@ Global
 		{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F} = {954F1E92-688B-4C68-B777-18D86AD574DE}
 		{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C} = {954F1E92-688B-4C68-B777-18D86AD574DE}
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
+		{5968849B-FACA-4411-8CC3-FDC74FAA51C9} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77DFA18A-BBC2-4580-B4FD-BECB3F123BAB}

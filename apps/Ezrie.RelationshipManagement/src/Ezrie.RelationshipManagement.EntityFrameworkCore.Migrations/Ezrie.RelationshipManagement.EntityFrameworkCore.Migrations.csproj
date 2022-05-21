@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<RootNamespace>Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore.Migrations\Ezrie.EntityFrameworkCore.Migrations.csproj" />
+	  <ProjectReference Include="..\Ezrie.RelationshipManagement.EntityFrameworkCore\Ezrie.RelationshipManagement.EntityFrameworkCore.csproj" />
+	</ItemGroup>
+
+</Project>

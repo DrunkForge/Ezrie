@@ -24,21 +24,21 @@
 			"ezrie-administration-httpapi-host": {
 				"Destinations": {
 					"destination1": {
-						"Address": "https://localhost:10001"
+						"Address": "https://localhost:10201"
 					}
 				}
 			},
 			"ezrie-tenant-httpapi-host": {
 				"Destinations": {
 					"destination1": {
-						"Address": "https://localhost:11001"
+						"Address": "https://localhost:10301"
 					}
 				}
 			},
 			"ezrie-account-httpapi-host": {
 				"Destinations": {
 					"destination1": {
-						"Address": "https://localhost:5001"
+						"Address": "https://localhost:10101"
 					}
 				}
 			}

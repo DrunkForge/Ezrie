@@ -77,11 +77,6 @@ public class AdministrationServiceDbContext : AbpDbContext<AdministrationService
 	{
 		base.OnModelCreating(modelBuilder);
 
-		modelBuilder.ConfigureAdministrationService();
-		modelBuilder.ConfigureAuditLogging();
-		modelBuilder.ConfigureFeatureManagement();
-		modelBuilder.ConfigureIdentity();
-		modelBuilder.ConfigurePermissionManagement();
-		modelBuilder.ConfigureSettingManagement();
+		modelBuilder.CreateAdministrationServiceModel();
 	}
 }

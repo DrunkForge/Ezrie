@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AdministrationService.EntityFrameworkCore.Migration;
+using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Hosting.AspNetCore;
 using Ezrie.Logging;
@@ -66,6 +66,6 @@ internal static class Program
 		var configuration = host.Services.GetRequiredService<IConfiguration>();
 		var logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger<AdministrationServiceHttpApiHostModule>();
 
-		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationModule>(logger).MigrateAndSeedAsync();
+		await new MigrationHost<AdministrationServiceEntityFrameworkCoreMigrationsModule>(logger).MigrateAndSeedAsync();
 	}
 }

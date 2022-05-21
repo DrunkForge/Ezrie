@@ -19,23 +19,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.FeatureManagement.Blazor;
-using Volo.Abp.FeatureManagement.Blazor.WebAssembly;
-using Volo.Abp.Identity.Blazor.WebAssembly;
 using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement.Blazor.WebAssembly;
-using Volo.Abp.SettingManagement.Blazor.WebAssembly;
-using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
 
 namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(AdministrationServiceApplicationContractsModule))]
-[DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
-[DependsOn(typeof(AbpFeatureManagementBlazorWebAssemblyModule))]
-[DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
-[DependsOn(typeof(AbpPermissionManagementBlazorWebAssemblyModule))]
-[DependsOn(typeof(AbpSettingManagementBlazorWebAssemblyModule))]
 
 [DependsOn(typeof(AbpAspNetCoreComponentsWebThemingModule))]
 [DependsOn(typeof(AbpAutoMapperModule))]

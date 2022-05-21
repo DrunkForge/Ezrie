@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\common.props" />
 	<Import Project="..\..\..\..\common.build.props" />
@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
 		<ProjectReference Include="..\Ezrie.AdministrationService.EntityFrameworkCore.Tests\Ezrie.AdministrationService.EntityFrameworkCore.Tests.csproj" />
 	</ItemGroup>
 
