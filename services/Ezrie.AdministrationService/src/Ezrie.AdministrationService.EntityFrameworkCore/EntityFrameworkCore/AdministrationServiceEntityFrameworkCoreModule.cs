@@ -28,8 +28,8 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore;
 
 [DependsOn(typeof(EzrieEntityFrameworkCoreModule))]
 [DependsOn(typeof(AdministrationServiceDomainModule))]
-[DependsOn(typeof(AbpEntityFrameworkCoreModule))]
 
+[DependsOn(typeof(AbpEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpAuditLoggingEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpFeatureManagementEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpIdentityEntityFrameworkCoreModule))]

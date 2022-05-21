@@ -2,7 +2,7 @@
 	"Serilog": {
 		"MinimumLevel": {
 			"Default": "Debug",
-			"Override": {
+			"Overrides": {
 				"Microsoft": "Warning"
 			}
 		},

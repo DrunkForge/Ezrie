@@ -13,7 +13,7 @@ namespace Ezrie.RelationshipManagement.EntityFrameworkCore;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
-[ConnectionStringName("Default")]
+[ConnectionStringName(RelationshipManagementDbProperties.ConnectionStringName)]
 public class RelationshipManagementDbContext :
 	AbpDbContext<RelationshipManagementDbContext>,
 	IIdentityDbContext,

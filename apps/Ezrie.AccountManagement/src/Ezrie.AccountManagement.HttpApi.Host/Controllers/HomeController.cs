@@ -17,8 +17,9 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ezrie.AccountManagement.Controllers;
+
 public class HomeController : Controller
 {
-	[HttpGet]
-	public IActionResult Index() => Redirect("/swagger/index.html");
+	[HttpGet("/")]
+	public IActionResult Index() => Redirect("~/swagger/index.html");
 }

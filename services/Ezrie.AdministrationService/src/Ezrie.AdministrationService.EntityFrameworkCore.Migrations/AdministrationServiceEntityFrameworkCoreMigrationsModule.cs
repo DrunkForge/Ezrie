@@ -11,4 +11,10 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreModule))]
 public class AdministrationServiceEntityFrameworkCoreMigrationsModule : MigrationsModuleBase
 {
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddAbpDbContext<AdministrationServiceMigrationsDbContext>(options =>
+		{
+		});
+	}
 }

@@ -33,8 +33,6 @@ public class PublicGatewayModule : AbpModule
 	{
 		ArgumentNullException.ThrowIfNull(context);
 
-		var configuration = context.Services.GetConfiguration();
-
 		// Requested scopes for authorization code request and descriptions for swagger UI only
 		context.ConfigureSwaggerWithAuth();
 	}

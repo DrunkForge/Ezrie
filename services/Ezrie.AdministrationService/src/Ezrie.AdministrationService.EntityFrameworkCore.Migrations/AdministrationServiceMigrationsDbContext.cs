@@ -33,11 +33,6 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace Ezrie.AdministrationService.EntityFrameworkCore;
 
-[ReplaceDbContext(typeof(IAuditLoggingDbContext))]
-[ReplaceDbContext(typeof(IFeatureManagementDbContext))]
-[ReplaceDbContext(typeof(IIdentityDbContext))]
-[ReplaceDbContext(typeof(IPermissionManagementDbContext))]
-[ReplaceDbContext(typeof(ISettingManagementDbContext))]
 [ConnectionStringName(AdministrationServiceDbProperties.ConnectionStringName)]
 public class AdministrationServiceMigrationsDbContext : AbpDbContext<AdministrationServiceMigrationsDbContext>
 {

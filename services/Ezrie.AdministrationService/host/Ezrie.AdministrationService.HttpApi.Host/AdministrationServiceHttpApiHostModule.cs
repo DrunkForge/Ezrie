@@ -19,6 +19,7 @@ using Ezrie.Hosting.AspNetCore;
 using Ezrie.Hosting.AspNetCore.Microservices;
 using System.Globalization;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 
@@ -33,9 +34,16 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		var hostingEnvironment = context.Services.GetHostingEnvironment();
-		var configuration = context.Services.GetConfiguration();
 
+		ConfigureVirtualFileSystem(hostingEnvironment);
 
+		context.ConfigureJwtAuthentication(AdministrationServiceOidcProperties.Audience);
+
+		ConfigureConventionalControllers();
+	}
+
+	private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
+	{
 		if (hostingEnvironment.IsDevelopment())
 		{
 			Configure<AbpVirtualFileSystemOptions>(options =>
@@ -54,16 +62,14 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
 					"..{0}..{0}src{0}Ezrie.AdministrationService.Application", Path.DirectorySeparatorChar)));
 			});
 		}
+	}
 
-		context.ConfigureJwtAuthentication(AdministrationServiceOidcProperties.Audience);
-
-		Configure<AbpEndpointRouterOptions>(options =>
+	private void ConfigureConventionalControllers()
+	{
+		Configure<AbpAspNetCoreMvcOptions>(options =>
 		{
-			options.EndpointConfigureActions.Add(endpointContext =>
-			{
-				endpointContext.Endpoints.MapControllers();
-				endpointContext.Endpoints.MapDefaultControllerRoute();
-			});
+			options.ConventionalControllers.Create(typeof(AdministrationServiceHttpApiHostModule).Assembly);
+			options.ConventionalControllers.Create(typeof(AdministrationServiceApplicationModule).Assembly);
 		});
 	}
 }

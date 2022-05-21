@@ -19,9 +19,8 @@ using Volo.Abp.AspNetCore.Mvc;
 
 namespace Ezrie.AdministrationService.Controllers;
 
-[ApiController]
 public class HomeController : AbpController
 {
-	[HttpGet]
+	[HttpGet("/")]
 	public ActionResult Index() => Redirect("~/swagger/index.html");
 }

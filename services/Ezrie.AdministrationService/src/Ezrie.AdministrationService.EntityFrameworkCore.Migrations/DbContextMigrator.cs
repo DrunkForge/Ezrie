@@ -19,7 +19,7 @@ using Volo.Abp.DependencyInjection;
 
 namespace Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
 
-public class DbContextMigrator : DbContextMigrator<AdministrationServiceDbContext>, IDbContextMigrator, ITransientDependency
+public class DbContextMigrator : DbContextMigrator<AdministrationServiceMigrationsDbContext>, IDbContextMigrator, ITransientDependency
 {
 	public DbContextMigrator(IServiceProvider serviceProvider)
 		: base(serviceProvider)

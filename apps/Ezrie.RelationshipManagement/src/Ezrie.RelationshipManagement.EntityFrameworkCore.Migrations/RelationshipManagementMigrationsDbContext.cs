@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -15,10 +15,11 @@
 *********************************************************************************************/
 
 using Microsoft.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore;
 
 namespace Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations;
 
-public class RelationshipManagementMigrationsDbContext : DbContext
+public class RelationshipManagementMigrationsDbContext : AbpDbContext<RelationshipManagementMigrationsDbContext>
 {
 	public RelationshipManagementMigrationsDbContext(DbContextOptions<RelationshipManagementMigrationsDbContext> options)
 		: base(options)

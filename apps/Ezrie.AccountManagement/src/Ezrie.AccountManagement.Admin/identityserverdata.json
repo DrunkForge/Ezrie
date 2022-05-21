@@ -77,6 +77,13 @@
 				]
 			},
 			{
+				"Name": "ezrie_relationship_management_api",
+				"DisplayName": "Ezrie Relationship Management API",
+				"Scopes": [
+					"ezrie_relationship_management_api"
+				]
+			},
+			{
 				"Name": "ezrie_tenant_service_api",
 				"DisplayName": "Ezrie Tenant Service API",
 				"Scopes": [
@@ -114,6 +121,20 @@
 				"Required": true
 			},
 			{
+				"Name": "ezrie_relationship_management_api",
+				"DisplayName": "Ezrie Relationship Management API",
+				"Required": true,
+				"UserClaims": [
+					"role",
+					"name"
+				]
+			},
+			{
+				"Name": "ezrie_relationship_management_swaggerui",
+				"DisplayName": "Ezrie Relationship Management Swagger UI",
+				"Required": true
+			},
+			{
 				"Name": "ezrie_tenant_service_api",
 				"DisplayName": "Ezrie Tenant Service API",
 				"Required": true,
@@ -129,6 +150,34 @@
 			}
 		],
 		"Clients": [
+			{
+				"ClientId": "ezrie_swaggerui",
+				"ClientName": "Ezrie Swagger UI",
+				"ClientUri": "https://localhost:10000",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequirePkce": true,
+				"ClientSecrets": [
+					{
+						"Value": "1q2w3E*"
+					}
+				],
+				"RedirectUris": [
+					"https://localhost:10000/swagger/oauth2-redirect.html"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:5000",
+					"https://localhost:10000",
+					"https://localhost:10100"
+				],
+				"AllowedScopes": [
+					"ezrie_account_management_api",
+					"ezrie_relationship_management_api",
+					"ezrie_administration_service_api",
+					"ezrie_tenant_service_api"
+				]
+			},
 			{
 				"ClientId": "ezrie_account_management",
 				"ClientName": "Ezrie Account Management",
@@ -179,10 +228,12 @@
 					"ezrie_account_management_api"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:10100",
-					"https://localhost:10101",
+					"https://localhost:5000",
+					"https://localhost:5001",
 					"https://localhost:5500",
 					"https://localhost:10000",
+					"https://localhost:10100",
+					"https://localhost:10101",
 					"https://localhost:10200",
 					"https://localhost:10201",
 					"https://localhost:10300",
@@ -230,6 +281,49 @@
 					"https://localhost:10000",
 					"https://localhost:10200",
 					"https://localhost:10201"
+				]
+			},
+			{
+				"ClientId": "ezrie_relationship_management_blazor",
+				"ClientName": "Ezrie Relationship Management Blazor",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:5000/authentication/login-callback"
+				],
+				"AllowedScopes": [
+					"ezrie_relationship_management_api",
+					"openid",
+					"profile"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:5000",
+					"https://localhost:5001",
+					"https://localhost:10000"
+				]
+			},
+			{
+				"ClientId": "ezrie_relationship_management_swaggerui",
+				"ClientName": "Ezrie Administration Service Swagger UI",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": false,
+				"RedirectUris": [
+					"https://localhost:10000/api/administration/swagger/oauth2-redirect.html",
+					"https://localhost:5001/swagger/oauth2-redirect.html"
+				],
+				"AllowedScopes": [
+					"ezrie_relationship_management_swaggerui",
+					"ezrie_relationship_management_api"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:5000",
+					"https://localhost:5001",
+					"https://localhost:10000"
 				]
 			},
 			{

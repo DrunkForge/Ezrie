@@ -3,6 +3,7 @@ using Ezrie.Hosting.AspNetCore.Microservices;
 using Ezrie.TenantService.EntityFrameworkCore;
 using System.Globalization;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 
@@ -17,8 +18,15 @@ public class TenantServiceHttpApiHostModule : AbpModule
 
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
+		ConfigureConventionalControllers();
+		ConfigureVirtualFileSystem(context);
+
+		context.ConfigureJwtAuthentication(TenantServiceOidcProperties.Audience);
+	}
+
+	private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
+	{
 		var hostingEnvironment = context.Services.GetHostingEnvironment();
-		var configuration = context.Services.GetConfiguration();
 
 		if (hostingEnvironment.IsDevelopment())
 		{
@@ -38,15 +46,14 @@ public class TenantServiceHttpApiHostModule : AbpModule
 					"..{0}..{0}src{0}Ezrie.TenantService.Application", Path.DirectorySeparatorChar)));
 			});
 		}
+	}
 
-		context.ConfigureJwtAuthentication(TenantServiceOidcProperties.Audience);
-
-		Configure<AbpEndpointRouterOptions>(options =>
+	private void ConfigureConventionalControllers()
+	{
+		Configure<AbpAspNetCoreMvcOptions>(options =>
 		{
-			options.EndpointConfigureActions.Add(endpointContext =>
-			{
-				endpointContext.Endpoints.MapDefaultControllerRoute();
-			});
+			options.ConventionalControllers.Create(typeof(TenantServiceHttpApiHostModule).Assembly);
+			options.ConventionalControllers.Create(typeof(TenantServiceApplicationModule).Assembly);
 		});
 	}
 }

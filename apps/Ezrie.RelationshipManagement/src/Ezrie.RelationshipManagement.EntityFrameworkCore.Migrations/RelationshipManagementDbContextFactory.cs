@@ -20,11 +20,11 @@ using Ezrie.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Volo.Abp.Data;
 
 namespace Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations;
 
-/* This class is needed for EF Core console commands
- * (like Add-Migration and Update-Database commands) */
+[ConnectionStringName(RelationshipManagementDbProperties.ConnectionStringName)]
 public class RelationshipManagementDbContextFactory : MigrationDbContextFactoryBase<RelationshipManagementMigrationsDbContext>
 {
 	public override String ConnectionStringName => RelationshipManagementDbProperties.ConnectionStringName;

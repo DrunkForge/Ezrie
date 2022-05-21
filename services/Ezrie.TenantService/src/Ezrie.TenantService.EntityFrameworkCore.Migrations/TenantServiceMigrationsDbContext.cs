@@ -25,7 +25,6 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Ezrie.TenantService.EntityFrameworkCore;
 
-[ReplaceDbContext(typeof(ITenantManagementDbContext))]
 [ConnectionStringName(TenantServiceDbProperties.ConnectionStringName)]
 public class TenantServiceMigrationsDbContext : AbpDbContext<TenantServiceMigrationsDbContext>
 {
