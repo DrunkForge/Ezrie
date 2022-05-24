@@ -1,0 +1,145 @@
+@{
+	var version = Piranha.Utils.GetAssemblyVersion(typeof(Piranha.App).Assembly);
+	version = version.Substring(0, version.LastIndexOf("."));
+	var year = DateTime.Now.Year;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>@ViewData["Title"]</title>
+	<link href="/assets/css/cpca-vendors.css" rel="stylesheet">
+	<link href="/assets/css/cpca-nexa.css" rel="stylesheet">
+	<link href="/assets/img/favicon.png" rel="shortcut icon">
+
+	@RenderSection("head", required: false)
+</head>
+<body id="body" class="home-classic up-scroll">
+	<!-- Preloader -->
+	<div id="preloader" class="smooth-loader-wrapper">
+		<div class="smooth-loader">
+			<div class="loader1">
+				<div class="loader-target">
+					<div class="loader-target-main"></div>
+					<div class="loader-target-inner"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- HEADER -->
+	<header id="pageTop" class="header">
+
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-expand-md main-nav header-transparent navbar-scrollUp">
+			<div class="container">
+				<button class="navbar-toggler animated" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="burger-menu icon-toggle"><i class="icon-menu icons"></i></span>
+				</button>
+				<a class="navbar-brand" href="/">
+					<img class="logo dark" src="/assets/img/brand/logo-black.svg" alt="Canadian Professional Counsellors Association" />
+					<img class="logo light" src="/assets/img/brand/logo-white.svg" alt="Canadian Professional Counsellors Association" />
+				</a>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto">
+
+						@foreach (var item in (await WebApp.Site.Sitemap.ForUserAsync(User, Auth)).Where(i => !i.IsHidden))
+						{
+							if (item.Items.Count == 0)
+							{
+								<li class="nav-item@(item.Id == WebApp.PageId || item.HasChild(WebApp.PageId) ? " active" : "")">
+									<a class="nav-link" href="@WebApp.Url(item)">@item.MenuTitle</a>
+								</li>
+							}
+							else
+							{
+								<li class="nav-item dropdown drop_single@(item.Id == WebApp.PageId || item.HasChild(WebApp.PageId) ? " active" : "")">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">@item.MenuTitle</a>
+									<ul class="dropdown-menu">
+										@foreach (var child in (await item.Items.ForUserAsync(User, Auth)).Where(c => !c.IsHidden))
+										{
+											<li><a href="@WebApp.Url(child)">@child.MenuTitle</a></li>
+										}
+									</ul>
+								</li>
+							}
+						}
+
+						<!-- header search -->
+						<li class="nav-item search_hook">
+							<a href="javascript:void(0)" data-toggle="modal" data-target="#searchModal" class="btn-search nav-link"><i class="fas fa-search"></i></a>
+							<form class="search_form">
+								<input type="text" name="search" placeholder="Search...">
+								<button class="no-bg btn-search" type="submit"><i class="fas fa-search"></i></button>
+							</form>
+						</li>
+						<!-- header search ends-->
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+	</header>
+
+	<div class="main-wrapper">
+
+		@RenderBody()
+
+		@(await Html.RenderComponentAsync<Breakpoints>(RenderMode.Static))
+
+		<!-- FOOTER -->
+		<footer class="footer footer-classic bg-dark">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-7 col-md-8 ">
+						<div class="text-center">
+							<a href="/nexa.html">
+								<img class="logo" src="/assets/img/brand/logo-white.svg" alt="Canadian Professional Counsellors Association" />
+							</a>
+							<p>
+								Working together to promote and support competency<br />in clinical counselling &amp; psychotherapy.
+							</p>
+						</div>
+					</div>
+					<!-- BACK TO TOP BUTTON -->
+					<a data-scroll href="#pageTop" class="backToTop"><i class="fas fa-chevron-up"></i></a>
+				</div>
+				<!-- COPY RIGHT -->
+				<div class="copyright">
+					<hr>
+					<div class="row justify-content-center">
+						<div class="col-md-8 col-lg-6 ">
+							<div class="copyRight_text text-center">
+								<p>&copy; Copyright @year Canadian Professional Counsellors Association</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span class="bar-1"></span>
+					<span class="bar-2"></span>
+				</button>
+				<form action="">
+					<input type="text" autofocus name="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- JAVASCRIPTS -->
+	<script src="/assets/js/cpca-vendors.js"></script>
+	<script src="/assets/js/cpca-nexa.js"></script>
+
+</body>
+</html>

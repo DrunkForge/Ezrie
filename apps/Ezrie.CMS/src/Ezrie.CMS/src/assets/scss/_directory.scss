@@ -1,0 +1,15 @@
+/*=== Directory ===*/
+.directory-page {
+	.directory-index {
+		a.index-link {
+			padding: 10px;
+		}
+	}
+}
+
+img.member-photo {
+	color: $white-color;
+	background-color: $light-gray;
+	border-radius: $border-radius-xl;
+	max-width: 100% !important;
+}

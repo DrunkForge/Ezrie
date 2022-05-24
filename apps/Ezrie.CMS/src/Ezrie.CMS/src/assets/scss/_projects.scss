@@ -1,0 +1,237 @@
+//Portfolios
+.portfolio-projects {
+	.sidebar {
+		margin-top: 40px;
+		@include desktops {
+			margin-top: 90px;
+		}
+	}
+}
+.block {
+	position: relative;
+
+	.nav-item {
+		a {
+			position: relative;
+			padding: 0px 0 20px;
+			display: block;
+
+			&:after {
+				display: inline-block;
+				text-rendering: auto;
+				-webkit-font-smoothing: antialiased;
+				font: var(--fa-font-solid);
+				content: '\f105';
+				right: 10px;
+				transition: all 0.3s ease;
+			}
+		}
+
+		&:hover a:after {
+			right: 0;
+		}
+
+		&:last-child {
+			a {
+				padding-bottom: 0px;
+			}
+		}
+	}
+
+	h4 {
+		padding-bottom: 30px;
+	}
+
+	.carousel-indicators {
+		bottom: -10px;
+
+		li {
+			background-color: rgba(0,0,0,0.2);
+
+			&.active {
+				background-color: $primary-color;
+			}
+		}
+	}
+
+	.carousel-item {
+		max-height: 200px;
+
+		@include tablet {
+			max-height: 140px;
+		}
+
+		@include large-desktops {
+			max-height: 170px;
+		}
+
+		.overlay-link {
+			position: absolute;
+
+			&:after {
+				position: absolute;
+				content: '';
+				top: 0;
+				bottom: 0;
+				left: 50%;
+				right: 50%;
+				background-color: tint($primary-color, 30%);
+				transition: all 0.3s ease;
+			}
+
+			i {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				color: $primary-color;
+				font-size: 18px;
+				z-index: 55;
+				border-radius: 100%;
+				background: $white-color;
+				opacity: 0;
+				visibility: hidden;
+				transition: all 0.3s ease;
+			}
+
+			&:hover {
+				&:after {
+					left: 0;
+					right: 0;
+				}
+
+				i {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+		}
+	}
+}
+.tags {
+	a {
+		padding: 4px 10px;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		color: $white-color;
+		display: inline-block;
+		margin-right: 5px;
+		margin-bottom: 8px;
+		border: 1px solid;
+		background-color: $primary-color;
+		border-color: $primary-color;
+		font-size: 12px;
+	font-weight: 400;
+		&:hover {
+			background-color: transparent;
+			color: $primary-color;
+			border-color: $primary-color;
+		}
+	}
+}
+.portfolio_grid {
+	.card-block {
+		border: 1px solid $primary-bg;
+		border-top: 0px;
+		padding-left: 25px;
+		padding-right: 25px;
+		
+		@include desktops {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+		a {
+			border-radius: 2px;
+			font-size: 12px;
+			margin-bottom: 25px;
+		}
+	}
+}
+
+
+
+
+.project-details-wrapper {
+	padding-top: 80px;
+	padding-bottom: 80px;
+	@include desktops {
+		padding-top: 100px;
+		padding-bottom: 100px;
+	}
+	.project-desc {
+		padding-top: 50px;
+		
+	}
+	.page-nav {
+		margin-top: 80px;
+		position: relative;
+		@include desktops {
+			margin-top: 100px;
+		}
+		padding: 30px 0px 25px;
+		border-top: 1px solid shade($white-color, 13%);
+		border-bottom: 1px solid shade($white-color, 13%);
+		.prev i {
+			padding-top: 2px;
+			padding-right: 10px;
+		}
+		.next i {
+			padding-top: 2px;
+			padding-left: 10px;
+		}
+		&:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			height: 14px;
+			border-left: 1px solid shade($white-color, 13%);
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	.project_specification {
+		padding: 40px 30px;
+		color: $white-color;
+		position: relative;
+		h2 {
+			color: $title-color;	
+			margin-bottom: 30px;
+			margin-top: 0px;
+		}
+		.row {
+			margin-top: 15px;
+			color: $text-color;
+			.col-4 {
+				color: $title-color;
+			}
+			a:hover {
+				color: $primary-color!important;
+			}
+		}
+	}
+	.related-projects {
+		.section-title {
+			margin-top: 80px;
+		}
+		.card {
+			margin-top: 30px;
+		}
+		.card-block {
+			border: 1px solid $primary-bg;
+			border-top: 0px;
+			padding-left: 25px;
+			padding-right: 25px;
+			a {
+				border-radius: 2px;
+				font-size: 12px;
+				margin-bottom: 25px;
+			}
+		}
+	}
+}

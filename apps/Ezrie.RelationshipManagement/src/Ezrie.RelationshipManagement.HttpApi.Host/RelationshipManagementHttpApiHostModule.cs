@@ -26,19 +26,18 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
+using System.Globalization;
 
 namespace Ezrie.RelationshipManagement;
 
-[DependsOn(
-	typeof(RelationshipManagementHttpApiModule),
-	typeof(AbpAutofacModule),
-	typeof(AbpCachingStackExchangeRedisModule),
-	typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-	typeof(RelationshipManagementApplicationModule),
-	typeof(RelationshipManagementEntityFrameworkCoreModule),
-	typeof(AbpAspNetCoreSerilogModule),
-	typeof(AbpSwashbuckleModule)
-)]
+[DependsOn(typeof(RelationshipManagementApplicationModule))]
+[DependsOn(typeof(RelationshipManagementEntityFrameworkCoreModule))]
+[DependsOn(typeof(RelationshipManagementHttpApiModule))]
+[DependsOn(typeof(AbpAspNetCoreMvcUiMultiTenancyModule))]
+[DependsOn(typeof(AbpAspNetCoreSerilogModule))]
+[DependsOn(typeof(AbpAutofacModule))]
+[DependsOn(typeof(AbpCachingStackExchangeRedisModule))]
+[DependsOn(typeof(AbpSwashbuckleModule))]
 public class RelationshipManagementHttpApiHostModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
@@ -94,13 +93,13 @@ public class RelationshipManagementHttpApiHostModule : AbpModule
 		});
 	}
 
-	private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
+	private static void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
 	{
 		context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			.AddJwtBearer(options =>
 			{
 				options.Authority = configuration["AuthServer:Authority"];
-				options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+				options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"], CultureInfo.InvariantCulture);
 				options.Audience = "RelationshipManagement";
 			});
 	}
@@ -109,7 +108,7 @@ public class RelationshipManagementHttpApiHostModule : AbpModule
 	{
 		context.Services.AddAbpSwaggerGenWithOAuth(
 			configuration["AuthServer:Authority"],
-			new Dictionary<string, string>
+			new Dictionary<String, String>
 			{
 					{"ezrie_relationship_management_api", "Ezrie Relationship Management API"}
 			},
@@ -147,7 +146,7 @@ public class RelationshipManagementHttpApiHostModule : AbpModule
 		});
 	}
 
-	private void ConfigureDataProtection(
+	private static void ConfigureDataProtection(
 		ServiceConfigurationContext context,
 		IConfiguration configuration,
 		IWebHostEnvironment hostingEnvironment)
@@ -160,7 +159,7 @@ public class RelationshipManagementHttpApiHostModule : AbpModule
 		}
 	}
 
-	private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
+	private static void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
 	{
 		context.Services.AddCors(options =>
 		{

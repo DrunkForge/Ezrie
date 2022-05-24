@@ -6,13 +6,13 @@ namespace Ezrie.TenantService.Permissions;
 
 public class TenantServicePermissionDefinitionProvider : PermissionDefinitionProvider
 {
-    public override void Define(IPermissionDefinitionContext context)
-    {
-        var myGroup = context.AddGroup(TenantServicePermissions.GroupName, L("Permission:TenantService"));
-    }
+	public override void Define(IPermissionDefinitionContext context)
+	{
+		var myGroup = context.AddGroup(TenantServicePermissions.GroupName, L("Permission:TenantService"));
+	}
 
-    private static LocalizableString L(String name)
-    {
-        return LocalizableString.Create<TenantServiceResource>(name);
-    }
+	private static LocalizableString L(String name)
+	{
+		return LocalizableString.Create<TenantServiceResource>(name);
+	}
 }

@@ -1,0 +1,379 @@
+/* ================================================
+--> Elements carousel style
+================================================== */
+
+.carousel-item {
+	height: 300px;
+	@include tablet {
+		height: 350px;
+	}
+	@include desktops {
+		height: 400px;
+	}
+	&:hover {
+		.carousel-control {
+			opacity: 0;
+			visibility: hidden;
+		}
+	}
+}
+.carousel-item img {
+	width: 100%;
+	height: 100%;
+	@include tablet {
+		height: auto;
+	}
+}
+
+//Carousel indicator Style ===========================
+.carousel-caption {
+	position: absolute;
+	right: unset;
+	bottom: auto;
+	left: 5%;
+	z-index: 10;
+	padding: 0px;
+	text-align: left; 
+	top: 50%;
+	transform: translateY(-50%);
+	&.text-center {
+		width: 100%;
+		top: 50%;
+		left: 50%;
+		@include transform(translate(-50%,-50%))
+	}
+	h1 {
+		font-size: 25px;
+		font-weight: 700;
+		font-style: italic;
+		color: $white-color;
+		line-height: 35px;
+		@include tablet {
+			font-size: 35px;
+			line-height: 55px;
+		}
+		@include desktops {
+			font-size: 40px;
+			line-height: 55px;
+		}
+	}
+	p {
+		font-size: 14px;
+		color: $white-color;
+		padding: 20px 0 25px;
+		line-height: 24px;
+		@include tablet {
+			font-size: 16px;
+			line-height: 26px;
+			padding: 25px 0 30px;
+		}
+		@include desktops {
+			padding: 35px 0 40px;
+		}
+	}
+	.btn {
+		height: 35px;
+		line-height: 35px;
+	}
+}
+.b-carousel-v1 {
+	.carousel-indicators {
+		li {
+			max-width: 20px;
+			height: 20px;
+			border: 2px solid rgba(255,255,255,0.7);
+			border-radius: 50%;
+			background: transparent;
+			position: relative;
+			&.active {
+				background-color: $primary-color;
+				border: 2px solid $primary-color;
+				&:before {
+					position: absolute;
+					top: 6px;
+					left: 6px;
+					display: inline-block;
+					content: "";
+					background: white;
+					width: 8px;
+					height: 8px;
+					border-radius: 50%;
+				}
+			}
+		}
+		&.right_indicators {
+			right: 0;
+			bottom: auto;
+			left: auto;
+			padding-left: 0;
+			margin-right: 5%;
+			margin-left: 0;
+			list-style: none;
+			flex-direction: column;
+			top: 50%;
+			transform: translateY(-50%);
+			li {
+				width: 20px;
+				height: 20px;
+				margin: 3px 0;
+			}
+		}
+	}
+	.carousel-control {
+		opacity: 0;
+		visibility: hidden;
+		span.icon-prev, span.icon-next {
+			position: absolute;
+			top: 50%;
+			border: 1px solid rgba(255, 255, 255,0.5);
+			width: 45px;
+			height: 45px;
+			transform: translateY(-50%);
+			background: rgba(255, 255, 255, 0.302);
+			text-align: center;
+			@include transition(all 0.3s ease);
+			z-index: 10;
+			.fa {
+				font-size: 30px;
+				color: $white-color;
+				line-height: 45px;
+			}
+			&:hover, &:focus {
+				background: $primary-color;
+				border-color: $primary-color;
+			}
+		}
+		.icon-prev {
+			left: 15px;
+		}
+		.icon-next {
+			right: 15px;
+		}
+	}
+}
+.carousel {
+	&:hover {
+		.carousel-control {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+// TESTIMONIAL Carousel =====================================
+.testimonial-carousel {
+	position: relative;
+	padding-bottom: 50px;
+	.carousel-indicators {
+		bottom: -30px;
+		left: -20px;
+		li {
+			border-color: $border-color;
+			&.active {
+				background-color: $primary-color;
+				border: 2px solid $primary-color;
+			}
+		}
+	}
+	p {
+		margin: 30px 5px;
+	}
+	h5 {
+		margin-bottom: 10px;
+	}
+	.carousel-item {
+		height: auto;
+	}
+}
+.client-img {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	overflow: hidden;
+}
+/*==============================================
+Carousel with Slick Styles 
+===============================================*/
+// slick arrow default style
+button.slick-arrow {
+	border: 2px solid $white-color;
+	width: 50px;
+	height: 50px;
+	z-index: 55;
+	@include tablet {
+		width: 40px;
+		height: 40px;
+	}
+	@include large-desktops {
+		width: 50px;
+		height: 50px;
+	}
+}
+.slick-prev:before {
+	display: inline-block;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	font: var(--fa-font-solid);
+	content: '\f060';
+}
+.slick-next:before {
+	display: inline-block;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	font: var(--fa-font-solid);
+	content: '\f061';
+}
+.slick-prev:before, .slick-next:before {
+	font-family: 'Font Awesome 6 Pro';
+	font-size: 14px;
+	line-height: 1;
+	opacity: 1;
+	color: white;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.slick-prev {
+	@include tablet {
+		left: 0px;
+	}
+}
+.slick-next {
+	@include tablet {
+		right: 0px;
+	}
+}
+// Slick arrow style two 
+.arrow-shade {
+	button.slick-arrow {
+		opacity: 0;
+		visibility: hidden;
+		border: 1px solid $white-color;
+		width: 50px;
+		height: 50px;
+		z-index: 55;
+		background: rgba(255, 255, 255, 0.302);
+		text-align: center;
+		@include transition(all 0.3s ease);
+		
+		.fa {
+			font-size: 30px;
+			color: $white-color;
+			line-height: 45px;
+		}
+		&:hover, &:focus {
+			background: $primary-color;
+			border-color: $primary-color;
+		}
+		&.slick-prev {
+			@include tablet {
+				left: 25px;
+			}
+		}
+		&.slick-next {
+			@include tablet {
+				right: 25px;
+			}
+		}
+	}
+	&:hover, &:focus {
+		button.slick-arrow {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+// Brand Carousel using slick ===================================
+.brand_carousel {
+	padding: 35px 0;
+
+	.slick-initialized {
+		.slick-slide {
+			align-items: center;
+			display: flex;
+			flex-direction: row;
+			height: 100px;
+			justify-content: center;
+		}
+	} 
+	.brand_img {
+		text-align: center;
+		@include tablet {
+			overflow: hidden;
+		}
+		img {
+			display: inline-block;
+			max-width: 100%;
+		}
+	}
+	.carousel_row {
+		.slick-prev {
+			@include tablet {
+				left: 25px;
+			}
+		}
+		.slick-next {
+			@include tablet {
+				right: 25px;
+			}
+		}
+	}
+	.slick-slider {
+		@include tablet {
+			padding: 0 50px;
+		}
+		@include desktops {
+			padding: 0 100px;
+		}
+	}
+}
+// image Carousel using slick ===================================
+.image_carousel {
+	.element_row {
+		margin: 0 -15px;
+		.image_single {
+			padding: 0 15px;
+		}
+	}
+}
+// Card carousel =================================
+.product-carousel {
+	.element_row {
+		margin: 0 -15px;
+		.card {
+			padding: 0 15px;
+			margin-bottom: 30px;
+		}
+	}
+	.slick-dots {
+		bottom: -30px;
+		li button {
+			border: 2px solid $border-color;
+		}
+	}
+}
+.slick-dots {
+	bottom: 35px;
+	li {
+		button {
+			border: 2px solid $white-color;
+			opacity: 0.7;
+			background: transparent;
+			border-radius: 50%;
+			&:before {
+				color: transparent;
+			}
+		}
+		&.slick-active {
+			button {
+				background-color: $primary-color;
+				border: none;
+				opacity: 1;
+				&:before {
+					opacity: 1;
+					font-size: 8px;
+					line-height: 22px;
+					color: $white-color;
+				}
+			}
+		}
+	}
+}

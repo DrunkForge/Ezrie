@@ -1,0 +1,52 @@
+/* ================================================
+--> Seperators
+================================================== */
+.seperator {
+	display: inline-block;
+	position: relative;
+	svg.seperator-icon {
+		width: 34px;
+		height: 39px;
+		fill: $primary-color;
+	}
+	&:before {
+		position: absolute;
+		content: '';
+		top: 19px;
+		left: -110px;
+		width: 100px;
+		border-bottom: 1px solid $primary-color;
+	}
+	&:after {
+		position: absolute;
+		content: '';
+		top: 19px;
+		right: -110px;
+		width: 100px;
+		border-bottom: 1px solid $primary-color;
+	}
+}
+p.devider {
+    position: relative;
+    border-top: 1px solid $border-color;
+    margin: 20px 0;
+    &.devider_medium {
+	    max-width: 50%;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	&.devider_dashed {
+	    border-top: 1px dashed $border-color;
+	}
+	&.devider_narrow {
+	    max-width: 10%;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	&.devider_thik {
+		border-width: 2px;
+	}
+	&.devider_primary {
+		border-color: $primary-color;
+	}
+}

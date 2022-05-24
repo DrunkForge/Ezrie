@@ -1,0 +1,21 @@
+@model AccordionItemBlock
+@{
+	var expanded = Model.Index == 0 ? "true" : "false";
+	var collapsed = Model.Index == 0 ? String.Empty : "collapsed";
+	var show = Model.Index == 0 ? "show" : String.Empty;
+	var htmlId = Model.HtmlId + "-heading";
+}
+<div class="card card-accordion @(Model.IconClass)">
+	<div class="card-header @(Model.HeaderClass)" role="tab" id="@htmlId">
+		<h6 class="mb-0">
+			<a data-toggle="collapse" data-target="#@(Model.HtmlId)" href="#@(Model.HtmlId)" aria-expanded="@(expanded)" aria-controls="@(Model.HtmlId)" class="@collapsed">
+				@Model.Title
+			</a>
+		</h6>
+	</div>
+	<div id="@(Model.HtmlId)" class="collapse @(show)" role="tabpanel" data-parent="#@(Model.ParentId)" aria-labelledby="@htmlId">
+		<div class="card-block">
+			@Html.Raw(Model.Body);
+		</div>
+	</div>
+</div>

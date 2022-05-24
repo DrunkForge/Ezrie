@@ -7,13 +7,13 @@ namespace Ezrie.RelationshipManagement.Blazor;
  */
 public class RelationshipManagementBundleContributor : IBundleContributor
 {
-    public void AddScripts(BundleContext context)
-    {
+	public void AddScripts(BundleContext context)
+	{
 
-    }
+	}
 
-    public void AddStyles(BundleContext context)
-    {
-        context.Add("main.css", true);
-    }
+	public void AddStyles(BundleContext context)
+	{
+		context.Add("main.css", true);
+	}
 }

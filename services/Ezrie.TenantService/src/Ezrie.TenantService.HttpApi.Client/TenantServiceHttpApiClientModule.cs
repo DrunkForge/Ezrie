@@ -7,22 +7,22 @@ using Volo.Abp.TenantManagement;
 namespace Ezrie.TenantService;
 
 [DependsOn(
-    typeof(TenantServiceApplicationContractsModule),
-    typeof(AbpHttpClientModule))]
+	typeof(TenantServiceApplicationContractsModule),
+	typeof(AbpHttpClientModule))]
 [DependsOn(typeof(AbpTenantManagementHttpApiClientModule))]
-    public class TenantServiceHttpApiClientModule : AbpModule
+public class TenantServiceHttpApiClientModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddHttpClientProxies(
-            typeof(TenantServiceApplicationContractsModule).Assembly,
-            TenantServiceRemoteServiceConsts.RemoteServiceName
-        );
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddHttpClientProxies(
+			typeof(TenantServiceApplicationContractsModule).Assembly,
+			TenantServiceRemoteServiceConsts.RemoteServiceName
+		);
 
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<TenantServiceHttpApiClientModule>();
-        });
+		Configure<AbpVirtualFileSystemOptions>(options =>
+		{
+			options.FileSets.AddEmbedded<TenantServiceHttpApiClientModule>();
+		});
 
-    }
+	}
 }

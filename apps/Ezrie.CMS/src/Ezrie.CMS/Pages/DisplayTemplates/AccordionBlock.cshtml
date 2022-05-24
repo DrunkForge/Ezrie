@@ -1,0 +1,10 @@
+@model AccordionBlock
+@if (Model.Items.Count > 0)
+{
+	<div id="@(Model.HtmlId())" role="tablist" aria-multiselectable="true">
+		@foreach (var panel in Model.Panels())
+		{
+			@Html.DisplayFor(m => panel, panel.GetType().Name)
+		}
+	</div>
+}

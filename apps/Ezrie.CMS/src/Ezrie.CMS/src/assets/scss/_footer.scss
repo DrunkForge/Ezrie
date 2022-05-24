@@ -1,0 +1,62 @@
+footer{
+  padding-top: 50px;
+  @include desktops {
+	padding-top: 55px;
+  }
+}
+/*======== Footer Classic version ========*/
+.footer {
+	p {
+		color: tint($white-color, 50%);
+        font-size: 14px;
+        line-height: 24px;
+        margin: 30px 0 40px;
+        @include tablet {
+            margin: 25px 0 35px;
+        }
+        @include desktops {
+            margin: 35px 0 45px;
+        }
+	}
+	.social-icons {
+		.btn-social-o {
+			background-color: transparent!important;
+			color: $white-color;
+			font-size: 14px;
+            @include tablet {
+                width: 30px;
+                height: 30px;
+            }
+            @include desktops {
+                width: 30px;
+                height: 30px;
+            }
+			&:hover {
+				color: $primary-color;
+			}
+		}
+	}
+}
+.copyright {
+	margin-top: 50px;
+	hr {
+		background-color: tint($white-color, 5%);
+        margin-top: 0px;
+        height: 1px;
+        margin-bottom: 0px;
+	}
+	p{
+		padding-bottom: 25px;
+		padding-top: 25px;
+		margin-bottom: 0;
+		margin-top: 0;
+		font-size: 12px;
+		line-height: 17px;
+		color: tint($white-color, 50%);
+		a {
+			&:hover {
+				color: $primary-color!important;
+			}
+		}
+	}
+}

@@ -1,0 +1,12 @@
+@model WindowBlock
+@{
+	var bgStyle = Model.Image.HasValue
+				? $"height: {Model.Height.Value}px; background-image:url({Url.Content(Model.Image)})"
+				: String.Empty;
+}
+
+<div class="window-block bg-image bg-fixed" style="position: relative; @bgStyle">
+	<div class="overlay-content">
+		@Html.Raw(Model)
+	</div>
+</div>

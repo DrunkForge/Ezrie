@@ -1,0 +1,29 @@
+/* ========== KIT_PROGRESSBAR ============ */
+.progress-holder {
+    margin-top: 50px;
+    .barWrapper {
+        .progressText {
+            font-size: 15px;
+            color: $title-color;
+        }
+    }
+    .progress {
+        margin-bottom: 25px;
+        margin-top: 10px;
+        overflow: visible;
+        background-color: $primary-bg;
+        .progress-bar {
+            position: relative;
+            &:after {
+                position: absolute;
+                content: '';
+                width: 1px;
+                height: 33px;
+                background-color: $primary-color;
+                top: -8px;
+                right: 0;
+                z-index: 55;
+            }
+        }
+    }
+}

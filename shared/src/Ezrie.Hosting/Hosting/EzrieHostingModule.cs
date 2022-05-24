@@ -37,7 +37,7 @@ public partial class EzrieHostingModule : AbpModule
 		ArgumentNullException.ThrowIfNull(context);
 
 		var redis = context.GetRedis();
-		
+
 		context.Services.AddSingleton<IDistributedLockProvider>(_ =>
 		{
 			var connection = ConnectionMultiplexer.Connect(redis.Configuration);

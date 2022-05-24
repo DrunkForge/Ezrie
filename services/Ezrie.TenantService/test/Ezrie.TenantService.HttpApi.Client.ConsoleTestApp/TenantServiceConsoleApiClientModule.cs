@@ -5,10 +5,10 @@ using Volo.Abp.Modularity;
 namespace Ezrie.TenantService;
 
 [DependsOn(
-    typeof(AbpAutofacModule),
-    typeof(TenantServiceHttpApiClientModule),
-    typeof(AbpHttpClientIdentityModelModule)
-    )]
+	typeof(AbpAutofacModule),
+	typeof(TenantServiceHttpApiClientModule),
+	typeof(AbpHttpClientIdentityModelModule)
+	)]
 public class TenantServiceConsoleApiClientModule : AbpModule
 {
 

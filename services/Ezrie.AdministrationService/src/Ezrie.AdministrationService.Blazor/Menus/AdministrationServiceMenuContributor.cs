@@ -35,9 +35,9 @@ public class AdministrationServiceMenuContributor : IMenuContributor
 
 		//Add main menu items.
 		context.Menu.AddItem(new ApplicationMenuItem(
-			name: AdministrationServiceMenus.Home, 
-			displayName: L["Menu:AdministrationService"], 
-			url: "/AdministrationService", 
+			name: AdministrationServiceMenus.Home,
+			displayName: L["Menu:AdministrationService"],
+			url: "/AdministrationService",
 			icon: "fa fa-globe"));
 
 		return Task.CompletedTask;

@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
+
+		<Title>CPCA</Title>
+		<Description>Canadian Professional Counsellors Association</Description>
+		<Authors>Doug Wilson</Authors>
+		<Company>Canadian Professional Counsellors Association</Company>
+		<Copyright>2021 Doug Wilson</Copyright>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="Flurl" Version="3.0.4" />
+		<PackageReference Include="Piranha" Version="10.0.4" />
+		<PackageReference Include="Piranha.AspNetCore" Version="10.0.4" />
+		<PackageReference Include="Piranha.AspNetCore.Identity.SQLServer" Version="10.0.4" />
+		<PackageReference Include="Piranha.AttributeBuilder" Version="10.0.4" />
+		<PackageReference Include="Piranha.Data.EF.SQLServer" Version="10.0.4" />
+		<PackageReference Include="Piranha.ImageSharp" Version="10.0.4" />
+		<PackageReference Include="Piranha.Local.FileStorage" Version="10.0.4" />
+		<PackageReference Include="Piranha.Manager" Version="10.0.4" />
+		<PackageReference Include="Piranha.Manager.LocalAuth" Version="10.0.4" />
+		<PackageReference Include="Piranha.Manager.TinyMCE" Version="10.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="GitVersion.MsBuild" Version="5.10.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CPCA.Abstractions\CPCA.Abstractions.csproj" />
+		<ProjectReference Include="..\CPCA.Application.Handlers\CPCA.Application.Handlers.csproj" />
+		<ProjectReference Include="..\CPCA.Presentation.Shared\CPCA.Presentation.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Script Remove="node_modules" />
+	</ItemGroup>
+	
+</Project>

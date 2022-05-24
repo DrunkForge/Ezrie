@@ -1,0 +1,24 @@
+// "Font Awesome 6 Pro"
+$fa-font-path: "../webfonts";
+@import '../../../node_modules/@fortawesome/fontawesome-pro/scss/fontawesome';
+@import '../../../node_modules/@fortawesome/fontawesome-pro/scss/solid';
+@import '../../../node_modules/@fortawesome/fontawesome-pro/scss/brands';
+
+@import 'partials/mixins';
+@import 'partials/variables';
+@import 'partials/media-query';
+@import 'partials/color-classes';
+@import 'reset';
+@import 'common';
+@import 'elements/elements';
+@import '../blocks/blocks';
+@import 'directory';
+@import 'standard';
+@import 'footer';
+@import 'sections';
+@import 'about-us';
+@import 'service';
+@import 'projects';
+@import 'team';
+@import 'blog';
+@import 'body-layout';

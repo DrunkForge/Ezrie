@@ -17,11 +17,12 @@
 namespace Ezrie.Configuration;
 public class RemoteServices
 {
-	public RemoteService Default { get; set; }
-	public RemoteService AdministrationService { get; set; }
+	public RemoteService Default { get; set; } = new();
+	public RemoteService? AdministrationService { get; set; }
 }
 
 public class RemoteService
 {
-	public String BaseUrl { get; set; }
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "System.Uri doesn't play nicely with IConfiguration")]
+	public String? BaseUrl { get; set; }
 }

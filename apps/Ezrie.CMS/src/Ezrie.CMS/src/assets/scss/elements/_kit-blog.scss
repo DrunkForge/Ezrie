@@ -1,0 +1,175 @@
+.media.blog-media {
+    margin-top: 30px;
+    position: relative;
+    display: block;
+    @include desktops {
+        display: table;
+    }
+    .circle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: rgba(0,0,0,0.5);
+        white-space: nowrap;
+        position: absolute;
+        padding: 0px;
+        top: 20px;
+        left: 20px;
+        text-align: center;
+        box-shadow: none;
+        transform: translateX(0);
+        color: $white-color;
+        -webkit-transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease;
+        
+        .day {
+            color: $white-color;
+            transition: color 0.25s ease;
+            font-weight: 500;
+            font-size: 28px;
+            line-height: 1;
+            margin-top: 12px;
+        }
+        .month {
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+    }
+    > a {
+        position: relative;
+        display: block;
+        @include desktops {
+            display: table-cell;
+            vertical-align: top;
+            min-width: 200px;
+        }
+        @include large-desktops {
+            min-width: 230px;
+        }
+        &:before {
+            position: absolute;
+            content: '';
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            opacity: 0;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            -webkit-transition: -webkit-transform 0.3s ease, opacity 0.3s;
+            transition: transform 0.3s ease, opacity 0.3s;
+            background: $primary-bg;
+        }
+        img {
+            width: 100%;
+        }
+    }
+    &:hover {
+        > a {
+            &:before {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .circle {
+            background-color: rgba(255,255,255,0.9);
+            .day, .month {
+                color: $title-color;
+            }
+        }
+        .media-body {
+            h5 {
+                color: $primary-color;
+            }
+            a.post-link {
+                color: $primary-color;
+                text-decoration: underline;
+            }
+        }
+    }
+    .media-body {
+        border: 1px solid #efeff3;
+        padding: 30px 30px 10px;
+        font-size: 14px;
+        background: $white-color;
+        border-top: none;
+        
+        @include desktops {
+            padding: 15px 20px 10px;
+            border-top: 1px solid #efeff3;
+            border-left: none;
+            display: table-cell;
+            vertical-align: top;
+            
+        }
+        @include large-desktops {
+            padding: 30px 20px 10px;
+        }
+        h5 {
+            @include transition(color 0.3s ease);
+            margin-bottom: 15px;
+            @include desktops {
+                font-size: 15px;
+            }
+            @include large-desktops {
+                margin-bottom: 15px;
+                font-size: 18px;
+            }
+        }
+        a.post-link {
+            display: block;
+            color: $title-color;
+            font-size: 11px;
+            padding: 23px 0;
+            text-transform: uppercase;
+            font-weight: 400;
+            @include desktops {
+                padding: 7px 0;
+            }
+            @include large-desktops {
+                padding: 23px 0;
+            }
+        }
+        ul {
+            position: relative;
+            padding: 10px 0 0;
+            li {
+                display: inline-block;
+                width: 49%;
+                position: relative;
+                &:before {
+                    position: absolute;
+                    content: '';
+                    top: 5px;
+                    left: 0;
+                    width: 1px;
+                    height: 14px;
+                    background: #eeeef2;
+                }
+                &:first-child:before {
+                    visibility: hidden;
+                }
+            }
+            &:before {
+                position: absolute;
+                content: '';
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background: #eeeef2;
+            }
+        }
+    }
+}
+.post-single {
+    &.media {
+        .media-body {
+            border-left: 1px solid #efeff3!important;
+            border-top: 0px;
+        }
+    }
+}
+.blog-content {
+  font-weight: 400;
+}

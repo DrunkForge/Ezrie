@@ -1,13 +1,13 @@
-﻿using Volo.Abp.Reflection;
+using Volo.Abp.Reflection;
 
 namespace Ezrie.TenantService.Permissions;
 
-public class TenantServicePermissions
+public static class TenantServicePermissions
 {
-    public const String GroupName = "TenantService";
+	public const String GroupName = "TenantService";
 
-    public static String[] GetAll()
-    {
-        return ReflectionHelper.GetPublicConstantsRecursively(typeof(TenantServicePermissions));
-    }
+	public static String[] GetAll()
+	{
+		return ReflectionHelper.GetPublicConstantsRecursively(typeof(TenantServicePermissions));
+	}
 }

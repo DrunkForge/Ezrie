@@ -15,42 +15,42 @@ using Volo.Abp.VirtualFileSystem;
 namespace Ezrie.RelationshipManagement;
 
 [DependsOn(
-    typeof(AbpAuditLoggingDomainSharedModule),
-    typeof(AbpBackgroundJobsDomainSharedModule),
-    typeof(AbpFeatureManagementDomainSharedModule),
-    typeof(AbpIdentityDomainSharedModule),
-    typeof(AbpPermissionManagementDomainSharedModule),
-    typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)
-    )]
+	typeof(AbpAuditLoggingDomainSharedModule),
+	typeof(AbpBackgroundJobsDomainSharedModule),
+	typeof(AbpFeatureManagementDomainSharedModule),
+	typeof(AbpIdentityDomainSharedModule),
+	typeof(AbpPermissionManagementDomainSharedModule),
+	typeof(AbpSettingManagementDomainSharedModule),
+	typeof(AbpTenantManagementDomainSharedModule)
+	)]
 public class RelationshipManagementDomainSharedModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        RelationshipManagementGlobalFeatureConfigurator.Configure();
-        RelationshipManagementModuleExtensionConfigurator.Configure();
-    }
+	public override void PreConfigureServices(ServiceConfigurationContext context)
+	{
+		RelationshipManagementGlobalFeatureConfigurator.Configure();
+		RelationshipManagementModuleExtensionConfigurator.Configure();
+	}
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<RelationshipManagementDomainSharedModule>();
-        });
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		Configure<AbpVirtualFileSystemOptions>(options =>
+		{
+			options.FileSets.AddEmbedded<RelationshipManagementDomainSharedModule>();
+		});
 
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Add<RelationshipManagementResource>("en")
-                .AddBaseTypes(typeof(AbpValidationResource))
-                .AddVirtualJson("/Localization/RelationshipManagement");
+		Configure<AbpLocalizationOptions>(options =>
+		{
+			options.Resources
+				.Add<RelationshipManagementResource>("en")
+				.AddBaseTypes(typeof(AbpValidationResource))
+				.AddVirtualJson("/Localization/RelationshipManagement");
 
-            options.DefaultResourceType = typeof(RelationshipManagementResource);
-        });
+			options.DefaultResourceType = typeof(RelationshipManagementResource);
+		});
 
-        Configure<AbpExceptionLocalizationOptions>(options =>
-        {
-            options.MapCodeNamespace("RelationshipManagement", typeof(RelationshipManagementResource));
-        });
-    }
+		Configure<AbpExceptionLocalizationOptions>(options =>
+		{
+			options.MapCodeNamespace("RelationshipManagement", typeof(RelationshipManagementResource));
+		});
+	}
 }

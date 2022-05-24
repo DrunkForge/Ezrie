@@ -20,7 +20,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Ezrie.AdministrationService.EntityFrameworkCore;
 
 [ConnectionStringName(AdministrationServiceDbProperties.ConnectionStringName)]
-public interface IAdministrationServiceDbContext : IEfCoreDbContext 
+public interface IAdministrationServiceDbContext : IEfCoreDbContext
 {
 	/* Add DbSet for each Aggregate Root here. Example:
 	 * DbSet<Question> Questions { get; }

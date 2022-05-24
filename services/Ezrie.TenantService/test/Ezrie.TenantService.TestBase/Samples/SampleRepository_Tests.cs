@@ -1,4 +1,4 @@
-﻿using Volo.Abp.Modularity;
+using Volo.Abp.Modularity;
 using Xunit;
 
 namespace Ezrie.TenantService.Samples;
@@ -8,18 +8,15 @@ namespace Ezrie.TenantService.Samples;
  * In this way, both database providers are tests with the same set tests.
  */
 public abstract class SampleRepository_Tests<TStartupModule> : TenantServiceTestBase<TStartupModule>
-    where TStartupModule : IAbpModule
+	where TStartupModule : IAbpModule
 {
-    //private readonly ISampleRepository _sampleRepository;
+	//private readonly ISampleRepository _sampleRepository;
 
-    protected SampleRepository_Tests()
-    {
-        //_sampleRepository = GetRequiredService<ISampleRepository>();
-    }
+	protected SampleRepository_Tests()
+	{
+		//_sampleRepository = GetRequiredService<ISampleRepository>();
+	}
 
-    [Fact]
-    public async Task Method1Async()
-    {
-
-    }
+	[Fact]
+	public Task Method1Async() => Task.CompletedTask;
 }

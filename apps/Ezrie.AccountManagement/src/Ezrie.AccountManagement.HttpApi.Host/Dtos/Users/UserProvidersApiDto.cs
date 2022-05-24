@@ -18,6 +18,6 @@ namespace Ezrie.AccountManagement.Dtos.Users;
 
 public class UserProvidersApiDto<TKey>
 {
-	public List<UserProviderApiDto<TKey>> Providers { get; set; }= new List<UserProviderApiDto<TKey>>();
+	public List<UserProviderApiDto<TKey>> Providers { get; set; } = new List<UserProviderApiDto<TKey>>();
 }
 

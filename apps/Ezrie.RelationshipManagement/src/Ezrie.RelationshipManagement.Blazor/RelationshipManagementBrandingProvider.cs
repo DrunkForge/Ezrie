@@ -6,5 +6,5 @@ namespace Ezrie.RelationshipManagement.Blazor;
 [Dependency(ReplaceServices = true)]
 public class RelationshipManagementBrandingProvider : DefaultBrandingProvider
 {
-    public override string AppName => "RelationshipManagement";
+	public override String AppName => "RelationshipManagement";
 }

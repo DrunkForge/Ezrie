@@ -11,28 +11,28 @@ using Volo.Abp.VirtualFileSystem;
 namespace Ezrie.RelationshipManagement;
 
 [DependsOn(
-    typeof(RelationshipManagementApplicationContractsModule),
-    typeof(AbpAccountHttpApiClientModule),
-    typeof(AbpIdentityHttpApiClientModule),
-    typeof(AbpPermissionManagementHttpApiClientModule),
-    typeof(AbpTenantManagementHttpApiClientModule),
-    typeof(AbpFeatureManagementHttpApiClientModule),
-    typeof(AbpSettingManagementHttpApiClientModule)
+	typeof(RelationshipManagementApplicationContractsModule),
+	typeof(AbpAccountHttpApiClientModule),
+	typeof(AbpIdentityHttpApiClientModule),
+	typeof(AbpPermissionManagementHttpApiClientModule),
+	typeof(AbpTenantManagementHttpApiClientModule),
+	typeof(AbpFeatureManagementHttpApiClientModule),
+	typeof(AbpSettingManagementHttpApiClientModule)
 )]
 public class RelationshipManagementHttpApiClientModule : AbpModule
 {
-    public const string RemoteServiceName = "Default";
+	public const String RemoteServiceName = "Default";
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddHttpClientProxies(
-            typeof(RelationshipManagementApplicationContractsModule).Assembly,
-            RemoteServiceName
-        );
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddHttpClientProxies(
+			typeof(RelationshipManagementApplicationContractsModule).Assembly,
+			RemoteServiceName
+		);
 
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<RelationshipManagementHttpApiClientModule>();
-        });
-    }
+		Configure<AbpVirtualFileSystemOptions>(options =>
+		{
+			options.FileSets.AddEmbedded<RelationshipManagementHttpApiClientModule>();
+		});
+	}
 }

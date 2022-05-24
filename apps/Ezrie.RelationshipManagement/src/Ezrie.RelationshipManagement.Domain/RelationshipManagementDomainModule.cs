@@ -15,27 +15,27 @@ using Volo.Abp.TenantManagement;
 namespace Ezrie.RelationshipManagement;
 
 [DependsOn(
-    typeof(RelationshipManagementDomainSharedModule),
-    typeof(AbpAuditLoggingDomainModule),
-    typeof(AbpBackgroundJobsDomainModule),
-    typeof(AbpFeatureManagementDomainModule),
-    typeof(AbpIdentityDomainModule),
-    typeof(AbpPermissionManagementDomainIdentityModule),
-    typeof(AbpSettingManagementDomainModule),
-    typeof(AbpTenantManagementDomainModule),
-    typeof(AbpEmailingModule)
+	typeof(RelationshipManagementDomainSharedModule),
+	typeof(AbpAuditLoggingDomainModule),
+	typeof(AbpBackgroundJobsDomainModule),
+	typeof(AbpFeatureManagementDomainModule),
+	typeof(AbpIdentityDomainModule),
+	typeof(AbpPermissionManagementDomainIdentityModule),
+	typeof(AbpSettingManagementDomainModule),
+	typeof(AbpTenantManagementDomainModule),
+	typeof(AbpEmailingModule)
 )]
 public class RelationshipManagementDomainModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpMultiTenancyOptions>(options =>
-        {
-            options.IsEnabled = MultiTenancyConsts.IsEnabled;
-        });
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		Configure<AbpMultiTenancyOptions>(options =>
+		{
+			options.IsEnabled = MultiTenancyConsts.IsEnabled;
+		});
 
 #if DEBUG
-        context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
+		context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
 #endif
-    }
+	}
 }

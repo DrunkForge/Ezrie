@@ -163,7 +163,7 @@ public class AccountController<TUser, TKey> : Controller
 					}
 
 					// user might have clicked on a malicious link - should be logged
-					throw new Exception("invalid return URL");
+					throw new AuthenticationException("Invalid return URL");
 				}
 
 				if (result.RequiresTwoFactor)
@@ -275,7 +275,7 @@ public class AccountController<TUser, TKey> : Controller
 	{
 		if (ModelState.IsValid)
 		{
-			TUser user = null;
+			TUser? user = null;
 			switch (model.Policy)
 			{
 				case LoginResolutionPolicy.Email:
@@ -286,7 +286,7 @@ public class AccountController<TUser, TKey> : Controller
 					catch (Exception ex)
 					{
 						// in case of multiple users with the same email this method would throw and reveal that the email is registered
-						_logger.LogError("Error retrieving user by email ({0}) for forgot password functionality: {1}", model.Email, ex.Message);
+						_logger.LogError(ex, "Error retrieving user by email {Email} for forgot password functionality.", model.Email);
 						user = null;
 					}
 
@@ -298,7 +298,7 @@ public class AccountController<TUser, TKey> : Controller
 					}
 					catch (Exception ex)
 					{
-						_logger.LogError("Error retrieving user by userName ({0}) for forgot password functionality: {1}", model.Username, ex.Message);
+						_logger.LogError(ex, "Error retrieving user by userName {Username} for forgot password functionality.", model.Username);
 						user = null;
 					}
 
@@ -314,6 +314,8 @@ public class AccountController<TUser, TKey> : Controller
 			var code = await _userManager.GeneratePasswordResetTokenAsync(user);
 			code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 			var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, HttpContext.Request.Scheme);
+			if (callbackUrl == null)
+				throw new IdentityException("Failed to generate the Reset Password Caallback URL.");
 
 			await _emailSender.SendEmailAsync(user.Email, _localizer["ResetPasswordTitle"], _localizer["ResetPasswordBody", HtmlEncoder.Default.Encode(callbackUrl)]);
 
@@ -669,6 +671,7 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
+	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri does not place nice with model binding.")]
 	public async Task<IActionResult> RegisterWithoutUsername(RegisterWithoutUsernameViewModel model, String? returnUrl = null)
 	{
 		var registerModel = new RegisterViewModel

@@ -13,25 +13,25 @@ namespace Ezrie.TenantService;
 [DependsOn(typeof(AbpAspNetCoreComponentsWebThemingModule))]
 [DependsOn(typeof(AbpAutoMapperModule))]
 [DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
-    public class TenantServiceBlazorModule : AbpModule
+public class TenantServiceBlazorModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddAutoMapperObjectMapper<TenantServiceBlazorModule>();
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddAutoMapperObjectMapper<TenantServiceBlazorModule>();
 
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddProfile<TenantServiceBlazorAutoMapperProfile>(validate: true);
-        });
+		Configure<AbpAutoMapperOptions>(options =>
+		{
+			options.AddProfile<TenantServiceBlazorAutoMapperProfile>(validate: true);
+		});
 
-        Configure<AbpNavigationOptions>(options =>
-        {
-            options.MenuContributors.Add(new TenantServiceMenuContributor());
-        });
+		Configure<AbpNavigationOptions>(options =>
+		{
+			options.MenuContributors.Add(new TenantServiceMenuContributor());
+		});
 
-        Configure<AbpRouterOptions>(options =>
-        {
-            options.AdditionalAssemblies.Add(typeof(TenantServiceBlazorModule).Assembly);
-        });
-    }
+		Configure<AbpRouterOptions>(options =>
+		{
+			options.AdditionalAssemblies.Add(typeof(TenantServiceBlazorModule).Assembly);
+		});
+	}
 }

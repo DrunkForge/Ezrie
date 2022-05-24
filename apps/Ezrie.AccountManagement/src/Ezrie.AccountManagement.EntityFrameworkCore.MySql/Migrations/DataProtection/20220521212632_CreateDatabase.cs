@@ -5,35 +5,35 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.DataProtection
 {
-    public partial class CreateDatabase : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
+	public partial class CreateDatabase : Migration
+	{
+		protected override void Up(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.AlterDatabase()
+				.Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateTable(
-                name: "DataProtectionKeys",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FriendlyName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Xml = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DataProtectionKeys", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-        }
+			migrationBuilder.CreateTable(
+				name: "DataProtectionKeys",
+				columns: table => new
+				{
+					Id = table.Column<Int32>(type: "int", nullable: false)
+						.Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+					FriendlyName = table.Column<String>(type: "longtext", nullable: true)
+						.Annotation("MySql:CharSet", "utf8mb4"),
+					Xml = table.Column<String>(type: "longtext", nullable: true)
+						.Annotation("MySql:CharSet", "utf8mb4")
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_DataProtectionKeys", x => x.Id);
+				})
+				.Annotation("MySql:CharSet", "utf8mb4");
+		}
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "DataProtectionKeys");
-        }
-    }
+		protected override void Down(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.DropTable(
+				name: "DataProtectionKeys");
+		}
+	}
 }

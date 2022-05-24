@@ -29,7 +29,7 @@ public class ManageController<TUser, TKey> : Controller
 	private const String AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
 	[TempData]
-	public String StatusMessage { get; set; }
+	public String StatusMessage { get; set; } = String.Empty;
 
 	public ManageController(UserManager<TUser> userManager, SignInManager<TUser> signInManager, IEmailSender emailSender, ILogger<ManageController<TUser, TKey>> logger, IGenericControllerLocalizer<ManageController<TUser, TKey>> localizer, UrlEncoder urlEncoder)
 	{
@@ -480,7 +480,7 @@ public class ManageController<TUser, TKey> : Controller
 
 		if (!user.TwoFactorEnabled)
 		{
-			throw new ApplicationException(_localizer["ErrorDisable2FA", user.Id]);
+			throw new IdentityException(_localizer["ErrorDisable2FA", user.Id]);
 		}
 
 		return View(nameof(Disable2fa));
@@ -499,7 +499,7 @@ public class ManageController<TUser, TKey> : Controller
 		var disable2faResult = await _userManager.SetTwoFactorEnabledAsync(user, false);
 		if (!disable2faResult.Succeeded)
 		{
-			throw new ApplicationException(_localizer["ErrorDisable2FA", user.Id]);
+			throw new IdentityException(_localizer["ErrorDisable2FA", user.Id]);
 		}
 
 		_logger.LogInformation(_localizer["SuccessDisabled2FA", user.Id]);
@@ -602,7 +602,7 @@ public class ManageController<TUser, TKey> : Controller
 
 		if (!user.TwoFactorEnabled)
 		{
-			throw new ApplicationException(_localizer["Error2FANotEnabled", user.Id]);
+			throw new IdentityException(_localizer["Error2FANotEnabled", user.Id]);
 		}
 
 		return View(nameof(GenerateRecoveryCodes));

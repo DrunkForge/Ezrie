@@ -77,7 +77,7 @@ internal static class Program
 			.ConfigureAppConfiguration((hostContext, configApp) =>
 			{
 				var configurationRoot = configApp.Build();
-				
+
 				configApp.AddJsonFile("serilog.json", optional: true, reloadOnChange: true);
 				configApp.AddJsonFile("identitydata.json", optional: true, reloadOnChange: true);
 				configApp.AddJsonFile("identityserverdata.json", optional: true, reloadOnChange: true);
@@ -97,7 +97,7 @@ internal static class Program
 
 				configApp.AddEnvironmentVariables();
 				configApp.AddCommandLine(args);
-			 })
+			})
 			.ConfigureWebHostDefaults(webBuilder =>
 			{
 				webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);

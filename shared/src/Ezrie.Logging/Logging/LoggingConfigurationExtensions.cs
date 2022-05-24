@@ -71,7 +71,7 @@ public static class LoggingConfigurationExtensions
 		AddChildLogger(services, Log.Logger);
 
 		Log.Logger.Write(LogEventLevel.Information, "Starting: {ApplicationName} in {EnvironmentName}",
-			applicationName, RuntimeEnvironment.GetEnvironmentName());
+			applicationName, HostEnvironment.EnvironmentName);
 		Log.Logger.Debug("Debug Logging Enabled");
 		Log.Logger.Verbose("Verbose Logging Enabled");
 	}

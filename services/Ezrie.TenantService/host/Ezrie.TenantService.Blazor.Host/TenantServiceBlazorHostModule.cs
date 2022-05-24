@@ -83,7 +83,7 @@ public class TenantServiceBlazorHostModule : AbpModule
 			var apiConfiguration = builder.Configuration.GetAppConfiguration();
 			options.ProviderOptions.Authority = apiConfiguration.IdentityServerBaseUrl;
 			options.ProviderOptions.ClientId = apiConfiguration.ClientId;
-			foreach(var scope in apiConfiguration.Scopes)
+			foreach (var scope in apiConfiguration.Scopes)
 				options.ProviderOptions.DefaultScopes.Add(scope);
 			options.ProviderOptions.ResponseType = apiConfiguration.OidcResponseType;
 			options.ProviderOptions.PostLogoutRedirectUri = apiConfiguration.PostLogoutRedirectUri;

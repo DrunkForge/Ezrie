@@ -1,0 +1,45 @@
+//Eva's Palette
+$cpca-red: #d4202780;
+$cpca-gold: #fdbc58;
+$cpca-granite: #202020;
+$cpca-black: #000000;
+$cpca-blue: #34568b;
+$cpca-green: #288383;
+
+// VARIABLES
+$primary-color: $cpca-gold;
+$primary-bg: tint($cpca-blue, 50%);
+$white-color: #ffffff;
+$black-color: #000000;
+$text-color: #000000;
+$title-color: #222222;
+$title-color-dk: #1d2025;
+$border-color: #d6dbe2;
+$light-gray: #cccccc;
+$dark-navy : #071e33;
+$faded: #303030;
+
+$success: #49c32c;
+$bg-success: #49c32c;
+$info: #439fdb;
+$bg-info: #439fdb;
+$warning: #eabf38;
+$bg-warning: #eabf38;
+$danger: #f55c5d;
+$bg-danger: #f55c5d;
+$inverse: #323f41;
+
+$border-radius: .375rem !default;
+$border-radius-xl: 1rem !default;
+$border-radius-lg: .75rem !default;
+$border-radius-md: .5rem !default;
+$border-radius-sm: .25rem !default;
+
+// FUNCTIONS
+@function tint($primary-color, $percentage) {
+	@return mix($primary-color, transparent, $percentage);
+}
+
+@function shade($color, $percentage) {
+	@return mix(black, $color, $percentage);
+}

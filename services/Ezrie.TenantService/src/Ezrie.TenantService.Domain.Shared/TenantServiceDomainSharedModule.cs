@@ -12,26 +12,26 @@ namespace Ezrie.TenantService;
 [DependsOn(typeof(EzrieDomainSharedModule))]
 [DependsOn(typeof(AbpValidationModule))]
 [DependsOn(typeof(AbpTenantManagementDomainSharedModule))]
-    public class TenantServiceDomainSharedModule : AbpModule
+public class TenantServiceDomainSharedModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<TenantServiceDomainSharedModule>();
-        });
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		Configure<AbpVirtualFileSystemOptions>(options =>
+		{
+			options.FileSets.AddEmbedded<TenantServiceDomainSharedModule>();
+		});
 
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Add<TenantServiceResource>("en")
-                .AddBaseTypes(typeof(AbpValidationResource))
-                .AddVirtualJson("/Localization/TenantService");
-        });
+		Configure<AbpLocalizationOptions>(options =>
+		{
+			options.Resources
+				.Add<TenantServiceResource>("en")
+				.AddBaseTypes(typeof(AbpValidationResource))
+				.AddVirtualJson("/Localization/TenantService");
+		});
 
-        Configure<AbpExceptionLocalizationOptions>(options =>
-        {
-            options.MapCodeNamespace("TenantService", typeof(TenantServiceResource));
-        });
-    }
+		Configure<AbpExceptionLocalizationOptions>(options =>
+		{
+			options.MapCodeNamespace("TenantService", typeof(TenantServiceResource));
+		});
+	}
 }

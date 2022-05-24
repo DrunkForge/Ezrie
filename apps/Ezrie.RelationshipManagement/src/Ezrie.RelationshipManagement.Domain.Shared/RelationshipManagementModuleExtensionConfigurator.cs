@@ -7,20 +7,20 @@ namespace Ezrie.RelationshipManagement;
 
 public static class RelationshipManagementModuleExtensionConfigurator
 {
-    private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
+	private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
 
-    public static void Configure()
-    {
-        OneTimeRunner.Run(() =>
-        {
-            ConfigureExistingProperties();
-            ConfigureExtraProperties();
-        });
-    }
+	public static void Configure()
+	{
+		OneTimeRunner.Run(() =>
+		{
+			ConfigureExistingProperties();
+			ConfigureExtraProperties();
+		});
+	}
 
-    private static void ConfigureExistingProperties()
-    {
-        /* You can change max lengths for properties of the
+	private static void ConfigureExistingProperties()
+	{
+		/* You can change max lengths for properties of the
          * entities defined in the modules used by your application.
          *
          * Example: Change user and role name max lengths
@@ -33,11 +33,11 @@ public static class RelationshipManagementModuleExtensionConfigurator
          *
          * If you are using EF Core, you will need to run the add-migration command after your changes.
          */
-    }
+	}
 
-    private static void ConfigureExtraProperties()
-    {
-        /* You can configure extra properties for the
+	private static void ConfigureExtraProperties()
+	{
+		/* You can configure extra properties for the
          * entities defined in the modules used by your application.
          *
          * This class can be used to define these extra properties
@@ -67,5 +67,5 @@ public static class RelationshipManagementModuleExtensionConfigurator
          * See the documentation for more:
          * https://docs.abp.io/en/abp/latest/Module-Entity-Extensions
          */
-    }
+	}
 }

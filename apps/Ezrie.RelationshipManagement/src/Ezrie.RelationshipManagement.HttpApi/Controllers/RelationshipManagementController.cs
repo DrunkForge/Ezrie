@@ -7,8 +7,8 @@ namespace Ezrie.RelationshipManagement.Controllers;
  */
 public abstract class RelationshipManagementController : AbpControllerBase
 {
-    protected RelationshipManagementController()
-    {
-        LocalizationResource = typeof(RelationshipManagementResource);
-    }
+	protected RelationshipManagementController()
+	{
+		LocalizationResource = typeof(RelationshipManagementResource);
+	}
 }

@@ -3,9 +3,9 @@
 namespace Ezrie.RelationshipManagement;
 
 [DependsOn(
-    typeof(RelationshipManagementApplicationModule),
-    typeof(RelationshipManagementDomainTestModule)
-    )]
+	typeof(RelationshipManagementApplicationModule),
+	typeof(RelationshipManagementDomainTestModule)
+	)]
 public class RelationshipManagementApplicationTestModule : AbpModule
 {
 

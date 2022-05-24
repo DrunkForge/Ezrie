@@ -1,10 +1,10 @@
-﻿namespace Ezrie.RelationshipManagement.Blazor.Menus;
+namespace Ezrie.RelationshipManagement.Blazor.Menus;
 
-public class RelationshipManagementMenus
+public static class RelationshipManagementMenus
 {
-    private const string Prefix = "RelationshipManagement";
-    public const string Home = Prefix + ".Home";
+	private const String Prefix = "RelationshipManagement";
+	public const String Home = Prefix + ".Home";
 
-    //Add your menu items here...
+	//Add your menu items here...
 
 }

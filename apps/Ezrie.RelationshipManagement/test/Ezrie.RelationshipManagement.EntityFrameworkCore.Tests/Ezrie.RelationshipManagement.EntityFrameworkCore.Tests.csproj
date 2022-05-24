@@ -12,6 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\test\Ezrie.TestBase.EntityFrameworkCore\Ezrie.TestBase.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.RelationshipManagement.EntityFrameworkCore\Ezrie.RelationshipManagement.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.RelationshipManagement.TestBase\Ezrie.RelationshipManagement.TestBase.csproj" />
 	</ItemGroup>

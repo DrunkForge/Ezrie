@@ -33,7 +33,7 @@ public static class SwaggerConfigurationHelper
 			scopes = new();
 		}
 
-		foreach(var scope in apiConfiguration.Scopes)
+		foreach (var scope in apiConfiguration.Scopes)
 		{
 			scopes.Add(scope, scope);
 		}

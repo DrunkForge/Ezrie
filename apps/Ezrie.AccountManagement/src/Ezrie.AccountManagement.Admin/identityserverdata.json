@@ -1,10 +1,11 @@
 {
 	"IdentityServerData": {
+
 		"IdentityResources": [
 			{
-				"Name": "roles",
+				"Name": "role",
 				"Enabled": true,
-				"DisplayName": "Roles",
+				"DisplayName": "Role",
 				"UserClaims": [
 					"role"
 				]
@@ -59,6 +60,15 @@
 				"UserClaims": [
 					"address"
 				]
+			},
+			{
+				"Name": "phone",
+				"Enabled": true,
+				"DisplayName": "Your address",
+				"Emphasize": true,
+				"UserClaims": [
+					"phone"
+				]
 			}
 		],
 		"ApiResources": [
@@ -88,6 +98,13 @@
 				"DisplayName": "Ezrie Tenant Service API",
 				"Scopes": [
 					"ezrie_tenant_service_api"
+				]
+			},
+			{
+				"Name": "blazorappwithidentity_server",
+				"DisplayName": "Blazor App With Identity Server",
+				"Scopes": [
+					"blazorappwithidentity_server"
 				]
 			}
 		],
@@ -147,6 +164,15 @@
 				"Name": "ezrie_tenant_service_swaggerui",
 				"DisplayName": "Ezrie Tenant Service Swagger UI",
 				"Required": true
+			},
+			{
+				"Name": "blazorappwithidentity_server",
+				"DisplayName": "Blazor App With Identity Server",
+				"Required": true,
+				"UserClaims": [
+					"role",
+					"name"
+				]
 			}
 		],
 		"Clients": [
@@ -287,7 +313,7 @@
 				"ClientId": "ezrie_relationship_management_blazor",
 				"ClientName": "Ezrie Relationship Management Blazor",
 				"AllowedGrantTypes": [
-					"authorization_code"
+					"code"
 				],
 				"RequireClientSecret": false,
 				"RequirePkce": true,
@@ -365,6 +391,23 @@
 					"https://localhost:10000",
 					"https://localhost:10300",
 					"https://localhost:10301"
+				]
+			},
+			{
+				"ClientId": "blazorappwithidentity-server",
+				"ClientName": "Blazor App With Identity Server",
+				"AllowedGrantTypes": [
+					"code"
+				],
+				"RequireClientSecret": true,
+				"ClientSecrets": [
+					{
+						"Value": "1q2w3E*"
+					}
+				],
+				"AllowedScopes": [
+					"ezrie_tenant_service_swaggerui",
+					"ezrie_tenant_service_api"
 				]
 			}
 		]

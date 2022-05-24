@@ -42,13 +42,12 @@ public abstract class MigrationDbContextFactoryBase<T> : IDesignTimeDbContextFac
 
 	private IConfigurationRoot BuildConfiguration()
 	{
-		var environment = RuntimeEnvironment.GetEnvironmentName();
 		var basePath = Directory.GetCurrentDirectory();
-		Console.WriteLine($"BasePath: {basePath} Environment: {environment} ConnectionStringName: {ConnectionStringName}");
+		Console.WriteLine($"BasePath: {basePath} Environment: {HostEnvironment.EnvironmentName} ConnectionStringName: {ConnectionStringName}");
 		var builder = new ConfigurationBuilder()
 			.SetBasePath(basePath)
 			.AddJsonFile("appsettings.json", true)
-			.AddJsonFile($"appsettings.{environment}.json", true);
+			.AddJsonFile($"appsettings.{HostEnvironment.EnvironmentName}.json", true);
 
 		return builder.Build();
 	}

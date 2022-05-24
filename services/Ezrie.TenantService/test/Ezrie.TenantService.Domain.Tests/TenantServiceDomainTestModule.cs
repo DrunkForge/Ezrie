@@ -8,8 +8,8 @@ namespace Ezrie.TenantService;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(TenantServiceEntityFrameworkCoreTestModule)
-    )]
+	typeof(TenantServiceEntityFrameworkCoreTestModule)
+	)]
 public class TenantServiceDomainTestModule : AbpModule
 {
 

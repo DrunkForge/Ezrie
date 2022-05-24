@@ -6,44 +6,44 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ezrie.AccountManagement.EntityFrameworkCore.MySql.Migrations.Logging
 {
-    public partial class CreateDatabase : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
+	public partial class CreateDatabase : Migration
+	{
+		protected override void Up(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.AlterDatabase()
+				.Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateTable(
-                name: "Logs",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Message = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MessageTemplate = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Level = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TimeStamp = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: false),
-                    Exception = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LogEvent = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Properties = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Logs", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-        }
+			migrationBuilder.CreateTable(
+				name: "Logs",
+				columns: table => new
+				{
+					Id = table.Column<Int64>(type: "bigint", nullable: false)
+						.Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+					Message = table.Column<String>(type: "longtext", nullable: true)
+						.Annotation("MySql:CharSet", "utf8mb4"),
+					MessageTemplate = table.Column<String>(type: "longtext", nullable: true)
+						.Annotation("MySql:CharSet", "utf8mb4"),
+					Level = table.Column<String>(type: "varchar(128)", maxLength: 128, nullable: true)
+						.Annotation("MySql:CharSet", "utf8mb4"),
+					TimeStamp = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: false),
+					Exception = table.Column<String>(type: "longtext", nullable: true)
+						.Annotation("MySql:CharSet", "utf8mb4"),
+					LogEvent = table.Column<String>(type: "longtext", nullable: true)
+						.Annotation("MySql:CharSet", "utf8mb4"),
+					Properties = table.Column<String>(type: "longtext", nullable: true)
+						.Annotation("MySql:CharSet", "utf8mb4")
+				},
+				constraints: table =>
+				{
+					table.PrimaryKey("PK_Logs", x => x.Id);
+				})
+				.Annotation("MySql:CharSet", "utf8mb4");
+		}
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Logs");
-        }
-    }
+		protected override void Down(MigrationBuilder migrationBuilder)
+		{
+			migrationBuilder.DropTable(
+				name: "Logs");
+		}
+	}
 }

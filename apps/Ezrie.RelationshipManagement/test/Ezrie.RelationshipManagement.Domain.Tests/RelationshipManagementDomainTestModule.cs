@@ -4,8 +4,8 @@ using Volo.Abp.Modularity;
 namespace Ezrie.RelationshipManagement;
 
 [DependsOn(
-    typeof(RelationshipManagementEntityFrameworkCoreTestModule)
-    )]
+	typeof(RelationshipManagementEntityFrameworkCoreTestModule)
+	)]
 public class RelationshipManagementDomainTestModule : AbpModule
 {
 

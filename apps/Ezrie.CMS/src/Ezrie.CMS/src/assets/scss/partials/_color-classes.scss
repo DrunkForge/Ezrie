@@ -1,0 +1,53 @@
+/*=== COLOR CLASSES ===*/
+.text-primary {
+	color: $primary-color !important;
+}
+
+.text-white {
+	color: $white-color !important;
+}
+
+.text-dark {
+	color: $black-color !important;
+}
+
+.bordered {
+	border: 1px solid $border-color;
+}
+
+.brd-gray {
+	border-color: $light-gray !important;
+}
+
+.brd-primary {
+	border-color: $primary-color !important;
+}
+
+/* Background Colors */
+.bg-white {
+	background-color: $white-color !important;
+}
+
+.bg-dark {
+	background-color: $title-color-dk !important;
+}
+
+.bg-faded {
+	background-color: $primary-bg;
+}
+
+.bg-sand {
+	background-color: $primary-bg;
+}
+
+.bg-gray {
+	background-color: $light-gray;
+}
+
+.bg-primary {
+	background-color: $primary-bg !important;
+}
+
+.no-bg {
+	background-color: transparent;
+}

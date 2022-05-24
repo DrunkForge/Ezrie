@@ -1,8 +1,8 @@
-﻿namespace Ezrie.TenantService;
+namespace Ezrie.TenantService;
 
-public class TenantServiceRemoteServiceConsts
+public static class TenantServiceRemoteServiceConsts
 {
-    public const String RemoteServiceName = "TenantService";
+	public const String RemoteServiceName = "TenantService";
 
-    public const String ModuleName = "tenantService";
+	public const String ModuleName = "tenantService";
 }

@@ -1,0 +1,8 @@
+@model HeadingBlock
+<div class="heading @Model.TextAlignment()">
+	<h2 class="title-text">@Model.Heading</h2>
+	@if (!String.IsNullOrWhiteSpace(Model.Description))
+	{
+		<p class="description">@Model.Description</p>
+	}
+</div>

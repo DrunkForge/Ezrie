@@ -1,0 +1,14 @@
+@model CardBlock
+
+<div class="card">
+	<div class="card_img">
+		<a href="@WebApp.Url(Model.Link)">
+			<img class="img-fluid" src="@Url.Content(WebApp.Media.ResizeImage(Model.Image, 1080, 720))" alt="@Model.Title">
+		</a>
+	</div>
+	<div class="card-block">
+		<a href=""><h3 class="card-title">@Model.Title</h3></a>
+		<p class="card-text">@Model.Content</p>
+		<a href="@WebApp.Url(Model.Link)" class="btn btn-primary">@Model.Button</a>
+	</div>
+</div>

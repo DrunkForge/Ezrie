@@ -5,9 +5,9 @@ namespace Ezrie.TenantService;
 
 public abstract class TenantServiceAppService : ApplicationService
 {
-    protected TenantServiceAppService()
-    {
-        LocalizationResource = typeof(TenantServiceResource);
-        ObjectMapperContext = typeof(TenantServiceApplicationModule);
-    }
+	protected TenantServiceAppService()
+	{
+		LocalizationResource = typeof(TenantServiceResource);
+		ObjectMapperContext = typeof(TenantServiceApplicationModule);
+	}
 }

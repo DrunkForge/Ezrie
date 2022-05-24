@@ -70,7 +70,8 @@ public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 			options.OAuthScopes(apiConfiguration.Scopes);
 		});
 
-		app.UseConfiguredEndpoints(endpoints => {
+		app.UseConfiguredEndpoints(endpoints =>
+		{
 			endpoints.MapControllers();
 			endpoints.MapDefaultControllerRoute();
 		});

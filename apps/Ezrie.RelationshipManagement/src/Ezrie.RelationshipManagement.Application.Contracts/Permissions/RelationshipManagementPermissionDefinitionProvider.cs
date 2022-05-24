@@ -6,15 +6,15 @@ namespace Ezrie.RelationshipManagement.Permissions;
 
 public class RelationshipManagementPermissionDefinitionProvider : PermissionDefinitionProvider
 {
-    public override void Define(IPermissionDefinitionContext context)
-    {
-        var myGroup = context.AddGroup(RelationshipManagementPermissions.GroupName);
-        //Define your own permissions here. Example:
-        //myGroup.AddPermission(RelationshipManagementPermissions.MyPermission1, L("Permission:MyPermission1"));
-    }
+	public override void Define(IPermissionDefinitionContext context)
+	{
+		var myGroup = context.AddGroup(RelationshipManagementPermissions.GroupName);
+		//Define your own permissions here. Example:
+		//myGroup.AddPermission(RelationshipManagementPermissions.MyPermission1, L("Permission:MyPermission1"));
+	}
 
-    private static LocalizableString L(string name)
-    {
-        return LocalizableString.Create<RelationshipManagementResource>(name);
-    }
+	private static LocalizableString L(String name)
+	{
+		return LocalizableString.Create<RelationshipManagementResource>(name);
+	}
 }

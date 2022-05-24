@@ -1,17 +1,17 @@
 ﻿namespace Ezrie.AccountManagement.Admin.Configuration.Test;
 
 public class StartupTest : Startup
-    {
-        public StartupTest(IWebHostEnvironment env, IConfiguration configuration) : base(env, configuration)
-        {
-        }
+{
+	public StartupTest(IWebHostEnvironment env, IConfiguration configuration) : base(env, configuration)
+	{
+	}
 
-        public override void ConfigureUIOptions(IdentityServer4AdminUIOptions options)
-        {
-            base.ConfigureUIOptions(options);
+	public override void ConfigureUIOptions(IdentityServer4AdminUIOptions options)
+	{
+		base.ConfigureUIOptions(options);
 
-            // Use staging DbContexts and auth services.
-            options.Testing.IsStaging = true;
-        }
-    }
+		// Use staging DbContexts and auth services.
+		options.Testing.IsStaging = true;
+	}
+}
 

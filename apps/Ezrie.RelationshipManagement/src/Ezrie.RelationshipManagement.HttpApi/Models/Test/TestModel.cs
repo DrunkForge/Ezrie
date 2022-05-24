@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace Ezrie.RelationshipManagement.Models.Test;
 
 public class TestModel
 {
-    public string Name { get; set; }
+	public String Name { get; set; } = String.Empty;
 
-    public DateTime BirthDate { get; set; }
+	public DateTime BirthDate { get; set; }
 }

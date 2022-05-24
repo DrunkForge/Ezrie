@@ -1,0 +1,66 @@
+@page
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService Auth
+@model CmsModel<StandardPage>
+@{
+	ViewData["Title"] = Model.Title;
+}
+
+@section head {
+	@WebApp.MetaTags(Model.Data)
+}
+
+@if (Model.HasHeaderImage)
+{
+	<div class="bredcrumb text-center @Model.BgCss" @Model.BgStyle>
+		<div class="row bredcrumb-inner">
+			<div class="col-sm-12 align-self-center">
+				<h1>@Model.Title</h1>
+				<ul class="">
+					<li><a href="" class="bread_link">Home</a></li>
+					<li><a href="" class="bread_link">@Model.Title</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+}
+
+
+<div class="container">
+
+	@if (Model.Data.Sidebar.Count == 0)
+	{
+		@foreach (var block in Model.Data.Blocks)
+		{
+			<section class="@block.CssName()">
+				@Html.DisplayFor(m => block, block.GetType().Name)
+			</section>
+		}
+	}
+	else
+	{
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 col-md-8 order-md-12">
+
+					@foreach (var block in Model.Data.Blocks)
+					{
+						<section class="@block.CssName()">
+							@Html.DisplayFor(m => block, block.GetType().Name)
+						</section>
+					}
+
+				</div>
+				<div class="col-lg-3 col-md-4 order-md-1 sidebar sidebar-left">
+					<ul class="list-group">
+						@foreach (var entry in Model.Data.Sidebar)
+						{
+							<li class="list-group-item"><a href="@WebApp.AbsoluteUrl(entry.Page)">@entry.Page.Title</a></li>
+						}
+					</ul>
+				</div>
+			</div>
+		</div>
+	}
+</div>

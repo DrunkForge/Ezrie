@@ -9,22 +9,22 @@ using Volo.Abp.Modularity;
 namespace Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp;
 
 [DependsOn(
-    typeof(AbpAutofacModule),
-    typeof(RelationshipManagementHttpApiClientModule),
-    typeof(AbpHttpClientIdentityModelModule)
-    )]
+	typeof(AbpAutofacModule),
+	typeof(RelationshipManagementHttpApiClientModule),
+	typeof(AbpHttpClientIdentityModelModule)
+	)]
 public class RelationshipManagementConsoleApiClientModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        PreConfigure<AbpHttpClientBuilderOptions>(options =>
-        {
-            options.ProxyClientBuildActions.Add((remoteServiceName, clientBuilder) =>
-            {
-                clientBuilder.AddTransientHttpErrorPolicy(
-                    policyBuilder => policyBuilder.WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Pow(2, i)))
-                );
-            });
-        });
-    }
+	public override void PreConfigureServices(ServiceConfigurationContext context)
+	{
+		PreConfigure<AbpHttpClientBuilderOptions>(options =>
+		{
+			options.ProxyClientBuildActions.Add((remoteServiceName, clientBuilder) =>
+			{
+				clientBuilder.AddTransientHttpErrorPolicy(
+					policyBuilder => policyBuilder.WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Pow(2, i)))
+				);
+			});
+		});
+	}
 }

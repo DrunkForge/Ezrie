@@ -9,7 +9,7 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore;
 [DependsOn(typeof(AdministrationServiceTestBaseModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpEntityFrameworkCoreSqliteModule))]
-public class AdministrationServiceEntityFrameworkCoreTestModule : EzrieEntityFrameworkCoreTestModule<AdministrationServiceDbContext>
+public class AdministrationServiceEntityFrameworkCoreTestModule : EzrieEntityFrameworkCoreTestModuleBase<AdministrationServiceDbContext>
 {
-	public override AdministrationServiceDbContext CreateDbContext(DbContextOptions<AdministrationServiceDbContext> options) => new (options);
+	public override AdministrationServiceDbContext CreateDbContext(DbContextOptions<AdministrationServiceDbContext> options) => new(options);
 }

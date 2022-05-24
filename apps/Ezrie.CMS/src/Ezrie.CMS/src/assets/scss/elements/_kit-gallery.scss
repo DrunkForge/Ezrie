@@ -1,0 +1,121 @@
+/* ================================================
+--> Kit Gallery style
+================================================== */
+.hover-overlay {
+	&.effect-scale {
+		z-index: 5;
+
+		&:before {
+			top: 15px;
+			left: 15px;
+			right: 15px;
+			bottom: 15px;
+			border-radius: 2px;
+			opacity: 1;
+			z-index: -1;
+			@include transform(scale(1));
+
+			@include tablet {
+				opacity: 0;
+				@include transform(scale(0));
+			}
+		}
+
+		&:before {
+			background-color: $primary-bg;
+		}
+
+		.overlay-content {
+			text-align: center;
+			color: $white-color;
+			font-weight: 300;
+
+			span {
+				font-size: 12px;
+				font-weight: 400;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+		}
+	}
+	// Rectangle Icon style
+	.icon-ract {
+		border: 1px solid tint($white-color, 70%);
+		width: 40px;
+		height: 40px;
+		display: inline-block;
+		border-radius: 4px;
+		line-height: 40px;
+		margin: 15px 8px;
+
+		i {
+			color: $white-color;
+			font-weight: 300;
+		}
+
+		&:before {
+			width: 40px;
+			height: 40px;
+			background: transparent;
+			left: -1px;
+			top: -1px;
+			border-radius: 4px;
+		}
+
+		&:hover {
+			border: 1px solid $white-color !important;
+
+			i {
+				color: $primary-color;
+			}
+
+			&:before {
+				background: $white-color;
+			}
+		}
+	}
+	// Circle Icon style
+	.icon-circle {
+		width: 50px;
+		height: 50px;
+		border: 1px solid tint($white-color, 70%);
+		border-radius: 100%;
+		line-height: 48px;
+		color: $white-color;
+		display: inline-block;
+		margin: 15px 5px;
+
+		&:hover {
+			background: $white-color;
+			color: $primary-color;
+		}
+	}
+
+	.overlay-title {
+		color: $white-color;
+		margin-bottom: 5px;
+		font-weight: 400;
+	}
+}
+.card.info-card {
+    .card-block {
+        border: 1px solid $primary-bg;
+        border-top: 0px;
+        padding-left: 25px;
+        padding-right: 25px;
+        
+        @include desktops {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        span {
+            font-size: 12px;
+            color: $primary-color;
+        }
+        a {
+            border-radius: 2px;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+    }
+}

@@ -40,7 +40,7 @@ public class AdministrationServiceEntityFrameworkCoreModule : AbpModule
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		context.Services.AddAbpDbContext<AdministrationServiceDbContext>(options =>
-		{			
+		{
 			/* Add custom repositories here. Example:
 			 * options.AddRepository<Question, EfCoreQuestionRepository>();
 			 */

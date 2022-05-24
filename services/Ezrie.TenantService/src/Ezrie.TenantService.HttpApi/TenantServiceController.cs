@@ -5,8 +5,8 @@ namespace Ezrie.TenantService;
 
 public abstract class TenantServiceController : AbpControllerBase
 {
-    protected TenantServiceController()
-    {
-        LocalizationResource = typeof(TenantServiceResource);
-    }
+	protected TenantServiceController()
+	{
+		LocalizationResource = typeof(TenantServiceResource);
+	}
 }

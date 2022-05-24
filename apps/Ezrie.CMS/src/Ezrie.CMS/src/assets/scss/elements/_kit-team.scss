@@ -1,0 +1,46 @@
+.card.team-card {
+	margin-top: 50px;
+	padding: 5px;
+
+	img {
+		@include transition(all 0.4s ease);
+	}
+
+	&:hover {
+		img {
+			filter: blur(3px);
+			//@include transform(scale(1.1));
+		}
+	}
+
+	.hover-overlay {
+		border-radius: $border-radius-xl;
+
+		.overlay-content {
+			text-align: center;
+			color: #ffffff;
+			font-weight: 300;
+
+			&.diamond-shape {
+				max-width: 100px;
+				@include transform(rotate(45deg));
+			}
+		}
+
+		.icon-circle {
+			margin: 15px 2px;
+			width: 45px;
+			height: 45px;
+			line-height: 44px;
+		}
+
+		.icon-ract.ract45 {
+			border: 1px solid $white-color;
+			margin: 3px 1px;
+		}
+
+		.ract45 {
+			@include transform(rotate(0deg));
+		}
+	}
+}

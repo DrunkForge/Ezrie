@@ -1,0 +1,58 @@
+/* ================================================
+--> Elements pagination style
+================================================== */
+.page-item {
+	a.page-link {
+	    border-radius: 0px!important;
+	    margin-right: 10px;
+	    color: $text-color;
+	    font-size: 17px;
+	    height: 40px;
+	    width: 40px;
+	    line-height: 26px;
+	    overflow: hidden;
+	    text-align: center;
+	    border: 1px solid #dadada;
+	    @include tablet {
+	    	height: 45px;
+	    	width: 45px;
+	    }
+	}
+	&.active, &:hover {
+		a.page-link { 
+			background-color: $primary-color;
+			border: 1px solid $primary-color;
+			color: $white-color;
+		}
+	}
+	&:last-child {
+		a.page-link {
+			margin-right: 0px;
+		}
+	}
+}
+
+.th-pagination {
+	a.page-link {
+		@include transform(rotate(45deg));
+		margin: 10px;
+		font-weight: 400;
+		@include tablet {
+			margin: 15px;
+		}
+		span, i {
+			display: inline-block;
+			@include transform(rotate(-45deg));
+		}
+	}
+	.page-item {
+		&:last-child {
+			a {
+				margin: 10px;
+				@include tablet {
+					margin: 15px;
+				}
+			}
+		}
+	}
+}

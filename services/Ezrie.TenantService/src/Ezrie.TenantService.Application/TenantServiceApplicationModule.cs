@@ -7,20 +7,20 @@ using Volo.Abp.TenantManagement;
 namespace Ezrie.TenantService;
 
 [DependsOn(
-    typeof(TenantServiceDomainModule),
-    typeof(TenantServiceApplicationContractsModule),
-    typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule)
-    )]
+	typeof(TenantServiceDomainModule),
+	typeof(TenantServiceApplicationContractsModule),
+	typeof(AbpDddApplicationModule),
+	typeof(AbpAutoMapperModule)
+	)]
 [DependsOn(typeof(AbpTenantManagementApplicationModule))]
-    public class TenantServiceApplicationModule : AbpModule
+public class TenantServiceApplicationModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddAutoMapperObjectMapper<TenantServiceApplicationModule>();
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<TenantServiceApplicationModule>(validate: true);
-        });
-    }
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddAutoMapperObjectMapper<TenantServiceApplicationModule>();
+		Configure<AbpAutoMapperOptions>(options =>
+		{
+			options.AddMaps<TenantServiceApplicationModule>(validate: true);
+		});
+	}
 }

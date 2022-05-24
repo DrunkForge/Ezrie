@@ -10,8 +10,8 @@ namespace Ezrie.RelationshipManagement;
  */
 public abstract class RelationshipManagementAppService : ApplicationService
 {
-    protected RelationshipManagementAppService()
-    {
-        LocalizationResource = typeof(RelationshipManagementResource);
-    }
+	protected RelationshipManagementAppService()
+	{
+		LocalizationResource = typeof(RelationshipManagementResource);
+	}
 }

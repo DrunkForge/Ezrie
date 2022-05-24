@@ -1,0 +1,66 @@
+/* ================================================
+--> Background Element style
+================================================== */
+.content-wrapper {
+	position: relative;
+	padding: 80px 50px;
+	h1 {
+		padding-bottom: 30px;        
+	}
+	p {
+		padding-bottom:  30px;
+	}
+}
+.bg-image {
+	position: relative;
+	&.shadow:before {
+		position: absolute;
+		content: '';
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: rgba(50,63,65,0.9);
+	}
+}
+.bg-custom {
+	h1,p {
+		color: $white-color;
+		padding-bottom: 30px;
+	}
+	.btn {
+		font-weight: 700;
+	}
+}
+.bg-video {
+	position: relative;
+	overflow: hidden;
+	video {
+		display: block;
+		@include desktops {
+			width: 100%;
+		}
+	}
+	.overlay {
+		position: absolute;
+		z-index: 55;
+		background: rgba(0,0,0,0.5);
+		bottom: 0;
+		top: 0;
+		text-align: center;
+		padding: 25px 50px;
+		@include tablet {
+			padding: 80px 50px;
+
+		}
+	}
+}
+.overlay {
+	position: relative;
+}
+.pattern-01{
+ 	background-image: url("../img/patterns/pattern1.png");
+	background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+}

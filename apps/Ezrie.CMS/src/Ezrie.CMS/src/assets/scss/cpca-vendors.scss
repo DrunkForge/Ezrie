@@ -1,0 +1,11 @@
+$fa-font-path: "../webfonts";
+$simple-line-font-path: "../webfonts/";
+
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+@import '../../../node_modules/simple-line-icons/scss/simple-line-icons';
+@import '../../../node_modules/daterangepicker/daterangepicker';
+@import '../../../node_modules/fancybox/dist/scss/jquery.fancybox';
+@import '../../../node_modules/slick-carousel/slick/slick';
+@import '../../../node_modules/slick-carousel/slick/slick-theme';
+@import '../../../node_modules/animate.css/animate';
+@import '../vendors/jquery-selectBox/jquery.selectBox';

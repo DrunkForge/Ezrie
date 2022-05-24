@@ -1,0 +1,12 @@
+@{
+	const String index = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+}
+
+<div class="row directory-index">
+	<div class="col text-center text-wrap">
+		@for (var i = 0; i < 26; i++)
+		{
+			<a class="index-link" href="/directory/@index[i]">@index[i]</a>
+		}
+	</div>
+</div>

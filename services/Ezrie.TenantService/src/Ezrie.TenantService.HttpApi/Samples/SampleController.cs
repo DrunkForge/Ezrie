@@ -9,24 +9,24 @@ namespace Ezrie.TenantService.Samples;
 [Route("api/TenantService/sample")]
 public class SampleController : TenantServiceController, ISampleAppService
 {
-    private readonly ISampleAppService _sampleAppService;
+	private readonly ISampleAppService _sampleAppService;
 
-    public SampleController(ISampleAppService sampleAppService)
-    {
-        _sampleAppService = sampleAppService;
-    }
+	public SampleController(ISampleAppService sampleAppService)
+	{
+		_sampleAppService = sampleAppService;
+	}
 
-    [HttpGet]
-    public async Task<SampleDto> GetAsync()
-    {
-        return await _sampleAppService.GetAsync();
-    }
+	[HttpGet]
+	public async Task<SampleDto> GetAsync()
+	{
+		return await _sampleAppService.GetAsync();
+	}
 
-    [HttpGet]
-    [Route("authorized")]
-    [Authorize]
-    public async Task<SampleDto> GetAuthorizedAsync()
-    {
-        return await _sampleAppService.GetAsync();
-    }
+	[HttpGet]
+	[Route("authorized")]
+	[Authorize]
+	public async Task<SampleDto> GetAuthorizedAsync()
+	{
+		return await _sampleAppService.GetAsync();
+	}
 }

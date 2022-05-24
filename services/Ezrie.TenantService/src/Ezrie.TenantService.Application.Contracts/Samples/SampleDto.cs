@@ -2,5 +2,5 @@
 
 public class SampleDto
 {
-    public Int32 Value { get; set; }
+	public Int32 Value { get; set; }
 }

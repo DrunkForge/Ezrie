@@ -1,4 +1,4 @@
-﻿using Volo.Abp.Account;
+using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -9,23 +9,21 @@ using Volo.Abp.TenantManagement;
 
 namespace Ezrie.RelationshipManagement;
 
-[DependsOn(
-    typeof(RelationshipManagementDomainModule),
-    typeof(AbpAccountApplicationModule),
-    typeof(RelationshipManagementApplicationContractsModule),
-    typeof(AbpIdentityApplicationModule),
-    typeof(AbpPermissionManagementApplicationModule),
-    typeof(AbpTenantManagementApplicationModule),
-    typeof(AbpFeatureManagementApplicationModule),
-    typeof(AbpSettingManagementApplicationModule)
-    )]
+[DependsOn(typeof(RelationshipManagementDomainModule))]
+[DependsOn(typeof(RelationshipManagementApplicationContractsModule))]
+[DependsOn(typeof(AbpAccountApplicationModule))]
+[DependsOn(typeof(AbpFeatureManagementApplicationModule))]
+[DependsOn(typeof(AbpIdentityApplicationModule))]
+[DependsOn(typeof(AbpPermissionManagementApplicationModule))]
+[DependsOn(typeof(AbpSettingManagementApplicationModule))]
+[DependsOn(typeof(AbpTenantManagementApplicationModule))]
 public class RelationshipManagementApplicationModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<RelationshipManagementApplicationModule>();
-        });
-    }
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		Configure<AbpAutoMapperOptions>(options =>
+		{
+			options.AddMaps<RelationshipManagementApplicationModule>();
+		});
+	}
 }

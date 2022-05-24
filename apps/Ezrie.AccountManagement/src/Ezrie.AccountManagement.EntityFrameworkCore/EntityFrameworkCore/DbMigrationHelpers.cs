@@ -41,8 +41,8 @@ public static class DbMigrationHelpers
 	/// <param name="databaseMigrationsConfiguration"></param>
 	public static async Task<Boolean> ApplyDbMigrationsWithDataSeedAsync<TIdentityServerDbContext, TIdentityDbContext,
 		TPersistedGrantDbContext, TLogDbContext, TAuditLogDbContext, TDataProtectionDbContext, TUser, TRole>(
-		IHost host, 
-		Boolean applyDbMigrationWithDataSeedFromProgramArguments, 
+		IHost host,
+		Boolean applyDbMigrationWithDataSeedFromProgramArguments,
 		SeedConfiguration? seedConfiguration,
 		DatabaseMigrationsConfiguration? databaseMigrationsConfiguration)
 		where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext

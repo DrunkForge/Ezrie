@@ -68,9 +68,9 @@ public class TenantCreatedEventHandler : IDistributedEventHandler<TenantCreatedE
 			_logger.LogInformation("Seeding {TenantName} ({TenantId})", _currentTenant.Name, _currentTenant.Id);
 
 			var abpUnitOfWorkOptions = new AbpUnitOfWorkOptions { IsTransactional = true };
-			
+
 			using var uow = _unitOfWorkManager.Begin(abpUnitOfWorkOptions, true);
-			
+
 			var permissionNames = _permissionDefinitionManager
 				.GetPermissions()
 				.Where(p => p.MultiTenancySide.HasFlag(MultiTenancySides.Tenant))

@@ -1,0 +1,69 @@
+/* ========== KIT_ACCORDIONS ============ */
+.th-accordions {
+	position: relative;
+
+	.collapse-bar {
+		font-size: 14px;
+		font-weight: 400;
+		padding: 20px 25px 17px;
+		display: block;
+		color: $title-color;
+		border-bottom: 2px solid shade($white-color, 10%);
+		position: relative;
+
+		i {
+			margin-right: 10px;
+		}
+
+		&:before {
+			position: absolute;
+			content: '';
+			width: 10px;
+			right: 32px;
+			background: white;
+			height: 10px;
+			bottom: -8px;
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		&:after {
+			display: inline-block;
+			text-rendering: auto;
+			-webkit-font-smoothing: antialiased;
+			font: var(--fa-font-solid);
+			content: "\f107";
+			right: 30px;
+			bottom: -14px;
+			opacity: 0;
+			visibility: hidden;
+			color: $primary-color;
+			font-size: 20px;
+		}
+
+		&:hover {
+			color: $primary-color;
+		}
+	}
+
+	a[aria-expanded="true"] {
+		border-color: $primary-color;
+		color: $primary-color;
+
+		&:after {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		&:before {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	.tab-pane {
+		p {
+			padding: 25px 30px 0;
+		}
+	}
+}

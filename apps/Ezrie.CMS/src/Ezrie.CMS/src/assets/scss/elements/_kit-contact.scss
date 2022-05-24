@@ -1,0 +1,75 @@
+/* ================================================
+--> Kit Contact style
+================================================== */
+.contact-media {
+	padding-top: 50px;
+	margin-bottom: -10px;
+	text-align: center;
+	display: block;
+
+	@include tablet {
+		display: flex;
+		text-align: left;
+	}
+
+	.icon {
+		margin-top: 0px;
+		text-align: center;
+		font-size: 20px;
+
+		&.icon-circle {
+			width: 80px;
+			height: 80px;
+			border: 1px dashed $cpca-blue;
+			line-height: 78px;
+			margin-bottom: 15px;
+			border-radius: 100px;
+			margin-top: -10px;
+			color: $primary-color;
+			display: inline-block;
+
+			@include tablet {
+				margin-right: 25px;
+				margin-bottom: 0px;
+			}
+		}
+
+		&.icon-ract.ract45 {
+			width: 60px;
+			height: 60px;
+			margin-right: 0px;
+			margin-bottom: 30px;
+			line-height: 60px;
+
+			&:before {
+				width: 52px;
+				height: 52px;
+				background: $primary-bg;
+			}
+
+			@include tablet {
+				margin-bottom: 0px;
+				margin-right: 20px;
+			}
+
+			@include desktops {
+				margin-bottom: 0px;
+				margin-right: 30px;
+			}
+		}
+	}
+
+	.media-body {
+		color: #606163;
+		line-height: 26px;
+	}
+
+	&.flex-row-reverse {
+		.icon {
+			&.icon-ract.ract45 {
+				margin-right: 0px;
+				margin-left: 30px;
+			}
+		}
+	}
+}
