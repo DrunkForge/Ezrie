@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
+using Volo.Abp.Identity.EntityFrameworkCore;
 
 namespace Ezrie.IdentityService.EntityFrameworkCore;
 
@@ -8,7 +9,8 @@ namespace Ezrie.IdentityService.EntityFrameworkCore;
     typeof(IdentityServiceDomainModule),
     typeof(AbpEntityFrameworkCoreModule)
 )]
-public class IdentityServiceEntityFrameworkCoreModule : AbpModule
+[DependsOn(typeof(AbpIdentityEntityFrameworkCoreModule))]
+    public class IdentityServiceEntityFrameworkCoreModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

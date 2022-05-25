@@ -16,7 +16,6 @@
 
 using Autofac.Core;
 using Microsoft.Extensions.Logging;
-using Npgsql;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;

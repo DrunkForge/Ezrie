@@ -1,7 +1,7 @@
 using Piranha.Extend;
 using Piranha.Extend.Fields;
 
-namespace CPCA.Presentation.CMS.Blocks;
+namespace Ezrie.CMS.Blocks;
 
 [BlockType(Name = "Heading", Category = "Content", Icon = "fas fa-heading", Component = "heading-block")]
 public class HeadingBlock : Block

@@ -16,13 +16,11 @@
 
 using Autofac.Core;
 using Microsoft.Extensions.Logging;
-using Volo.Abp.Data;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.Uow;
 using Volo.Abp.DependencyInjection;
-using Npgsql;
 
 namespace Ezrie.EntityFrameworkCore.Migrations;
 

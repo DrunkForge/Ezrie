@@ -1,7 +1,7 @@
 using Piranha.Extend;
 using Piranha.Extend.Fields;
 
-namespace CPCA.Presentation.CMS.Blocks;
+namespace Ezrie.CMS.Blocks;
 
 [BlockGroupType(Name = "Accordion Content", Category = "Content", Icon = "fa fa-sort-circle", IsUnlisted = true, Component = "accordion-panel-block")]
 public class AccordionItemBlock : Block

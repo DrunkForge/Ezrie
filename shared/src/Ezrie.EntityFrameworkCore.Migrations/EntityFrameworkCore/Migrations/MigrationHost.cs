@@ -17,13 +17,11 @@
 using Ezrie.Configuration;
 using Ezrie.EntityFrameworkCore.Seeding;
 using Ezrie.Logging;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Modularity;
 
 namespace Ezrie.EntityFrameworkCore.Migrations;
 

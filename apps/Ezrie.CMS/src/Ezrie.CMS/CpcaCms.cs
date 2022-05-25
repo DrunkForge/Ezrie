@@ -1,8 +1,6 @@
-using System;
+namespace Ezrie;
 
-namespace CPCA;
-
-public static class CpcaCms
+public static class EzrieCms
 {
 	public const String CmsBaseUrl = "https://localhost:54825";
 	public const String CdnBaseUrl = "https://cdn.cpca-rpc.ca";
@@ -12,7 +10,7 @@ public static class CpcaCms
 
 	public static class CacheKeys
 	{
-		private const String CachePrefix = "CpcaCache_";
+		private const String CachePrefix = "EzrieCache_";
 		public const String DirectoryLookups = CachePrefix + "DirectoryLookups";
 	}
 }

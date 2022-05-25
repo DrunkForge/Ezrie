@@ -17,19 +17,8 @@
 #nullable disable
 
 using Microsoft.EntityFrameworkCore;
-using Volo.Abp.AuditLogging;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Data;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.FeatureManagement;
-using Volo.Abp.FeatureManagement.EntityFrameworkCore;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.PermissionManagement;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.SettingManagement;
-using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace Ezrie.AdministrationService.EntityFrameworkCore;
 

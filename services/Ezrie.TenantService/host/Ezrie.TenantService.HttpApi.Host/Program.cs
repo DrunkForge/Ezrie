@@ -19,7 +19,6 @@ using Ezrie.Hosting.AspNetCore;
 using Ezrie.Logging;
 using Ezrie.TenantService.EntityFrameworkCore.Migrations;
 using Serilog;
-using Serilog.Events;
 
 namespace Ezrie.TenantService;
 

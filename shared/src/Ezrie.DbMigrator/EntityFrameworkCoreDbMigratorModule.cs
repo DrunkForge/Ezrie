@@ -14,21 +14,15 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.AdministrationService;
-using Ezrie.AdministrationService.EntityFrameworkCore;
 using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Logging;
 using Ezrie.MultiTenancy;
-using Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations;
 using Ezrie.Seeding;
-using Ezrie.TenantService;
-using Ezrie.TenantService.EntityFrameworkCore;
 using Ezrie.TenantService.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Data;
 using Volo.Abp.Modularity;
@@ -38,7 +32,6 @@ namespace Ezrie.DbMigrator;
 
 [DependsOn(typeof(EzrieEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreMigrationsModule))]
-[DependsOn(typeof(RelationshipManagementEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(TenantServiceEntityFrameworkCoreMigrationsModule))]
 public class EntityFrameworkCoreDbMigratorModule : AbpModule
 {

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using Ezrie.IdentityService.Localization;
 using Ezrie.IdentityService.Web.Menus;
@@ -9,6 +9,8 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using Ezrie.IdentityService.Permissions;
+using Volo.Abp.Identity.Web;
+using Volo.Abp.Identity.AspNetCore;
 
 namespace Ezrie.IdentityService.Web;
 
@@ -17,7 +19,9 @@ namespace Ezrie.IdentityService.Web;
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpAutoMapperModule)
     )]
-public class IdentityServiceWebModule : AbpModule
+[DependsOn(typeof(AbpIdentityWebModule))]
+    [DependsOn(typeof(AbpIdentityAspNetCoreModule))]
+    public class IdentityServiceWebModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {

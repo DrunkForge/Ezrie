@@ -18,7 +18,6 @@ using Ezrie.AdministrationService.EntityFrameworkCore;
 using Ezrie.Hosting.AspNetCore;
 using Ezrie.Hosting.AspNetCore.Microservices;
 using System.Globalization;
-using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;

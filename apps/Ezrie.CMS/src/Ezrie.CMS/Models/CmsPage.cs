@@ -2,7 +2,7 @@
 using Piranha.Extend.Fields;
 using Piranha.Models;
 
-namespace CPCA.Presentation.CMS.Models;
+namespace Ezrie.CMS.Models;
 
 public class CmsPage<T> : Page<T> where T : Page<T>
 {

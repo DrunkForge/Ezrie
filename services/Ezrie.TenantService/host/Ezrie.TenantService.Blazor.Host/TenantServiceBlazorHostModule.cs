@@ -17,6 +17,7 @@
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Ezrie.Configuration;
+using Ezrie.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Volo.Abp.Account;
 using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;
@@ -31,12 +32,13 @@ using Volo.Abp.UI.Navigation;
 
 namespace Ezrie.TenantService;
 
+[DependsOn(typeof(TenantServiceBlazorWebAssemblyModule))]
+
 [DependsOn(typeof(AbpAutofacWebAssemblyModule))]
 [DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule))]
 [DependsOn(typeof(AbpAccountApplicationContractsModule))]
 [DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
 [DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
-[DependsOn(typeof(TenantServiceBlazorWebAssemblyModule))]
 public class TenantServiceBlazorHostModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
@@ -45,12 +47,13 @@ public class TenantServiceBlazorHostModule : AbpModule
 		var builder = context.Services.GetSingletonInstance<WebAssemblyHostBuilder>();
 
 		ConfigureAuthentication(builder);
-		ConfigureHttpClient(context, environment);
+		ConfigureAutoMapper(context);
 		ConfigureBlazorise(context);
+		ConfigureHttpClient(context, environment);
+		ConfigureLogging(builder);
+		ConfigureMenu(context);
 		ConfigureRouter(context);
 		ConfigureUI(builder);
-		ConfigureMenu(context);
-		ConfigureAutoMapper(context);
 	}
 
 	private void ConfigureRouter(ServiceConfigurationContext context)
@@ -59,6 +62,11 @@ public class TenantServiceBlazorHostModule : AbpModule
 		{
 			options.AppAssembly = typeof(TenantServiceBlazorHostModule).Assembly;
 		});
+	}
+
+	private static void ConfigureLogging(WebAssemblyHostBuilder builder)
+	{
+		builder.UseEzrieLogging<TenantServiceBlazorModule>();
 	}
 
 	private void ConfigureMenu(ServiceConfigurationContext context)

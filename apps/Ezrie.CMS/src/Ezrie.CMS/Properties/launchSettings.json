@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "CPCA.Presentation.CMS": {
+    "Ezrie.CMS": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

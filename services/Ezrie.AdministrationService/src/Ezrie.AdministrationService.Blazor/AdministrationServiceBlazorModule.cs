@@ -32,21 +32,30 @@ public class AdministrationServiceBlazorModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
+		ConfigureAutoMapper(context);
+
+		ConfigureNavigation();
+
+		ConfigureRouter();
+	}
+
+	private void ConfigureAutoMapper(ServiceConfigurationContext context)
+	{
 		context.Services.AddAutoMapperObjectMapper<AdministrationServiceBlazorModule>();
 
 		Configure<AbpAutoMapperOptions>(options =>
 		{
 			options.AddProfile<AdministrationServiceBlazorAutoMapperProfile>(validate: true);
 		});
-
-		Configure<AbpNavigationOptions>(options =>
-		{
-			options.MenuContributors.Add(new AdministrationServiceMenuContributor());
-		});
-
-		Configure<AbpRouterOptions>(options =>
-		{
-			options.AdditionalAssemblies.Add(typeof(AdministrationServiceBlazorModule).Assembly);
-		});
 	}
+
+	private void ConfigureNavigation() => Configure<AbpNavigationOptions>(options =>
+	{
+		options.MenuContributors.Add(new AdministrationServiceMenuContributor());
+	});
+
+	private void ConfigureRouter() => Configure<AbpRouterOptions>(options =>
+	{
+		options.AdditionalAssemblies.Add(typeof(AdministrationServiceBlazorModule).Assembly);
+	});
 }

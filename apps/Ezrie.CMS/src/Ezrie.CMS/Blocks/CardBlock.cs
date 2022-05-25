@@ -1,9 +1,7 @@
-using Piranha;
 using Piranha.Extend;
 using Piranha.Extend.Fields;
-using System.Text.RegularExpressions;
 
-namespace CPCA.Presentation.CMS.Blocks;
+namespace Ezrie.CMS.Blocks;
 
 [BlockType(Name = "Card", Category = "Content", Icon = "fas fa-rectangle-vertical-history fa-rotate-270", Component = "card-block")]
 public class CardBlock : Block

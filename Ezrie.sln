@@ -176,43 +176,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.TenantService.EntityF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.EntityFrameworkCore.Migrations", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migrations\Ezrie.AdministrationService.EntityFrameworkCore.Migrations.csproj", "{3BDB578D-F70D-4449-A0C7-39257105A866}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ezrie.RelationshipManagement", "Ezrie.RelationshipManagement", "{420AF32F-F54F-4A74-B9EF-BDBE059FD4D9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9B1D728E-D683-4269-B8FD-BC73C512C6E0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Application", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Application\Ezrie.RelationshipManagement.Application.csproj", "{317149CA-1857-47D0-AD1E-EB67A4B1C1AA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Application.Contracts", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Application.Contracts\Ezrie.RelationshipManagement.Application.Contracts.csproj", "{DA270560-D9ED-4191-89A6-65952605CDC9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Blazor", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Blazor\Ezrie.RelationshipManagement.Blazor.csproj", "{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Domain", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Domain\Ezrie.RelationshipManagement.Domain.csproj", "{A62C6353-18DD-417B-A90E-8E57DC42ED06}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Domain.Shared", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Domain.Shared\Ezrie.RelationshipManagement.Domain.Shared.csproj", "{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.EntityFrameworkCore", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.EntityFrameworkCore\Ezrie.RelationshipManagement.EntityFrameworkCore.csproj", "{AE515D07-530A-4A21-8C25-ADFAC46F71CB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi\Ezrie.RelationshipManagement.HttpApi.csproj", "{6038CC5D-6D1F-41AC-B30D-3B3859CF34FE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi.Client", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Client\Ezrie.RelationshipManagement.HttpApi.Client.csproj", "{D44D1E69-0B02-4C22-BE8A-CDF208F8CAA1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi.Host", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Host\Ezrie.RelationshipManagement.HttpApi.Host.csproj", "{5CA2FD91-0EA5-483F-9383-A220BC027CF5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{954F1E92-688B-4C68-B777-18D86AD574DE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Application.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.Application.Tests\Ezrie.RelationshipManagement.Application.Tests.csproj", "{FAE703D6-E30F-48BC-BCD7-2BA9345C8C7A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Domain.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.Domain.Tests\Ezrie.RelationshipManagement.Domain.Tests.csproj", "{A78BCEE5-523A-45C1-9C30-0734C0EA62F5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.EntityFrameworkCore.Tests", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.EntityFrameworkCore.Tests\Ezrie.RelationshipManagement.EntityFrameworkCore.Tests.csproj", "{39151A93-1761-4E3B-A836-AB355697BDA0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp\Ezrie.RelationshipManagement.HttpApi.Client.ConsoleTestApp.csproj", "{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.TestBase", "apps\Ezrie.RelationshipManagement\test\Ezrie.RelationshipManagement.TestBase\Ezrie.RelationshipManagement.TestBase.csproj", "{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.AdministrationService.Blazor.Server", "services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Blazor.Server\Ezrie.AdministrationService.Blazor.Server.csproj", "{A5149ECB-E0A2-4493-A414-7BC29E47715B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations\Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations.csproj", "{5968849B-FACA-4411-8CC3-FDC74FAA51C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{5085E537-F299-479A-A611-C34D82E74F8E}"
 	ProjectSection(SolutionItems) = preProject
@@ -222,21 +186,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{5085E5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8C67FF1A-6F99-4551-A7FB-0FD4FF6D4087}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppWithIdentity.Shared", "tests\BlazorAppWithIdentity\BlazorAppWithIdentity\Shared\BlazorAppWithIdentity.Shared.csproj", "{068CF554-6E1C-4E7A-BAB9-D42334A8D25A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppWithIdentity.Server", "tests\BlazorAppWithIdentity\BlazorAppWithIdentity\Server\BlazorAppWithIdentity.Server.csproj", "{501517C2-86A6-4A82-9FD6-594BD9E61EFA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAppWithIdentity.Client", "tests\BlazorAppWithIdentity\BlazorAppWithIdentity\Client\BlazorAppWithIdentity.Client.csproj", "{A6A5AD1D-6157-42C5-85B8-15812E6255DF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ezrie.CMS", "Ezrie.CMS", "{D60FD8F5-6858-4FAE-BB40-AC1DC85E88E7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4687F187-A7EF-4362-9FE3-45FFD1F9432D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.CMS", "apps\Ezrie.CMS\src\Ezrie.CMS\Ezrie.CMS.csproj", "{4EBAFC26-2D06-45CB-83DE-01CB68D466E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.CMS", "apps\Ezrie.CMS\src\Ezrie.CMS\Ezrie.CMS.csproj", "{4EBAFC26-2D06-45CB-83DE-01CB68D466E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.Authentication.EzrieAccount", "shared\src\Ezrie.Authentication.EzrieAccount\Ezrie.Authentication.EzrieAccount.csproj", "{3A1AE883-B797-402C-8451-23ED8BBE70D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dantooine.Api", "tests\Dantooine.Api1\Dantooine.Api.csproj", "{A18CD06F-9EDB-40F0-A76D-96145F9EFC92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ezrie.Authentication.OpenIdConnect", "shared\src\Ezrie.Authentication.OpenIdConnect\Ezrie.Authentication.OpenIdConnect.csproj", "{94975885-8B14-4DBA-8677-5580CFCE4004}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ezrie.RelationshipManagement", "Ezrie.RelationshipManagement", "{DE4641DC-05B4-481F-9B35-0FC5B00CC3E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{426E408E-60FB-4463-B0E8-096E2F85D759}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Shared", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Shared\Ezrie.RelationshipManagement.Shared.csproj", "{A22560AD-DB08-4ADA-8353-9FFF94744604}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Blazor", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Client\Ezrie.RelationshipManagement.Blazor.csproj", "{B9DD9B82-D3E1-40F5-8390-3EF19DF4E562}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.Blazor.Host", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Host\Ezrie.RelationshipManagement.Blazor.Host.csproj", "{D35085EC-0AC9-46F5-B681-95BB1396BEC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.RelationshipManagement.HttpApi.Host", "apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Host\Ezrie.RelationshipManagement.HttpApi.Host.csproj", "{72928D7E-3BB4-4D4C-972C-2E261E88EB60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -488,94 +456,34 @@ Global
 		{3BDB578D-F70D-4449-A0C7-39257105A866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BDB578D-F70D-4449-A0C7-39257105A866}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BDB578D-F70D-4449-A0C7-39257105A866}.Release|Any CPU.Build.0 = Release|Any CPU
-		{317149CA-1857-47D0-AD1E-EB67A4B1C1AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{317149CA-1857-47D0-AD1E-EB67A4B1C1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{317149CA-1857-47D0-AD1E-EB67A4B1C1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{317149CA-1857-47D0-AD1E-EB67A4B1C1AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA270560-D9ED-4191-89A6-65952605CDC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA270560-D9ED-4191-89A6-65952605CDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA270560-D9ED-4191-89A6-65952605CDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA270560-D9ED-4191-89A6-65952605CDC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A62C6353-18DD-417B-A90E-8E57DC42ED06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A62C6353-18DD-417B-A90E-8E57DC42ED06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A62C6353-18DD-417B-A90E-8E57DC42ED06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A62C6353-18DD-417B-A90E-8E57DC42ED06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE515D07-530A-4A21-8C25-ADFAC46F71CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE515D07-530A-4A21-8C25-ADFAC46F71CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE515D07-530A-4A21-8C25-ADFAC46F71CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE515D07-530A-4A21-8C25-ADFAC46F71CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6038CC5D-6D1F-41AC-B30D-3B3859CF34FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6038CC5D-6D1F-41AC-B30D-3B3859CF34FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6038CC5D-6D1F-41AC-B30D-3B3859CF34FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6038CC5D-6D1F-41AC-B30D-3B3859CF34FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D44D1E69-0B02-4C22-BE8A-CDF208F8CAA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D44D1E69-0B02-4C22-BE8A-CDF208F8CAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D44D1E69-0B02-4C22-BE8A-CDF208F8CAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D44D1E69-0B02-4C22-BE8A-CDF208F8CAA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CA2FD91-0EA5-483F-9383-A220BC027CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CA2FD91-0EA5-483F-9383-A220BC027CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CA2FD91-0EA5-483F-9383-A220BC027CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CA2FD91-0EA5-483F-9383-A220BC027CF5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAE703D6-E30F-48BC-BCD7-2BA9345C8C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAE703D6-E30F-48BC-BCD7-2BA9345C8C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAE703D6-E30F-48BC-BCD7-2BA9345C8C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAE703D6-E30F-48BC-BCD7-2BA9345C8C7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A78BCEE5-523A-45C1-9C30-0734C0EA62F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A78BCEE5-523A-45C1-9C30-0734C0EA62F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A78BCEE5-523A-45C1-9C30-0734C0EA62F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A78BCEE5-523A-45C1-9C30-0734C0EA62F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39151A93-1761-4E3B-A836-AB355697BDA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39151A93-1761-4E3B-A836-AB355697BDA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39151A93-1761-4E3B-A836-AB355697BDA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39151A93-1761-4E3B-A836-AB355697BDA0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5968849B-FACA-4411-8CC3-FDC74FAA51C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5968849B-FACA-4411-8CC3-FDC74FAA51C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5968849B-FACA-4411-8CC3-FDC74FAA51C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5968849B-FACA-4411-8CC3-FDC74FAA51C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{068CF554-6E1C-4E7A-BAB9-D42334A8D25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{068CF554-6E1C-4E7A-BAB9-D42334A8D25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{068CF554-6E1C-4E7A-BAB9-D42334A8D25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{068CF554-6E1C-4E7A-BAB9-D42334A8D25A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{501517C2-86A6-4A82-9FD6-594BD9E61EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{501517C2-86A6-4A82-9FD6-594BD9E61EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{501517C2-86A6-4A82-9FD6-594BD9E61EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{501517C2-86A6-4A82-9FD6-594BD9E61EFA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6A5AD1D-6157-42C5-85B8-15812E6255DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6A5AD1D-6157-42C5-85B8-15812E6255DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6A5AD1D-6157-42C5-85B8-15812E6255DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6A5AD1D-6157-42C5-85B8-15812E6255DF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4EBAFC26-2D06-45CB-83DE-01CB68D466E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EBAFC26-2D06-45CB-83DE-01CB68D466E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EBAFC26-2D06-45CB-83DE-01CB68D466E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EBAFC26-2D06-45CB-83DE-01CB68D466E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A1AE883-B797-402C-8451-23ED8BBE70D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A1AE883-B797-402C-8451-23ED8BBE70D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A1AE883-B797-402C-8451-23ED8BBE70D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A1AE883-B797-402C-8451-23ED8BBE70D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94975885-8B14-4DBA-8677-5580CFCE4004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94975885-8B14-4DBA-8677-5580CFCE4004}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94975885-8B14-4DBA-8677-5580CFCE4004}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94975885-8B14-4DBA-8677-5580CFCE4004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A18CD06F-9EDB-40F0-A76D-96145F9EFC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A18CD06F-9EDB-40F0-A76D-96145F9EFC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A18CD06F-9EDB-40F0-A76D-96145F9EFC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A18CD06F-9EDB-40F0-A76D-96145F9EFC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A22560AD-DB08-4ADA-8353-9FFF94744604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A22560AD-DB08-4ADA-8353-9FFF94744604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A22560AD-DB08-4ADA-8353-9FFF94744604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A22560AD-DB08-4ADA-8353-9FFF94744604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9DD9B82-D3E1-40F5-8390-3EF19DF4E562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9DD9B82-D3E1-40F5-8390-3EF19DF4E562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9DD9B82-D3E1-40F5-8390-3EF19DF4E562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9DD9B82-D3E1-40F5-8390-3EF19DF4E562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D35085EC-0AC9-46F5-B681-95BB1396BEC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D35085EC-0AC9-46F5-B681-95BB1396BEC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D35085EC-0AC9-46F5-B681-95BB1396BEC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D35085EC-0AC9-46F5-B681-95BB1396BEC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72928D7E-3BB4-4D4C-972C-2E261E88EB60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72928D7E-3BB4-4D4C-972C-2E261E88EB60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72928D7E-3BB4-4D4C-972C-2E261E88EB60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72928D7E-3BB4-4D4C-972C-2E261E88EB60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -654,33 +562,17 @@ Global
 		{69F1436E-9D04-4053-81F0-3EC6904F8DF9} = {38174443-E334-4153-A481-501069AD0D64}
 		{01FF0D35-E630-4033-8BE8-460300F6F4A6} = {38174443-E334-4153-A481-501069AD0D64}
 		{3BDB578D-F70D-4449-A0C7-39257105A866} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
-		{420AF32F-F54F-4A74-B9EF-BDBE059FD4D9} = {46BDFC06-7221-40B8-9DA3-53F88E9685AC}
-		{9B1D728E-D683-4269-B8FD-BC73C512C6E0} = {420AF32F-F54F-4A74-B9EF-BDBE059FD4D9}
-		{317149CA-1857-47D0-AD1E-EB67A4B1C1AA} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{DA270560-D9ED-4191-89A6-65952605CDC9} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{C555EC61-62C6-4A5E-B3BB-6EA3B63634AB} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{A62C6353-18DD-417B-A90E-8E57DC42ED06} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{69C84AC3-9BFC-4AAB-AB59-F07D6E3DEE88} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{AE515D07-530A-4A21-8C25-ADFAC46F71CB} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{6038CC5D-6D1F-41AC-B30D-3B3859CF34FE} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{D44D1E69-0B02-4C22-BE8A-CDF208F8CAA1} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{5CA2FD91-0EA5-483F-9383-A220BC027CF5} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{954F1E92-688B-4C68-B777-18D86AD574DE} = {420AF32F-F54F-4A74-B9EF-BDBE059FD4D9}
-		{FAE703D6-E30F-48BC-BCD7-2BA9345C8C7A} = {954F1E92-688B-4C68-B777-18D86AD574DE}
-		{A78BCEE5-523A-45C1-9C30-0734C0EA62F5} = {954F1E92-688B-4C68-B777-18D86AD574DE}
-		{39151A93-1761-4E3B-A836-AB355697BDA0} = {954F1E92-688B-4C68-B777-18D86AD574DE}
-		{38BA169B-3744-4C50-8D9D-C5EEFA2FB67F} = {954F1E92-688B-4C68-B777-18D86AD574DE}
-		{E6CBA9CD-D4C1-4A21-A7C3-86AB29A7B58C} = {954F1E92-688B-4C68-B777-18D86AD574DE}
 		{A5149ECB-E0A2-4493-A414-7BC29E47715B} = {6314C3BF-347D-4884-9EAC-AF2B78B78504}
-		{5968849B-FACA-4411-8CC3-FDC74FAA51C9} = {9B1D728E-D683-4269-B8FD-BC73C512C6E0}
-		{068CF554-6E1C-4E7A-BAB9-D42334A8D25A} = {8C67FF1A-6F99-4551-A7FB-0FD4FF6D4087}
-		{501517C2-86A6-4A82-9FD6-594BD9E61EFA} = {8C67FF1A-6F99-4551-A7FB-0FD4FF6D4087}
-		{A6A5AD1D-6157-42C5-85B8-15812E6255DF} = {8C67FF1A-6F99-4551-A7FB-0FD4FF6D4087}
 		{D60FD8F5-6858-4FAE-BB40-AC1DC85E88E7} = {46BDFC06-7221-40B8-9DA3-53F88E9685AC}
 		{4687F187-A7EF-4362-9FE3-45FFD1F9432D} = {D60FD8F5-6858-4FAE-BB40-AC1DC85E88E7}
 		{4EBAFC26-2D06-45CB-83DE-01CB68D466E5} = {4687F187-A7EF-4362-9FE3-45FFD1F9432D}
-		{3A1AE883-B797-402C-8451-23ED8BBE70D1} = {F2957D03-145B-4688-B3DF-CC54572F0F40}
-		{94975885-8B14-4DBA-8677-5580CFCE4004} = {F2957D03-145B-4688-B3DF-CC54572F0F40}
+		{A18CD06F-9EDB-40F0-A76D-96145F9EFC92} = {8C67FF1A-6F99-4551-A7FB-0FD4FF6D4087}
+		{DE4641DC-05B4-481F-9B35-0FC5B00CC3E5} = {46BDFC06-7221-40B8-9DA3-53F88E9685AC}
+		{426E408E-60FB-4463-B0E8-096E2F85D759} = {DE4641DC-05B4-481F-9B35-0FC5B00CC3E5}
+		{A22560AD-DB08-4ADA-8353-9FFF94744604} = {426E408E-60FB-4463-B0E8-096E2F85D759}
+		{B9DD9B82-D3E1-40F5-8390-3EF19DF4E562} = {426E408E-60FB-4463-B0E8-096E2F85D759}
+		{D35085EC-0AC9-46F5-B681-95BB1396BEC2} = {426E408E-60FB-4463-B0E8-096E2F85D759}
+		{72928D7E-3BB4-4D4C-972C-2E261E88EB60} = {426E408E-60FB-4463-B0E8-096E2F85D759}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77DFA18A-BBC2-4580-B4FD-BECB3F123BAB}

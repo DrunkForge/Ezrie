@@ -34,13 +34,14 @@ using Volo.Abp.UI.Navigation;
 
 namespace Ezrie.AdministrationService;
 
-[DependsOn(typeof(AbpAutofacWebAssemblyModule))]
-[DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule))]
-[DependsOn(typeof(AbpAccountApplicationContractsModule))]
-[DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
-[DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
-[DependsOn(typeof(AbpSettingManagementBlazorWebAssemblyModule))]
 [DependsOn(typeof(AdministrationServiceBlazorWebAssemblyModule))]
+
+[DependsOn(typeof(AbpAutofacWebAssemblyModule))]
+[DependsOn(typeof(AbpAccountApplicationContractsModule))]
+[DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule))]
+[DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
+[DependsOn(typeof(AbpSettingManagementBlazorWebAssemblyModule))]
+[DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
 public class AdministrationServiceBlazorHostModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)

@@ -19,6 +19,7 @@ public class RemoteServices
 {
 	public RemoteService Default { get; set; } = new();
 	public RemoteService? AdministrationService { get; set; }
+	public RemoteService? RelationshipManagement { get; set; }
 }
 
 public class RemoteService

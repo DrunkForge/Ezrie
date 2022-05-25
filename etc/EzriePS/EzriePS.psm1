@@ -1,10 +1,11 @@
 $location = Get-Location
 $root = "Ezrie"
-$apps = "apps"
-$services = "services"
-$shared = "shared"
+$apps = "$location\apps"
+$gateways = "$location\gateways"
+$services = "$location\services"
+$shared = "$location\shared"
 $docker = "$location\etc\docker"
-Export-ModuleMember -Variable location,root
+Export-ModuleMember -Variable location,root,apps,gateways,services,shared
 
 if ($null -eq $location) {
 	throw "The EzriePS module was not initialized correctly."
@@ -88,8 +89,8 @@ Export-ModuleMember -Function New-App
 function New-Service($service) {
 	Write-Host "New Service $root.$service ===================================================================" -ForegroundColor Yellow
 	abp new "$root.$service" -t module -d ef -dbms PostgreSQL -csf -o "$services"
-	Remove-Unwanted $services
-	git add --all
+	Remove-Unwanted "$services\$root.$service"
+	git add --all "$services\$root.$service"
 	git commit -m "New Module $root.$service"
 }
 Export-ModuleMember -Function New-Service

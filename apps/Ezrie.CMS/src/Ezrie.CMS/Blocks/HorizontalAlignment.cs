@@ -1,4 +1,4 @@
-namespace CPCA.Presentation.CMS.Blocks;
+namespace Ezrie.CMS.Blocks;
 
 public enum HorizontalAlignment
 {

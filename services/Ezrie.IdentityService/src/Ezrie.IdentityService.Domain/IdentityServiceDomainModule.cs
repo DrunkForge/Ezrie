@@ -1,5 +1,7 @@
-﻿using Volo.Abp.Domain;
+using Volo.Abp.Domain;
 using Volo.Abp.Modularity;
+using Volo.Abp.Identity;
+using Volo.Abp.PermissionManagement;
 
 namespace Ezrie.IdentityService;
 
@@ -7,7 +9,9 @@ namespace Ezrie.IdentityService;
     typeof(AbpDddDomainModule),
     typeof(IdentityServiceDomainSharedModule)
 )]
-public class IdentityServiceDomainModule : AbpModule
+[DependsOn(typeof(AbpIdentityDomainModule))]
+    [DependsOn(typeof(AbpPermissionManagementDomainIdentityModule))]
+    public class IdentityServiceDomainModule : AbpModule
 {
 
 }

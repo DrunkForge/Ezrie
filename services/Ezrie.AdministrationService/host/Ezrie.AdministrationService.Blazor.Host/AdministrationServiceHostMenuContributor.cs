@@ -16,7 +16,6 @@
 
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.Account.Localization;
 using Ezrie.Configuration;
 using Ezrie.AdministrationService.Localization;
 

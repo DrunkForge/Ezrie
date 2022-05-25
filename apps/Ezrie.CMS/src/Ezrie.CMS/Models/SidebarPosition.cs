@@ -1,4 +1,4 @@
-namespace CPCA.Presentation.CMS.Models;
+namespace Ezrie.CMS.Models;
 
 public enum SidebarPosition
 {

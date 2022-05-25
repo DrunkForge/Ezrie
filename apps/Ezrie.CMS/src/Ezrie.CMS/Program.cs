@@ -1,65 +1,33 @@
-using CPCA;
-using CPCA.Presentation.CMS.Blocks;
-using CPCA.Presentation.CMS.Pages.DisplayTemplates;
-using Microsoft.EntityFrameworkCore;
-using Piranha;
-using Piranha.AspNetCore.Identity.SQLServer;
-using Piranha.AttributeBuilder;
-using Piranha.Data.EF.SQLServer;
-using Piranha.Manager.Editor;
+using Ezrie;
+using Ezrie.Logging;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.AddCpcaCms();
-
-builder.AddPiranha(options =>
+internal static class Program
 {
-	options.AddRazorRuntimeCompilation = true;
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
+	public async static Task<Int32> Main(String[] args)
+	{
+		try
+		{
+			var builder = WebApplication.CreateBuilder();
 
-	options.UseCms();
-	options.UseManager();
+			builder.Host.AddAppSettingsSecretsJson()
+				.UseAutofac()
+				.AddAppSettingsSecretsJson()
+				.UseEzrieLogging<EzrieCmsModule>();
 
-	options.UseFileStorage(naming: Piranha.Local.FileStorageNaming.UniqueFolderNames);
-	options.UseImageSharp();
-	options.UseTinyMCE();
-	options.UseMemoryCache();
+			await builder.Build().RunAsync().ConfigureAwait(false);
 
-	var connectionString = builder.Configuration.GetConnectionString(CpcaConsts.WebsiteDatabase);
-	options.UseEF<SQLServerDb>(db => db.UseSqlServer(connectionString));
-	options.UseIdentityWithSeed<IdentitySQLServerDb>(db => db.UseSqlServer(connectionString));
-});
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-	app.UseDeveloperExceptionPage();
+			return 0;
+		}
+		catch (Exception ex)
+		{
+			Log.Fatal(ex, "Host terminated unexpectedly!");
+			return 1;
+		}
+		finally
+		{
+			Log.CloseAndFlush();
+		}
+	}
 }
-
-app.UsePiranha(options =>
-{
-	// Initialize Piranha
-	App.Init(options.Api);
-	App.Blocks.Register<AccordionBlock>();
-	App.Blocks.Register<AccordionItemBlock>();
-	App.Blocks.Register<CardBlock>();
-	App.Blocks.Register<HeadingBlock>();
-	App.Blocks.Register<WindowBlock>();
-	App.Modules.Manager().Scripts.Add("~/assets/js/cpca-blocks.js");
-	App.Modules.Manager().Styles.Add("~/assets/css/cpca-blocks.css");
-
-	// Build content types
-	new ContentTypeBuilder(options.Api)
-		.AddAssembly(typeof(Program).Assembly)
-		.Build()
-		.DeleteOrphans();
-
-	// Configure Tiny MCE
-	EditorConfig.FromFile("editorconfig.json");
-
-	options.UseManager();
-	options.UseTinyMCE();
-	options.UseIdentity();
-});
-
-app.Run();

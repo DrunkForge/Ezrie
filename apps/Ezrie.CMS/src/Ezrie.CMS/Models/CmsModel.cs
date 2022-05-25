@@ -2,9 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Piranha;
 using Piranha.AspNetCore.Services;
 using Piranha.Models;
-using System.Threading.Tasks;
 
-namespace CPCA.Presentation.CMS.Models;
+namespace Ezrie.CMS.Models;
 
 public class CmsModel<T> : Microsoft.AspNetCore.Mvc.RazorPages.PageModel where T : PageBase
 {

@@ -394,8 +394,8 @@
 				]
 			},
 			{
-				"ClientId": "blazorappwithidentity-server",
-				"ClientName": "Blazor App With Identity Server",
+				"ClientId": "resource_server",
+				"ClientName": "Resource Server",
 				"AllowedGrantTypes": [
 					"code"
 				],
@@ -406,8 +406,7 @@
 					}
 				],
 				"AllowedScopes": [
-					"ezrie_tenant_service_swaggerui",
-					"ezrie_tenant_service_api"
+					"resource_server"
 				]
 			}
 		]

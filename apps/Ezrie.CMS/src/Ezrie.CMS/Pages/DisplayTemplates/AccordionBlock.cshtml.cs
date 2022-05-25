@@ -1,10 +1,10 @@
-using CPCA.Presentation.CMS.Blocks;
+using Ezrie.CMS.Blocks;
 using Piranha.Extend;
 using Piranha.Extend.Fields;
 using Piranha.Models;
 using System.Text;
 
-namespace CPCA.Presentation.CMS.Pages.DisplayTemplates;
+namespace Ezrie.CMS.Pages.DisplayTemplates;
 
 /// <summary>
 /// Single column quote block.

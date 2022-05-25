@@ -3,18 +3,20 @@
 		"windowsAuthentication": false,
 		"anonymousAuthentication": true,
 		"iisExpress": {
-			"applicationUrl": "https://localhost:5001",
-			"sslPort": 5001
+			"applicationUrl": "https://localhost:44319/",
+			"sslPort": 44319
 		}
 	},
 	"profiles": {
 		"Ezrie.RelationshipManagement.HttpApi.Host": {
 			"commandName": "Project",
 			"launchBrowser": true,
-			"applicationUrl": "https://localhost:5001",
 			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Development"
-			}
+				"ASPNETCORE_ENVIRONMENT": "Development",
+				"ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
+			},
+			"dotnetRunMessages": "true",
+			"applicationUrl": "https://localhost:44319/"
 		}
 	}
 }

@@ -10,7 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations\Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\..\services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migrations\Ezrie.AdministrationService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\..\services\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore.Migrations\Ezrie.TenantService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\Ezrie.EntityFrameworkCore.Migrations\Ezrie.EntityFrameworkCore.Migrations.csproj" />

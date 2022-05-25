@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.Identity.EntityFrameworkCore;
 
 namespace Ezrie.IdentityService.EntityFrameworkCore;
 
@@ -22,5 +23,6 @@ public class IdentityServiceDbContext : AbpDbContext<IdentityServiceDbContext>, 
         base.OnModelCreating(builder);
 
         builder.ConfigureIdentityService();
-    }
+        builder.ConfigureIdentity();
+        }
 }

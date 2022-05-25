@@ -2,7 +2,7 @@ using Piranha.Extend;
 using Piranha.Extend.Fields;
 using System.Text.RegularExpressions;
 
-namespace CPCA.Presentation.CMS.Pages.DisplayTemplates;
+namespace Ezrie.CMS.Pages.DisplayTemplates;
 
 /// <summary>
 /// Single column HTML block.
