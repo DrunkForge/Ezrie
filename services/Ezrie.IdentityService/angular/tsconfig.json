@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.prod.json",
+  "compilerOptions": {
+    "paths": {
+      "@ezrie/identity-service": [
+        "projects/identity-service/src/public-api.ts"
+      ],
+      "@ezrie/identity-service/config": [
+        "projects/identity-service/config/src/public-api.ts"
+      ],
+      "@proxy": ["projects/identity-service/src/lib/proxy/index.ts"],
+      "@proxy/*": ["projects/identity-service/src/lib/proxy/*"]
+    }
+  }
+}

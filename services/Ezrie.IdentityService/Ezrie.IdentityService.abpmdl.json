@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Ezrie.IdentityService.Domain.Shared": {
+      "path": "src/Ezrie.IdentityService.Domain.Shared/Ezrie.IdentityService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.Domain": {
+      "path": "src/Ezrie.IdentityService.Domain/Ezrie.IdentityService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.Application.Contracts": {
+      "path": "src/Ezrie.IdentityService.Application.Contracts/Ezrie.IdentityService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.Application": {
+      "path": "src/Ezrie.IdentityService.Application/Ezrie.IdentityService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.EntityFrameworkCore": {
+      "path": "src/Ezrie.IdentityService.EntityFrameworkCore/Ezrie.IdentityService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.MongoDB": {
+      "path": "src/Ezrie.IdentityService.MongoDB/Ezrie.IdentityService.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.HttpApi": {
+      "path": "src/Ezrie.IdentityService.HttpApi/Ezrie.IdentityService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.HttpApi.Client": {
+      "path": "src/Ezrie.IdentityService.HttpApi.Client/Ezrie.IdentityService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.TestBase": {
+      "path": "test/Ezrie.IdentityService.TestBase/Ezrie.IdentityService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.IdentityService.EntityFrameworkCore.Tests": {
+      "path": "test/Ezrie.IdentityService.EntityFrameworkCore.Tests/Ezrie.IdentityService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.IdentityService.MongoDB.Tests": {
+      "path": "test/Ezrie.IdentityService.MongoDB.Tests/Ezrie.IdentityService.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.IdentityService.Domain.Tests": {
+      "path": "test/Ezrie.IdentityService.Domain.Tests/Ezrie.IdentityService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.IdentityService.Application.Tests": {
+      "path": "test/Ezrie.IdentityService.Application.Tests/Ezrie.IdentityService.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.IdentityService.HttpApi.Host": {
+      "path": "host/Ezrie.IdentityService.HttpApi.Host/Ezrie.IdentityService.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.IdentityService.Web": {
+      "path": "src/Ezrie.IdentityService.Web/Ezrie.IdentityService.Web.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ezrie.IdentityService.HttpApi.Client.ConsoleTestApp/Ezrie.IdentityService.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.IdentityService.Web.Host": {
+      "path": "host/Ezrie.IdentityService.Web.Host/Ezrie.IdentityService.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.IdentityService.IdentityServer": {
+      "path": "host/Ezrie.IdentityService.IdentityServer/Ezrie.IdentityService.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.IdentityService.Host.Shared": {
+      "path": "host/Ezrie.IdentityService.Host.Shared/Ezrie.IdentityService.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.IdentityService.Web.Unified": {
+      "path": "host/Ezrie.IdentityService.Web.Unified/Ezrie.IdentityService.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.IdentityService.Blazor": {
+      "path": "src/Ezrie.IdentityService.Blazor/Ezrie.IdentityService.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.Blazor.Host": {
+      "path": "host/Ezrie.IdentityService.Blazor.Host/Ezrie.IdentityService.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.IdentityService.Blazor.Server": {
+      "path": "src/Ezrie.IdentityService.Blazor.Server/Ezrie.IdentityService.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.Blazor.WebAssembly": {
+      "path": "src/Ezrie.IdentityService.Blazor.WebAssembly/Ezrie.IdentityService.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.IdentityService.Blazor.Server.Host": {
+      "path": "host/Ezrie.IdentityService.Blazor.Server.Host/Ezrie.IdentityService.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

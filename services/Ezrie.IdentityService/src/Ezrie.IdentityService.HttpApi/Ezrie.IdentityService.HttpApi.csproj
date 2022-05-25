@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Ezrie.IdentityService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="5.2.2" />
+    <ProjectReference Include="..\Ezrie.IdentityService.Application.Contracts\Ezrie.IdentityService.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

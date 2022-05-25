@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Ezrie.IdentityService": {
+      "path": "Ezrie.IdentityService.abpmdl.json"
+    }
+  }
+}
