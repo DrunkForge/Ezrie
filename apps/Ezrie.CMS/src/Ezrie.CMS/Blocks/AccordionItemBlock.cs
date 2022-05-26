@@ -13,7 +13,7 @@ public class AccordionItemBlock : Block
 	public override String GetTitle()
 		=> Title == null || String.IsNullOrWhiteSpace(Title.Value) ? "[Section Title]" : Title.Value;
 
-	public String HtmlId => $"accordion-item-{Id.ToString().Replace("-", String.Empty)}";
+	public String HtmlId => $"accordion-item-{Id.ToString().Replace("-", String.Empty, StringComparison.Ordinal)}";
 
 	public String ParentId { get; private set; } = String.Empty;
 	public Int32 Index { get; private set; }

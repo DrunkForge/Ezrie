@@ -4,7 +4,7 @@ using Serilog;
 
 internal static class Program
 {
-	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
 	public async static Task<Int32> Main(String[] args)
 	{
 		try

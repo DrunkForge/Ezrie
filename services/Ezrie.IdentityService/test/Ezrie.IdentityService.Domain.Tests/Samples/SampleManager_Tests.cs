@@ -1,4 +1,3 @@
-﻿using System.Threading.Tasks;
 using Xunit;
 
 namespace Ezrie.IdentityService.Samples;
@@ -12,9 +11,6 @@ public class SampleManager_Tests : IdentityServiceDomainTestBase
         //_sampleManager = GetRequiredService<SampleManager>();
     }
 
-    [Fact]
-    public async Task Method1Async()
-    {
-
-    }
+	[Fact]
+	public Task Method1Async() => Task.CompletedTask;
 }

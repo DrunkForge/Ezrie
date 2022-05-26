@@ -1,10 +1,8 @@
-﻿namespace Ezrie.IdentityService;
+namespace Ezrie.IdentityService;
 
 public static class IdentityServiceDbProperties
 {
-    public static string DbTablePrefix { get; set; } = "IdentityService";
-
-    public static string DbSchema { get; set; } = null;
-
-    public const string ConnectionStringName = "IdentityService";
+	public const String ConnectionStringName = "IdentityService";
+	public static String? DbSchema { get; set; }
+	public static String DbTablePrefix { get; set; } = "IdentityService";
 }

@@ -1,16 +1,16 @@
-﻿using Volo.Abp.Bundling;
+using Volo.Abp.Bundling;
 
-namespace Ezrie.IdentityService.Blazor.Host;
+namespace Ezrie.IdentityService;
 
 public class IdentityServiceBlazorHostBundleContributor : IBundleContributor
 {
-    public void AddScripts(BundleContext context)
-    {
+	public void AddScripts(BundleContext context)
+	{
 
-    }
+	}
 
-    public void AddStyles(BundleContext context)
-    {
-        context.Add("main.css", true);
-    }
+	public void AddStyles(BundleContext context)
+	{
+		context.Add("main.css", true);
+	}
 }

@@ -18,7 +18,7 @@ namespace Ezrie.AccountManagement.Dtos.Users;
 
 public class UserRolesApiDto<TRoleDto>
 {
-	public List<TRoleDto> Roles { get; set; } = new List<TRoleDto>();
+	public IReadOnlyCollection<TRoleDto> Roles { get; set; } = Array.Empty<TRoleDto>();
 
 	public Int32 PageSize { get; set; }
 

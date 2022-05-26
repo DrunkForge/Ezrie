@@ -20,6 +20,7 @@ public class UserinfoController : Controller
 	// GET: /api/userinfo
 	[Authorize(AuthenticationSchemes = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)]
 	[HttpGet("~/connect/userinfo"), HttpPost("~/connect/userinfo"), Produces("application/json")]
+	[IgnoreAntiforgeryToken]
 	public async Task<IActionResult> Userinfo()
 	{
 		var user = await _userManager.GetUserAsync(User);
@@ -27,7 +28,7 @@ public class UserinfoController : Controller
 		{
 			return Challenge(
 				authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-				properties: new AuthenticationProperties(new Dictionary<string, string>
+				properties: new AuthenticationProperties(new Dictionary<String, String?>
 				{
 					[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
 					[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
@@ -35,7 +36,7 @@ public class UserinfoController : Controller
 				}));
 		}
 
-		var claims = new Dictionary<string, object>(StringComparer.Ordinal)
+		var claims = new Dictionary<String, Object>(StringComparer.Ordinal)
 		{
 			// Note: the "sub" claim is a mandatory claim and must be included in the JSON response.
 			[Claims.Subject] = await _userManager.GetUserIdAsync(user)

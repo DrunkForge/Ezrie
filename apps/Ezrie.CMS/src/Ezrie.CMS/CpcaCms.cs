@@ -8,6 +8,7 @@ public static class EzrieCms
 
 	public const Int32 MemberNumberMin = 1100;
 
+	[SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "This is a clean and tidy way for managing constants. -dw")]
 	public static class CacheKeys
 	{
 		private const String CachePrefix = "EzrieCache_";

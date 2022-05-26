@@ -1,19 +1,18 @@
-﻿namespace Ezrie.RelationshipManagement
-{
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			CreateHostBuilder(args).Build().Run();
-		}
+namespace Ezrie.RelationshipManagement;
 
-		public static IHostBuilder CreateHostBuilder(string[] args) =>
-			 Host.CreateDefaultBuilder(args)
-				 .ConfigureWebHostDefaults(webBuilder =>
-				 {
-					 webBuilder
-						 .ConfigureKestrel(options => options.AddServerHeader = false)
-						 .UseStartup<Startup>();
-				 });
+internal static class Program
+{
+	public static void Main(String[] args)
+	{
+		CreateHostBuilder(args).Build().Run();
 	}
+
+	public static IHostBuilder CreateHostBuilder(String[] args) =>
+		 Host.CreateDefaultBuilder(args)
+			 .ConfigureWebHostDefaults(webBuilder =>
+			 {
+				 webBuilder
+					 .ConfigureKestrel(options => options.AddServerHeader = false)
+					 .UseStartup<Startup>();
+			 });
 }

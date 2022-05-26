@@ -113,7 +113,7 @@ public class SeedingService : ITransientDependency
 		}
 	}
 
-	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "This method is not significant and the exception will be reported.")]
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
 	private async Task<List<Tenant>> GetTenantsAsync(CancellationToken cancellationToken)
 	{
 		try

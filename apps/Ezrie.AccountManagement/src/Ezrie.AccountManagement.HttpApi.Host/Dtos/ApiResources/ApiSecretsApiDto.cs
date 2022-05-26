@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -27,6 +27,6 @@ public class ApiSecretsApiDto
 
 	public Int32 PageSize { get; set; }
 
-	public List<ApiSecretApiDto> ApiSecrets { get; set; }
+	public IReadOnlyCollection<ApiSecretApiDto> ApiSecrets { get; set; } = Array.Empty<ApiSecretApiDto>();
 }
 

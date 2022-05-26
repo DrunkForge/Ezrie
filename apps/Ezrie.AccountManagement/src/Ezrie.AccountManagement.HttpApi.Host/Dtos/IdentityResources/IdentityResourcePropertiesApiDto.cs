@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -18,15 +18,10 @@ namespace Ezrie.AccountManagement.Dtos.IdentityResources;
 
 public class IdentityResourcePropertiesApiDto
 {
-	public IdentityResourcePropertiesApiDto()
-	{
-		IdentityResourceProperties = new List<IdentityResourcePropertyApiDto>();
-	}
-
 	public Int32 TotalCount { get; set; }
 
 	public Int32 PageSize { get; set; }
 
-	public List<IdentityResourcePropertyApiDto> IdentityResourceProperties { get; set; }
+	public IReadOnlyCollection<IdentityResourcePropertyApiDto> IdentityResourceProperties { get; set; } = Array.Empty<IdentityResourcePropertyApiDto>();
 }
 

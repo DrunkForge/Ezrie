@@ -5,8 +5,8 @@ namespace Ezrie.RelationshipManagement.ViewModels.Shared;
 public class ErrorViewModel
 {
 	[Display(Name = "Error")]
-	public string Error { get; set; }
+	public String Error { get; set; } = String.Empty;
 
 	[Display(Name = "Description")]
-	public string ErrorDescription { get; set; }
+	public String ErrorDescription { get; set; } = String.Empty;
 }

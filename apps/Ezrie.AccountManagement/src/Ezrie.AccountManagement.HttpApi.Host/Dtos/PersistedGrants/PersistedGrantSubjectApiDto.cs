@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -18,16 +18,16 @@ namespace Ezrie.AccountManagement.Dtos.PersistedGrants;
 
 public class PersistedGrantSubjectApiDto
 {
-	public String Key { get; set; }
-	public String Type { get; set; }
-	public String SubjectId { get; set; }
-	public String SubjectName { get; set; }
-	public String ClientId { get; set; }
+	public String Key { get; set; } = String.Empty;
+	public String Type { get; set; } = String.Empty;
+	public String SubjectId { get; set; } = String.Empty;
+	public String SubjectName { get; set; } = String.Empty;
+	public String ClientId { get; set; } = String.Empty;
 	public DateTime CreationTime { get; set; }
 	public DateTime? Expiration { get; set; }
-	public String Data { get; set; }
+	public String Data { get; set; } = String.Empty;
 	public DateTime? ConsumedTime { get; set; }
-	public String SessionId { get; set; }
-	public String Description { get; set; }
+	public String SessionId { get; set; } = String.Empty;
+	public String Description { get; set; } = String.Empty;
 }
 

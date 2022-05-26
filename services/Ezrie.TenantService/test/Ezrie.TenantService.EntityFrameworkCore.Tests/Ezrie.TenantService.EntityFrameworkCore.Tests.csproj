@@ -9,7 +9,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(MicrosoftPackageVersion)" />
+		<ProjectReference Include="..\..\..\..\shared\test\Ezrie.TestBase.EntityFrameworkCore\Ezrie.TestBase.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.TenantService.EntityFrameworkCore\Ezrie.TenantService.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.TenantService.TestBase\Ezrie.TenantService.TestBase.csproj" />
 		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(VoloAbpPackageVersion)" />

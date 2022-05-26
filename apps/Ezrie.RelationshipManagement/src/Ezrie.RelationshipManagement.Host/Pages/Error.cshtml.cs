@@ -1,27 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 
-namespace Ezrie.RelationshipManagement.Pages
+namespace Ezrie.RelationshipManagement.Pages;
+
+[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+[IgnoreAntiforgeryToken]
+public class ErrorModel : PageModel
 {
-	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-	[IgnoreAntiforgeryToken]
-	public class ErrorModel : PageModel
+	public String RequestId { get; set; } = String.Empty;
+
+	public Boolean ShowRequestId => !String.IsNullOrEmpty(RequestId);
+
+	private readonly ILogger<ErrorModel> _logger;
+
+	public ErrorModel(ILogger<ErrorModel> logger)
 	{
-		public string RequestId { get; set; }
+		_logger = logger;
+	}
 
-		public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-
-		private readonly ILogger<ErrorModel> _logger;
-
-		public ErrorModel(ILogger<ErrorModel> logger)
-		{
-			_logger = logger;
-		}
-
-		public void OnGet()
-		{
-			RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-		}
+	public void OnGet()
+	{
+		RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
 	}
 }

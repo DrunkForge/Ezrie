@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -18,12 +18,7 @@ namespace Ezrie.AccountManagement.Dtos.ApiResources;
 
 public class ApiResourcePropertiesApiDto
 {
-	public ApiResourcePropertiesApiDto()
-	{
-		ApiResourceProperties = new List<ApiResourcePropertyApiDto>();
-	}
-
-	public List<ApiResourcePropertyApiDto> ApiResourceProperties { get; set; }
+	public IReadOnlyCollection<ApiResourcePropertyApiDto> ApiResourceProperties { get; set; } = Array.Empty<ApiResourcePropertyApiDto>();
 
 	public Int32 TotalCount { get; set; }
 

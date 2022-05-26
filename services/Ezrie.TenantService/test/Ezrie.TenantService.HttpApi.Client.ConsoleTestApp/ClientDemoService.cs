@@ -1,4 +1,4 @@
-﻿using IdentityModel.Client;
+using IdentityModel.Client;
 using Microsoft.Extensions.Configuration;
 using Ezrie.TenantService.Samples;
 using Volo.Abp.DependencyInjection;
@@ -6,6 +6,7 @@ using Volo.Abp.IdentityModel;
 
 namespace Ezrie.TenantService;
 
+[SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
 public class ClientDemoService : ITransientDependency
 {
 	private readonly ISampleAppService _sampleAppService;
@@ -73,10 +74,10 @@ public class ClientDemoService : ITransientDependency
 		{
 			httpClient.SetBearerToken(accessToken);
 
-			var url = _configuration["RemoteServices:TenantService:BaseUrl"] +
-					  "api/TenantService/sample/authorized";
+			var uri = new Uri(_configuration["RemoteServices:TenantService:BaseUrl"] +
+					  "api/TenantService/sample/authorized");
 
-			var responseMessage = await httpClient.GetAsync(url);
+			var responseMessage = await httpClient.GetAsync(uri);
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var responseString = await responseMessage.Content.ReadAsStringAsync();
@@ -84,7 +85,7 @@ public class ClientDemoService : ITransientDependency
 			}
 			else
 			{
-				throw new Exception("Remote server returns error code: " + responseMessage.StatusCode);
+				throw new TddException("Remote server returns error code: " + responseMessage.StatusCode);
 			}
 		}
 	}
@@ -101,7 +102,7 @@ public class ClientDemoService : ITransientDependency
 		//Obtain access token from the IDS4 server
 
 		// discover endpoints from metadata
-		var client = new HttpClient();
+		using var client = new HttpClient();
 		var disco = await client.GetDiscoveryDocumentAsync(_configuration["IdentityClients:Default:Authority"]);
 		if (disco.IsError)
 		{
@@ -110,7 +111,7 @@ public class ClientDemoService : ITransientDependency
 		}
 
 		// request token
-		var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+		using var request = new PasswordTokenRequest
 		{
 			Address = disco.TokenEndpoint,
 			ClientId = _configuration["IdentityClients:Default:ClientId"],
@@ -118,7 +119,8 @@ public class ClientDemoService : ITransientDependency
 			UserName = _configuration["IdentityClients:Default:UserName"],
 			Password = _configuration["IdentityClients:Default:UserPassword"],
 			Scope = _configuration["IdentityClients:Default:Scope"]
-		});
+		};
+		var tokenResponse = await client.RequestPasswordTokenAsync(request);
 
 		if (tokenResponse.IsError)
 		{
@@ -134,10 +136,10 @@ public class ClientDemoService : ITransientDependency
 		{
 			httpClient.SetBearerToken(tokenResponse.AccessToken);
 
-			var url = _configuration["RemoteServices:TenantService:BaseUrl"] +
-					  "api/TenantService/sample/authorized";
+			var uri = new Uri(_configuration["RemoteServices:TenantService:BaseUrl"] +
+					  "api/TenantService/sample/authorized");
 
-			var responseMessage = await httpClient.GetAsync(url);
+			var responseMessage = await httpClient.GetAsync(uri);
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var responseString = await responseMessage.Content.ReadAsStringAsync();
@@ -145,7 +147,7 @@ public class ClientDemoService : ITransientDependency
 			}
 			else
 			{
-				throw new Exception("Remote server returns error code: " + responseMessage.StatusCode);
+				throw new TddException("Remote server returns error code: " + responseMessage.StatusCode);
 			}
 		}
 	}

@@ -18,7 +18,7 @@ namespace Ezrie.AccountManagement.Dtos.Roles;
 
 public class RoleClaimsApiDto<TKey>
 {
-	public List<RoleClaimApiDto<TKey>> Claims { get; set; } = new List<RoleClaimApiDto<TKey>>();
+	public IReadOnlyCollection<RoleClaimApiDto<TKey>> Claims { get; set; } = Array.Empty<RoleClaimApiDto<TKey>>();
 
 	public Int32 TotalCount { get; set; }
 

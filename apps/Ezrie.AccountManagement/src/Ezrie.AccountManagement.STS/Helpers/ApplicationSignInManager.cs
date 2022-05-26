@@ -26,32 +26,34 @@ public class ApplicationSignInManager<TUser> : SignInManager<TUser>
 	public override async Task SignInWithClaimsAsync(TUser user, AuthenticationProperties authenticationProperties, IEnumerable<Claim> additionalClaims)
 	{
 		var claims = additionalClaims.ToList();
-
-		var externalResult = await _contextAccessor.HttpContext.AuthenticateAsync(IdentityConstants.ExternalScheme);
-		if (externalResult != null && externalResult.Succeeded)
+		if (_contextAccessor.HttpContext != null)
 		{
-			var sid = externalResult.Principal.Claims.FirstOrDefault(x => x.Type == JwtClaimTypes.SessionId);
-			if (sid != null)
+			var externalResult = await _contextAccessor.HttpContext.AuthenticateAsync(IdentityConstants.ExternalScheme);
+			if (externalResult != null && externalResult.Succeeded)
 			{
-				claims.Add(new Claim(JwtClaimTypes.SessionId, sid.Value));
-			}
-
-			if (authenticationProperties != null)
-			{
-				// if the external provider issued an id_token, we'll keep it for sign out
-				var idToken = externalResult.Properties.GetTokenValue("id_token");
-				if (idToken != null)
+				var sid = externalResult.Principal.Claims.FirstOrDefault(x => x.Type == JwtClaimTypes.SessionId);
+				if (sid != null)
 				{
-					authenticationProperties.StoreTokens(new[] { new AuthenticationToken { Name = "id_token", Value = idToken } });
+					claims.Add(new Claim(JwtClaimTypes.SessionId, sid.Value));
 				}
-			}
 
-			var authenticationMethod = claims.FirstOrDefault(x => x.Type == ClaimTypes.AuthenticationMethod);
-			var idp = claims.FirstOrDefault(x => x.Type == JwtClaimTypes.IdentityProvider);
+				if (authenticationProperties != null)
+				{
+					// if the external provider issued an id_token, we'll keep it for sign out
+					var idToken = externalResult.Properties.GetTokenValue("id_token");
+					if (idToken != null)
+					{
+						authenticationProperties.StoreTokens(new[] { new AuthenticationToken { Name = "id_token", Value = idToken } });
+					}
+				}
 
-			if (authenticationMethod != null && idp == null)
-			{
-				claims.Add(new Claim(JwtClaimTypes.IdentityProvider, authenticationMethod.Value));
+				var authenticationMethod = claims.FirstOrDefault(x => x.Type == ClaimTypes.AuthenticationMethod);
+				var idp = claims.FirstOrDefault(x => x.Type == JwtClaimTypes.IdentityProvider);
+
+				if (authenticationMethod != null && idp == null)
+				{
+					claims.Add(new Claim(JwtClaimTypes.IdentityProvider, authenticationMethod.Value));
+				}
 			}
 		}
 

@@ -5,12 +5,12 @@ namespace Ezrie.AdministrationService.HttpApi.Client.ConsoleTestApp;
 
 class Program
 {
-	static async Task Main(System.String[] args)
+	static async Task Main(String[] args)
 	{
 		await CreateHostBuilder(args).RunConsoleAsync();
 	}
 
-	public static IHostBuilder CreateHostBuilder(System.String[] args) =>
+	public static IHostBuilder CreateHostBuilder(String[] args) =>
 		Host.CreateDefaultBuilder(args)
 			.AddAppSettingsSecretsJson()
 			.ConfigureServices((hostContext, services) =>

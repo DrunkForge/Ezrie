@@ -1,9 +1,9 @@
-﻿using IdentityServer4.Models;
+using IdentityServer4.Models;
 
 namespace Ezrie.AccountManagement.STS.ViewModels.Home;
 
 public class ErrorViewModel
 {
-	public ErrorMessage Error { get; set; }
+	public ErrorMessage? Error { get; set; }
 }
 

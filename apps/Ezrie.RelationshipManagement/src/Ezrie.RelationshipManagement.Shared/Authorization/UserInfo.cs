@@ -2,14 +2,14 @@ namespace Ezrie.RelationshipManagement.Authorization
 {
 	public class UserInfo
 	{
-		public static readonly UserInfo Anonymous = new UserInfo();
+		public static readonly UserInfo Anonymous = new();
 
-		public bool IsAuthenticated { get; set; }
+		public Boolean IsAuthenticated { get; set; }
 
-		public string NameClaimType { get; set; }
+		public String NameClaimType { get; set; } = String.Empty;
 
-		public string RoleClaimType { get; set; }
+		public String RoleClaimType { get; set; } = String.Empty;
 
-		public ICollection<ClaimValue> Claims { get; set; }
+		public IReadOnlyCollection<ClaimValue> Claims { get; set; } = Array.Empty<ClaimValue>();
 	}
 }

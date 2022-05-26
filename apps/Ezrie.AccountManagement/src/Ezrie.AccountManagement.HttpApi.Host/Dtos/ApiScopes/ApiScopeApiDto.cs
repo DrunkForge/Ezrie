@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -20,21 +20,16 @@ namespace Ezrie.AccountManagement.Dtos.ApiScopes;
 
 public class ApiScopeApiDto
 {
-	public ApiScopeApiDto()
-	{
-		UserClaims = new List<String>();
-	}
-
 	public Boolean ShowInDiscoveryDocument { get; set; } = true;
 
 	public Int32 Id { get; set; }
 
 	[Required]
-	public String Name { get; set; }
+	public String Name { get; set; } = String.Empty;
 
-	public String DisplayName { get; set; }
+	public String DisplayName { get; set; } = String.Empty;
 
-	public String Description { get; set; }
+	public String Description { get; set; } = String.Empty;
 
 	public Boolean Required { get; set; }
 
@@ -42,8 +37,8 @@ public class ApiScopeApiDto
 
 	public Boolean Enabled { get; set; } = true;
 
-	public List<String> UserClaims { get; set; }
+	public IReadOnlyCollection<String> UserClaims { get; set; } = Array.Empty<String>();
 
-	public List<ApiScopePropertyApiDto> ApiScopeProperties { get; set; }
+	public IReadOnlyCollection<ApiScopePropertyApiDto> ApiScopeProperties { get; set; } = Array.Empty<ApiScopePropertyApiDto>();
 }
 

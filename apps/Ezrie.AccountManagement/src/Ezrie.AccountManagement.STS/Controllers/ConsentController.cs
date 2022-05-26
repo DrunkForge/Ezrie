@@ -39,7 +39,6 @@ public class ConsentController : Controller
 	/// <param name="returnUrl"></param>
 	/// <returns></returns>
 	[HttpGet]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
 	public async Task<IActionResult> Index(String returnUrl)
 	{
 		var vm = await BuildViewModelAsync(returnUrl);
@@ -67,15 +66,15 @@ public class ConsentController : Controller
 			{
 				// The client is native, so this change in how to
 				// return the response is for better UX for the end user.
-				return this.LoadingPage("Redirect", result.RedirectUri);
+				return this.LoadingPage("Redirect", result.RedirectUri!);
 			}
 
-			return Redirect(result.RedirectUri);
+			return Redirect(result.RedirectUri!);
 		}
 
 		if (result.HasValidationError)
 		{
-			ModelState.AddModelError(String.Empty, result.ValidationError);
+			ModelState.AddModelError(String.Empty, result.ValidationError!);
 		}
 
 		if (result.ShowView)
@@ -98,7 +97,7 @@ public class ConsentController : Controller
 		if (request == null)
 			return result;
 
-		ConsentResponse grantedConsent = null;
+		ConsentResponse? grantedConsent = null;
 
 		// user clicked 'no' - send back the standard 'access_denied' response
 		if (model?.Button == "no")
@@ -152,13 +151,13 @@ public class ConsentController : Controller
 		else
 		{
 			// we need to redisplay the consent UI
-			result.ViewModel = await BuildViewModelAsync(model.ReturnUrl, model);
+			result.ViewModel = await BuildViewModelAsync(model?.ReturnUrl, model);
 		}
 
 		return result;
 	}
 
-	private async Task<ConsentViewModel?> BuildViewModelAsync(String returnUrl, ConsentInputModel? model = null)
+	private async Task<ConsentViewModel?> BuildViewModelAsync(String? returnUrl, ConsentInputModel? model = null)
 	{
 		var request = await _interaction.GetAuthorizationContextAsync(returnUrl);
 		if (request != null)
@@ -173,12 +172,12 @@ public class ConsentController : Controller
 		return null;
 	}
 
-	private ConsentViewModel CreateConsentViewModel(ConsentInputModel? model, String returnUrl, AuthorizationRequest request)
+	private ConsentViewModel CreateConsentViewModel(ConsentInputModel? model, String? returnUrl, AuthorizationRequest request)
 	{
 		var vm = new ConsentViewModel
 		{
 			RememberConsent = model?.RememberConsent ?? true,
-			ScopesConsented = model?.ScopesConsented ?? Enumerable.Empty<String>(),
+			ScopesConsented = model?.ScopesConsented ?? Array.Empty<String>(),
 			Description = model?.Description ?? String.Empty,
 
 			ReturnUrl = returnUrl,
@@ -212,7 +211,7 @@ public class ConsentController : Controller
 		return vm;
 	}
 
-	private ScopeViewModel CreateScopeViewModel(IdentityResource identity, Boolean check)
+	private static ScopeViewModel CreateScopeViewModel(IdentityResource identity, Boolean check)
 	{
 		return new ScopeViewModel
 		{
@@ -244,7 +243,7 @@ public class ConsentController : Controller
 		};
 	}
 
-	private ScopeViewModel GetOfflineAccessScope(Boolean check)
+	private static ScopeViewModel GetOfflineAccessScope(Boolean check)
 	{
 		return new ScopeViewModel
 		{

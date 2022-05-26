@@ -7,16 +7,16 @@ namespace Ezrie.CMS.Models;
 
 public class CmsModel<T> : Microsoft.AspNetCore.Mvc.RazorPages.PageModel where T : PageBase
 {
-	protected readonly IApi _api;
-	protected readonly IModelLoader _loader;
-
 	public CmsModel(IApi api, IModelLoader loader)
 	{
-		_api = api;
-		_loader = loader;
+		Api = api;
+		Loader = loader;
 	}
 
-	public T Data { get; set; }
+	protected IApi Api { get; }
+	protected IModelLoader Loader { get; }
+
+	public T Data { get; set; } = default!;
 	public Boolean HasHeaderImage => Data.PrimaryImage.HasValue;
 	public String BgCss => HasHeaderImage ? " bg-image" : "bg-no-image";
 	public String BgStyle => HasHeaderImage ? $" style=background-image:url({ Url.Content(Data.PrimaryImage) })" : "";
@@ -31,7 +31,7 @@ public class CmsModel<T> : Microsoft.AspNetCore.Mvc.RazorPages.PageModel where T
 	{
 		try
 		{
-			Data = await _loader.GetPageAsync<T>(id, HttpContext.User, draft);
+			Data = await Loader.GetPageAsync<T>(id, HttpContext.User, draft);
 
 			if (Data == null)
 			{

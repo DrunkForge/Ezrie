@@ -18,6 +18,7 @@ public class HomeController : Controller
 		_interaction = interaction;
 	}
 
+	[HttpGet]
 	public IActionResult Index()
 	{
 		return View();
@@ -51,6 +52,7 @@ public class HomeController : Controller
 	/// <summary>
 	/// Shows the error page
 	/// </summary>
+	[HttpGet]
 	public async Task<IActionResult> Error(String errorId)
 	{
 		var vm = new ErrorViewModel();

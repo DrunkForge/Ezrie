@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Skoruba.IdentityServer4.Shared.Configuration.Configuration.Identity;
 
 namespace Ezrie.AccountManagement.STS.Helpers;
@@ -14,17 +14,11 @@ public class UserResolver<TUser> where TUser : class
 		_policy = configuration.ResolutionPolicy;
 	}
 
-	public async Task<TUser> GetUserAsync(String login)
+	public async Task<TUser?> GetUserAsync(String login) => _policy switch
 	{
-		switch (_policy)
-		{
-			case LoginResolutionPolicy.Username:
-				return await _userManager.FindByNameAsync(login);
-			case LoginResolutionPolicy.Email:
-				return await _userManager.FindByEmailAsync(login);
-			default:
-				return null;
-		}
-	}
+		LoginResolutionPolicy.Username => await _userManager.FindByNameAsync(login),
+		LoginResolutionPolicy.Email => await _userManager.FindByEmailAsync(login),
+		_ => null,
+	};
 }
 

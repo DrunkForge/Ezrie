@@ -6,13 +6,13 @@ namespace Ezrie.AccountManagement.STS.Helpers.TagHelpers;
 public class GravatarTagHelper : TagHelper
 {
 	[HtmlAttributeName("email")]
-	public String Email { get; set; }
+	public String? Email { get; set; }
 
 	[HtmlAttributeName("alt")]
-	public String Alt { get; set; }
+	public String? Alt { get; set; }
 
 	[HtmlAttributeName("class")]
-	public String Class { get; set; }
+	public String? Class { get; set; }
 
 	[HtmlAttributeName("size")]
 	public Int32 Size { get; set; }

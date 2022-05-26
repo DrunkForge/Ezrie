@@ -15,6 +15,7 @@
 *********************************************************************************************/
 
 namespace Ezrie.Configuration;
+
 public class RemoteServices
 {
 	public RemoteService Default { get; set; } = new();

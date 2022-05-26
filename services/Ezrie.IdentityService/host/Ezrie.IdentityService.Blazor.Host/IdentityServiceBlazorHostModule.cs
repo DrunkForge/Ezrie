@@ -1,12 +1,7 @@
-﻿using System;
-using System.Net.Http;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
-using Ezrie.IdentityService.Blazor.WebAssembly;
 using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme;
@@ -18,17 +13,15 @@ using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
 
-namespace Ezrie.IdentityService.Blazor.Host;
+namespace Ezrie.IdentityService;
 
-[DependsOn(
-    typeof(AbpAutofacWebAssemblyModule),
-    typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule),
-    typeof(AbpAccountApplicationContractsModule),
-    typeof(AbpIdentityBlazorWebAssemblyModule),
-    typeof(AbpTenantManagementBlazorWebAssemblyModule),
-    typeof(AbpSettingManagementBlazorWebAssemblyModule),
-    typeof(IdentityServiceBlazorWebAssemblyModule)
-)]
+[DependsOn(typeof(AbpAutofacWebAssemblyModule))]
+[DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule))]
+[DependsOn(typeof(AbpAccountApplicationContractsModule))]
+[DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
+[DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
+[DependsOn(typeof(AbpSettingManagementBlazorWebAssemblyModule))]
+[DependsOn(typeof(IdentityServiceBlazorWebAssemblyModule))]
 public class IdentityServiceBlazorHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

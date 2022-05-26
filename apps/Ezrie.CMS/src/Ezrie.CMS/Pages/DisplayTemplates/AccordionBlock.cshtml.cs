@@ -54,7 +54,7 @@ public class AccordionBlock : BlockGroup, ISearchable
 		}
 	}
 
-	public String HtmlId() => $"accordion-{Id.ToString().Replace("-", String.Empty)}";
+	public String HtmlId() => $"accordion-{Id.ToString().Replace("-", String.Empty, StringComparison.Ordinal)}";
 
 	private String Header => Inverse.Value ? " header-inverse " : String.Empty;
 

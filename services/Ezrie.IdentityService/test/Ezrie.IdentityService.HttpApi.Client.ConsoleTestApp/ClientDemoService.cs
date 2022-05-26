@@ -1,6 +1,3 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using IdentityModel.Client;
 using Microsoft.Extensions.Configuration;
 using Ezrie.IdentityService.Samples;
@@ -76,10 +73,10 @@ public class ClientDemoService : ITransientDependency
         {
             httpClient.SetBearerToken(accessToken);
 
-            var url = _configuration["RemoteServices:IdentityService:BaseUrl"] +
-                      "api/IdentityService/sample/authorized";
+            var uri = new Uri(_configuration["RemoteServices:IdentityService:BaseUrl"] +
+                      "api/IdentityService/sample/authorized");
 
-            var responseMessage = await httpClient.GetAsync(url);
+            var responseMessage = await httpClient.GetAsync(uri);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var responseString = await responseMessage.Content.ReadAsStringAsync();
@@ -87,7 +84,7 @@ public class ClientDemoService : ITransientDependency
             }
             else
             {
-                throw new Exception("Remote server returns error code: " + responseMessage.StatusCode);
+                throw new TddException("Remote server returns error code: " + responseMessage.StatusCode);
             }
         }
     }
@@ -104,7 +101,7 @@ public class ClientDemoService : ITransientDependency
         //Obtain access token from the IDS4 server
 
         // discover endpoints from metadata
-        var client = new HttpClient();
+        using var client = new HttpClient();
         var disco = await client.GetDiscoveryDocumentAsync(_configuration["IdentityClients:Default:Authority"]);
         if (disco.IsError)
         {
@@ -112,16 +109,17 @@ public class ClientDemoService : ITransientDependency
             return;
         }
 
-        // request token
-        var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
-        {
-            Address = disco.TokenEndpoint,
-            ClientId = _configuration["IdentityClients:Default:ClientId"],
-            ClientSecret = _configuration["IdentityClients:Default:ClientSecret"],
-            UserName = _configuration["IdentityClients:Default:UserName"],
-            Password = _configuration["IdentityClients:Default:UserPassword"],
-            Scope = _configuration["IdentityClients:Default:Scope"]
-        });
+		// request token
+		using var request = new PasswordTokenRequest
+		{
+			Address = disco.TokenEndpoint,
+			ClientId = _configuration["IdentityClients:Default:ClientId"],
+			ClientSecret = _configuration["IdentityClients:Default:ClientSecret"],
+			UserName = _configuration["IdentityClients:Default:UserName"],
+			Password = _configuration["IdentityClients:Default:UserPassword"],
+			Scope = _configuration["IdentityClients:Default:Scope"]
+		};
+		var tokenResponse = await client.RequestPasswordTokenAsync(request);
 
         if (tokenResponse.IsError)
         {
@@ -137,8 +135,7 @@ public class ClientDemoService : ITransientDependency
         {
             httpClient.SetBearerToken(tokenResponse.AccessToken);
 
-            var url = _configuration["RemoteServices:IdentityService:BaseUrl"] +
-                      "api/IdentityService/sample/authorized";
+            var url = new Uri(_configuration["RemoteServices:IdentityService:BaseUrl"] + "api/IdentityService/sample/authorized");
 
             var responseMessage = await httpClient.GetAsync(url);
             if (responseMessage.IsSuccessStatusCode)
@@ -148,7 +145,7 @@ public class ClientDemoService : ITransientDependency
             }
             else
             {
-                throw new Exception("Remote server returns error code: " + responseMessage.StatusCode);
+                throw new TddException("Remote server returns error code: " + responseMessage.StatusCode);
             }
         }
     }

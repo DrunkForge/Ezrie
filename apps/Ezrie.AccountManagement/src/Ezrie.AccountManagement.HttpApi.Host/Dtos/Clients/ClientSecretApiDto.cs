@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -26,12 +26,12 @@ public class ClientSecretApiDto
 
 	public Int32 Id { get; set; }
 
-	public String Description { get; set; }
+	public String Description { get; set; } = String.Empty;
 
 	[Required]
-	public String Value { get; set; }
+	public String Value { get; set; } = String.Empty;
 
-	public String HashType { get; set; }
+	public String HashType { get; set; } = String.Empty;
 
 	public HashType HashTypeEnum => Enum.TryParse(HashType, true, out HashType result) ? result : Skoruba.IdentityServer4.Admin.EntityFramework.Helpers.HashType.Sha256;
 

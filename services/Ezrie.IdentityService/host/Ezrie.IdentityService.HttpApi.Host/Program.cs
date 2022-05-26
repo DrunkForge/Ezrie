@@ -1,16 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
 namespace Ezrie.IdentityService;
 
-public class Program
+internal static class Program
 {
-    public async static Task<int> Main(string[] args)
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
+	public async static Task<Int32> Main(String[] args)
     {
         Log.Logger = new LoggerConfiguration()
 #if DEBUG

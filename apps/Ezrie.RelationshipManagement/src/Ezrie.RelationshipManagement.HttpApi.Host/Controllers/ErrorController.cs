@@ -12,6 +12,7 @@ namespace Ezrie.RelationshipManagement.Controllers;
 
 public class ErrorController : Controller
 {
+	[HttpGet]
 	[Route("error")]
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 	public IActionResult Error()
@@ -26,8 +27,8 @@ public class ErrorController : Controller
 
 		return View(new ErrorViewModel
 		{
-			Error = response.Error,
-			ErrorDescription = response.ErrorDescription
+			Error = response.Error ?? "Unknown OpenIddict error.",
+			ErrorDescription = response.ErrorDescription ?? "A description is not available."
 		});
 	}
 }

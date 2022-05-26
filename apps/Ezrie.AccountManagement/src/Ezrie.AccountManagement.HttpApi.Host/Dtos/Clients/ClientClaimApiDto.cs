@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -23,9 +23,9 @@ public class ClientClaimApiDto
 	public Int32 Id { get; set; }
 
 	[Required]
-	public String Type { get; set; }
+	public String Type { get; set; } = String.Empty;
 
 	[Required]
-	public String Value { get; set; }
+	public String Value { get; set; } = String.Empty;
 }
 

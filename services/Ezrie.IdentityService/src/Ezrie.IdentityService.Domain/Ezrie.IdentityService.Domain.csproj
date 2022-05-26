@@ -1,17 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Ezrie.IdentityService</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RootNamespace>Ezrie.IdentityService</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.Identity.Domain" Version="5.2.2" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="5.2.2" />
-    <ProjectReference Include="..\Ezrie.IdentityService.Domain.Shared\Ezrie.IdentityService.Domain.Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.Identity.Domain" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="$(VoloAbpPackageVersion)" />
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Domain\Ezrie.Domain.csproj" />
+		<ProjectReference Include="..\Ezrie.IdentityService.Domain.Shared\Ezrie.IdentityService.Domain.Shared.csproj" />
+	</ItemGroup>
 
 </Project>

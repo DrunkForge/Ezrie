@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Ezrie.AccountManagement.STS.Helpers;
 
-public class SecurityHeadersAttribute : ActionFilterAttribute
+public sealed class SecurityHeadersAttribute : ActionFilterAttribute
 {
 	public override void OnResultExecuting(ResultExecutingContext context)
 	{
@@ -49,4 +49,3 @@ public class SecurityHeadersAttribute : ActionFilterAttribute
 		}
 	}
 }
-

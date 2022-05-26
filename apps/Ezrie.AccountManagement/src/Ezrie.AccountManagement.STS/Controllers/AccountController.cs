@@ -77,7 +77,6 @@ public class AccountController<TUser, TKey> : Controller
 	/// </summary>
 	[HttpGet]
 	[AllowAnonymous]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
 	public async Task<IActionResult> Login(String returnUrl)
 	{
 		// build a model so we know what to show on the login page
@@ -271,6 +270,7 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
 	public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
 	{
 		if (ModelState.IsValid)
@@ -378,7 +378,6 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
 	public async Task<IActionResult> ExternalLoginCallback(String? returnUrl = null, String? remoteError = null)
 	{
 		if (remoteError != null)
@@ -398,7 +397,7 @@ public class AccountController<TUser, TKey> : Controller
 		var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
 		if (result.Succeeded)
 		{
-			return RedirectToLocal(returnUrl);
+			return RedirectToLocal(returnUrl ?? "/");
 		}
 
 		if (result.RequiresTwoFactor)
@@ -423,7 +422,7 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[HttpGet]
 	[AllowAnonymous]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
+	[SuppressMessage("Security", "CA5391:Use antiforgery tokens in ASP.NET Core MVC controllers", Justification = "POSTs to this action are expected to come from non-local pages.")]
 	public IActionResult ExternalLogin(String provider, String? returnUrl = null)
 	{
 		// Request a redirect to the external login provider.
@@ -436,7 +435,6 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
 	public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, String? returnUrl = null)
 	{
 		returnUrl = returnUrl ?? Url.Content("~/");
@@ -479,7 +477,6 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
 	public async Task<IActionResult> LoginWithRecoveryCode(String? returnUrl = null)
 	{
 		// Ensure the user has gone through the username & password screen first
@@ -499,6 +496,7 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpPost]
 	[AllowAnonymous]
+	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> LoginWithRecoveryCode(LoginWithRecoveryCodeViewModel model)
 	{
 		if (!ModelState.IsValid)
@@ -512,7 +510,7 @@ public class AccountController<TUser, TKey> : Controller
 			throw new InvalidOperationException(_localizer["Unable2FA"]);
 		}
 
-		var recoveryCode = model.RecoveryCode.Replace(" ", String.Empty);
+		var recoveryCode = model.RecoveryCode.Replace(" ", String.Empty, StringComparison.Ordinal);
 
 		var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
 
@@ -533,7 +531,6 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
 	public async Task<IActionResult> LoginWith2fa(Boolean rememberMe, String? returnUrl = null)
 	{
 		// Ensure the user has gone through the username & password screen first
@@ -590,7 +587,6 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
 	public IActionResult Register(String? returnUrl = null)
 	{
 		if (!_registerConfiguration.Enabled)
@@ -609,7 +605,6 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri doesn't work well with ModelBinding")]
 	public async Task<IActionResult> Register(RegisterViewModel model, String? returnUrl = null, Boolean IsCalledFromRegisterWithoutUsername = false)
 	{
 		if (!_registerConfiguration.Enabled)
@@ -633,7 +628,10 @@ public class AccountController<TUser, TKey> : Controller
 		{
 			var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 			code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
 			var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, HttpContext.Request.Scheme);
+			if (callbackUrl == null)
+				throw new IdentityException("Unable to generated the Account.ConfirmEmail callback URL");
 
 			await _emailSender.SendEmailAsync(model.Email, _localizer["ConfirmEmailTitle"], _localizer["ConfirmEmailBody", HtmlEncoder.Default.Encode(callbackUrl)]);
 
@@ -671,7 +669,6 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
-	[SuppressMessage("Design", "CA1054:URI-like parameters should not be strings", Justification = "System.Uri does not place nice with model binding.")]
 	public async Task<IActionResult> RegisterWithoutUsername(RegisterWithoutUsernameViewModel model, String? returnUrl = null)
 	{
 		var registerModel = new RegisterViewModel
@@ -709,7 +706,7 @@ public class AccountController<TUser, TKey> : Controller
 	private async Task<LoginViewModel> BuildLoginViewModelAsync(String returnUrl)
 	{
 		var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-		if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
+		if (context != null && context.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
 		{
 			var local = context.IdP == IdentityServerConstants.LocalIdentityProvider;
 
@@ -718,7 +715,7 @@ public class AccountController<TUser, TKey> : Controller
 			{
 				EnableLocalLogin = local,
 				ReturnUrl = returnUrl,
-				Username = context?.LoginHint ?? String.Empty
+				Username = context.LoginHint ?? String.Empty
 			};
 
 			if (!local)

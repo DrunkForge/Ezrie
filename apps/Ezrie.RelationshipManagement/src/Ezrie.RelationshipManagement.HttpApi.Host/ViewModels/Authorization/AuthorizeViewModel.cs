@@ -5,8 +5,8 @@ namespace Ezrie.RelationshipManagement.ViewModels.Authorization;
 public class AuthorizeViewModel
 {
 	[Display(Name = "Application")]
-	public string ApplicationName { get; set; }
+	public String ApplicationName { get; set; } = String.Empty;
 
 	[Display(Name = "Scope")]
-	public string Scope { get; set; }
+	public String Scope { get; set; } = String.Empty;
 }

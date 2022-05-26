@@ -1,12 +1,12 @@
-﻿using Volo.Abp.Reflection;
+using Volo.Abp.Reflection;
 
 namespace Ezrie.IdentityService.Permissions;
 
-public class IdentityServicePermissions
+public static class IdentityServicePermissions
 {
-    public const string GroupName = "IdentityService";
+    public const String GroupName = "IdentityService";
 
-    public static string[] GetAll()
+    public static String[] GetAll()
     {
         return ReflectionHelper.GetPublicConstantsRecursively(typeof(IdentityServicePermissions));
     }

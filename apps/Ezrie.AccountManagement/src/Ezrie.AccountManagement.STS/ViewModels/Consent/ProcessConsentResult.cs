@@ -10,7 +10,7 @@ public class ProcessConsentResult
 	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "System.Uri doesn't work nicely with IConfiguration")]
 	public String? RedirectUri { get; set; }
 
-	public Client Client { get; set; }
+	public Client? Client { get; set; }
 
 	public Boolean ShowView => ViewModel != null;
 	public ConsentViewModel? ViewModel { get; set; }

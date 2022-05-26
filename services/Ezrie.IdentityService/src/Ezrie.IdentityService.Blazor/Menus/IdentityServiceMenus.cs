@@ -1,10 +1,10 @@
-﻿namespace Ezrie.IdentityService.Blazor.Menus;
+namespace Ezrie.IdentityService.Menus;
 
-public class IdentityServiceMenus
+public static class IdentityServiceMenus
 {
-    public const string Prefix = "IdentityService";
+	public const String Prefix = "IdentityService";
 
-    //Add your menu items here...
-    //public const string Home = Prefix + ".MyNewMenuItem";
+	//Add your menu items here...
+	public const string Home = Prefix + ".MyNewMenuItem";
 
 }

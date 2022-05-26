@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -20,18 +20,6 @@ namespace Ezrie.AccountManagement.Dtos.Clients;
 
 public class ClientApiDto
 {
-	public ClientApiDto()
-	{
-		AllowedScopes = new List<String>();
-		PostLogoutRedirectUris = new List<String>();
-		RedirectUris = new List<String>();
-		IdentityProviderRestrictions = new List<String>();
-		AllowedCorsOrigins = new List<String>();
-		AllowedGrantTypes = new List<String>();
-		Claims = new List<ClientClaimApiDto>();
-		Properties = new List<ClientPropertyApiDto>();
-	}
-
 	public Int32 AbsoluteRefreshTokenLifetime { get; set; } = 2592000;
 	public Int32 AccessTokenLifetime { get; set; } = 3600;
 
@@ -47,31 +35,37 @@ public class ClientApiDto
 	public Boolean AlwaysSendClientClaims { get; set; }
 	public Int32 AuthorizationCodeLifetime { get; set; } = 300;
 
-	public String FrontChannelLogoutUri { get; set; }
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>")]
+	public String FrontChannelLogoutUri { get; set; } = String.Empty;
 	public Boolean FrontChannelLogoutSessionRequired { get; set; } = true;
-	public String BackChannelLogoutUri { get; set; }
+
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>")]
+	public String BackChannelLogoutUri { get; set; } = String.Empty;
 	public Boolean BackChannelLogoutSessionRequired { get; set; } = true;
 
 	[Required]
-	public String ClientId { get; set; }
+	public String ClientId { get; set; } = String.Empty;
 
 	[Required]
-	public String ClientName { get; set; }
+	public String ClientName { get; set; } = String.Empty;
 
-	public String ClientUri { get; set; }
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>")]
+	public String ClientUri { get; set; } = String.Empty;
 
-	public String Description { get; set; }
+	public String Description { get; set; } = String.Empty;
 
 	public Boolean Enabled { get; set; } = true;
 	public Boolean EnableLocalLogin { get; set; } = true;
 	public Int32 Id { get; set; }
 	public Int32 IdentityTokenLifetime { get; set; } = 300;
 	public Boolean IncludeJwtId { get; set; }
-	public String LogoUri { get; set; }
+
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>")]
+	public String LogoUri { get; set; } = String.Empty;
 
 	public String ClientClaimsPrefix { get; set; } = "client_";
 
-	public String PairWiseSubjectSalt { get; set; }
+	public String PairWiseSubjectSalt { get; set; } = String.Empty;
 
 	public String ProtocolType { get; set; } = "oidc";
 
@@ -86,32 +80,25 @@ public class ClientApiDto
 	public Boolean RequirePkce { get; set; }
 	public Boolean UpdateAccessTokenClaimsOnRefresh { get; set; }
 
-	public List<String> PostLogoutRedirectUris { get; set; }
-
-	public List<String> IdentityProviderRestrictions { get; set; }
-
-	public List<String> RedirectUris { get; set; }
-
-	public List<String> AllowedCorsOrigins { get; set; }
-
-	public List<String> AllowedGrantTypes { get; set; }
-
-	public List<String> AllowedScopes { get; set; }
-
-	public List<ClientClaimApiDto> Claims { get; set; }
-	public List<ClientPropertyApiDto> Properties { get; set; }
+	public IReadOnlyCollection<String> PostLogoutRedirectUris { get; set; } = Array.Empty<String>();
+	public IReadOnlyCollection<String> IdentityProviderRestrictions { get; set; } = Array.Empty<String>();
+	public IReadOnlyCollection<String> RedirectUris { get; set; } = Array.Empty<String>();
+	public IReadOnlyCollection<String> AllowedCorsOrigins { get; set; } = Array.Empty<String>();
+	public IReadOnlyCollection<String> AllowedGrantTypes { get; set; } = Array.Empty<String>();
+	public IReadOnlyCollection<String> AllowedScopes { get; set; } = Array.Empty<String>();
+	public IReadOnlyCollection<ClientClaimApiDto> Claims { get; set; } = Array.Empty<ClientClaimApiDto>();
+	public IReadOnlyCollection<ClientPropertyApiDto> Properties { get; set; } = Array.Empty<ClientPropertyApiDto>();
 
 	public DateTime? Updated { get; set; }
 	public DateTime? LastAccessed { get; set; }
 
 	public Int32? UserSsoLifetime { get; set; }
-	public String UserCodeType { get; set; }
+	public String UserCodeType { get; set; } = String.Empty;
 	public Int32 DeviceCodeLifetime { get; set; } = 300;
 
 	public Boolean RequireRequestObject { get; set; }
 
-	public List<String> AllowedIdentityTokenSigningAlgorithms { get; set; }
+	public IReadOnlyCollection<String> AllowedIdentityTokenSigningAlgorithms { get; set; } = Array.Empty<String>();
 
 	public Boolean NonEditable { get; set; }
 }
-

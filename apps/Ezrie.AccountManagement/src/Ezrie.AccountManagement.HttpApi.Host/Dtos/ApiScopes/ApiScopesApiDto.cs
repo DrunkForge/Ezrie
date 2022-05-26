@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -18,15 +18,7 @@ namespace Ezrie.AccountManagement.Dtos.ApiScopes;
 
 public class ApiScopesApiDto
 {
-	public ApiScopesApiDto()
-	{
-		Scopes = new List<ApiScopeApiDto>();
-	}
-
 	public Int32 PageSize { get; set; }
-
 	public Int32 TotalCount { get; set; }
-
-	public List<ApiScopeApiDto> Scopes { get; set; }
+	public IReadOnlyCollection<ApiScopeApiDto> Scopes { get; set; } = Array.Empty<ApiScopeApiDto>();
 }
-

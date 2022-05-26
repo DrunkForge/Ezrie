@@ -56,7 +56,7 @@ public class AuthorizationController : Controller
 		{
 			// To avoid endless login -> authorization redirects, the prompt=login flag
 			// is removed from the authorization request payload before redirecting the user.
-			var prompt = string.Join(" ", request.GetPrompts().Remove(Prompts.Login));
+			var prompt = String.Join(" ", request.GetPrompts().Remove(Prompts.Login));
 
 			var parameters = Request.HasFormContentType ?
 				Request.Form.Where(parameter => parameter.Key != Parameters.Prompt).ToList() :
@@ -85,7 +85,7 @@ public class AuthorizationController : Controller
 			{
 				return Forbid(
 					authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-					properties: new AuthenticationProperties(new Dictionary<string, string>
+					properties: new AuthenticationProperties(new Dictionary<String, String?>
 					{
 						[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.LoginRequired,
 						[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The user is not logged in."
@@ -124,7 +124,7 @@ public class AuthorizationController : Controller
 			case ConsentTypes.External when !authorizations.Any():
 				return Forbid(
 					authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-					properties: new AuthenticationProperties(new Dictionary<string, string>
+					properties: new AuthenticationProperties(new Dictionary<String, String?>
 					{
 						[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
 						[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
@@ -172,7 +172,7 @@ public class AuthorizationController : Controller
 			case ConsentTypes.Systematic when request.HasPrompt(Prompts.None):
 				return Forbid(
 					authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-					properties: new AuthenticationProperties(new Dictionary<string, string>
+					properties: new AuthenticationProperties(new Dictionary<String, String?>
 					{
 						[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
 						[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
@@ -219,7 +219,7 @@ public class AuthorizationController : Controller
 		{
 			return Forbid(
 				authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-				properties: new AuthenticationProperties(new Dictionary<string, string>
+				properties: new AuthenticationProperties(new Dictionary<String, String?>
 				{
 					[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
 					[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
@@ -288,6 +288,7 @@ public class AuthorizationController : Controller
 	}
 
 	[HttpPost("~/connect/token"), Produces("application/json")]
+	[SuppressMessage("Security", "CA5391:Use antiforgery tokens in ASP.NET Core MVC controllers", Justification = "POSTs to this action are expected to come from non-local pages.")]
 	public async Task<IActionResult> Exchange()
 	{
 		var request = HttpContext.GetOpenIddictServerRequest() ??
@@ -297,6 +298,16 @@ public class AuthorizationController : Controller
 		{
 			// Retrieve the claims principal stored in the authorization code/device code/refresh token.
 			var principal = (await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)).Principal;
+			if (principal == null)
+			{
+				return Forbid(
+					authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
+					properties: new AuthenticationProperties(new Dictionary<String, String?>
+					{
+						[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.LoginRequired,
+						[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "Login required."
+					}));
+			}
 
 			// Retrieve the user profile corresponding to the authorization code/refresh token.
 			// Note: if you want to automatically invalidate the authorization code/refresh token
@@ -307,7 +318,7 @@ public class AuthorizationController : Controller
 			{
 				return Forbid(
 					authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-					properties: new AuthenticationProperties(new Dictionary<string, string>
+					properties: new AuthenticationProperties(new Dictionary<String, String?>
 					{
 						[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
 						[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The token is no longer valid."
@@ -319,7 +330,7 @@ public class AuthorizationController : Controller
 			{
 				return Forbid(
 					authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-					properties: new AuthenticationProperties(new Dictionary<string, string>
+					properties: new AuthenticationProperties(new Dictionary<String, String?>
 					{
 						[OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
 						[OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The user is no longer allowed to sign in."
@@ -338,7 +349,7 @@ public class AuthorizationController : Controller
 		throw new InvalidOperationException("The specified grant type is not supported.");
 	}
 
-	private IEnumerable<string> GetDestinations(Claim claim, ClaimsPrincipal principal)
+	private static IEnumerable<String> GetDestinations(Claim claim, ClaimsPrincipal principal)
 	{
 		// Note: by default, claims are NOT automatically included in the access and identity tokens.
 		// To allow OpenIddict to serialize them, you must attach them a destination, that specifies

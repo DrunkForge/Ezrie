@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Ezrie.IdentityService</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RootNamespace>Ezrie.IdentityService</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Ezrie.IdentityService.Application\Ezrie.IdentityService.Application.csproj" />
-    <ProjectReference Include="..\Ezrie.IdentityService.Domain.Tests\Ezrie.IdentityService.Domain.Tests.csproj" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Ezrie.IdentityService.Application\Ezrie.IdentityService.Application.csproj" />
+		<ProjectReference Include="..\Ezrie.IdentityService.Domain.Tests\Ezrie.IdentityService.Domain.Tests.csproj" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+	</ItemGroup>
 
 </Project>

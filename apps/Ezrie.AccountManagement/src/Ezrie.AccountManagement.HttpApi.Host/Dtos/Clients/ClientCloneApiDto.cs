@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -24,10 +24,10 @@ public class ClientCloneApiDto
 	public Int32 Id { get; set; }
 
 	[Required]
-	public String ClientId { get; set; }
+	public String ClientId { get; set; } = String.Empty;
 
 	[Required]
-	public String ClientName { get; set; }
+	public String ClientName { get; set; } = String.Empty;
 
 	[Required]
 	public Boolean CloneClientCorsOrigins { get; set; }

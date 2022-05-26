@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -25,10 +25,10 @@ public class ApiSecretApiDto
 
 	public Int32 Id { get; set; }
 
-	public String Description { get; set; }
+	public String Description { get; set; } = String.Empty;
 
 	[Required]
-	public String Value { get; set; }
+	public String Value { get; set; } = String.Empty;
 
 	public DateTime? Expiration { get; set; }
 }

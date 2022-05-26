@@ -1,4 +1,4 @@
-﻿using Xunit;
+using Xunit;
 
 namespace Ezrie.TenantService.Samples;
 
@@ -12,8 +12,5 @@ public class SampleManager_Tests : TenantServiceDomainTestBase
 	}
 
 	[Fact]
-	public async Task Method1Async()
-	{
-
-	}
+	public Task Method1Async() => Task.CompletedTask;
 }

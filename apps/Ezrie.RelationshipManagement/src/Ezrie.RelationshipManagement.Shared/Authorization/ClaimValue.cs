@@ -6,13 +6,13 @@ public class ClaimValue
 	{
 	}
 
-	public ClaimValue(string type, string value)
+	public ClaimValue(String type, String value)
 	{
 		Type = type;
 		Value = value;
 	}
 
-	public string Type { get; set; }
+	public String Type { get; set; } = String.Empty;
 
-	public string Value { get; set; }
+	public String Value { get; set; } = String.Empty;
 }

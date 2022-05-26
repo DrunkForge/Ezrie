@@ -105,9 +105,15 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 
 	private static void ConfigureHttpClient(ServiceConfigurationContext context)
 	{
-		context.Services.AddTransient(sp => new HttpClient
+		context.Services.AddTransient(sp =>
 		{
-			BaseAddress = new Uri(context.GetRemoteServices().AdministrationService.BaseUrl)
+			var baseUrl = context.GetRemoteServices().Default.BaseUrl 
+				?? throw new ConfigurationException("RemoteServices:Default:BaseUrl is required and has not been provided.");
+
+			return new HttpClient
+			{
+				BaseAddress = new Uri(baseUrl)
+			};
 		});
 	}
 

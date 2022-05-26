@@ -126,7 +126,7 @@ public class DbContextMigrationRunner : IDbContextMigrationRunner, ITransientDep
 		}
 	}
 
-	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
 	private async Task<List<Tenant>> GetTenantsAsync(CancellationToken cancellationToken)
 	{
 		try

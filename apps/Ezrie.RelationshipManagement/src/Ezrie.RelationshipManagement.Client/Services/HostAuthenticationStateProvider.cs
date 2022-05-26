@@ -11,8 +11,7 @@ namespace Ezrie.RelationshipManagement.Services
 	{
 		private static readonly TimeSpan _userCacheRefreshInterval = TimeSpan.FromSeconds(60);
 
-		private const string LogInPath = "api/Account/Login";
-		private const string LogOutPath = "api/Account/Logout";
+		private const String LogInPath = "api/Account/Login";
 
 		private readonly NavigationManager _navigation;
 		private readonly HttpClient _client;
@@ -33,7 +32,7 @@ namespace Ezrie.RelationshipManagement.Services
 			return new AuthenticationState(await GetUser(useCache: true));
 		}
 
-		public void SignIn(string customReturnUrl = null)
+		public void SignIn(String? customReturnUrl = null)
 		{
 			var returnUrl = customReturnUrl != null ? _navigation.ToAbsoluteUri(customReturnUrl).ToString() : null;
 			var encodedReturnUrl = Uri.EscapeDataString(returnUrl ?? _navigation.Uri);
@@ -41,7 +40,7 @@ namespace Ezrie.RelationshipManagement.Services
 			_navigation.NavigateTo(logInUrl.ToString(), true);
 		}
 
-		private async ValueTask<ClaimsPrincipal> GetUser(bool useCache = false)
+		private async ValueTask<ClaimsPrincipal> GetUser(Boolean useCache = false)
 		{
 			var now = DateTimeOffset.Now;
 			if (useCache && now < _userLastCheck + _userCacheRefreshInterval)
@@ -57,13 +56,14 @@ namespace Ezrie.RelationshipManagement.Services
 			return _cachedUser;
 		}
 
+		[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
 		private async Task<ClaimsPrincipal> FetchUser()
 		{
-			UserInfo user = null;
+			UserInfo? user = null;
 
 			try
 			{
-				_logger.LogInformation(_client.BaseAddress.ToString());
+				_logger.LogInformation("Base Address: {BaseAddress}", _client.BaseAddress);
 				user = await _client.GetFromJsonAsync<UserInfo>("api/User");
 			}
 			catch (Exception exc)

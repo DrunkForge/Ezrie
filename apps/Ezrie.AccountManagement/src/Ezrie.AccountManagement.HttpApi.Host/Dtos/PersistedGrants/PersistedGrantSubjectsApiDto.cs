@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -18,15 +18,10 @@ namespace Ezrie.AccountManagement.Dtos.PersistedGrants;
 
 public class PersistedGrantSubjectsApiDto
 {
-	public PersistedGrantSubjectsApiDto()
-	{
-		PersistedGrants = new List<PersistedGrantSubjectApiDto>();
-	}
-
 	public Int32 TotalCount { get; set; }
 
 	public Int32 PageSize { get; set; }
 
-	public List<PersistedGrantSubjectApiDto> PersistedGrants { get; set; }
+	public IReadOnlyCollection<PersistedGrantSubjectApiDto> PersistedGrants { get; set; } = Array.Empty<PersistedGrantSubjectApiDto>();
 }
 

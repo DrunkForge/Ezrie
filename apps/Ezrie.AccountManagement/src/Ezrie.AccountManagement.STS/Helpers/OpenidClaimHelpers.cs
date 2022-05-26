@@ -1,4 +1,4 @@
-﻿using IdentityModel;
+using IdentityModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Security.Claims;
@@ -63,27 +63,27 @@ public static class OpenIdClaimHelpers
 			var addressJson = JObject.Parse(address);
 			if (addressJson.ContainsKey(AddressClaimConstants.StreetAddress))
 			{
-				profile.StreetAddress = addressJson[AddressClaimConstants.StreetAddress].ToString();
+				profile.StreetAddress = addressJson[AddressClaimConstants.StreetAddress]?.ToString() ?? String.Empty;
 			}
 
 			if (addressJson.ContainsKey(AddressClaimConstants.Locality))
 			{
-				profile.Locality = addressJson[AddressClaimConstants.Locality].ToString();
+				profile.Locality = addressJson[AddressClaimConstants.Locality]?.ToString() ?? String.Empty;
 			}
 
 			if (addressJson.ContainsKey(AddressClaimConstants.Region))
 			{
-				profile.Region = addressJson[AddressClaimConstants.Region].ToString();
+				profile.Region = addressJson[AddressClaimConstants.Region]?.ToString() ?? String.Empty;
 			}
 
 			if (addressJson.ContainsKey(AddressClaimConstants.PostalCode))
 			{
-				profile.PostalCode = addressJson[AddressClaimConstants.PostalCode].ToString();
+				profile.PostalCode = addressJson[AddressClaimConstants.PostalCode]?.ToString() ?? String.Empty;
 			}
 
 			if (addressJson.ContainsKey(AddressClaimConstants.Country))
 			{
-				profile.Country = addressJson[AddressClaimConstants.Country].ToString();
+				profile.Country = addressJson[AddressClaimConstants.Country]?.ToString() ?? String.Empty;
 			}
 		}
 		catch (JsonReaderException)

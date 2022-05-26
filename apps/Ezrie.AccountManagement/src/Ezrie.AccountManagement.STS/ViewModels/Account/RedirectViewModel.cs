@@ -1,8 +1,8 @@
-﻿
+
 namespace Ezrie.AccountManagement.STS.ViewModels.Account;
 
 public class RedirectViewModel
 {
-	public String RedirectUrl { get; set; }
+	public String RedirectUrl { get; set; } = String.Empty;
 }
 

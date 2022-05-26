@@ -156,7 +156,7 @@ public class DeviceController : Controller
 			Description = model?.Description ?? String.Empty,
 
 			RememberConsent = model?.RememberConsent ?? true,
-			ScopesConsented = model?.ScopesConsented ?? Enumerable.Empty<String>(),
+			ScopesConsented = model?.ScopesConsented ?? Array.Empty<String>(),
 
 			ClientName = request.Client.ClientName ?? request.Client.ClientId,
 			ClientUrl = request.Client.ClientUri,
@@ -207,6 +207,7 @@ public class DeviceController : Controller
 		Required = apiScope.Required,
 		Checked = check || apiScope.Required
 	};
+
 	private static ScopeViewModel GetOfflineAccessScope(Boolean check) => new()
 	{
 		Value = IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess,

@@ -1,4 +1,3 @@
-﻿using System.Threading.Tasks;
 using Volo.Abp.Modularity;
 using Xunit;
 
@@ -18,9 +17,6 @@ public abstract class SampleRepository_Tests<TStartupModule> : IdentityServiceTe
         //_sampleRepository = GetRequiredService<ISampleRepository>();
     }
 
-    [Fact]
-    public async Task Method1Async()
-    {
-
-    }
+	[Fact]
+	public Task Method1Async() => Task.CompletedTask;
 }

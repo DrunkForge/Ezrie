@@ -11,7 +11,7 @@ public class IdentityServicePermissionDefinitionProvider : PermissionDefinitionP
         var myGroup = context.AddGroup(IdentityServicePermissions.GroupName, L("Permission:IdentityService"));
     }
 
-    private static LocalizableString L(string name)
+    private static LocalizableString L(String name)
     {
         return LocalizableString.Create<IdentityServiceResource>(name);
     }

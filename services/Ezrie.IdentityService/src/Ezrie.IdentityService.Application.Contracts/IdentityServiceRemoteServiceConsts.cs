@@ -1,8 +1,8 @@
-﻿namespace Ezrie.IdentityService;
+namespace Ezrie.IdentityService;
 
-public class IdentityServiceRemoteServiceConsts
+public static class IdentityServiceRemoteServiceConsts
 {
-    public const string RemoteServiceName = "IdentityService";
+    public const String RemoteServiceName = "IdentityService";
 
-    public const string ModuleName = "identityService";
+    public const String ModuleName = "identityService";
 }

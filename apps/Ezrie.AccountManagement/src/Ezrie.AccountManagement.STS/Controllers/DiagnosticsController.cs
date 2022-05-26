@@ -14,7 +14,7 @@ public class DiagnosticsController : Controller
 	[HttpGet]
 	public async Task<IActionResult> Index()
 	{
-		var localAddresses = new String[] { "127.0.0.1", "::1", HttpContext.Connection?.LocalIpAddress?.ToString() };
+		var localAddresses = new String[] { "127.0.0.1", "::1", HttpContext.Connection?.LocalIpAddress?.ToString() ?? String.Empty };
 		if (!localAddresses.Contains(HttpContext.Connection?.RemoteIpAddress?.ToString()))
 		{
 			return NotFound();

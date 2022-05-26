@@ -8,21 +8,21 @@ namespace Ezrie.IdentityService.EntityFrameworkCore;
 [ConnectionStringName(IdentityServiceDbProperties.ConnectionStringName)]
 public class IdentityServiceDbContext : AbpDbContext<IdentityServiceDbContext>, IIdentityServiceDbContext
 {
-    /* Add DbSet for each Aggregate Root here. Example:
+	/* Add DbSet for each Aggregate Root here. Example:
      * public DbSet<Question> Questions { get; set; }
      */
 
-    public IdentityServiceDbContext(DbContextOptions<IdentityServiceDbContext> options)
-        : base(options)
-    {
+	public IdentityServiceDbContext(DbContextOptions<IdentityServiceDbContext> options)
+		: base(options)
+	{
 
-    }
+	}
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		base.OnModelCreating(modelBuilder);
 
-        builder.ConfigureIdentityService();
-        builder.ConfigureIdentity();
-        }
+		modelBuilder.ConfigureIdentityService();
+		modelBuilder.ConfigureIdentity();
+	}
 }

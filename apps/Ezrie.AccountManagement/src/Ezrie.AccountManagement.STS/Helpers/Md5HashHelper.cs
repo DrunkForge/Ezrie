@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Ezrie.AccountManagement.STS.Helpers;
@@ -13,6 +13,7 @@ public static class Md5HashHelper
 	/// </summary>
 	/// <param name="input"></param>
 	/// <returns></returns>
+	[SuppressMessage("Security", "CA5351:Do Not Use Broken Cryptographic Algorithms", Justification = "MD5 is sufficiently secure for the purpose (Gravatar API).")]
 	public static String GetHash(String input)
 	{
 		using (var md5 = MD5.Create())
@@ -23,7 +24,7 @@ public static class Md5HashHelper
 
 			foreach (var dataByte in bytes)
 			{
-				sBuilder.Append(dataByte.ToString("x2"));
+				sBuilder.Append(dataByte.ToString("x2", CultureInfo.InvariantCulture));
 			}
 
 			return sBuilder.ToString();

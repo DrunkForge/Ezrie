@@ -9,30 +9,29 @@ using Volo.Abp.Identity;
 
 namespace Ezrie.IdentityService;
 
-[DependsOn(
-    typeof(AbpValidationModule)
-)]
+[DependsOn(typeof(EzrieDomainSharedModule))]
+[DependsOn(typeof(AbpValidationModule))]
 [DependsOn(typeof(AbpIdentityDomainSharedModule))]
-    public class IdentityServiceDomainSharedModule : AbpModule
+public class IdentityServiceDomainSharedModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<IdentityServiceDomainSharedModule>();
-        });
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		Configure<AbpVirtualFileSystemOptions>(options =>
+		{
+			options.FileSets.AddEmbedded<IdentityServiceDomainSharedModule>();
+		});
 
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Add<IdentityServiceResource>("en")
-                .AddBaseTypes(typeof(AbpValidationResource))
-                .AddVirtualJson("/Localization/IdentityService");
-        });
+		Configure<AbpLocalizationOptions>(options =>
+		{
+			options.Resources
+				.Add<IdentityServiceResource>("en")
+				.AddBaseTypes(typeof(AbpValidationResource))
+				.AddVirtualJson("/Localization/IdentityService");
+		});
 
-        Configure<AbpExceptionLocalizationOptions>(options =>
-        {
-            options.MapCodeNamespace("IdentityService", typeof(IdentityServiceResource));
-        });
-    }
+		Configure<AbpExceptionLocalizationOptions>(options =>
+		{
+			options.MapCodeNamespace("IdentityService", typeof(IdentityServiceResource));
+		});
+	}
 }

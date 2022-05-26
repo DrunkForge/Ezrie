@@ -12,54 +12,58 @@ namespace Ezrie.RelationshipManagement
 		public Worker(IServiceProvider serviceProvider)
 			=> _serviceProvider = serviceProvider;
 
-		public async Task StartAsync(CancellationToken cancellationToken)
+		public async Task StartAsync(CancellationToken cancellationToken = default)
 		{
 			using var scope = _serviceProvider.CreateScope();
 
 			var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 			await context.Database.EnsureCreatedAsync(cancellationToken);
 
-			await RegisterApplicationsAsync(scope.ServiceProvider);
-			await RegisterScopesAsync(scope.ServiceProvider);
+			await RegisterApplicationsAsync(scope.ServiceProvider, cancellationToken);
+			await RegisterScopesAsync(scope.ServiceProvider, cancellationToken);
 
-			static async Task RegisterApplicationsAsync(IServiceProvider provider)
+		}
+
+		public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
+		static async Task RegisterApplicationsAsync(IServiceProvider provider, CancellationToken cancellationToken = default)
+		{
+			var manager = provider.GetRequiredService<IOpenIddictApplicationManager>();
+
+			// API
+			if (await manager.FindByClientIdAsync("resource_server_1", cancellationToken) == null)
 			{
-				var manager = provider.GetRequiredService<IOpenIddictApplicationManager>();
-
-				// API
-				if (await manager.FindByClientIdAsync("resource_server_1") == null)
+				var descriptor = new OpenIddictApplicationDescriptor
 				{
-					var descriptor = new OpenIddictApplicationDescriptor
-					{
-						ClientId = "resource_server_1",
-						ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342",
-						Permissions =
+					ClientId = "resource_server_1",
+					ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342",
+					Permissions =
 						{
 							Permissions.Endpoints.Introspection
 						}
-					};
+				};
 
-					await manager.CreateAsync(descriptor);
-				}
+				await manager.CreateAsync(descriptor, cancellationToken);
+			}
 
-				// Blazor Hosted
-				if (await manager.FindByClientIdAsync("blazorcodeflowpkceclient") is null)
+			// Blazor Hosted
+			if (await manager.FindByClientIdAsync("blazorcodeflowpkceclient", cancellationToken) is null)
+			{
+				await manager.CreateAsync(new OpenIddictApplicationDescriptor
 				{
-					await manager.CreateAsync(new OpenIddictApplicationDescriptor
-					{
-						ClientId = "blazorcodeflowpkceclient",
-						ConsentType = ConsentTypes.Explicit,
-						DisplayName = "Blazor code PKCE",
-						PostLogoutRedirectUris =
+					ClientId = "blazorcodeflowpkceclient",
+					ConsentType = ConsentTypes.Explicit,
+					DisplayName = "Blazor code PKCE",
+					PostLogoutRedirectUris =
 						{
 							new Uri("https://localhost:44348/signout-callback-oidc")
 						},
-						RedirectUris =
+					RedirectUris =
 						{
 							new Uri("https://localhost:44348/signin-oidc")
 						},
-						ClientSecret = "codeflow_pkce_client_secret",
-						Permissions =
+					ClientSecret = "codeflow_pkce_client_secret",
+					Permissions =
 						{
 							Permissions.Endpoints.Authorization,
 							Permissions.Endpoints.Logout,
@@ -71,37 +75,34 @@ namespace Ezrie.RelationshipManagement
 							Permissions.Scopes.Roles,
 							Permissions.Prefixes.Scope + "api1"
 						},
-						Requirements =
+					Requirements =
 						{
 							Requirements.Features.ProofKeyForCodeExchange
 						}
-					});
-				}
-			}
-
-			static async Task RegisterScopesAsync(IServiceProvider provider)
-			{
-				var manager = provider.GetRequiredService<IOpenIddictScopeManager>();
-
-				if (await manager.FindByNameAsync("api1") is null)
-				{
-					await manager.CreateAsync(new OpenIddictScopeDescriptor
-					{
-						DisplayName = "Dantooine API access",
-						DisplayNames =
-						{
-							[CultureInfo.GetCultureInfo("fr-FR")] = "Accès à l'API de démo"
-						},
-						Name = "api1",
-						Resources =
-						{
-							"resource_server_1"
-						}
-					});
-				}
+				}, cancellationToken);
 			}
 		}
 
-		public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+		static async Task RegisterScopesAsync(IServiceProvider provider, CancellationToken cancellationToken = default)
+		{
+			var manager = provider.GetRequiredService<IOpenIddictScopeManager>();
+
+			if (await manager.FindByNameAsync("api1", cancellationToken) is null)
+			{
+				await manager.CreateAsync(new OpenIddictScopeDescriptor
+				{
+					DisplayName = "Dantooine API access",
+					DisplayNames =
+						{
+							[CultureInfo.GetCultureInfo("fr-FR")] = "Accès à l'API de démo"
+						},
+					Name = "api1",
+					Resources =
+						{
+							"resource_server_1"
+						}
+				}, cancellationToken);
+			}
+		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -18,12 +18,7 @@ namespace Ezrie.AccountManagement.Dtos.Clients;
 
 public class ClientPropertiesApiDto
 {
-	public ClientPropertiesApiDto()
-	{
-		ClientProperties = new List<ClientPropertyApiDto>();
-	}
-
-	public List<ClientPropertyApiDto> ClientProperties { get; set; }
+	public IReadOnlyCollection<ClientPropertyApiDto> ClientProperties { get; set; } = Array.Empty<ClientPropertyApiDto>();
 
 	public Int32 TotalCount { get; set; }
 

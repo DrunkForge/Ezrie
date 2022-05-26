@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using global::Localization.Resources.AbpUi;
+using Localization.Resources.AbpUi;
 using Ezrie.AdministrationService.Localization;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;

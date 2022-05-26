@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -22,6 +22,7 @@ using Ezrie.AccountManagement.Helpers;
 using Ezrie.AccountManagement.Configuration.Constants;
 using Ezrie.AccountManagement.Dtos.PersistedGrants;
 using Ezrie.AccountManagement.ExceptionHandling;
+using NUglify.Helpers;
 
 namespace Ezrie.AccountManagement.Controllers;
 
@@ -86,7 +87,7 @@ public class PersistedGrantsController : ControllerBase
 		return Ok();
 	}
 
-	private void ParsePersistedGrantKey(PersistedGrantApiDto persistedGrantApiDto)
+	private static void ParsePersistedGrantKey(PersistedGrantApiDto persistedGrantApiDto)
 	{
 		if (!String.IsNullOrEmpty(persistedGrantApiDto.Key))
 		{
@@ -94,7 +95,7 @@ public class PersistedGrantsController : ControllerBase
 		}
 	}
 
-	private void ParsePersistedGrantKeys(PersistedGrantsApiDto persistedGrantApiDto)
+	private static void ParsePersistedGrantKeys(PersistedGrantsApiDto persistedGrantApiDto)
 	{
 		persistedGrantApiDto.PersistedGrants.ForEach(ParsePersistedGrantKey);
 	}

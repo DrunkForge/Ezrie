@@ -18,7 +18,7 @@ namespace Ezrie.AccountManagement.Dtos.Users;
 
 public class UserClaimsApiDto<TKey>
 {
-	public List<UserClaimApiDto<TKey>> Claims { get; set; } = new List<UserClaimApiDto<TKey>>();
+	public IReadOnlyCollection<UserClaimApiDto<TKey>> Claims { get; set; } = Array.Empty<UserClaimApiDto<TKey>>();
 
 	public Int32 TotalCount { get; set; }
 

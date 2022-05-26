@@ -1,13 +1,11 @@
-﻿using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 
 namespace Ezrie.IdentityService.EntityFrameworkCore;
 
 public class IdentityServiceHttpApiHostMigrationsDbContextFactory : IDesignTimeDbContextFactory<IdentityServiceHttpApiHostMigrationsDbContext>
 {
-    public IdentityServiceHttpApiHostMigrationsDbContext CreateDbContext(string[] args)
+    public IdentityServiceHttpApiHostMigrationsDbContext CreateDbContext(String[] args)
     {
         var configuration = BuildConfiguration();
 

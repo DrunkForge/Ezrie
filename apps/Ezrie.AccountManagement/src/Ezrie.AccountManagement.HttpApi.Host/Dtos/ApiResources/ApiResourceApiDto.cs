@@ -33,10 +33,9 @@ public class ApiResourceApiDto
 
 	public Boolean ShowInDiscoveryDocument { get; set; }
 
-	public List<String> UserClaims { get; set; } = new();
+	public IReadOnlyCollection<String> UserClaims { get; set; } = Array.Empty<String>();
 
-	public List<String> AllowedAccessTokenSigningAlgorithms { get; set; } = new();
+	public IReadOnlyCollection<String> AllowedAccessTokenSigningAlgorithms { get; set; } = Array.Empty<String>();
 
-	public List<String> Scopes { get; set; } = new();
+	public IReadOnlyCollection<String> Scopes { get; set; } = Array.Empty<String>();
 }
-

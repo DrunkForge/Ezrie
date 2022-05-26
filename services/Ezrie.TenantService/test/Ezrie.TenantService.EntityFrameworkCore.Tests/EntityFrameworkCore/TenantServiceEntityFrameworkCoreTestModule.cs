@@ -1,3 +1,4 @@
+using Ezrie.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -8,35 +9,10 @@ using Volo.Abp.Modularity;
 
 namespace Ezrie.TenantService.EntityFrameworkCore;
 
-[DependsOn(
-	typeof(TenantServiceTestBaseModule),
-	typeof(TenantServiceEntityFrameworkCoreModule),
-	typeof(AbpEntityFrameworkCoreSqliteModule)
-	)]
-public class TenantServiceEntityFrameworkCoreTestModule : AbpModule
+[DependsOn(typeof(TenantServiceTestBaseModule))]
+[DependsOn(typeof(TenantServiceEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpEntityFrameworkCoreSqliteModule))]
+public class TenantServiceEntityFrameworkCoreTestModule : EzrieEntityFrameworkCoreTestModuleBase<TenantServiceDbContext>
 {
-	public override void ConfigureServices(ServiceConfigurationContext context)
-	{
-		var sqliteConnection = CreateDatabaseAndGetConnection();
-
-		Configure<AbpDbContextOptions>(options =>
-		{
-			options.Configure(abpDbContextConfigurationContext =>
-			{
-				abpDbContextConfigurationContext.DbContextOptions.UseSqlite(sqliteConnection);
-			});
-		});
-	}
-
-	private static SqliteConnection CreateDatabaseAndGetConnection()
-	{
-		var connection = new SqliteConnection("Data Source=:memory:");
-		connection.Open();
-
-		new TenantServiceDbContext(
-			new DbContextOptionsBuilder<TenantServiceDbContext>().UseSqlite(connection).Options
-		).GetService<IRelationalDatabaseCreator>().CreateTables();
-
-		return connection;
-	}
+	public override TenantServiceDbContext CreateDbContext(DbContextOptions<TenantServiceDbContext> options) => new(options);
 }

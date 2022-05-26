@@ -25,6 +25,7 @@ using Ezrie.AccountManagement.STS.Configuration.Constants;
 using Ezrie.AccountManagement.STS.Helpers.Localization;
 using Ezrie.AccountManagement.STS.Configuration;
 using Ezrie.AccountManagement.STS.Configuration.Interfaces;
+using Ezrie.Configuration;
 
 namespace Ezrie.AccountManagement.STS.Helpers;
 
@@ -59,27 +60,37 @@ public static class StartupHelpers
 		services.Configure<RequestLocalizationOptions>(
 			opts =>
 			{
-				// If cultures are specified in the configuration, use them (making sure they are among the available cultures),
-				// otherwise use all the available cultures
-				var supportedCultureCodes = (cultureConfiguration?.Cultures?.Count > 0 ?
-					cultureConfiguration.Cultures.Intersect(CultureConfiguration.AvailableCultures) :
-					CultureConfiguration.AvailableCultures).ToArray();
+				if (cultureConfiguration == null)
+				{
+					opts.DefaultRequestCulture = new RequestCulture(CultureConfiguration.DefaultRequestCulture);
+					opts.SupportedCultures = new List<CultureInfo>() { new CultureInfo(CultureConfiguration.DefaultRequestCulture) };
+					opts.SupportedUICultures = new List<CultureInfo>() { new CultureInfo(CultureConfiguration.DefaultRequestCulture) };
+				}
+				else
+				{
+					// If cultures are specified in the configuration, use them (making sure they are among the available cultures),
+					// otherwise use all the available cultures
+					var supportedCultureCodes = (cultureConfiguration?.Cultures?.Count > 0
+						? cultureConfiguration.Cultures.Intersect(CultureConfiguration.AvailableCultures)
+						: CultureConfiguration.AvailableCultures).ToArray();
 
-				if (!supportedCultureCodes.Any())
-					supportedCultureCodes = CultureConfiguration.AvailableCultures;
-				var supportedCultures = supportedCultureCodes.Select(c => new CultureInfo(c)).ToList();
+					if (!supportedCultureCodes.Any())
+						supportedCultureCodes = CultureConfiguration.AvailableCultures;
+					var supportedCultures = supportedCultureCodes.Select(c => new CultureInfo(c)).ToList();
 
-				// If the default culture is specified use it, otherwise use CultureConfiguration.DefaultRequestCulture ("en")
-				var defaultCultureCode = String.IsNullOrEmpty(cultureConfiguration?.DefaultCulture) ?
-					CultureConfiguration.DefaultRequestCulture : cultureConfiguration?.DefaultCulture;
+					// If the default culture is specified use it, otherwise use CultureConfiguration.DefaultRequestCulture ("en")
+					var defaultCultureCode = String.IsNullOrEmpty(cultureConfiguration?.DefaultCulture)
+						? CultureConfiguration.DefaultRequestCulture
+						: cultureConfiguration.DefaultCulture;
 
-				// If the default culture is not among the supported cultures, use the first supported culture as default
-				if (!supportedCultureCodes.Contains(defaultCultureCode))
-					defaultCultureCode = supportedCultureCodes.FirstOrDefault();
+					// If the default culture is not among the supported cultures, use the first supported culture as default
+					if (!supportedCultureCodes.Contains(defaultCultureCode))
+						defaultCultureCode = supportedCultureCodes.First();
 
-				opts.DefaultRequestCulture = new RequestCulture(defaultCultureCode);
-				opts.SupportedCultures = supportedCultures;
-				opts.SupportedUICultures = supportedCultures;
+					opts.DefaultRequestCulture = new RequestCulture(defaultCultureCode);
+					opts.SupportedCultures = supportedCultures;
+					opts.SupportedUICultures = supportedCultures;
+				}
 			});
 
 		return mvcBuilder;
@@ -369,8 +380,7 @@ public static class StartupHelpers
 	/// </summary>
 	/// <param name="authenticationBuilder"></param>
 	/// <param name="configuration"></param>
-	private static void AddExternalProviders(AuthenticationBuilder authenticationBuilder,
-		IConfiguration configuration)
+	private static void AddExternalProviders(AuthenticationBuilder authenticationBuilder, IConfiguration configuration)
 	{
 		var externalProviderConfiguration = configuration.GetSection(nameof(ExternalProvidersConfiguration)).Get<ExternalProvidersConfiguration>();
 
@@ -378,9 +388,12 @@ public static class StartupHelpers
 		{
 			authenticationBuilder.AddGitHub(options =>
 			{
-				options.ClientId = externalProviderConfiguration.GitHubClientId;
-				options.ClientSecret = externalProviderConfiguration.GitHubClientSecret;
-				options.CallbackPath = externalProviderConfiguration.GitHubCallbackPath;
+				options.ClientId = externalProviderConfiguration.GitHubClientId
+					?? throw new ConfigurationException("UseGitHubProvider is set to 'true' but GitHubClientId has not been provided.");
+				options.ClientSecret = externalProviderConfiguration.GitHubClientSecret
+					?? throw new ConfigurationException("UseGitHubProvider is set to 'true' but GitHubClientSecret has not been provided.");
+				options.CallbackPath = externalProviderConfiguration.GitHubCallbackPath
+					?? throw new ConfigurationException("UseGitHubProvider is set to 'true' but GitHubCallbackPath has not been provided.");
 				options.Scope.Add("user:email");
 			});
 		}
@@ -392,7 +405,8 @@ public static class StartupHelpers
 				options.ClientSecret = externalProviderConfiguration.AzureAdSecret;
 				options.ClientId = externalProviderConfiguration.AzureAdClientId;
 				options.TenantId = externalProviderConfiguration.AzureAdTenantId;
-				options.Instance = externalProviderConfiguration.AzureInstance;
+				options.Instance = externalProviderConfiguration.AzureInstance
+					?? throw new ConfigurationException("UseAzureAdProvider is set to 'true' but AzureInstance has not been provided.");
 				options.Domain = externalProviderConfiguration.AzureDomain;
 				options.CallbackPath = externalProviderConfiguration.AzureAdCallbackPath;
 			}, cookieScheme: null);
@@ -406,7 +420,8 @@ public static class StartupHelpers
 	public static void UseMvcLocalizationServices(this IApplicationBuilder app)
 	{
 		var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-		app.UseRequestLocalization(options.Value);
+		if (options != null)
+			app.UseRequestLocalization(options.Value);
 	}
 
 	/// <summary>

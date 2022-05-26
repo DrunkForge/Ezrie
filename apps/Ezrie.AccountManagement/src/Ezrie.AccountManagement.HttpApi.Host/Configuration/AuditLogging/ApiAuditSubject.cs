@@ -16,6 +16,7 @@
 
 using Skoruba.AuditLogging.Constants;
 using Skoruba.AuditLogging.Events;
+using System.Security.Claims;
 
 namespace Ezrie.AccountManagement.Configuration.AuditLogging;
 
@@ -23,12 +24,14 @@ public class ApiAuditSubject : IAuditSubject
 {
 	public ApiAuditSubject(IHttpContextAccessor accessor, AuditLoggingConfiguration auditLoggingConfiguration)
 	{
+		var clientIdClaim = accessor.HttpContext?.User.FindFirst(auditLoggingConfiguration.ClientIdClaim)
+			?? new Claim(String.Empty, "Uknown Subject");
+
 		var subClaim = accessor.HttpContext?.User.FindFirst(auditLoggingConfiguration.SubjectIdentifierClaim);
 		var nameClaim = accessor.HttpContext?.User.FindFirst(auditLoggingConfiguration.SubjectNameClaim);
-		var clientIdClaim = accessor.HttpContext?.User.FindFirst(auditLoggingConfiguration.ClientIdClaim);
 
 		SubjectIdentifier = subClaim == null ? clientIdClaim.Value : subClaim.Value;
-		SubjectName = subClaim == null ? clientIdClaim.Value : nameClaim?.Value;
+		SubjectName = nameClaim == null ? clientIdClaim.Value : nameClaim.Value;
 		SubjectType = subClaim == null ? AuditSubjectTypes.Machine : AuditSubjectTypes.User;
 
 		SubjectAdditionalData = new
