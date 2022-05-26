@@ -18,7 +18,6 @@ using Volo.Abp.Modularity;
 
 namespace Ezrie.Logging;
 
-[DependsOn(typeof(EzrieDomainModule))]
 public class EzrieLoggingModule : AbpModule
 {
 }

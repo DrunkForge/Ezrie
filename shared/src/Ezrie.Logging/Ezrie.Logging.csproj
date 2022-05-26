@@ -25,7 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Ezrie.Domain\Ezrie.Domain.csproj" />
+	  <ProjectReference Include="..\Ezrie.Core\Ezrie.Core.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -70,3 +70,17 @@ services:
   bindings:
     - protocol: https
       port: 10301
+
+# Identity Blazor Host
+- name: ezrie-identity-blazor-host
+  project: services\Ezrie.IdentityService\host\Ezrie.IdentityService.Blazor.Host\Ezrie.IdentityService.Blazor.Host.csproj
+  bindings:
+    - protocol: https
+      port: 10400
+
+# Identity API
+- name: ezrie-identity-httpapi-host
+  project: services\Ezrie.IdentityService\host\Ezrie.IdentityService.HttpApi.Host\Ezrie.IdentityService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 10401

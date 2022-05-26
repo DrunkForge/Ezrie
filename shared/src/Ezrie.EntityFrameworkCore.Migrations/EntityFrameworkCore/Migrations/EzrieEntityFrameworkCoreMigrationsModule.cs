@@ -15,7 +15,6 @@
 *********************************************************************************************/
 
 using Ezrie.Logging;
-using Ezrie.MultiTenancy;
 using Ezrie.Seeding;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -44,7 +43,5 @@ public class EzrieEntityFrameworkCoreMigrationsModule : AbpModule
 		context.Services.Replace(ServiceDescriptor.Transient<IDataSeeder, EzrieDataSeeder>());
 
 		Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
-
-		Configure<AbpMultiTenancyOptions>(options => options.IsEnabled = MultiTenancyConsts.IsEnabled);
 	}
 }

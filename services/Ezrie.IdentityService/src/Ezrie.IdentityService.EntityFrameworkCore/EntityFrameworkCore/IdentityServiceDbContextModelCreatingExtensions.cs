@@ -1,14 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
+using Volo.Abp.Identity.EntityFrameworkCore;
 
 namespace Ezrie.IdentityService.EntityFrameworkCore;
 
 public static class IdentityServiceDbContextModelCreatingExtensions
 {
-    public static void ConfigureIdentityService(
-        this ModelBuilder builder)
+	public static void CreateIdentityServiceModel(this ModelBuilder modelBuilder) {
+	
+		modelBuilder.ConfigureIdentityService();
+		modelBuilder.ConfigureIdentity();
+
+	}
+
+	public static void ConfigureIdentityService(this ModelBuilder modelBuilder)
     {
-        Check.NotNull(builder, nameof(builder));
+        Check.NotNull(modelBuilder, nameof(modelBuilder));
 
         /* Configure all entities here. Example:
 

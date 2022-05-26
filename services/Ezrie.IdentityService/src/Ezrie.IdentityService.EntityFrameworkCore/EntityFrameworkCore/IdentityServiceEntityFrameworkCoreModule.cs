@@ -5,20 +5,19 @@ using Volo.Abp.Identity.EntityFrameworkCore;
 
 namespace Ezrie.IdentityService.EntityFrameworkCore;
 
-[DependsOn(
-    typeof(IdentityServiceDomainModule),
-    typeof(AbpEntityFrameworkCoreModule)
-)]
+[DependsOn(typeof(IdentityServiceDomainModule))]
+
+[DependsOn(typeof(AbpEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpIdentityEntityFrameworkCoreModule))]
-    public class IdentityServiceEntityFrameworkCoreModule : AbpModule
+public class IdentityServiceEntityFrameworkCoreModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddAbpDbContext<IdentityServiceDbContext>(options =>
-        {
-                /* Add custom repositories here. Example:
-                 * options.AddRepository<Question, EfCoreQuestionRepository>();
-                 */
-        });
-    }
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddAbpDbContext<IdentityServiceDbContext>(options =>
+		{
+			options.ReplaceDbContext<IIdentityDbContext>();
+
+			options.AddDefaultRepositories(true);
+		});
+	}
 }

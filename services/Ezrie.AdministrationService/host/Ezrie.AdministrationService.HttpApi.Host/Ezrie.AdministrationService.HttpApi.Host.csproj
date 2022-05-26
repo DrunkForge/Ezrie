@@ -14,30 +14,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
-		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
-		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-		<PackageReference Include="IdentityModel" Version="5.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Autofac" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Swashbuckle" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.Microservices\Ezrie.Hosting.Microservices.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
+		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.Application\Ezrie.AdministrationService.Application.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.EntityFrameworkCore.Migrations\Ezrie.AdministrationService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.HttpApi\Ezrie.AdministrationService.HttpApi.csproj" />
-		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.Application\Ezrie.AdministrationService.Application.csproj" />
-		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.EntityFrameworkCore\Ezrie.AdministrationService.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 
 </Project>

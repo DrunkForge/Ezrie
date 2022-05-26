@@ -24,8 +24,6 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement;
@@ -33,24 +31,14 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace Ezrie.AdministrationService.EntityFrameworkCore;
 
-[ReplaceDbContext(typeof(IAuditLoggingDbContext))]
-[ReplaceDbContext(typeof(IFeatureManagementDbContext))]
-[ReplaceDbContext(typeof(IIdentityDbContext))]
-[ReplaceDbContext(typeof(IPermissionManagementDbContext))]
-[ReplaceDbContext(typeof(ISettingManagementDbContext))]
 [ConnectionStringName(AdministrationServiceDbProperties.ConnectionStringName)]
 public class AdministrationServiceDbContext : AbpDbContext<AdministrationServiceDbContext>,
 	IAdministrationServiceDbContext,
 	IAuditLoggingDbContext,
 	IFeatureManagementDbContext,
-	IIdentityDbContext,
 	IPermissionManagementDbContext,
 	ISettingManagementDbContext
 {
-	/* Add DbSet for each Aggregate Root here. Example:
-	 * public DbSet<Question> Questions { get; set; }
-	 */
-
 	public AdministrationServiceDbContext(DbContextOptions<AdministrationServiceDbContext> options)
 		: base(options)
 	{
@@ -61,13 +49,6 @@ public class AdministrationServiceDbContext : AbpDbContext<AdministrationService
 	public DbSet<AuditLog> AuditLogs { get; set; }
 	// Feature Management
 	public DbSet<FeatureValue> FeatureValues { get; set; }
-	// Identity
-	public DbSet<IdentityUser> Users { get; set; }
-	public DbSet<IdentityRole> Roles { get; set; }
-	public DbSet<IdentityClaimType> ClaimTypes { get; set; }
-	public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
-	public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
-	public DbSet<IdentityLinkUser> LinkUsers { get; set; }
 	// Permission Management
 	public DbSet<PermissionGrant> PermissionGrants { get; set; }
 	// SettingManagement

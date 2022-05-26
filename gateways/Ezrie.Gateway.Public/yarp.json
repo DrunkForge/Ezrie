@@ -13,6 +13,12 @@
 					"Path": "/api/administration/{**everything}"
 				}
 			},
+			"Ezrie Identity Serivce": {
+				"ClusterId": "ezrie-identity-httpapi-host",
+				"Match": {
+					"Path": "/api/identity/{**everything}"
+				}
+			},
 			"Ezrie Relationship Management": {
 				"ClusterId": "ezrie-relationship-httpapi-host",
 				"Match": {
@@ -27,6 +33,13 @@
 			}
 		},
 		"Clusters": {
+			"ezrie-relationship-httpapi-host": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:5001"
+					}
+				}
+			},
 			"ezrie-account-httpapi-host": {
 				"Destinations": {
 					"destination1": {
@@ -41,17 +54,17 @@
 					}
 				}
 			},
-			"ezrie-relationship-httpapi-host": {
-				"Destinations": {
-					"destination1": {
-						"Address": "https://localhost:5001"
-					}
-				}
-			},
 			"ezrie-tenant-httpapi-host": {
 				"Destinations": {
 					"destination1": {
 						"Address": "https://localhost:10301"
+					}
+				}
+			},
+			"ezrie-identity-httpapi-host": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:10401"
 					}
 				}
 			}

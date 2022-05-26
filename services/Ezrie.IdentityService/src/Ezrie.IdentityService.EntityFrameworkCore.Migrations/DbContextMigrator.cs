@@ -14,13 +14,15 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Microsoft.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc;
+using Ezrie.EntityFrameworkCore.Migrations;
+using Volo.Abp.DependencyInjection;
 
-namespace Ezrie.IdentityService.Controllers;
+namespace Ezrie.IdentityService.EntityFrameworkCore.Migrations;
 
-public class HomeController : AbpController
+public class DbContextMigrator : DbContextMigrator<IdentityServiceMigrationsDbContext>, IDbContextMigrator, ITransientDependency
 {
-	[HttpGet("/")]
-	public ActionResult Index() => Redirect("~/swagger/index.html");
+	public DbContextMigrator(IServiceProvider serviceProvider)
+		: base(serviceProvider)
+	{
+	}
 }

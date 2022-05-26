@@ -129,6 +129,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ezrie.TenantService", "Ezrie.TenantService", "{BABA6A92-B0BD-49C5-A812-394A50BEE427}"
+	ProjectSection(SolutionItems) = preProject
+		services\Ezrie.IdentityService\src\Ezrie.IdentityService.EntityFrameworkCore.Migrations\FodyWeavers.xml = services\Ezrie.IdentityService\src\Ezrie.IdentityService.EntityFrameworkCore.Migrations\FodyWeavers.xml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{2CB4BC15-D556-4C24-BF47-0037C6047396}"
 EndProject
@@ -181,8 +184,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{5085E5
 		docker\docker-compose.override.yml = docker\docker-compose.override.yml
 		docker\docker-compose.yml = docker\docker-compose.yml
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8C67FF1A-6F99-4551-A7FB-0FD4FF6D4087}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ezrie.CMS", "Ezrie.CMS", "{D60FD8F5-6858-4FAE-BB40-AC1DC85E88E7}"
 EndProject

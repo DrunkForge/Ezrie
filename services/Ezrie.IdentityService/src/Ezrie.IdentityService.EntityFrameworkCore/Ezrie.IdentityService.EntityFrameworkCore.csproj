@@ -10,6 +10,9 @@
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
 		<PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Ezrie.IdentityService.Domain\Ezrie.IdentityService.Domain.csproj" />
 	</ItemGroup>
 

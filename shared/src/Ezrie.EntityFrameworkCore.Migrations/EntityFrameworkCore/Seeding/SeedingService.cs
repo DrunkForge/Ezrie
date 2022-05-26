@@ -97,7 +97,7 @@ public class SeedingService : ITransientDependency
 					var name = tenant == null ? "HOST" : $"{tenant.Name} ({tenant.Id})";
 					Logger.LogInformation("Started Seeding {Name}", name);
 
-					await _dataSeeder.SeedAsync(tenant?.Id);
+					await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id));
 
 					Logger.LogInformation("Completed Seeding {Name}", name);
 

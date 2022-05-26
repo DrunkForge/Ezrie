@@ -7,38 +7,23 @@
 		<RootNamespace>Ezrie.IdentityService</RootNamespace>
 		<PreserveCompilationReferences>true</PreserveCompilationReferences>
 		<UserSecretsId>Ezrie.IdentityService-c2d31439-b723-48e2-b061-5ebd7aeb6010</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..\..</DockerfileContext>
+		<DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
-		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-		<PackageReference Include="IdentityModel" Version="5.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Autofac" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Swashbuckle" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Ezrie.IdentityService.HttpApi\Ezrie.IdentityService.HttpApi.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.Microservices\Ezrie.Hosting.Microservices.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
+		<ProjectReference Include="..\..\..\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore\Ezrie.AdministrationService.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\..\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore\Ezrie.TenantService.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.IdentityService.Application\Ezrie.IdentityService.Application.csproj" />
-		<ProjectReference Include="..\..\src\Ezrie.IdentityService.EntityFrameworkCore\Ezrie.IdentityService.EntityFrameworkCore.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Remove="Logs\**" />
-		<Content Remove="Logs\**" />
-		<EmbeddedResource Remove="Logs\**" />
-		<None Remove="Logs\**" />
+		<ProjectReference Include="..\..\src\Ezrie.IdentityService.EntityFrameworkCore.Migrations\Ezrie.IdentityService.EntityFrameworkCore.Migrations.csproj" />
+		<ProjectReference Include="..\..\src\Ezrie.IdentityService.HttpApi\Ezrie.IdentityService.HttpApi.csproj" />
 	</ItemGroup>
 
 </Project>

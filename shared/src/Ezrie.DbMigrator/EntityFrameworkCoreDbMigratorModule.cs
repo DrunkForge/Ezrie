@@ -16,6 +16,7 @@
 
 using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
 using Ezrie.EntityFrameworkCore.Migrations;
+using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
 using Ezrie.Logging;
 using Ezrie.MultiTenancy;
 using Ezrie.Seeding;
@@ -32,6 +33,7 @@ namespace Ezrie.DbMigrator;
 
 [DependsOn(typeof(EzrieEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreMigrationsModule))]
+[DependsOn(typeof(IdentityServiceEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(TenantServiceEntityFrameworkCoreMigrationsModule))]
 public class EntityFrameworkCoreDbMigratorModule : AbpModule
 {
@@ -44,7 +46,5 @@ public class EntityFrameworkCoreDbMigratorModule : AbpModule
 			);
 
 		Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
-
-		Configure<AbpMultiTenancyOptions>(options => options.IsEnabled = MultiTenancyConsts.IsEnabled);
 	}
 }

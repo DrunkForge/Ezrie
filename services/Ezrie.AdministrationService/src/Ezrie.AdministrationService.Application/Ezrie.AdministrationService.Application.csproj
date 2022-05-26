@@ -10,6 +10,9 @@
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.AutoMapper" Version="$(VoloAbpPackageVersion)" />
 		<PackageReference Include="Volo.Abp.Ddd.Application" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Ezrie.AdministrationService.Application.Contracts\Ezrie.AdministrationService.Application.Contracts.csproj" />
 		<ProjectReference Include="..\Ezrie.AdministrationService.Domain\Ezrie.AdministrationService.Domain.csproj" />
 	</ItemGroup>

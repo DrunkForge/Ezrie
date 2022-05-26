@@ -23,7 +23,6 @@ using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.Http.Client.IdentityModel.Web;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
-using Volo.Abp.MultiTenancy;
 using Volo.Abp.Swashbuckle;
 
 namespace Ezrie.Hosting.AspNetCore.Microservices;
@@ -40,11 +39,6 @@ public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 		ArgumentNullException.ThrowIfNull(context);
 
 		var configuration = context.Services.GetConfiguration();
-
-		Configure<AbpMultiTenancyOptions>(options =>
-		{
-			options.IsEnabled = MultiTenancyConsts.IsEnabled;
-		});
 
 		context.ConfigureSwaggerWithAuth();
 	}

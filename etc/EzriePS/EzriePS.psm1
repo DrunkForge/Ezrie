@@ -13,7 +13,7 @@ if ($null -eq $location) {
 
 
 $cert = "$location\etc\dev-cert"
-$dbMigrator = "$location\$shared\src\$root.DbMigrator\$root.DbMigrator.csproj"
+$dbMigrator = "$shared\src\$root.DbMigrator\$root.DbMigrator.csproj"
 Export-ModuleMember -Variable sln
 
 Write-Host "Location:  $location" -ForegroundColor Yellow

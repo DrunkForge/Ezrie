@@ -14,14 +14,21 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.MultiTenancy;
 using Volo.Abp.Modularity;
+using Volo.Abp.MultiTenancy;
 
 namespace Ezrie;
 
 [DependsOn(typeof(EzrieDomainSharedModule))]
+[DependsOn(typeof(AbpMultiTenancyModule))]
 public class EzrieDomainModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
+		Configure<AbpMultiTenancyOptions>(options =>
+		{
+			options.IsEnabled = MultiTenancyConsts.IsEnabled;
+		});
 	}
 }

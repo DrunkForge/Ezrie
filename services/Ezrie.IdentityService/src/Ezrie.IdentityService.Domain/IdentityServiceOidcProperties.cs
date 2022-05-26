@@ -14,13 +14,11 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Microsoft.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc;
+namespace Ezrie.IdentityService;
 
-namespace Ezrie.IdentityService.Controllers;
-
-public class HomeController : AbpController
+public static class IdentityServiceOidcProperties
 {
-	[HttpGet("/")]
-	public ActionResult Index() => Redirect("~/swagger/index.html");
+	public const String DefaultAudience = "identity-service";
+
+	public static String Audience { get; set; } = DefaultAudience;
 }

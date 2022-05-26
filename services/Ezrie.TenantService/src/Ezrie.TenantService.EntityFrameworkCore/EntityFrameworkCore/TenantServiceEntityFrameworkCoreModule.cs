@@ -14,9 +14,9 @@ public class TenantServiceEntityFrameworkCoreModule : AbpModule
 	{
 		context.Services.AddAbpDbContext<TenantServiceDbContext>(options =>
 		{
-			/* Add custom repositories here. Example:
-			 * options.AddRepository<Question, EfCoreQuestionRepository>();
-			 */
+			options.ReplaceDbContext<ITenantManagementDbContext>();
+
+			options.AddDefaultRepositories(true);
 		});
 	}
 }

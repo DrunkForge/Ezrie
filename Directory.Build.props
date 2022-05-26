@@ -8,7 +8,7 @@
 		<FluentAssertionsAnalyzersPackageVersion>0.17.2</FluentAssertionsAnalyzersPackageVersion>
 
 		<!-- All Microsoft packages -->
-		<MicrosoftPackageVersion>6.0.2</MicrosoftPackageVersion>
+		<MicrosoftPackageVersion>6.0.5</MicrosoftPackageVersion>
 
 		<!-- Microsoft.NET.Test.Sdk https://www.nuget.org/packages/Microsoft.NET.Test.Sdk -->
 		<MicrosoftNETTestSdkPackageVersion>17.2.0</MicrosoftNETTestSdkPackageVersion>

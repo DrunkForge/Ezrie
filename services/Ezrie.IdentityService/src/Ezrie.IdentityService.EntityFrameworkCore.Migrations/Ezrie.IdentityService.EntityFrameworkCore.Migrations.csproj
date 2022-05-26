@@ -4,12 +4,17 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
-		<RootNamespace>Ezrie.IdentityService</RootNamespace>
+		<RootNamespace>Ezrie.IdentityService.EntityFrameworkCore.Migrations</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore.Migrations\Ezrie.EntityFrameworkCore.Migrations.csproj" />
+	  <ProjectReference Include="..\Ezrie.IdentityService.Application.Contracts\Ezrie.IdentityService.Application.Contracts.csproj" />
 	  <ProjectReference Include="..\Ezrie.IdentityService.EntityFrameworkCore\Ezrie.IdentityService.EntityFrameworkCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>

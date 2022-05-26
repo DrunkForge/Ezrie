@@ -6,7 +6,7 @@ if ($true -ne (Test-Path -Path ".\$root.sln" -IsValid -PathType Leaf))
 }
 
 <# Check development certificates #>
-Invoke-CreateCertificate
+<# Invoke-CreateCertificate #>
 
 <# Check Docker containers #>
 <#Start-Containers #>

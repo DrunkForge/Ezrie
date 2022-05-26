@@ -14,13 +14,27 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Microsoft.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc;
+#nullable disable
 
-namespace Ezrie.IdentityService.Controllers;
+using Ezrie;
+using Microsoft.EntityFrameworkCore;
+using Volo.Abp.Data;
+using Volo.Abp.EntityFrameworkCore;
 
-public class HomeController : AbpController
+namespace Ezrie.IdentityService.EntityFrameworkCore.Migrations;
+
+[ConnectionStringName(IdentityServiceDbProperties.ConnectionStringName)]
+public class IdentityServiceMigrationsDbContext : AbpDbContext<IdentityServiceMigrationsDbContext>
 {
-	[HttpGet("/")]
-	public ActionResult Index() => Redirect("~/swagger/index.html");
+	public IdentityServiceMigrationsDbContext(DbContextOptions<IdentityServiceMigrationsDbContext> options)
+		: base(options)
+	{
+	}
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		base.OnModelCreating(modelBuilder);
+
+		modelBuilder.CreateIdentityServiceModel();
+	}
 }
