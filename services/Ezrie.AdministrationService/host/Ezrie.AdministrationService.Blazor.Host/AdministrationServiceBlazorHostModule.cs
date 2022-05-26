@@ -16,9 +16,7 @@
 
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
-using Ezrie.AdministrationService.Configuration;
 using Ezrie.Configuration;
-using Ezrie.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Volo.Abp.Account;
 using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;
@@ -48,7 +46,7 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 	{
 		var builder = context.Services.GetSingletonInstance<WebAssemblyHostBuilder>();
 
-		builder.UseEzrieLogging<AdministrationServiceBlazorModule>();
+		//builder.UseEzrieLogging<AdministrationServiceBlazorModule>();
 
 		ConfigureAuthentication(builder);
 		ConfigureHttpClient(context);
@@ -57,8 +55,6 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 		ConfigureUI(builder);
 		ConfigureMenu(context);
 		ConfigureAutoMapper(context);
-
-		context.Services.ConfigureCors();
 	}
 
 	private void ConfigureRouter(ServiceConfigurationContext context)

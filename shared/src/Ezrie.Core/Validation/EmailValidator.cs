@@ -14,36 +14,26 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.Configuration;
+using System.Text.RegularExpressions;
 
-namespace Ezrie.AdministrationService.Configuration;
+namespace Ezrie.Validation;
 
-public static class ServiceCollectionExtensions
+public static class EmailValidator
 {
-	public static void ConfigureCors(this IServiceCollection services)
-	{
-		var apiConfiguration = services.GetConfiguration().GetAppConfiguration();
-		var origins = apiConfiguration.CorsAllowOrigins.Select(o => o.RemovePostFix("/")).ToArray();
-		services.AddCors(options =>
-		{
-			options.AddDefaultPolicy(builder =>
-			{
-				if (apiConfiguration.CorsAllowAnyOrigin)
-				{
-					builder
-						.AllowAnyOrigin();
-				}
-				else
-				{
-					builder
-						.WithOrigins(origins)
-						.SetIsOriginAllowedToAllowWildcardSubdomains();
-				}
+	public const String Pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
-				builder
-					.AllowAnyHeader()
-					.AllowAnyMethod();
-			});
-		});
+	public static readonly Regex Regex = new(Pattern);
+
+	public static Int32 MaximumLength { get; private set; } = 320;
+
+	public static Boolean IsValid(String address)
+		=> address != null && address.Length < MaximumLength && Regex.IsMatch(address);
+
+	public static void SetMaximumLength(Int32 maximumLength)
+	{
+		if (maximumLength < 5 /* a@b.c */)
+			throw new ArgumentOutOfRangeException(nameof(maximumLength));
+
+		MaximumLength = maximumLength;
 	}
 }

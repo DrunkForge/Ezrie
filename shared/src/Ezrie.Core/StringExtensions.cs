@@ -14,14 +14,29 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.Validation;
+
 namespace Ezrie;
 
-public static class HostEnvironment
+public static class StringExtensions
 {
-	private static String? EnvName;
-	public static String EnvironmentName => EnvName ??= Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+	public static String Redact(this String source, Int32 visible = 4)
+	{
+		ArgumentNullException.ThrowIfNull(source);
 
-	public static Boolean IsDevelopment => String.Equals(EnvironmentName, "DEVELOPMENT", StringComparison.OrdinalIgnoreCase);
-	public static Boolean IsStaging => String.Equals(EnvironmentName, "STAGING", StringComparison.OrdinalIgnoreCase);
-	public static Boolean IsProduction => String.Equals(EnvironmentName, "PRODUCTION", StringComparison.OrdinalIgnoreCase);
+		return visible < 0
+			? throw new ArgumentOutOfRangeException(nameof(visible), "Must be greater than or equal to 0.")
+			: source.Length <= visible
+				? new String('*', source.Length)
+				: String.Create(source.Length, source, (Span<Char> chars, String s) =>
+				{
+					for (var i = 0; i < chars.Length; i++)
+					{
+						chars[i] = i < chars.Length - visible ? '*' : source[i];
+					}
+				});
+	}
+
+	public static Boolean IsValidEmail(this String emailAddress)
+		=> EmailValidator.IsValid(emailAddress);
 }

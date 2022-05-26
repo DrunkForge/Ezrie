@@ -1,15 +1,14 @@
-using Volo.Abp.Modularity;
-using Volo.Abp.Localization;
 using Ezrie.TenantService.Localization;
+using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
+using Volo.Abp.Modularity;
+using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
-using Volo.Abp.TenantManagement;
 
 namespace Ezrie.TenantService;
 
-[DependsOn(typeof(EzrieDomainSharedModule))]
 [DependsOn(typeof(AbpValidationModule))]
 [DependsOn(typeof(AbpTenantManagementDomainSharedModule))]
 public class TenantServiceDomainSharedModule : AbpModule

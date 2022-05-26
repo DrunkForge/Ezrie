@@ -15,4 +15,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Ezrie.AdministrationService.Application.Contracts\Ezrie.AdministrationService.Application.Contracts.csproj" />
 	</ItemGroup>
+
 </Project>

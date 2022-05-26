@@ -14,6 +14,8 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.Validation;
+
 namespace Ezrie.Domain;
 
 public record EmailAddress()

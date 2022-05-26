@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Identity.Blazor.Server;
+using Volo.Abp.Identity.Blazor.WebAssembly;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 
@@ -14,7 +14,7 @@ namespace Ezrie.IdentityService;
 	typeof(AbpAspNetCoreComponentsWebThemingModule),
 	typeof(AbpAutoMapperModule)
 	)]
-[DependsOn(typeof(AbpIdentityBlazorServerModule))]
+[DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
 public class IdentityServiceBlazorModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)

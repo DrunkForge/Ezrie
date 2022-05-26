@@ -1,4 +1,4 @@
-﻿/*********************************************************************************************
+/*********************************************************************************************
 * EzrieCRM
 * Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
 * 
@@ -14,26 +14,4 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using System.Text.RegularExpressions;
-
-namespace Ezrie.Domain;
-
-public static class EmailValidator
-{
-	public const String Pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-
-	public static readonly Regex Regex = new(Pattern);
-
-	public static Int32 MaximumLength { get; private set; } = 320;
-
-	public static Boolean IsValid(String address)
-		=> address != null && address.Length < MaximumLength && Regex.IsMatch(address);
-
-	public static void SetMaximumLength(Int32 maximumLength)
-	{
-		if (maximumLength < 5 /* a@b.c */)
-			throw new ArgumentOutOfRangeException(nameof(maximumLength));
-
-		MaximumLength = maximumLength;
-	}
-}
+[assembly: SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "EzrieException() is private to force usage of EzrieException(String message) or  EzrieException(String message, Exception innerException)")]

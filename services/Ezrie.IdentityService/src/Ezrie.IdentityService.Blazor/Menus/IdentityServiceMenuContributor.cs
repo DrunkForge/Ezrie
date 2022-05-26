@@ -1,4 +1,4 @@
-﻿using Volo.Abp.UI.Navigation;
+using Volo.Abp.UI.Navigation;
 
 namespace Ezrie.IdentityService.Menus;
 
@@ -12,7 +12,7 @@ public class IdentityServiceMenuContributor : IMenuContributor
 		}
 	}
 
-	private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+	private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
 	{
 		//Add main menu items.
 		context.Menu.AddItem(new ApplicationMenuItem(IdentityServiceMenus.Prefix, displayName: "IdentityService", "/IdentityService", icon: "fa fa-globe"));

@@ -22,8 +22,4 @@
 		<Content Remove="Localization\IdentityService\*.json" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\shared\src\Ezrie.Domain.Shared\Ezrie.Domain.Shared.csproj" />
-	</ItemGroup>
-
 </Project>

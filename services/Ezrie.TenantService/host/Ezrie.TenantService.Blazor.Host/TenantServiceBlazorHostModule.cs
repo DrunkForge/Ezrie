@@ -17,7 +17,6 @@
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Ezrie.Configuration;
-using Ezrie.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Volo.Abp.Account;
 using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;
@@ -50,7 +49,6 @@ public class TenantServiceBlazorHostModule : AbpModule
 		ConfigureAutoMapper(context);
 		ConfigureBlazorise(context);
 		ConfigureHttpClient(context, environment);
-		ConfigureLogging(builder);
 		ConfigureMenu(context);
 		ConfigureRouter(context);
 		ConfigureUI(builder);
@@ -62,11 +60,6 @@ public class TenantServiceBlazorHostModule : AbpModule
 		{
 			options.AppAssembly = typeof(TenantServiceBlazorHostModule).Assembly;
 		});
-	}
-
-	private static void ConfigureLogging(WebAssemblyHostBuilder builder)
-	{
-		builder.UseEzrieLogging<TenantServiceBlazorModule>();
 	}
 
 	private void ConfigureMenu(ServiceConfigurationContext context)

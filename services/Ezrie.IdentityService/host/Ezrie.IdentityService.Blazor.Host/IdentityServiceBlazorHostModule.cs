@@ -15,13 +15,14 @@ using Volo.Abp.UI.Navigation;
 
 namespace Ezrie.IdentityService;
 
+[DependsOn(typeof(IdentityServiceBlazorWebAssemblyModule))]
+
 [DependsOn(typeof(AbpAutofacWebAssemblyModule))]
 [DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule))]
 [DependsOn(typeof(AbpAccountApplicationContractsModule))]
 [DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
 [DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
 [DependsOn(typeof(AbpSettingManagementBlazorWebAssemblyModule))]
-[DependsOn(typeof(IdentityServiceBlazorWebAssemblyModule))]
 public class IdentityServiceBlazorHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

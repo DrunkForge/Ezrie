@@ -244,6 +244,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.IdentityService.TestB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.IdentityService.EntityFrameworkCore.Migrations", "services\Ezrie.IdentityService\src\Ezrie.IdentityService.EntityFrameworkCore.Migrations\Ezrie.IdentityService.EntityFrameworkCore.Migrations.csproj", "{E1082322-00A3-4AF4-AED0-7669883BDF97}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ezrie.Core", "shared\src\Ezrie.Core\Ezrie.Core.csproj", "{01DF0E9D-B2D6-43AA-95A4-E9600CA58167}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -582,6 +584,10 @@ Global
 		{E1082322-00A3-4AF4-AED0-7669883BDF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1082322-00A3-4AF4-AED0-7669883BDF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1082322-00A3-4AF4-AED0-7669883BDF97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01DF0E9D-B2D6-43AA-95A4-E9600CA58167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01DF0E9D-B2D6-43AA-95A4-E9600CA58167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01DF0E9D-B2D6-43AA-95A4-E9600CA58167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01DF0E9D-B2D6-43AA-95A4-E9600CA58167}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -690,6 +696,7 @@ Global
 		{1BB01C1F-F801-42ED-885F-865D5F34000B} = {14A51A89-D514-4398-9539-29463E49F1DE}
 		{99838EA2-D40D-4BE2-8A6F-E4DB77F4A46F} = {14A51A89-D514-4398-9539-29463E49F1DE}
 		{E1082322-00A3-4AF4-AED0-7669883BDF97} = {A4D78C91-667E-45D3-8E41-A6DC0390C449}
+		{01DF0E9D-B2D6-43AA-95A4-E9600CA58167} = {F2957D03-145B-4688-B3DF-CC54572F0F40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77DFA18A-BBC2-4580-B4FD-BECB3F123BAB}

@@ -11,6 +11,10 @@
 		<PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
 		<PackageReference Include="Volo.Abp.Authorization" Version="$(VoloAbpPackageVersion)" />
 		<PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Core\Ezrie.Core.csproj" />
 		<ProjectReference Include="..\Ezrie.IdentityService.Domain.Shared\Ezrie.IdentityService.Domain.Shared.csproj" />
 	</ItemGroup>
 

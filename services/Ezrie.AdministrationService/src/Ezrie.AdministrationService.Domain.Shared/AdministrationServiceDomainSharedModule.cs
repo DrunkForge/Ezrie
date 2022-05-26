@@ -24,7 +24,6 @@ using Volo.Abp.VirtualFileSystem;
 
 namespace Ezrie.AdministrationService;
 
-[DependsOn(typeof(EzrieDomainSharedModule))]
 [DependsOn(typeof(AbpValidationModule))]
 public class AdministrationServiceDomainSharedModule : AbpModule
 {

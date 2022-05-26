@@ -22,7 +22,6 @@ using Ezrie.AccountManagement.Helpers;
 using Ezrie.AccountManagement.Configuration.Constants;
 using Ezrie.AccountManagement.Dtos.PersistedGrants;
 using Ezrie.AccountManagement.ExceptionHandling;
-using NUglify.Helpers;
 
 namespace Ezrie.AccountManagement.Controllers;
 
@@ -97,7 +96,7 @@ public class PersistedGrantsController : ControllerBase
 
 	private static void ParsePersistedGrantKeys(PersistedGrantsApiDto persistedGrantApiDto)
 	{
-		persistedGrantApiDto.PersistedGrants.ForEach(ParsePersistedGrantKey);
+		foreach (var grant in persistedGrantApiDto.PersistedGrants)
+			ParsePersistedGrantKey(grant);
 	}
 }
-
