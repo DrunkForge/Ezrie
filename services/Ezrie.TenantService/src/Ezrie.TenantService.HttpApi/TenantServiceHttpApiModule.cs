@@ -5,12 +5,12 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.TenantManagement;
+using Volo.Abp.VirtualFileSystem;
 
 namespace Ezrie.TenantService;
 
-[DependsOn(
-	typeof(TenantServiceApplicationContractsModule),
-	typeof(AbpAspNetCoreMvcModule))]
+[DependsOn(typeof(TenantServiceApplicationContractsModule))]
+[DependsOn(typeof(AbpAspNetCoreMvcModule))]
 [DependsOn(typeof(AbpTenantManagementHttpApiModule))]
 public class TenantServiceHttpApiModule : AbpModule
 {

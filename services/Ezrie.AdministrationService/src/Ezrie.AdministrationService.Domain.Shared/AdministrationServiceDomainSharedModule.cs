@@ -14,10 +14,13 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Volo.Abp.Modularity;
-using Volo.Abp.Localization;
 using Ezrie.AdministrationService.Localization;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
+using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.SettingManagement;
 using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
@@ -25,6 +28,9 @@ using Volo.Abp.VirtualFileSystem;
 namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(AbpValidationModule))]
+[DependsOn(typeof(AbpFeatureManagementDomainSharedModule))]
+[DependsOn(typeof(AbpPermissionManagementDomainSharedModule))]
+[DependsOn(typeof(AbpSettingManagementDomainSharedModule))]
 public class AdministrationServiceDomainSharedModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)

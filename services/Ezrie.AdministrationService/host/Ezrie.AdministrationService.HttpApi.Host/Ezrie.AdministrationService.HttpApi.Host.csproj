@@ -19,6 +19,9 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.Microservices\Ezrie.Hosting.Microservices.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
+		<ProjectReference Include="..\..\..\Ezrie.IdentityService\src\Ezrie.IdentityService.Application.Contracts\Ezrie.IdentityService.Application.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\Ezrie.IdentityService\src\Ezrie.IdentityService.EntityFrameworkCore\Ezrie.IdentityService.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\..\Ezrie.TenantService\src\Ezrie.TenantService.Application.Contracts\Ezrie.TenantService.Application.Contracts.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.Application\Ezrie.AdministrationService.Application.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.EntityFrameworkCore.Migrations\Ezrie.AdministrationService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.HttpApi\Ezrie.AdministrationService.HttpApi.csproj" />

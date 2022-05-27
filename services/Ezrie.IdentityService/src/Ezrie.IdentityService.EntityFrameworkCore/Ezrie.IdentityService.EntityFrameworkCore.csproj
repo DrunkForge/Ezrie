@@ -13,6 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore\Ezrie.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.IdentityService.Domain\Ezrie.IdentityService.Domain.csproj" />
 	</ItemGroup>
 

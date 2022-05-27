@@ -15,14 +15,20 @@
 *********************************************************************************************/
 
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.FeatureManagement;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.SettingManagement;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(AdministrationServiceApplicationContractsModule))]
 [DependsOn(typeof(AbpHttpClientModule))]
+[DependsOn(typeof(AbpFeatureManagementHttpApiClientModule))]
+[DependsOn(typeof(AbpPermissionManagementHttpApiClientModule))]
+[DependsOn(typeof(AbpSettingManagementHttpApiClientModule))]
 public class AdministrationServiceHttpApiClientModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)

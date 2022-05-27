@@ -1,20 +1,26 @@
+/*********************************************************************************************
+* EzrieCRM
+* Copyright (C) 2022 Doug Wilson (info@dougwilson.ca)
+* 
+* This program is free software: you can redistribute it and/or modify it under the terms of
+* the GNU Affero General Public License as published by the Free Software Foundation, either
+* version 3 of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY
+* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+* See the GNU Affero General Public License for more details.
+* 
+* You should have received a copy of the GNU Affero General Public License along with this
+* program. If not, see <https://www.gnu.org/licenses/>.
+*********************************************************************************************/
+
 using Ezrie.AdministrationService.EntityFrameworkCore;
 using Ezrie.Hosting.AspNetCore;
 using Ezrie.Hosting.AspNetCore.Microservices;
 using Ezrie.IdentityService.EntityFrameworkCore;
-using Ezrie.MultiTenancy;
 using Ezrie.TenantService.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.DataProtection;
-using StackExchange.Redis;
-using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.Caching;
-using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.MultiTenancy;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Ezrie.IdentityService;

@@ -39,7 +39,7 @@ public class Startup
 	   .AddOpenIdConnect(options =>
 	   {
 		   options.SignInScheme = "Cookies";
-		   options.Authority = "https://localhost:44319";
+		   options.Authority = "https://localhost:5500";
 		   options.ClientId = "blazorcodeflowpkceclient";
 		   options.ClientSecret = "codeflow_pkce_client_secret";
 		   options.RequireHttpsMetadata = true;

@@ -15,14 +15,20 @@
 *********************************************************************************************/
 
 using Volo.Abp.Application;
-using Volo.Abp.Modularity;
 using Volo.Abp.Authorization;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.SettingManagement;
 
 namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(AdministrationServiceDomainSharedModule))]
 [DependsOn(typeof(AbpDddApplicationContractsModule))]
 [DependsOn(typeof(AbpAuthorizationModule))]
+[DependsOn(typeof(AbpFeatureManagementApplicationContractsModule))]
+[DependsOn(typeof(AbpPermissionManagementApplicationContractsModule))]
+[DependsOn(typeof(AbpSettingManagementApplicationContractsModule))]
 public class AdministrationServiceApplicationContractsModule : AbpModule
 {
 

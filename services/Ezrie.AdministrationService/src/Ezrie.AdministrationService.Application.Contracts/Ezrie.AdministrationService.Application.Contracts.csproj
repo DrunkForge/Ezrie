@@ -10,6 +10,9 @@
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
 		<PackageReference Include="Volo.Abp.Authorization" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)"/>
+		<PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)"/>
+		<PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)"/>
 	</ItemGroup>
 
 	<ItemGroup>

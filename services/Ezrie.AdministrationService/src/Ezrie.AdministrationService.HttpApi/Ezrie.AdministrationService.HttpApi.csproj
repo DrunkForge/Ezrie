@@ -9,6 +9,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="$(VoloAbpPackageVersion)"/>
+		<PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="$(VoloAbpPackageVersion)"/>
+		<PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="$(VoloAbpPackageVersion)"/>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Ezrie.AdministrationService.Application.Contracts\Ezrie.AdministrationService.Application.Contracts.csproj" />
 	</ItemGroup>
 

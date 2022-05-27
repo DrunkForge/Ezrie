@@ -16,7 +16,6 @@
 
 using Ezrie.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
@@ -28,8 +27,6 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore;
 [DependsOn(typeof(EzrieEntityFrameworkCoreModule))]
 [DependsOn(typeof(AdministrationServiceDomainModule))]
 
-[DependsOn(typeof(AbpEntityFrameworkCoreModule))]
-[DependsOn(typeof(AbpAuditLoggingEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpFeatureManagementEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpPermissionManagementEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpSettingManagementEntityFrameworkCoreModule))]
@@ -39,7 +36,6 @@ public class AdministrationServiceEntityFrameworkCoreModule : AbpModule
 	{
 		context.Services.AddAbpDbContext<AdministrationServiceDbContext>(options =>
 		{
-			options.ReplaceDbContext<IAuditLoggingDbContext>();
 			options.ReplaceDbContext<IFeatureManagementDbContext>();
 			options.ReplaceDbContext<IPermissionManagementDbContext>();
 			options.ReplaceDbContext<ISettingManagementDbContext>();

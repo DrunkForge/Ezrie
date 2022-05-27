@@ -15,7 +15,6 @@
 *********************************************************************************************/
 
 using Microsoft.EntityFrameworkCore;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
@@ -27,7 +26,6 @@ public static class AdministrationServiceDbContextModelCreatingExtensions
 	public static void CreateAdministrationServiceModel(this ModelBuilder modelBuilder)
 	{
 		modelBuilder.ConfigureAdministrationService();
-		modelBuilder.ConfigureAuditLogging();
 		modelBuilder.ConfigureFeatureManagement();
 		modelBuilder.ConfigurePermissionManagement();
 		modelBuilder.ConfigureSettingManagement();

@@ -20,11 +20,17 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.PermissionManagement.HttpApi;
+using Volo.Abp.SettingManagement;
 
 namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(AdministrationServiceApplicationContractsModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcModule))]
+[DependsOn(typeof(AbpFeatureManagementHttpApiModule))]
+[DependsOn(typeof(AbpPermissionManagementHttpApiModule))]
+[DependsOn(typeof(AbpSettingManagementHttpApiModule))]
 public class AdministrationServiceHttpApiModule : AbpModule
 {
 	public override void PreConfigureServices(ServiceConfigurationContext context)

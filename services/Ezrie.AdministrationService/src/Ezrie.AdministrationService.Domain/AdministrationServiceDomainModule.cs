@@ -15,13 +15,22 @@
 *********************************************************************************************/
 
 using Volo.Abp.Domain;
+using Volo.Abp.FeatureManagement;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.PermissionManagement.Identity;
+using Volo.Abp.SettingManagement;
 
 namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(EzrieDomainModule))]
-[DependsOn(typeof(AbpDddDomainModule))]
 [DependsOn(typeof(AdministrationServiceDomainSharedModule))]
+
+[DependsOn(typeof(AbpDddDomainModule))]
+[DependsOn(typeof(AbpFeatureManagementDomainModule))]
+[DependsOn(typeof(AbpPermissionManagementDomainIdentityModule))]
+[DependsOn(typeof(AbpPermissionManagementDomainModule))]
+[DependsOn(typeof(AbpSettingManagementDomainModule))]
 public class AdministrationServiceDomainModule : AbpModule
 {
 

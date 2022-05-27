@@ -87,6 +87,13 @@
 				]
 			},
 			{
+				"Name": "ezrie_identity_service_api",
+				"DisplayName": "Ezrie Identity Service API",
+				"Scopes": [
+					"ezrie_identity_service_api"
+				]
+			},
+			{
 				"Name": "ezrie_relationship_management_api",
 				"DisplayName": "Ezrie Relationship Management API",
 				"Scopes": [
@@ -98,13 +105,6 @@
 				"DisplayName": "Ezrie Tenant Service API",
 				"Scopes": [
 					"ezrie_tenant_service_api"
-				]
-			},
-			{
-				"Name": "blazorappwithidentity_server",
-				"DisplayName": "Blazor App With Identity Server",
-				"Scopes": [
-					"blazorappwithidentity_server"
 				]
 			}
 		],
@@ -138,6 +138,20 @@
 				"Required": true
 			},
 			{
+				"Name": "ezrie_identity_service_api",
+				"DisplayName": "Ezrie Identity Service API",
+				"Required": true,
+				"UserClaims": [
+					"role",
+					"name"
+				]
+			},
+			{
+				"Name": "ezrie_identity_service_swaggerui",
+				"DisplayName": "Ezrie Identity Service Swagger UI",
+				"Required": true
+			},
+			{
 				"Name": "ezrie_relationship_management_api",
 				"DisplayName": "Ezrie Relationship Management API",
 				"Required": true,
@@ -147,7 +161,7 @@
 				]
 			},
 			{
-				"Name": "ezrie_relationship_management_swaggerui",
+				"Name": "ezrie_relationship_management_blazor_host",
 				"DisplayName": "Ezrie Relationship Management Swagger UI",
 				"Required": true
 			},
@@ -164,15 +178,6 @@
 				"Name": "ezrie_tenant_service_swaggerui",
 				"DisplayName": "Ezrie Tenant Service Swagger UI",
 				"Required": true
-			},
-			{
-				"Name": "blazorappwithidentity_server",
-				"DisplayName": "Blazor App With Identity Server",
-				"Required": true,
-				"UserClaims": [
-					"role",
-					"name"
-				]
 			}
 		],
 		"Clients": [
@@ -201,6 +206,7 @@
 					"ezrie_account_management_api",
 					"ezrie_relationship_management_api",
 					"ezrie_administration_service_api",
+					"ezrie_identity_service_api",
 					"ezrie_tenant_service_api"
 				]
 			},
@@ -310,6 +316,49 @@
 				]
 			},
 			{
+				"ClientId": "ezrie_identity_service_blazor",
+				"ClientName": "Ezrie Identity Service Blazor",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:5000/authentication/login-callback"
+				],
+				"AllowedScopes": [
+					"ezrie_identity_service_api",
+					"openid",
+					"profile"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:10000",
+					"https://localhost:10400",
+					"https://localhost:10401"
+				]
+			},
+			{
+				"ClientId": "ezrie_identity_service_swaggerui",
+				"ClientName": "Ezrie Identity Service Swagger UI",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": false,
+				"RedirectUris": [
+					"https://localhost:10000/api/identity/swagger/oauth2-redirect.html",
+					"https://localhost:5001/swagger/oauth2-redirect.html"
+				],
+				"AllowedScopes": [
+					"ezrie_identity_service_swaggerui",
+					"ezrie_identity_service_api"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:10000",
+					"https://localhost:10400",
+					"https://localhost:10401"
+				]
+			},
+			{
 				"ClientId": "ezrie_relationship_management_blazor",
 				"ClientName": "Ezrie Relationship Management Blazor",
 				"AllowedGrantTypes": [
@@ -332,8 +381,8 @@
 				]
 			},
 			{
-				"ClientId": "ezrie_relationship_management_swaggerui",
-				"ClientName": "Ezrie Administration Service Swagger UI",
+				"ClientId": "ezrie_relationship_management_blazor_host",
+				"ClientName": "Ezrie Administration Service Blazor Host",
 				"AllowedGrantTypes": [
 					"authorization_code"
 				],
@@ -343,7 +392,7 @@
 					"https://localhost:5001/swagger/oauth2-redirect.html"
 				],
 				"AllowedScopes": [
-					"ezrie_relationship_management_swaggerui",
+					"ezrie_relationship_management_blazor_host",
 					"ezrie_relationship_management_api"
 				],
 				"AllowedCorsOrigins": [
@@ -391,22 +440,6 @@
 					"https://localhost:10000",
 					"https://localhost:10300",
 					"https://localhost:10301"
-				]
-			},
-			{
-				"ClientId": "resource_server",
-				"ClientName": "Resource Server",
-				"AllowedGrantTypes": [
-					"code"
-				],
-				"RequireClientSecret": true,
-				"ClientSecrets": [
-					{
-						"Value": "1q2w3E*"
-					}
-				],
-				"AllowedScopes": [
-					"resource_server"
 				]
 			}
 		]

@@ -17,10 +17,7 @@
 #nullable disable
 
 using Microsoft.EntityFrameworkCore;
-using Volo.Abp.AuditLogging;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Data;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
@@ -34,7 +31,6 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore;
 [ConnectionStringName(AdministrationServiceDbProperties.ConnectionStringName)]
 public class AdministrationServiceDbContext : AbpDbContext<AdministrationServiceDbContext>,
 	IAdministrationServiceDbContext,
-	IAuditLoggingDbContext,
 	IFeatureManagementDbContext,
 	IPermissionManagementDbContext,
 	ISettingManagementDbContext
@@ -45,8 +41,6 @@ public class AdministrationServiceDbContext : AbpDbContext<AdministrationService
 
 	}
 
-	// Audit Logging
-	public DbSet<AuditLog> AuditLogs { get; set; }
 	// Feature Management
 	public DbSet<FeatureValue> FeatureValues { get; set; }
 	// Permission Management

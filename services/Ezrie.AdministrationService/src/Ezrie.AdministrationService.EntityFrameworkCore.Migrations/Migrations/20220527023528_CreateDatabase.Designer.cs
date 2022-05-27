@@ -3,6 +3,7 @@ using System;
 using Ezrie.AdministrationService.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Ezrie.AdministrationService.EntityFrameworkCore.Migrations.Migrations
 {
     [DbContext(typeof(AdministrationServiceMigrationsDbContext))]
-    partial class AdministrationServiceMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220527023528_CreateDatabase")]
+    partial class CreateDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

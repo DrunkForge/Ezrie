@@ -67,6 +67,7 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 		}
 		else
 		{
+			app.UseStatusCodePagesWithReExecute("~/error");
 			app.UseHsts();
 		}
 

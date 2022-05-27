@@ -5,13 +5,11 @@ using Volo.Abp.Identity;
 
 namespace Ezrie.IdentityService;
 
-[DependsOn(
-    typeof(IdentityServiceDomainSharedModule),
-    typeof(AbpDddApplicationContractsModule),
-    typeof(AbpAuthorizationModule)
-    )]
+[DependsOn(typeof(IdentityServiceDomainSharedModule))]
+[DependsOn(typeof(AbpDddApplicationContractsModule))]
+[DependsOn(typeof(AbpAuthorizationModule))]
 [DependsOn(typeof(AbpIdentityApplicationContractsModule))]
-    public class IdentityServiceApplicationContractsModule : AbpModule
+public class IdentityServiceApplicationContractsModule : AbpModule
 {
 
 }

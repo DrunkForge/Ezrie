@@ -22,6 +22,7 @@ using Volo.Abp.Modularity;
 namespace Ezrie.EntityFrameworkCore;
 
 [DependsOn(typeof(EzrieDomainSharedModule))]
+[DependsOn(typeof(AbpEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpEntityFrameworkCorePostgreSqlModule))]
 public class EzrieEntityFrameworkCoreModule : AbpModule
 {

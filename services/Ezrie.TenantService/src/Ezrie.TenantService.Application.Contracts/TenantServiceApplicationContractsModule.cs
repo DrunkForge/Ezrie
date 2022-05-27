@@ -5,11 +5,9 @@ using Volo.Abp.TenantManagement;
 
 namespace Ezrie.TenantService;
 
-[DependsOn(
-	typeof(TenantServiceDomainSharedModule),
-	typeof(AbpDddApplicationContractsModule),
-	typeof(AbpAuthorizationModule)
-	)]
+[DependsOn(typeof(TenantServiceDomainSharedModule))]
+[DependsOn(typeof(AbpDddApplicationContractsModule))]
+[DependsOn(typeof(AbpAuthorizationModule))]
 [DependsOn(typeof(AbpTenantManagementApplicationContractsModule))]
 public class TenantServiceApplicationContractsModule : AbpModule
 {

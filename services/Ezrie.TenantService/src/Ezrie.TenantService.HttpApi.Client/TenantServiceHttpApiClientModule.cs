@@ -6,9 +6,8 @@ using Volo.Abp.TenantManagement;
 
 namespace Ezrie.TenantService;
 
-[DependsOn(
-	typeof(TenantServiceApplicationContractsModule),
-	typeof(AbpHttpClientModule))]
+[DependsOn(typeof(TenantServiceApplicationContractsModule))]
+[DependsOn(typeof(AbpHttpClientModule))]
 [DependsOn(typeof(AbpTenantManagementHttpApiClientModule))]
 public class TenantServiceHttpApiClientModule : AbpModule
 {

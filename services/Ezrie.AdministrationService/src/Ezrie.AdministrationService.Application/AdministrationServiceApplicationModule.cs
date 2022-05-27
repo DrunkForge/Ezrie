@@ -15,9 +15,12 @@
 *********************************************************************************************/
 
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.AutoMapper;
-using Volo.Abp.Modularity;
 using Volo.Abp.Application;
+using Volo.Abp.AutoMapper;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.SettingManagement;
 
 namespace Ezrie.AdministrationService;
 
@@ -25,6 +28,9 @@ namespace Ezrie.AdministrationService;
 [DependsOn(typeof(AdministrationServiceApplicationContractsModule))]
 [DependsOn(typeof(AbpDddApplicationModule))]
 [DependsOn(typeof(AbpAutoMapperModule))]
+[DependsOn(typeof(AbpFeatureManagementApplicationModule))]
+[DependsOn(typeof(AbpPermissionManagementApplicationModule))]
+[DependsOn(typeof(AbpSettingManagementApplicationModule))]
 public class AdministrationServiceApplicationModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)

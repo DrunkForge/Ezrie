@@ -17,8 +17,13 @@
 using Ezrie.AdministrationService.EntityFrameworkCore;
 using Ezrie.Hosting.AspNetCore;
 using Ezrie.Hosting.AspNetCore.Microservices;
-using System.Globalization;
+using Ezrie.IdentityService;
+using Ezrie.IdentityService.EntityFrameworkCore;
+using Ezrie.TenantService;
+using Microsoft.IdentityModel.Logging;
+using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 
@@ -28,21 +33,24 @@ namespace Ezrie.AdministrationService;
 [DependsOn(typeof(AdministrationServiceApplicationModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreModule))]
 [DependsOn(typeof(AdministrationServiceHttpApiModule))]
+[DependsOn(typeof(IdentityServiceApplicationContractsModule))]
+[DependsOn(typeof(IdentityServiceEntityFrameworkCoreModule))]
+[DependsOn(typeof(TenantServiceApplicationContractsModule))]
+[DependsOn(typeof(AbpIdentityDomainModule))]
 public class AdministrationServiceHttpApiHostModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
-		var hostingEnvironment = context.Services.GetHostingEnvironment();
-
-		ConfigureVirtualFileSystem(hostingEnvironment);
+		ConfigureVirtualFileSystem(context);
+		ConfigureConventionalControllers();
 
 		context.ConfigureJwtAuthentication(AdministrationServiceOidcProperties.Audience);
-
-		ConfigureConventionalControllers();
 	}
 
-	private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
+	private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
 	{
+		var hostingEnvironment = context.Services.GetHostingEnvironment();
+
 		if (hostingEnvironment.IsDevelopment())
 		{
 			Configure<AbpVirtualFileSystemOptions>(options =>
@@ -70,5 +78,10 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
 			options.ConventionalControllers.Create(typeof(AdministrationServiceHttpApiHostModule).Assembly);
 			options.ConventionalControllers.Create(typeof(AdministrationServiceApplicationModule).Assembly);
 		});
+	}
+
+	public override void OnApplicationInitialization(ApplicationInitializationContext context)
+	{
+		IdentityModelEventSource.ShowPII = true;
 	}
 }
