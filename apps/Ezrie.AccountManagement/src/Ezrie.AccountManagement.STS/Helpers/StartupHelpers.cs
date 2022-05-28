@@ -44,9 +44,9 @@ public static class StartupHelpers
 		services.TryAddTransient(typeof(IGenericControllerLocalizer<>), typeof(GenericControllerLocalizer<>));
 
 		var mvcBuilder = services.AddControllersWithViews(o =>
-			{
-				o.Conventions.Add(new GenericControllerRouteConvention());
-			})
+		{
+			o.Conventions.Add(new GenericControllerRouteConvention());
+		})
 			.AddViewLocalization(
 				LanguageViewLocationExpanderFormat.Suffix,
 				opts => { opts.ResourcesPath = ConfigurationConsts.ResourcesPath; })
@@ -60,37 +60,27 @@ public static class StartupHelpers
 		services.Configure<RequestLocalizationOptions>(
 			opts =>
 			{
-				if (cultureConfiguration == null)
-				{
-					opts.DefaultRequestCulture = new RequestCulture(CultureConfiguration.DefaultRequestCulture);
-					opts.SupportedCultures = new List<CultureInfo>() { new CultureInfo(CultureConfiguration.DefaultRequestCulture) };
-					opts.SupportedUICultures = new List<CultureInfo>() { new CultureInfo(CultureConfiguration.DefaultRequestCulture) };
-				}
-				else
-				{
 					// If cultures are specified in the configuration, use them (making sure they are among the available cultures),
 					// otherwise use all the available cultures
-					var supportedCultureCodes = (cultureConfiguration?.Cultures?.Count > 0
-						? cultureConfiguration.Cultures.Intersect(CultureConfiguration.AvailableCultures)
-						: CultureConfiguration.AvailableCultures).ToArray();
+				var supportedCultureCodes = (cultureConfiguration?.Cultures?.Count > 0 ?
+					cultureConfiguration.Cultures.Intersect(CultureConfiguration.AvailableCultures) :
+					CultureConfiguration.AvailableCultures).ToArray();
 
-					if (!supportedCultureCodes.Any())
-						supportedCultureCodes = CultureConfiguration.AvailableCultures;
-					var supportedCultures = supportedCultureCodes.Select(c => new CultureInfo(c)).ToList();
+				if (!supportedCultureCodes.Any())
+					supportedCultureCodes = CultureConfiguration.AvailableCultures;
+				var supportedCultures = supportedCultureCodes.Select(c => new CultureInfo(c)).ToList();
 
 					// If the default culture is specified use it, otherwise use CultureConfiguration.DefaultRequestCulture ("en")
-					var defaultCultureCode = String.IsNullOrEmpty(cultureConfiguration?.DefaultCulture)
-						? CultureConfiguration.DefaultRequestCulture
-						: cultureConfiguration.DefaultCulture;
+				var defaultCultureCode = String.IsNullOrEmpty(cultureConfiguration?.DefaultCulture) ?
+					CultureConfiguration.DefaultRequestCulture : cultureConfiguration?.DefaultCulture;
 
 					// If the default culture is not among the supported cultures, use the first supported culture as default
-					if (!supportedCultureCodes.Contains(defaultCultureCode))
-						defaultCultureCode = supportedCultureCodes.First();
+				if (!supportedCultureCodes.Contains(defaultCultureCode))
+					defaultCultureCode = supportedCultureCodes.FirstOrDefault();
 
-					opts.DefaultRequestCulture = new RequestCulture(defaultCultureCode);
-					opts.SupportedCultures = supportedCultures;
-					opts.SupportedUICultures = supportedCultures;
-				}
+				opts.DefaultRequestCulture = new RequestCulture(defaultCultureCode);
+				opts.SupportedCultures = supportedCultures;
+				opts.SupportedUICultures = supportedCultures;
 			});
 
 		return mvcBuilder;
@@ -220,8 +210,7 @@ public static class StartupHelpers
 				services.RegisterMySqlDbContexts<TIdentityDbContext, TConfigurationDbContext, TPersistedGrantDbContext, TDataProtectionDbContext>(identityConnectionString, configurationConnectionString, persistedGrantsConnectionString, dataProtectionConnectionString);
 				break;
 			default:
-				ExceptionHelper.ThrowInvalidEnumValueConfigurationException(databaseProvider.ProviderType);
-				break;
+				throw new ArgumentOutOfRangeException(nameof(databaseProvider.ProviderType), $@"The value needs to be one of {String.Join(", ", Enum.GetNames(typeof(DatabaseProviderType)))}.");
 		}
 	}
 
@@ -380,7 +369,8 @@ public static class StartupHelpers
 	/// </summary>
 	/// <param name="authenticationBuilder"></param>
 	/// <param name="configuration"></param>
-	private static void AddExternalProviders(AuthenticationBuilder authenticationBuilder, IConfiguration configuration)
+	private static void AddExternalProviders(AuthenticationBuilder authenticationBuilder,
+		IConfiguration configuration)
 	{
 		var externalProviderConfiguration = configuration.GetSection(nameof(ExternalProvidersConfiguration)).Get<ExternalProvidersConfiguration>();
 
@@ -388,12 +378,9 @@ public static class StartupHelpers
 		{
 			authenticationBuilder.AddGitHub(options =>
 			{
-				options.ClientId = externalProviderConfiguration.GitHubClientId
-					?? throw new ConfigurationException("UseGitHubProvider is set to 'true' but GitHubClientId has not been provided.");
-				options.ClientSecret = externalProviderConfiguration.GitHubClientSecret
-					?? throw new ConfigurationException("UseGitHubProvider is set to 'true' but GitHubClientSecret has not been provided.");
-				options.CallbackPath = externalProviderConfiguration.GitHubCallbackPath
-					?? throw new ConfigurationException("UseGitHubProvider is set to 'true' but GitHubCallbackPath has not been provided.");
+				options.ClientId = externalProviderConfiguration.GitHubClientId;
+				options.ClientSecret = externalProviderConfiguration.GitHubClientSecret;
+				options.CallbackPath = externalProviderConfiguration.GitHubCallbackPath;
 				options.Scope.Add("user:email");
 			});
 		}
@@ -405,8 +392,7 @@ public static class StartupHelpers
 				options.ClientSecret = externalProviderConfiguration.AzureAdSecret;
 				options.ClientId = externalProviderConfiguration.AzureAdClientId;
 				options.TenantId = externalProviderConfiguration.AzureAdTenantId;
-				options.Instance = externalProviderConfiguration.AzureInstance
-					?? throw new ConfigurationException("UseAzureAdProvider is set to 'true' but AzureInstance has not been provided.");
+				options.Instance = externalProviderConfiguration.AzureInstance;
 				options.Domain = externalProviderConfiguration.AzureDomain;
 				options.CallbackPath = externalProviderConfiguration.AzureAdCallbackPath;
 			}, cookieScheme: null);
@@ -420,8 +406,7 @@ public static class StartupHelpers
 	public static void UseMvcLocalizationServices(this IApplicationBuilder app)
 	{
 		var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-		if (options != null)
-			app.UseRequestLocalization(options.Value);
+		app.UseRequestLocalization(options.Value);
 	}
 
 	/// <summary>
@@ -499,7 +484,7 @@ public static class StartupHelpers
 						.AddMySql(dataProtectionDbConnectionString, name: "DataProtectionDb");
 					break;
 				default:
-					throw new NotImplementedException($"Health checks for the `{databaseProvider.ProviderType}` database provider have not been implemented.");
+					throw new NotImplementedException($"Health checks not defined for database provider {databaseProvider.ProviderType}");
 			}
 		}
 	}

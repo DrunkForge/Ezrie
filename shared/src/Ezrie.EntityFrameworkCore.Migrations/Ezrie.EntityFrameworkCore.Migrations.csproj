@@ -4,12 +4,13 @@
 	<Import Project="..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.TenantManagement.Application.Contracts" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

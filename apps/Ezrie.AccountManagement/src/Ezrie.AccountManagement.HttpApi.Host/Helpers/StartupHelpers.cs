@@ -182,10 +182,10 @@ public static class StartupHelpers
 			})
 			.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 			{
-				var apiConfiguration = configuration.GetAppConfiguration();
-				options.Authority = apiConfiguration.IdentityServerBaseUrl;
-				options.RequireHttpsMetadata = apiConfiguration.RequireHttpsMetadata;
-				options.Audience = apiConfiguration.OidcApiName;
+				var appConfiguration = configuration.GetHostOptions();
+				options.Authority = appConfiguration.Authority;
+				options.RequireHttpsMetadata = appConfiguration.RequireHttpsMetadata;
+				options.Audience = appConfiguration.OidcApiName;
 			});
 	}
 
@@ -231,9 +231,9 @@ public static class StartupHelpers
 
 	public static void AddAuthorizationPolicies(this IServiceCollection services)
 	{
-		var apiConfiguration = services.GetAppConfiguration();
+		var hostOptions = services.GetHostOptions();
 
-		if (apiConfiguration == null || String.IsNullOrWhiteSpace(apiConfiguration.OidcApiName))
+		if (hostOptions == null || String.IsNullOrWhiteSpace(hostOptions.OidcApiName))
 			throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
 
 		services.AddAuthorization(options =>
@@ -241,14 +241,14 @@ public static class StartupHelpers
 			options.AddPolicy(AuthorizationConsts.AdministrationPolicy,
 				policy =>
 					policy.RequireAssertion(context => context.User.HasClaim(c =>
-							c.Type == JwtClaimTypes.Role && c.Value == apiConfiguration.AdministrationRole ||
-							c.Type == $"client_{JwtClaimTypes.Role}" && c.Value == apiConfiguration.AdministrationRole
-						) && context.User.HasClaim(c => c.Type == JwtClaimTypes.Scope && c.Value == apiConfiguration.OidcApiName)
+							c.Type == JwtClaimTypes.Role && c.Value == hostOptions.AdministrationRole ||
+							c.Type == $"client_{JwtClaimTypes.Role}" && c.Value == hostOptions.AdministrationRole
+						) && context.User.HasClaim(c => c.Type == JwtClaimTypes.Scope && c.Value == hostOptions.OidcApiName)
 					));
 		});
 	}
 
-	public static void AddIdSHealthChecks<TConfigurationDbContext, TPersistedGrantDbContext, TIdentityDbContext, TLogDbContext, TAuditLoggingDbContext, TDataProtectionDbContext>(this IServiceCollection services, IConfiguration configuration, AppConfiguration apiConfiguration)
+	public static void AddIdSHealthChecks<TConfigurationDbContext, TPersistedGrantDbContext, TIdentityDbContext, TLogDbContext, TAuditLoggingDbContext, TDataProtectionDbContext>(this IServiceCollection services, IConfiguration configuration, Ezrie.Configuration.HostOptions hostOptions)
 		where TConfigurationDbContext : DbContext, IAdminConfigurationDbContext
 		where TPersistedGrantDbContext : DbContext, IAdminPersistedGrantDbContext
 		where TIdentityDbContext : DbContext
@@ -263,7 +263,7 @@ public static class StartupHelpers
 		var auditLogDbConnectionString = configuration.GetConnectionString(ConfigurationConsts.AdminAuditLogDbConnectionStringKey);
 		var dataProtectionDbConnectionString = configuration.GetConnectionString(ConfigurationConsts.DataProtectionDbConnectionStringKey);
 
-		var identityServerUri = apiConfiguration.IdentityServerBaseUrl;
+		var identityServerUri = hostOptions.Authority;
 		var healthChecksBuilder = services.AddHealthChecks()
 			.AddDbContextCheck<TConfigurationDbContext>("ConfigurationDbContext")
 			.AddDbContextCheck<TPersistedGrantDbContext>("PersistedGrantsDbContext")

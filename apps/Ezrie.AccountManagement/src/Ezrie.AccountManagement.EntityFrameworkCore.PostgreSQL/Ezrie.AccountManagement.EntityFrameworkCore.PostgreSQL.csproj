@@ -4,6 +4,7 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.AccountManagement.EntityFrameworkCore.PostgreSQL</RootNamespace>
 		<Description>Entity Framework layer for the administration of the IdentityServer4 and Asp.Net Core Identity with PostrgreSQL support</Description>
 	</PropertyGroup>

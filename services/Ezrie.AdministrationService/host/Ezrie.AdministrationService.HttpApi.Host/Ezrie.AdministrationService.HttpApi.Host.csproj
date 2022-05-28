@@ -4,6 +4,7 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.AdministrationService</RootNamespace>
 		<PreserveCompilationReferences>true</PreserveCompilationReferences>
 		<UserSecretsId>Ezrie.AdministrationService-c2d31439-b723-48e2-b061-5ebd7aeb6010</UserSecretsId>
@@ -22,6 +23,7 @@
 		<ProjectReference Include="..\..\..\Ezrie.IdentityService\src\Ezrie.IdentityService.Application.Contracts\Ezrie.IdentityService.Application.Contracts.csproj" />
 		<ProjectReference Include="..\..\..\Ezrie.IdentityService\src\Ezrie.IdentityService.EntityFrameworkCore\Ezrie.IdentityService.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\..\Ezrie.TenantService\src\Ezrie.TenantService.Application.Contracts\Ezrie.TenantService.Application.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore\Ezrie.TenantService.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.Application\Ezrie.AdministrationService.Application.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.EntityFrameworkCore.Migrations\Ezrie.AdministrationService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.AdministrationService.HttpApi\Ezrie.AdministrationService.HttpApi.csproj" />

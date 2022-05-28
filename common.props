@@ -21,7 +21,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<TargetFramework>net6.0</TargetFramework>
 		<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
 		<WarningsNotAsErrors>CA1014</WarningsNotAsErrors>
 	</PropertyGroup>

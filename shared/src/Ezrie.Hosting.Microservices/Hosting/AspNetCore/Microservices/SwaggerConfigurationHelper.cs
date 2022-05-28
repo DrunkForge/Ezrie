@@ -27,23 +27,23 @@ public static class SwaggerConfigurationHelper
 	{
 		ArgumentNullException.ThrowIfNull(context);
 
-		var apiConfiguration = context.Services.GetConfiguration().GetAppConfiguration();
+		var hostOptions = context.Services.GetHostOptions();
 		if (scopes == null)
 		{
 			scopes = new();
 		}
 
-		foreach (var scope in apiConfiguration.Scopes)
+		foreach (var scope in hostOptions.Scopes)
 		{
-			scopes.Add(scope, scope);
+			scopes.Add(scope.Id, scope.Name);
 		}
 
 		context.Services.AddAbpSwaggerGenWithOAuth(
-			apiConfiguration.IdentityServerBaseUrl,
+			hostOptions.Authority,
 			scopes: scopes,
 			options =>
 			{
-				options.SwaggerDoc(apiConfiguration.ApiVersion, new OpenApiInfo { Title = apiConfiguration.ApiName, Version = apiConfiguration.ApiVersion });
+				options.SwaggerDoc(hostOptions.ApiVersion, new OpenApiInfo { Title = hostOptions.ApiName, Version = hostOptions.ApiVersion });
 				options.DocInclusionPredicate((_, __) => true);
 				options.CustomSchemaIds(type => type.FullName);
 			});

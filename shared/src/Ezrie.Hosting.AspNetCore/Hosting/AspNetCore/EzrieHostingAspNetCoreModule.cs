@@ -16,7 +16,9 @@
 
 using Ezrie.Configuration;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -38,9 +40,13 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 	{
 		ArgumentNullException.ThrowIfNull(context);
 
-		context.ConfigureCors();
-
+		ConfigureCors(context);
 		ConfigureDistributedCache(context);
+	}
+
+	private static void ConfigureCors(ServiceConfigurationContext context)
+	{
+		context.Services.ConfigureCors(builder => builder.WithAbpExposedHeaders());
 	}
 
 	private void ConfigureDistributedCache(ServiceConfigurationContext context)
@@ -68,11 +74,11 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 		else
 		{
 			app.UseStatusCodePagesWithReExecute("~/error");
-			app.UseHsts();
+			//app.UseHsts();
 		}
 
 		app.UseSerilogRequestLogging();
-		app.UseHttpsRedirection();
+		//app.UseHttpsRedirection();
 		app.UseCorrelationId();
 		app.UseStaticFiles();
 		app.UseAbpRequestLocalization();

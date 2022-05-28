@@ -59,7 +59,7 @@ public class Startup
 	{
 		// Applies configuration from appsettings.
 		options.BindConfiguration(Configuration);
-		Configuration.GetSection("AppConfiguration").Bind(options.Admin);
+		Configuration.GetSection("AdminConfiguration").Bind(options.Admin);
 
 		if (HostingEnvironment.IsDevelopment())
 		{

@@ -4,10 +4,11 @@
 	<Import Project="..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.2.2" />
 	</ItemGroup>
 
 </Project>

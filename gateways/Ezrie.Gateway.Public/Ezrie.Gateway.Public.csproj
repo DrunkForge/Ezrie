@@ -4,6 +4,8 @@
 	<Import Project="..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>Ezrie.Gateway.Public</RootNamespace>
 		<PreserveCompilationReferences>true</PreserveCompilationReferences>
 		<UserSecretsId>Ezrie.Gateway.Public-216dd4b2-19d1-4738-9d00-f3fb514296cd</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>

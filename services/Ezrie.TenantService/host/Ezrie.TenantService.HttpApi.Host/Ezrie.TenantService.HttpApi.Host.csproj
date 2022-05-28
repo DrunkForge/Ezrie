@@ -4,6 +4,7 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.TenantService</RootNamespace>
 		<PreserveCompilationReferences>true</PreserveCompilationReferences>
 		<UserSecretsId>Ezrie.TenantService-c2d31439-b723-48e2-b061-5ebd7aeb6010</UserSecretsId>
@@ -14,7 +15,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
-		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

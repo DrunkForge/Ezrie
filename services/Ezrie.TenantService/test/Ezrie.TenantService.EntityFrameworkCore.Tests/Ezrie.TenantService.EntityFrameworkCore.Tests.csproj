@@ -4,6 +4,7 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.TenantService</RootNamespace>
 	</PropertyGroup>
 
@@ -13,7 +14,7 @@
 		<ProjectReference Include="..\..\..\..\shared\test\Ezrie.TestBase.EntityFrameworkCore\Ezrie.TestBase.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.TenantService.EntityFrameworkCore\Ezrie.TenantService.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.TenantService.TestBase\Ezrie.TenantService.TestBase.csproj" />
-		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.2.2" />
 	</ItemGroup>
 
 </Project>

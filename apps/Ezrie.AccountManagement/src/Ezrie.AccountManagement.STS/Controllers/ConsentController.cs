@@ -66,15 +66,15 @@ public class ConsentController : Controller
 			{
 				// The client is native, so this change in how to
 				// return the response is for better UX for the end user.
-				return this.LoadingPage("Redirect", result.RedirectUri!);
+				return this.LoadingPage("Redirect", result.RedirectUri);
 			}
 
-			return Redirect(result.RedirectUri!);
+			return Redirect(result.RedirectUri);
 		}
 
 		if (result.HasValidationError)
 		{
-			ModelState.AddModelError(String.Empty, result.ValidationError!);
+			ModelState.AddModelError(String.Empty, result.ValidationError);
 		}
 
 		if (result.ShowView)
@@ -97,7 +97,7 @@ public class ConsentController : Controller
 		if (request == null)
 			return result;
 
-		ConsentResponse? grantedConsent = null;
+		ConsentResponse grantedConsent = null;
 
 		// user clicked 'no' - send back the standard 'access_denied' response
 		if (model?.Button == "no")
@@ -116,7 +116,7 @@ public class ConsentController : Controller
 				var scopes = model.ScopesConsented;
 				if (ConsentOptions.EnableOfflineAccess == false)
 				{
-					scopes = scopes.Where(x => x != IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess);
+					scopes = scopes.Where(x => x != global::IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess);
 				}
 
 				grantedConsent = new ConsentResponse
@@ -145,19 +145,19 @@ public class ConsentController : Controller
 			await _interaction.GrantConsentAsync(request, grantedConsent);
 
 			// indicate that's it ok to redirect back to authorization endpoint
-			result.RedirectUri = model?.ReturnUrl ?? String.Empty;
+			result.RedirectUri = model.ReturnUrl;
 			result.Client = request.Client;
 		}
 		else
 		{
 			// we need to redisplay the consent UI
-			result.ViewModel = await BuildViewModelAsync(model?.ReturnUrl, model);
+			result.ViewModel = await BuildViewModelAsync(model.ReturnUrl, model);
 		}
 
 		return result;
 	}
 
-	private async Task<ConsentViewModel?> BuildViewModelAsync(String? returnUrl, ConsentInputModel? model = null)
+	private async Task<ConsentViewModel> BuildViewModelAsync(String returnUrl, ConsentInputModel model = null)
 	{
 		var request = await _interaction.GetAuthorizationContextAsync(returnUrl);
 		if (request != null)
@@ -166,19 +166,21 @@ public class ConsentController : Controller
 		}
 		else
 		{
-			_logger.LogError("No consent request matching request: {ReturnUrl}", returnUrl);
+			_logger.LogError("No consent request matching request: {0}", returnUrl);
 		}
 
 		return null;
 	}
 
-	private ConsentViewModel CreateConsentViewModel(ConsentInputModel? model, String? returnUrl, AuthorizationRequest request)
+	private ConsentViewModel CreateConsentViewModel(
+		ConsentInputModel model, String returnUrl,
+		AuthorizationRequest request)
 	{
 		var vm = new ConsentViewModel
 		{
 			RememberConsent = model?.RememberConsent ?? true,
-			ScopesConsented = model?.ScopesConsented ?? Array.Empty<String>(),
-			Description = model?.Description ?? String.Empty,
+			ScopesConsented = model?.ScopesConsented ?? Enumerable.Empty<String>(),
+			Description = model?.Description,
 
 			ReturnUrl = returnUrl,
 
@@ -200,18 +202,16 @@ public class ConsentController : Controller
 				apiScopes.Add(scopeVm);
 			}
 		}
-
 		if (ConsentOptions.EnableOfflineAccess && request.ValidatedResources.Resources.OfflineAccess)
 		{
-			apiScopes.Add(GetOfflineAccessScope(vm.ScopesConsented.Contains(IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess) || model == null));
+			apiScopes.Add(GetOfflineAccessScope(vm.ScopesConsented.Contains(global::IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess) || model == null));
 		}
-
 		vm.ApiScopes = apiScopes;
 
 		return vm;
 	}
 
-	private static ScopeViewModel CreateScopeViewModel(IdentityResource identity, Boolean check)
+	private ScopeViewModel CreateScopeViewModel(IdentityResource identity, Boolean check)
 	{
 		return new ScopeViewModel
 		{
@@ -243,11 +243,11 @@ public class ConsentController : Controller
 		};
 	}
 
-	private static ScopeViewModel GetOfflineAccessScope(Boolean check)
+	private ScopeViewModel GetOfflineAccessScope(Boolean check)
 	{
 		return new ScopeViewModel
 		{
-			Value = IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess,
+			Value = global::IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess,
 			DisplayName = ConsentOptions.OfflineAccessDisplayName,
 			Description = ConsentOptions.OfflineAccessDescription,
 			Emphasize = true,

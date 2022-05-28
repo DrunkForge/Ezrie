@@ -9,11 +9,9 @@ using Volo.Abp.UI.Navigation;
 
 namespace Ezrie.IdentityService;
 
-[DependsOn(
-	typeof(IdentityServiceApplicationContractsModule),
-	typeof(AbpAspNetCoreComponentsWebThemingModule),
-	typeof(AbpAutoMapperModule)
-	)]
+[DependsOn(typeof(IdentityServiceApplicationContractsModule))]
+[DependsOn(typeof(AbpAspNetCoreComponentsWebThemingModule))]
+[DependsOn(typeof(AbpAutoMapperModule))]
 [DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
 public class IdentityServiceBlazorModule : AbpModule
 {

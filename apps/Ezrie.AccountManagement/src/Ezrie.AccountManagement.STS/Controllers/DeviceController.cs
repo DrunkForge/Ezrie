@@ -57,8 +57,10 @@ public class DeviceController : Controller
 	public async Task<IActionResult> UserCodeCapture(String userCode)
 	{
 		var vm = await BuildViewModelAsync(userCode);
+		if (vm == null)
+			return View("Error");
 
-		return vm == null ? View("Error") : (IActionResult)View("UserCodeConfirmation", vm);
+		return View("UserCodeConfirmation", vm);
 	}
 
 	[HttpPost]
@@ -69,8 +71,10 @@ public class DeviceController : Controller
 			throw new ArgumentNullException(nameof(model));
 
 		var result = await ProcessConsent(model);
+		if (result.HasValidationError)
+			return View("Error");
 
-		return result.HasValidationError ? View("Error") : (IActionResult)View("Success");
+		return View("Success");
 	}
 
 	private async Task<ProcessConsentResult> ProcessConsent(DeviceAuthorizationInputModel model)
@@ -81,7 +85,7 @@ public class DeviceController : Controller
 		if (request == null)
 			return result;
 
-		ConsentResponse? grantedConsent = null;
+		ConsentResponse grantedConsent = null;
 
 		// user clicked 'no' - send back the standard 'access_denied' response
 		if (model.Button == "no")
@@ -100,7 +104,7 @@ public class DeviceController : Controller
 				var scopes = model.ScopesConsented;
 				if (ConsentOptions.EnableOfflineAccess == false)
 				{
-					scopes = scopes.Where(x => x != IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess);
+					scopes = scopes.Where(x => x != global::IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess);
 				}
 
 				grantedConsent = new ConsentResponse
@@ -141,22 +145,26 @@ public class DeviceController : Controller
 		return result;
 	}
 
-	private async Task<DeviceAuthorizationViewModel?> BuildViewModelAsync(String userCode, DeviceAuthorizationInputModel? model = null)
+	private async Task<DeviceAuthorizationViewModel> BuildViewModelAsync(String userCode, DeviceAuthorizationInputModel model = null)
 	{
 		var request = await _interaction.GetAuthorizationContextAsync(userCode);
+		if (request != null)
+		{
+			return CreateConsentViewModel(userCode, model, request);
+		}
 
-		return request != null ? CreateConsentViewModel(userCode, model, request) : null;
+		return null;
 	}
 
-	private DeviceAuthorizationViewModel CreateConsentViewModel(String userCode, DeviceAuthorizationInputModel? model, DeviceFlowAuthorizationRequest request)
+	private DeviceAuthorizationViewModel CreateConsentViewModel(String userCode, DeviceAuthorizationInputModel model, DeviceFlowAuthorizationRequest request)
 	{
 		var vm = new DeviceAuthorizationViewModel
 		{
 			UserCode = userCode,
-			Description = model?.Description ?? String.Empty,
+			Description = model?.Description,
 
 			RememberConsent = model?.RememberConsent ?? true,
-			ScopesConsented = model?.ScopesConsented ?? Array.Empty<String>(),
+			ScopesConsented = model?.ScopesConsented ?? Enumerable.Empty<String>(),
 
 			ClientName = request.Client.ClientName ?? request.Client.ClientId,
 			ClientUrl = request.Client.ClientUri,
@@ -176,45 +184,51 @@ public class DeviceController : Controller
 				apiScopes.Add(scopeVm);
 			}
 		}
-
 		if (ConsentOptions.EnableOfflineAccess && request.ValidatedResources.Resources.OfflineAccess)
 		{
-			apiScopes.Add(GetOfflineAccessScope(vm.ScopesConsented.Contains(IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess) || model == null));
+			apiScopes.Add(GetOfflineAccessScope(vm.ScopesConsented.Contains(global::IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess) || model == null));
 		}
-
 		vm.ApiScopes = apiScopes;
 
 		return vm;
 	}
 
-	private static ScopeViewModel CreateScopeViewModel(IdentityResource identity, Boolean check) => new()
+	private ScopeViewModel CreateScopeViewModel(IdentityResource identity, Boolean check)
 	{
-		Value = identity.Name,
-		DisplayName = identity.DisplayName ?? identity.Name,
-		Description = identity.Description,
-		Emphasize = identity.Emphasize,
-		Required = identity.Required,
-		Checked = check || identity.Required
-	};
+		return new ScopeViewModel
+		{
+			Value = identity.Name,
+			DisplayName = identity.DisplayName ?? identity.Name,
+			Description = identity.Description,
+			Emphasize = identity.Emphasize,
+			Required = identity.Required,
+			Checked = check || identity.Required
+		};
+	}
 
-	public ScopeViewModel CreateScopeViewModel(ParsedScopeValue parsedScopeValue, ApiScope apiScope, Boolean check) => new()
+	public ScopeViewModel CreateScopeViewModel(ParsedScopeValue parsedScopeValue, ApiScope apiScope, Boolean check)
 	{
-		Value = parsedScopeValue.RawValue,
-		// todo: use the parsed scope value in the display?
-		DisplayName = apiScope.DisplayName ?? apiScope.Name,
-		Description = apiScope.Description,
-		Emphasize = apiScope.Emphasize,
-		Required = apiScope.Required,
-		Checked = check || apiScope.Required
-	};
-
-	private static ScopeViewModel GetOfflineAccessScope(Boolean check) => new()
+		return new ScopeViewModel
+		{
+			Value = parsedScopeValue.RawValue,
+			// todo: use the parsed scope value in the display?
+			DisplayName = apiScope.DisplayName ?? apiScope.Name,
+			Description = apiScope.Description,
+			Emphasize = apiScope.Emphasize,
+			Required = apiScope.Required,
+			Checked = check || apiScope.Required
+		};
+	}
+	private ScopeViewModel GetOfflineAccessScope(Boolean check)
 	{
-		Value = IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess,
-		DisplayName = ConsentOptions.OfflineAccessDisplayName,
-		Description = ConsentOptions.OfflineAccessDescription,
-		Emphasize = true,
-		Checked = check
-	};
+		return new ScopeViewModel
+		{
+			Value = global::IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess,
+			DisplayName = ConsentOptions.OfflineAccessDisplayName,
+			Description = ConsentOptions.OfflineAccessDescription,
+			Emphasize = true,
+			Checked = check
+		};
+	}
 }
 

@@ -38,8 +38,6 @@ public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 	{
 		ArgumentNullException.ThrowIfNull(context);
 
-		var configuration = context.Services.GetConfiguration();
-
 		context.ConfigureSwaggerWithAuth();
 	}
 
@@ -47,7 +45,7 @@ public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 	{
 		var app = context.GetApplicationBuilder();
 		var configuration = context.GetConfiguration();
-		var apiConfiguration = configuration.GetAppConfiguration();
+		var hostOptions = configuration.GetHostOptions();
 
 		if (MultiTenancyConsts.IsEnabled)
 		{
@@ -58,10 +56,10 @@ public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 		app.UseSwagger();
 		app.UseAbpSwaggerUI(options =>
 		{
-			options.SwaggerEndpoint(SwaggerProperties.EndPointUrl, apiConfiguration.ApiName);
-			options.OAuthClientId(apiConfiguration.ClientId);
-			options.OAuthClientSecret(apiConfiguration.ClientSecret);
-			options.OAuthScopes(apiConfiguration.Scopes);
+			options.SwaggerEndpoint(SwaggerProperties.EndPointUrl, hostOptions.ApiName);
+			options.OAuthClientId(hostOptions.ClientId);
+			options.OAuthClientSecret(hostOptions.ClientSecret);
+			options.OAuthScopes(hostOptions.Scopes.Select(s => s.Id).ToArray());
 		});
 
 		app.UseConfiguredEndpoints(endpoints =>

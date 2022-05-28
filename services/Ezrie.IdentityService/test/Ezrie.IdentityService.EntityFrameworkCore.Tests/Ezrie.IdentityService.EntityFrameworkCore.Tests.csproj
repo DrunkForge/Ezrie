@@ -4,6 +4,7 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.IdentityService</RootNamespace>
 	</PropertyGroup>
 
@@ -13,7 +14,7 @@
 		<ProjectReference Include="..\..\..\..\shared\test\Ezrie.TestBase.EntityFrameworkCore\Ezrie.TestBase.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.IdentityService.EntityFrameworkCore\Ezrie.IdentityService.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.IdentityService.TestBase\Ezrie.IdentityService.TestBase.csproj" />
-		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.2.2" />
 	</ItemGroup>
 
 </Project>

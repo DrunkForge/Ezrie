@@ -14,10 +14,10 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore.Migrations.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    Value = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true)
+                    Name = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    Value = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    ProviderName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    ProviderKey = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,9 +30,9 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore.Migrations.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false)
+                    Name = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    ProviderName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    ProviderKey = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,10 +44,10 @@ namespace Ezrie.AdministrationService.EntityFrameworkCore.Migrations.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    Value = table.Column<string>(type: "character varying(2048)", maxLength: 2048, nullable: false),
-                    ProviderName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true)
+                    Name = table.Column<String>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    Value = table.Column<String>(type: "character varying(2048)", maxLength: 2048, nullable: false),
+                    ProviderName = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    ProviderKey = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {

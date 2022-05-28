@@ -19,7 +19,7 @@ using Ezrie.Hosting.AspNetCore;
 using Ezrie.Logging;
 using Serilog;
 
-namespace Ezrie.Crm.Gateway;
+namespace Ezrie.Gateway.Public;
 
 internal static class Program
 {

@@ -18,8 +18,6 @@ using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
 using Ezrie.Logging;
-using Ezrie.MultiTenancy;
-using Ezrie.RelationshipManagement.EntityFrameworkCore.Migrations;
 using Ezrie.Seeding;
 using Ezrie.TenantService.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,14 +26,12 @@ using Microsoft.Extensions.Logging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Data;
 using Volo.Abp.Modularity;
-using Volo.Abp.MultiTenancy;
 
 namespace Ezrie.DbMigrator;
 
 [DependsOn(typeof(EzrieEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(IdentityServiceEntityFrameworkCoreMigrationsModule))]
-[DependsOn(typeof(RelationshipManagementEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(TenantServiceEntityFrameworkCoreMigrationsModule))]
 public class EntityFrameworkCoreDbMigratorModule : AbpModule
 {

@@ -6,23 +6,22 @@ using Volo.Abp.Identity;
 
 namespace Ezrie.IdentityService;
 
-[DependsOn(
-    typeof(IdentityServiceApplicationContractsModule),
-    typeof(AbpHttpClientModule))]
+[DependsOn(typeof(IdentityServiceApplicationContractsModule))]
+[DependsOn(typeof(AbpHttpClientModule))]
 [DependsOn(typeof(AbpIdentityHttpApiClientModule))]
-    public class IdentityServiceHttpApiClientModule : AbpModule
+public class IdentityServiceHttpApiClientModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddHttpClientProxies(
-            typeof(IdentityServiceApplicationContractsModule).Assembly,
-            IdentityServiceRemoteServiceConsts.RemoteServiceName
-        );
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddHttpClientProxies(
+			typeof(IdentityServiceApplicationContractsModule).Assembly,
+			IdentityServiceRemoteServiceConsts.RemoteServiceName
+		);
 
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<IdentityServiceHttpApiClientModule>();
-        });
+		Configure<AbpVirtualFileSystemOptions>(options =>
+		{
+			options.FileSets.AddEmbedded<IdentityServiceHttpApiClientModule>();
+		});
 
-    }
+	}
 }

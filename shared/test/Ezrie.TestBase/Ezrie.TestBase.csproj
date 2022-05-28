@@ -4,14 +4,15 @@
 	<Import Project="..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.Authorization" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Autofac" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Identity.Domain" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.TestBase" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.Authorization" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.Autofac" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.Identity.Domain" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.TestBase" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

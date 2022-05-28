@@ -32,7 +32,7 @@ public class DelegationGrantValidator : IExtensionGrantValidator
 		}
 
 		// get user's identity
-		var sub = result.Claims.First(c => c.Type == "sub").Value;
+		var sub = result.Claims.FirstOrDefault(c => c.Type == "sub").Value;
 
 		context.Result = new GrantValidationResult(sub, GrantType);
 		return;

@@ -44,34 +44,62 @@ public static class ConfigurationExtensions
 		?? new();
 
 	public static RedisConfiguration GetRedis(this ServiceConfigurationContext context)
-		=> context.Services.GetConfiguration().GetOptions<RedisConfiguration>()
-		?? new();
+		=> context.Services.GetConfiguration().GetRedis();
 
 	public static RedisConfiguration GetRedis(this IConfiguration configuration)
 		=> configuration.GetOptions<RedisConfiguration>()
 		?? new();
 
-	public static AppConfiguration GetAppConfiguration(this IServiceCollection services)
-		=> services.GetOptions<AppConfiguration>()
-		?? throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
+	public static CorsOptions GetCorsOptions(this IServiceCollection services)
+		=> services.GetOptions<CorsOptions>()
+		?? throw new ConfigurationException($"The {nameof(CorsOptions)} section is missing or invalid.");
 
-	public static AppConfiguration GetAppConfiguration(this IServiceProvider serviceProvider)
-		=> serviceProvider.GetOptions<AppConfiguration>()
-		?? throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
+	public static HostOptions GetHostOptions(this IServiceCollection services)
+		=> services.GetOptions<HostOptions>()
+		?? throw new ConfigurationException($"The {nameof(HostOptions)} section is missing or invalid.");
+	public static HostOptions GetHostOptions(this IServiceProvider serviceProvider)
+		=> serviceProvider.GetOptions<HostOptions>()
+		?? throw new ConfigurationException($"The {nameof(HostOptions)} section is missing or invalid.");
+	public static HostOptions GetHostOptions(this IConfiguration configuration)
+		=> configuration.GetOptions<HostOptions>()
+		?? throw new ConfigurationException($"The {nameof(HostOptions)} section is missing or invalid.");
 
-	public static AppConfiguration GetAppConfiguration(this IConfiguration configuration)
-		=> configuration.GetOptions<AppConfiguration>()
-		?? throw new ConfigurationException($"The AppConfiguration section is missing or invalid.");
+	public static OpenIdConnectClientOptions GetOpenIdConnectOptions(this ServiceConfigurationContext context)
+		=> context.Services.GetOptions<OpenIdConnectClientOptions>()
+		?? throw new ConfigurationException($"The {nameof(OpenIdConnectClientOptions)} section is missing or invalid.");
+	public static OpenIdConnectClientOptions GetOpenIdConnectOptions(this IConfiguration configuration)
+		=> configuration.GetOptions<OpenIdConnectClientOptions>()
+		?? throw new ConfigurationException($"The {nameof(OpenIdConnectClientOptions)} section is missing or invalid.");
+
+	public static AuthenticationOptions GetAuthenticationOptions(this ServiceConfigurationContext context)
+		=> context.GetOptions<AuthenticationOptions>()
+		?? throw new ConfigurationException($"The {nameof(AuthenticationOptions)} section is missing or invalid.");
+	public static AuthenticationOptions GetAuthenticationOptions(this IConfiguration configuration)
+		=> configuration.GetOptions<AuthenticationOptions>()
+		?? throw new ConfigurationException($"The {nameof(AuthenticationOptions)} section is missing or invalid.");
 
 	public static RemoteServices GetRemoteServices(this ServiceConfigurationContext context)
-		=> context.Services.GetConfiguration().GetOptions<RemoteServices>()
-		?? new();
+		=> context.Services.GetConfiguration().GetRemoteServices();
 
-	private static T? GetOptions<T>(this IServiceProvider serviceProvider) where T : class
-		=> serviceProvider.GetRequiredService<IConfiguration>().GetOptions<T>();
+	public static RemoteServices GetRemoteServices(this IServiceCollection services)
+		=>  services.BuildServiceProvider().GetRequiredService<IConfiguration>().GetRemoteServices();
 
-	private static T? GetOptions<T>(this IServiceCollection services) where T : class
+	public static RemoteServices GetRemoteServices(this IConfiguration configuration)
+	{
+		var remote = configuration.GetOptions<RemoteServices>();
+		return remote != null && Uri.IsWellFormedUriString(remote.Default.BaseUrl, UriKind.Absolute)
+			? remote
+			: throw new ConfigurationException($"The {nameof(RemoteServices)} section is missing or invalid.");
+	}
+
+	public static T? GetOptions<T>(this ServiceConfigurationContext context) where T : class
+		=> context.Services.GetOptions<T>();
+
+	public static T? GetOptions<T>(this IServiceCollection services) where T : class
 		=> services.BuildServiceProvider().GetRequiredService<IConfiguration>().GetOptions<T>();
+
+	public static T? GetOptions<T>(this IServiceProvider serviceProvider) where T : class
+		=> serviceProvider.GetRequiredService<IConfiguration>().GetOptions<T>();
 
 	public static T? GetOptions<T>(this IConfiguration configuration, T? defaultValue = null) where T : class
 		=> configuration.GetSection(typeof(T).Name).Get<T>() ?? defaultValue;

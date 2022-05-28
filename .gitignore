@@ -258,3 +258,5 @@ paket-files/
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
+
+.tye/

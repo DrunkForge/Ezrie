@@ -3,17 +3,10 @@ services:
 
 ## Relationship Management Blazor Host
 #- name: ezrie-relationship-blazor-host
-#  project: apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Blazor.Host\Ezrie.RelationshipManagement.Blazor.Host.csproj
+#  project: apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.Blazor\Ezrie.RelationshipManagement.Blazor.csproj
 #  bindings:
 #    - protocol: https
 #      port: 5000
-
-## Relationship API
-#- name: ezrie-relationship-httpapi-host
-#  project: apps\Ezrie.RelationshipManagement\src\Ezrie.RelationshipManagement.HttpApi.Host\Ezrie.RelationshipManagement.HttpApi.Host.csproj
-#  bindings:
-#    - protocol: https
-#      port: 5001
 
 # Account STS API
 - name: ezrie-account-sts
@@ -43,13 +36,6 @@ services:
     - protocol: https
       port: 10101
 
-# Administration Blazor Host
-- name: ezrie-administration-blazor-host
-  project: services\Ezrie.AdministrationService\host\Ezrie.AdministrationService.Blazor.Host\Ezrie.AdministrationService.Blazor.Host.csproj
-  bindings:
-    - protocol: https
-      port: 10200
-
 # Administration API
 - name: ezrie-administration-httpapi-host
   project: services\Ezrie.AdministrationService\host\Ezrie.AdministrationService.HttpApi.Host\Ezrie.AdministrationService.HttpApi.Host.csproj
@@ -57,26 +43,12 @@ services:
     - protocol: https
       port: 10201
 
-# Tenant Blazor Host
-- name: ezrie-tenant-blazor-host
-  project: services\Ezrie.TenantService\host\Ezrie.TenantService.Blazor.Host\Ezrie.TenantService.Blazor.Host.csproj
-  bindings:
-    - protocol: https
-      port: 10300
-
 # Tenant API
 - name: ezrie-tenant-httpapi-host
   project: services\Ezrie.TenantService\host\Ezrie.TenantService.HttpApi.Host\Ezrie.TenantService.HttpApi.Host.csproj
   bindings:
     - protocol: https
       port: 10301
-
-# Identity Blazor Host
-- name: ezrie-identity-blazor-host
-  project: services\Ezrie.IdentityService\host\Ezrie.IdentityService.Blazor.Host\Ezrie.IdentityService.Blazor.Host.csproj
-  bindings:
-    - protocol: https
-      port: 10400
 
 # Identity API
 - name: ezrie-identity-httpapi-host

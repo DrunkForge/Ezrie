@@ -48,7 +48,7 @@ public class Startup
 
 	public void ConfigureServices(IServiceCollection services)
 	{
-		var apiConfiguration = Configuration.GetAppConfiguration();
+		var apiConfiguration = Configuration.GetHostOptions();
 		services.AddSingleton(apiConfiguration);
 
 		// Add DbContexts
@@ -100,8 +100,8 @@ public class Startup
 				{
 					AuthorizationCode = new OpenApiOAuthFlow
 					{
-						AuthorizationUrl = new Uri($"{apiConfiguration.IdentityServerBaseUrl}/connect/authorize"),
-						TokenUrl = new Uri($"{apiConfiguration.IdentityServerBaseUrl}/connect/token"),
+						AuthorizationUrl = new Uri($"{apiConfiguration.Authority}/connect/authorize"),
+						TokenUrl = new Uri($"{apiConfiguration.Authority}/connect/token"),
 						Scopes = new Dictionary<String, String> { { apiConfiguration.OidcApiName, apiConfiguration.ApiName } }
 					}
 				}
@@ -121,7 +121,7 @@ public class Startup
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 	{
-		var apiConfiguration = app.ApplicationServices.GetAppConfiguration();
+		var httpApiHostOptions = app.ApplicationServices.GetHostOptions();
 
 		app.UseSerilogRequestLogging();
 		app.AddForwardHeaders();
@@ -134,10 +134,10 @@ public class Startup
 		app.UseSwagger();
 		app.UseSwaggerUI(c =>
 		{
-			c.SwaggerEndpoint($"{apiConfiguration.ApiBaseUrl}/swagger/v1/swagger.json", apiConfiguration.ApiName);
+			c.SwaggerEndpoint($"{httpApiHostOptions.ApiBaseUrl}/swagger/v1/swagger.json", httpApiHostOptions.ApiName);
 
-			c.OAuthClientId(apiConfiguration.ClientId);
-			c.OAuthAppName(apiConfiguration.ApiName);
+			c.OAuthClientId(httpApiHostOptions.ClientId);
+			c.OAuthAppName(httpApiHostOptions.ApiName);
 			c.OAuthUsePkce();
 		});
 

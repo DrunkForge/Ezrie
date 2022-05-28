@@ -4,6 +4,7 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.IdentityService</RootNamespace>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 	</PropertyGroup>
@@ -17,15 +18,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Identity.Blazor.WebAssembly" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.Identity.Blazor.WebAssembly" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

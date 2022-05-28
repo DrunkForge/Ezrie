@@ -5,11 +5,12 @@
 
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.TenantService</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

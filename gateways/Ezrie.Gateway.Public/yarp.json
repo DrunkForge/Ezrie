@@ -1,6 +1,12 @@
 {
 	"ReverseProxy": {
 		"Routes": {
+			"Default": {
+				"ClusterId": "ezrie-administration-httpapi-host",
+				"Match": {
+					"Path": "{**catch-all}"
+				}
+			},
 			"Ezrie Account Management": {
 				"ClusterId": "ezrie-account-httpapi-host",
 				"Match": {
@@ -19,27 +25,20 @@
 					"Path": "/api/identity/{**everything}"
 				}
 			},
-			"Ezrie Relationship Management": {
-				"ClusterId": "ezrie-relationship-httpapi-host",
-				"Match": {
-					"Path": "/api/relationship/{**everything}"
-				}
-			},
 			"Ezrie Tenant Serivce": {
 				"ClusterId": "ezrie-tenant-httpapi-host",
 				"Match": {
 					"Path": "/api/tenant/{**everything}"
 				}
+			},
+			"Ezrie Multi-Tenancy": {
+				"ClusterId": "ezrie-tenant-httpapi-host",
+				"Match": {
+					"Path": "/api/multi-tenancy/{**everything}"
+				}
 			}
 		},
 		"Clusters": {
-			"ezrie-relationship-httpapi-host": {
-				"Destinations": {
-					"destination1": {
-						"Address": "https://localhost:5001"
-					}
-				}
-			},
 			"ezrie-account-httpapi-host": {
 				"Destinations": {
 					"destination1": {

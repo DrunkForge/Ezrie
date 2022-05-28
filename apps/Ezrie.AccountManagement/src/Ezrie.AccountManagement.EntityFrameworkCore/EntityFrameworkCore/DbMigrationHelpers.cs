@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Skoruba.AuditLogging.EntityFramework.DbContexts;
 using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Configuration.Configuration;
@@ -29,7 +30,7 @@ using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
 
 namespace Ezrie.AccountManagement.EntityFrameworkCore;
 
-public static class DbMigrationHelpers
+public sealed class DbMigrationHelpers
 {
 	/// <summary>
 	/// Generate migrations before running this method, you can use these steps bellow:
@@ -138,13 +139,14 @@ public static class DbMigrationHelpers
 			var context = scope.ServiceProvider.GetRequiredService<TIdentityServerDbContext>();
 			var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
 			var idsDataConfiguration = scope.ServiceProvider.GetRequiredService<IdentityServerData>();
+			var logger = scope.ServiceProvider.GetRequiredService<ILogger<DbMigrationHelpers>>();
 
-			await EnsureSeedIdentityServerData(context, idsDataConfiguration);
+			await EnsureSeedIdentityServerData(context, idsDataConfiguration, logger);
 
 			var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<TRole>>();
 			var idDataConfiguration = scope.ServiceProvider.GetRequiredService<IdentityData>();
 
-			await EnsureSeedIdentityData(userManager, roleManager, idDataConfiguration);
+			await EnsureSeedIdentityData(userManager, roleManager, idDataConfiguration, logger);
 
 			return true;
 		}
@@ -154,16 +156,16 @@ public static class DbMigrationHelpers
 	/// Generate default admin user / role
 	/// </summary>
 	private static async Task EnsureSeedIdentityData<TUser, TRole>(UserManager<TUser> userManager,
-		RoleManager<TRole> roleManager, IdentityData identityDataConfiguration)
+		RoleManager<TRole> roleManager, IdentityData identityDataConfiguration, ILogger<DbMigrationHelpers> logger)
 		where TUser : IdentityUser, new()
 		where TRole : IdentityRole, new()
 	{
-		await EnsureRoles(roleManager, identityDataConfiguration);
+		await EnsureRoles(roleManager, identityDataConfiguration, logger);
 
-		await EnsureUsers(userManager, identityDataConfiguration);
+		await EnsureUsers(userManager, identityDataConfiguration, logger);
 	}
 
-	private static async Task EnsureUsers<TUser>(UserManager<TUser> userManager, IdentityData identityDataConfiguration) where TUser : IdentityUser, new()
+	private static async Task EnsureUsers<TUser>(UserManager<TUser> userManager, IdentityData identityDataConfiguration, ILogger<DbMigrationHelpers> logger) where TUser : IdentityUser, new()
 	{
 		// adding users from seed
 		foreach (var user in identityDataConfiguration.Users)
@@ -192,20 +194,23 @@ public static class DbMigrationHelpers
 
 			if (result.Succeeded)
 			{
+				logger.LogInformation("Added User: {Username} ({Email})", user.Username, user.Email);
 				foreach (var claim in user.Claims)
 				{
 					await userManager.AddClaimAsync(identityUser, new System.Security.Claims.Claim(claim.Type, claim.Value));
+					logger.LogInformation("Added Claim to {Username}: {Type}={Value}", user.Username, claim.Type, claim.Value);
 				}
 
 				foreach (var role in user.Roles)
 				{
 					await userManager.AddToRoleAsync(identityUser, role);
+					logger.LogInformation("Added {Username} to {Role}", user.Username, role);
 				}
 			}
 		}
 	}
 
-	private static async Task EnsureRoles<TRole>(RoleManager<TRole> roleManager, IdentityData identityDataConfiguration) where TRole : IdentityRole, new()
+	private static async Task EnsureRoles<TRole>(RoleManager<TRole> roleManager, IdentityData identityDataConfiguration, ILogger<DbMigrationHelpers> logger) where TRole : IdentityRole, new()
 	{
 		// adding roles from seed
 		foreach (var r in identityDataConfiguration.Roles)
@@ -221,9 +226,11 @@ public static class DbMigrationHelpers
 
 				if (result.Succeeded)
 				{
+					logger.LogInformation("Added Role: {Name}", r.Name);
 					foreach (var claim in r.Claims)
 					{
 						await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(claim.Type, claim.Value));
+						logger.LogInformation("Added Claim to {Name}: {Type}={Value}", r.Name, claim.Type, claim.Value);
 					}
 				}
 			}
@@ -233,21 +240,21 @@ public static class DbMigrationHelpers
 	/// <summary>
 	/// Generate default clients, identity and api resources
 	/// </summary>
-	private static async Task EnsureSeedIdentityServerData<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration)
+	private static async Task EnsureSeedIdentityServerData<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration, ILogger<DbMigrationHelpers> logger)
 		where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
 	{
-		await EnsureIdentityResources(context, identityServerDataConfiguration);
+		await EnsureIdentityResources(context, identityServerDataConfiguration, logger);
 
-		await EnsureApiScopes(context, identityServerDataConfiguration);
+		await EnsureApiScopes(context, identityServerDataConfiguration, logger);
 
-		await EnsureApiResources(context, identityServerDataConfiguration);
+		await EnsureApiResources(context, identityServerDataConfiguration, logger);
 
-		await EnsureClients(context, identityServerDataConfiguration);
+		await EnsureClients(context, identityServerDataConfiguration, logger);
 
 		await context.SaveChangesAsync();
 	}
 
-	private static async Task EnsureClients<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
+	private static async Task EnsureClients<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration, ILogger<DbMigrationHelpers> logger) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
 	{
 		foreach (var client in identityServerDataConfiguration.Clients)
 		{
@@ -263,11 +270,12 @@ public static class DbMigrationHelpers
 					.ToList();
 
 				await context.Clients.AddAsync(client.ToEntity());
+				logger.LogInformation("Added Client: {ClientId} ({ClientName})", client.ClientId, client.ClientName);
 			}
 		}
 	}
 
-	private static async Task EnsureApiResources<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
+	private static async Task EnsureApiResources<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration, ILogger<DbMigrationHelpers> logger) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
 	{
 		foreach (var resource in identityServerDataConfiguration.ApiResources)
 		{
@@ -279,30 +287,32 @@ public static class DbMigrationHelpers
 				}
 
 				await context.ApiResources.AddAsync(resource.ToEntity());
+				logger.LogInformation("Added API Resource: {ResourceId} ({ResournceName})", resource.Name, resource.DisplayName);
 			}
 		}
 	}
 
-	private static async Task EnsureApiScopes<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
+	private static async Task EnsureApiScopes<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration, ILogger<DbMigrationHelpers> logger) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
 	{
 		foreach (var apiScope in identityServerDataConfiguration.ApiScopes)
 		{
 			if (!await context.ApiScopes.AnyAsync(a => a.Name == apiScope.Name))
 			{
 				await context.ApiScopes.AddAsync(apiScope.ToEntity());
+				logger.LogInformation("Added API Scope: {ApiScopeId} ({ApiScopeName})", apiScope.Name, apiScope.DisplayName);
 			}
 		}
 	}
 
-	private static async Task EnsureIdentityResources<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
+	private static async Task EnsureIdentityResources<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerData identityServerDataConfiguration, ILogger<DbMigrationHelpers> logger) where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
 	{
 		foreach (var resource in identityServerDataConfiguration.IdentityResources)
 		{
 			if (!await context.IdentityResources.AnyAsync(a => a.Name == resource.Name))
 			{
 				await context.IdentityResources.AddAsync(resource.ToEntity());
+				logger.LogInformation("Added Identity Resource: {IdentityResourceId} ({IdentityResourceName})", resource.Name, resource.DisplayName);
 			}
 		}
 	}
 }
-

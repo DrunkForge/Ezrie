@@ -3,14 +3,6 @@
 
 		"IdentityResources": [
 			{
-				"Name": "role",
-				"Enabled": true,
-				"DisplayName": "Role",
-				"UserClaims": [
-					"role"
-				]
-			},
-			{
 				"Name": "openid",
 				"Enabled": true,
 				"Required": true,
@@ -43,6 +35,19 @@
 				]
 			},
 			{
+				"Name": "address",
+				"Enabled": true,
+				"DisplayName": "Your street address",
+				"Emphasize": true,
+				"UserClaims": [
+					"address",
+					"city",
+					"prov",
+					"postalcode",
+					"country"
+				]
+			},
+			{
 				"Name": "email",
 				"Enabled": true,
 				"DisplayName": "Your email address",
@@ -53,21 +58,20 @@
 				]
 			},
 			{
-				"Name": "address",
-				"Enabled": true,
-				"DisplayName": "Your address",
-				"Emphasize": true,
-				"UserClaims": [
-					"address"
-				]
-			},
-			{
 				"Name": "phone",
 				"Enabled": true,
-				"DisplayName": "Your address",
+				"DisplayName": "Your mobile phone number",
 				"Emphasize": true,
 				"UserClaims": [
 					"phone"
+				]
+			},
+			{
+				"Name": "role",
+				"Enabled": true,
+				"DisplayName": "Role",
+				"UserClaims": [
+					"role"
 				]
 			}
 		],
@@ -94,13 +98,6 @@
 				]
 			},
 			{
-				"Name": "ezrie_relationship_management_api",
-				"DisplayName": "Ezrie Relationship Management API",
-				"Scopes": [
-					"ezrie_relationship_management_api"
-				]
-			},
-			{
 				"Name": "ezrie_tenant_service_api",
 				"DisplayName": "Ezrie Tenant Service API",
 				"Scopes": [
@@ -119,11 +116,6 @@
 				]
 			},
 			{
-				"Name": "ezrie_account_management_swaggerui",
-				"DisplayName": "Ezrie Account Mangement Swagger UI",
-				"Required": true
-			},
-			{
 				"Name": "ezrie_administration_service_api",
 				"DisplayName": "Ezrie Administration Service API",
 				"Required": true,
@@ -131,11 +123,6 @@
 					"role",
 					"name"
 				]
-			},
-			{
-				"Name": "ezrie_administration_service_swaggerui",
-				"DisplayName": "Ezrie Administration Service Swagger UI",
-				"Required": true
 			},
 			{
 				"Name": "ezrie_identity_service_api",
@@ -147,25 +134,6 @@
 				]
 			},
 			{
-				"Name": "ezrie_identity_service_swaggerui",
-				"DisplayName": "Ezrie Identity Service Swagger UI",
-				"Required": true
-			},
-			{
-				"Name": "ezrie_relationship_management_api",
-				"DisplayName": "Ezrie Relationship Management API",
-				"Required": true,
-				"UserClaims": [
-					"role",
-					"name"
-				]
-			},
-			{
-				"Name": "ezrie_relationship_management_blazor_host",
-				"DisplayName": "Ezrie Relationship Management Swagger UI",
-				"Required": true
-			},
-			{
 				"Name": "ezrie_tenant_service_api",
 				"DisplayName": "Ezrie Tenant Service API",
 				"Required": true,
@@ -173,11 +141,6 @@
 					"role",
 					"name"
 				]
-			},
-			{
-				"Name": "ezrie_tenant_service_swaggerui",
-				"DisplayName": "Ezrie Tenant Service Swagger UI",
-				"Required": true
 			}
 		],
 		"Clients": [
@@ -211,90 +174,6 @@
 				]
 			},
 			{
-				"ClientId": "ezrie_account_management",
-				"ClientName": "Ezrie Account Management",
-				"ClientUri": "https://localhost:10100",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequirePkce": true,
-				"ClientSecrets": [
-					{
-						"Value": "e2c06464-d26d-4518-b6e8-6b0c271d1da7"
-					}
-				],
-				"RedirectUris": [
-					"https://localhost:10100/signin-oidc"
-				],
-				"FrontChannelLogoutUri": "https://localhost:10100/signout-oidc",
-				"PostLogoutRedirectUris": [
-					"https://localhost:10100/signout-callback-oidc"
-				],
-				"AllowedCorsOrigins": [
-					"https://localhost:10100"
-				],
-				"AllowedScopes": [
-					"openid",
-					"email",
-					"profile",
-					"roles"
-				]
-			},
-			{
-				"ClientId": "ezrie_account_management_api_swaggerui",
-				"ClientName": "Ezrie Account Management API Swagger UI",
-				"ClientSecret": "1q2w3E*",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"ClientSecrets": [
-					{
-						"Value": "1q2w3E*"
-					}
-				],
-				"RedirectUris": [
-					"https://localhost:10101/swagger/oauth2-redirect.html"
-				],
-				"AllowedScopes": [
-					"ezrie_account_management_swaggerui",
-					"ezrie_account_management_api"
-				],
-				"AllowedCorsOrigins": [
-					"https://localhost:5000",
-					"https://localhost:5001",
-					"https://localhost:5500",
-					"https://localhost:10000",
-					"https://localhost:10100",
-					"https://localhost:10101",
-					"https://localhost:10200",
-					"https://localhost:10201",
-					"https://localhost:10300",
-					"https://localhost:10301"
-				]
-			},
-			{
-				"ClientId": "ezrie_administration_service_blazor",
-				"ClientName": "Ezrie Administration Service Blazor",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequireClientSecret": false,
-				"RequirePkce": true,
-				"RedirectUris": [
-					"https://localhost:10200/authentication/login-callback"
-				],
-				"AllowedScopes": [
-					"ezrie_administration_service_api",
-					"openid",
-					"profile"
-				],
-				"AllowedCorsOrigins": [
-					"https://localhost:10000",
-					"https://localhost:10200",
-					"https://localhost:10201"
-				]
-			},
-			{
 				"ClientId": "ezrie_administration_service_swaggerui",
 				"ClientName": "Ezrie Administration Service Swagger UI",
 				"AllowedGrantTypes": [
@@ -313,28 +192,6 @@
 					"https://localhost:10000",
 					"https://localhost:10200",
 					"https://localhost:10201"
-				]
-			},
-			{
-				"ClientId": "ezrie_identity_service_blazor",
-				"ClientName": "Ezrie Identity Service Blazor",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequireClientSecret": false,
-				"RequirePkce": true,
-				"RedirectUris": [
-					"https://localhost:5000/authentication/login-callback"
-				],
-				"AllowedScopes": [
-					"ezrie_identity_service_api",
-					"openid",
-					"profile"
-				],
-				"AllowedCorsOrigins": [
-					"https://localhost:10000",
-					"https://localhost:10400",
-					"https://localhost:10401"
 				]
 			},
 			{
@@ -359,10 +216,10 @@
 				]
 			},
 			{
-				"ClientId": "ezrie_relationship_management_blazor",
-				"ClientName": "Ezrie Relationship Management Blazor",
+				"ClientId": "ezrie-crm-app",
+				"ClientName": "EzrieCRM Blazor App",
 				"AllowedGrantTypes": [
-					"code"
+					"authorization_code"
 				],
 				"RequireClientSecret": false,
 				"RequirePkce": true,
@@ -370,55 +227,20 @@
 					"https://localhost:5000/authentication/login-callback"
 				],
 				"AllowedScopes": [
-					"ezrie_relationship_management_api",
+					"ezrie_account_management_api",
+					"ezrie_administration_service_api",
+					"ezrie_identity_service_api",
+					"ezrie_tenant_service_api",
 					"openid",
-					"profile"
+					"profile",
+					"email",
+					"phone",
+					"role",
+					"roles"
 				],
 				"AllowedCorsOrigins": [
-					"https://localhost:5000",
-					"https://localhost:5001",
-					"https://localhost:10000"
-				]
-			},
-			{
-				"ClientId": "ezrie_relationship_management_blazor_host",
-				"ClientName": "Ezrie Administration Service Blazor Host",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequireClientSecret": false,
-				"RedirectUris": [
-					"https://localhost:10000/api/administration/swagger/oauth2-redirect.html",
-					"https://localhost:5001/swagger/oauth2-redirect.html"
-				],
-				"AllowedScopes": [
-					"ezrie_relationship_management_blazor_host",
-					"ezrie_relationship_management_api"
-				],
-				"AllowedCorsOrigins": [
-					"https://localhost:5000",
-					"https://localhost:5001",
-					"https://localhost:10000"
-				]
-			},
-			{
-				"ClientId": "ezrie_tenant_service_blazor",
-				"ClientName": "Ezrie Tenant Service Blazor",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequireClientSecret": false,
-				"RequirePkce": true,
-				"RedirectUris": [
-					"https://localhost:10300/authentication/login-callback"
-				],
-				"AllowedScopes": [
-					"ezrie_tenant_management_api"
-				],
-				"AllowedCorsOrigins": [
-					"https://localhost:10000",
-					"https://localhost:10300",
-					"https://localhost:10301"
+					"https://crm.ezrie.ca",
+					"https://localhost:5000"
 				]
 			},
 			{

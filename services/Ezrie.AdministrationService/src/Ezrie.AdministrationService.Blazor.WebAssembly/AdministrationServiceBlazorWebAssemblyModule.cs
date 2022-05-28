@@ -16,12 +16,14 @@
 
 using Volo.Abp.AspNetCore.Components.WebAssembly.Theming;
 using Volo.Abp.Modularity;
+using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 
 namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(AdministrationServiceBlazorModule))]
 [DependsOn(typeof(AdministrationServiceHttpApiClientModule))]
 [DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule))]
+[DependsOn(typeof(AbpSettingManagementBlazorWebAssemblyModule))]
 public class AdministrationServiceBlazorWebAssemblyModule : AbpModule
 {
 

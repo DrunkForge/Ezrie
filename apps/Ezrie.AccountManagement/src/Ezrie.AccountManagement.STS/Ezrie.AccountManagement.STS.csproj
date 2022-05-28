@@ -4,12 +4,65 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.AccountManagement.STS</RootNamespace>
 		<UserSecretsId>Ezrie.AccountManagement-9c91d295-54c5-4d09-9bd6-fa56fb74011b</UserSecretsId>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..\..\..</DockerfileContext>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="Views\Account\ConfirmEmail.cshtml" />
+	  <None Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+	  <None Include="Views\Account\ExternalLoginFailure.cshtml" />
+	  <None Include="Views\Account\ForgotPassword.cshtml" />
+	  <None Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+	  <None Include="Views\Account\Lockout.cshtml" />
+	  <None Include="Views\Account\LoggedOut.cshtml" />
+	  <None Include="Views\Account\Login.cshtml" />
+	  <None Include="Views\Account\LoginWith2fa.cshtml" />
+	  <None Include="Views\Account\LoginWithRecoveryCode.cshtml" />
+	  <None Include="Views\Account\Logout.cshtml" />
+	  <None Include="Views\Account\Register.cshtml" />
+	  <None Include="Views\Account\RegisterConfirmation.cshtml" />
+	  <None Include="Views\Account\RegisterFailure.cshtml" />
+	  <None Include="Views\Account\RegisterWithoutUsername.cshtml" />
+	  <None Include="Views\Account\ResetPassword.cshtml" />
+	  <None Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+	  <None Include="Views\Consent\Index.cshtml" />
+	  <None Include="Views\Device\Success.cshtml" />
+	  <None Include="Views\Device\UserCodeCapture.cshtml" />
+	  <None Include="Views\Device\UserCodeConfirmation.cshtml" />
+	  <None Include="Views\Diagnostics\Index.cshtml" />
+	  <None Include="Views\Grants\Index.cshtml" />
+	  <None Include="Views\Home\Index.cshtml" />
+	  <None Include="Views\Manage\ChangePassword.cshtml" />
+	  <None Include="Views\Manage\DeletePersonalData.cshtml" />
+	  <None Include="Views\Manage\Disable2fa.cshtml" />
+	  <None Include="Views\Manage\DownloadPersonalData.cshtml" />
+	  <None Include="Views\Manage\EnableAuthenticator.cshtml" />
+	  <None Include="Views\Manage\ExternalLogins.cshtml" />
+	  <None Include="Views\Manage\GenerateRecoveryCodes.cshtml" />
+	  <None Include="Views\Manage\Index.cshtml" />
+	  <None Include="Views\Manage\LinkLoginFailure.cshtml" />
+	  <None Include="Views\Manage\PersonalData.cshtml" />
+	  <None Include="Views\Manage\ResetAuthenticator.cshtml" />
+	  <None Include="Views\Manage\SetPassword.cshtml" />
+	  <None Include="Views\Manage\ShowRecoveryCodes.cshtml" />
+	  <None Include="Views\Manage\TwoFactorAuthentication.cshtml" />
+	  <None Include="Views\Manage\_StatusMessage.cshtml" />
+	  <None Include="Views\Shared\Common\ApplicationVersion.cshtml" />
+	  <None Include="Views\Shared\Common\SelectLanguage.cshtml" />
+	  <None Include="Views\Shared\Common\SelectTheme.cshtml" />
+	  <None Include="Views\Shared\Common\ThemeResources.cshtml" />
+	  <None Include="Views\Shared\Components\IdentityServerAdminLink\Default.cshtml" />
+	  <None Include="Views\Shared\Error.cshtml" />
+	  <None Include="Views\Shared\Redirect.cshtml" />
+	  <None Include="Views\Shared\_Layout.cshtml" />
+	  <None Include="Views\Shared\_ScopeListItem.cshtml" />
+	  <None Include="Views\Shared\_ValidationSummary.cshtml" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.6" />
@@ -38,8 +91,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.AspNetCore\Ezrie.Hosting.AspNetCore.csproj" />
-		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore\Ezrie.AccountManagement.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.Domain.Shared\Ezrie.AccountManagement.Domain.Shared.csproj" />
 	</ItemGroup>

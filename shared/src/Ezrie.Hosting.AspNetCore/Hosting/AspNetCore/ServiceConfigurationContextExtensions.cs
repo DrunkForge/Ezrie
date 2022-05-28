@@ -31,20 +31,15 @@ public static class ServiceConfigurationContextExtensions
 			throw new ArgumentException($"'{nameof(audience)}' cannot be null or whitespace.", nameof(audience));
 		}
 
-		var apiConfiguration = context.Services.GetConfiguration().GetAppConfiguration();
+		var hostoptions = context.Services.GetConfiguration().GetHostOptions();
 
 		context.Services
 			.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			.AddJwtBearer(options =>
 			{
-				options.Authority = apiConfiguration.IdentityServerBaseUrl;
-				options.RequireHttpsMetadata = apiConfiguration.RequireHttpsMetadata;
+				options.Authority = hostoptions.Authority;
+				options.RequireHttpsMetadata = hostoptions.RequireHttpsMetadata;
 				options.Audience = audience;
 			});
-	}
-
-	public static void ConfigureCors(this ServiceConfigurationContext context)
-	{
-		context.Services.ConfigureCors(builder => builder.WithAbpExposedHeaders());
 	}
 }

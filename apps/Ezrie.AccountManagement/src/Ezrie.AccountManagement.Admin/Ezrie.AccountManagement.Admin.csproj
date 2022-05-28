@@ -4,6 +4,7 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.AccountManagement.Admin</RootNamespace>
 		<UserSecretsId>Ezrie.AccountManagement-8fe260ca-ef4c-4fa3-9364-029146f8d339</UserSecretsId>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>

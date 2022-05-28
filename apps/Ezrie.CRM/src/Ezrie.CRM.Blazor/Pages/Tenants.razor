@@ -1,0 +1,26 @@
+@page "/tenants"
+@using Volo.Abp.TenantManagement
+@inherits CrmComponentBase
+@inject IStringLocalizer<CrmResource> L
+
+<h3>Tenants</h3>
+
+@if ( Loading )
+{
+    <span>Loading...</span>
+}
+else
+{
+    <SfGrid DataSource="@TenantList" AllowPaging="true">
+        <GridPageSettings PageSizes="true" PageSize="10"></GridPageSettings>
+        <GridColumns>
+            <GridColumn Field="@nameof( TenantDto.Name )" HeaderText="Name" />
+            <GridColumn Field="@nameof( TenantDto.ConcurrencyStamp )" HeaderText="Concurrency Stamp" />
+            <GridColumn Width="200px">
+                <Template>
+                    <SfButton OnClick="@(()=>DeleteTenantAsync(context as TenantDto))">Delete</SfButton>
+                </Template>
+            </GridColumn>
+        </GridColumns>
+    </SfGrid>
+}

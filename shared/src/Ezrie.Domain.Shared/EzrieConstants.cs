@@ -18,10 +18,10 @@ namespace Ezrie;
 
 public static class EzrieConstants
 {
+	public static readonly LocalDate Epoch = LocalDate.FromDateTime(DateTime.UnixEpoch);
+
 	public const String AnonymousUserClaimName = "anonymous_id";
 	public const String DataProtectionApplicationName = "EzrieCRM";
 	public const String DataProtectionKey = "Ezrie-DataProtection-Key";
 	public const String DistributedCachePrefix = "Ezrie:";
-
-	public static readonly LocalDate Epoch = LocalDate.FromDateTime(DateTime.UnixEpoch);
 }

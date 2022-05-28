@@ -4,15 +4,16 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.TenantService</RootNamespace>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="$(VoloAbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="$(VoloAbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="$(VoloAbpPackageVersion)" />
-    <ProjectReference Include="..\Ezrie.TenantService.Application.Contracts\Ezrie.TenantService.Application.Contracts.csproj" />
-    <ProjectReference Include="..\Ezrie.TenantService.Domain\Ezrie.TenantService.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AutoMapper" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.Ddd.Application" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.2.2" />
+		<ProjectReference Include="..\Ezrie.TenantService.Application.Contracts\Ezrie.TenantService.Application.Contracts.csproj" />
+		<ProjectReference Include="..\Ezrie.TenantService.Domain\Ezrie.TenantService.Domain.csproj" />
+	</ItemGroup>
 
 </Project>

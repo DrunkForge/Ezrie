@@ -1,8 +1,8 @@
-namespace Ezrie.AccountManagement.STS.ViewModels.Manage;
+﻿namespace Ezrie.AccountManagement.STS.ViewModels.Manage;
 
 public class RemoveLoginViewModel
 {
-	public String LoginProvider { get; set; } = String.Empty;
-	public String ProviderKey { get; set; } = String.Empty;
+	public String LoginProvider { get; set; }
+	public String ProviderKey { get; set; }
 }
 

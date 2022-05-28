@@ -1,0 +1,9 @@
+{
+  "culture": "en",
+	"texts": {
+		"CRM:Menu:Home": "Home",
+		"CRM:Menu:Tenants": "Tenants",
+		"CRM:Menu:Tenants:List": "List Tenants",
+		"LongWelcomeMessage": "Welcome to the EzrieCRM."
+	}
+}

@@ -84,13 +84,13 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 	{
 		builder.Services.AddOidcAuthentication(options =>
 		{
-			var apiConfiguration = builder.Configuration.GetAppConfiguration();
-			options.ProviderOptions.Authority = apiConfiguration.IdentityServerBaseUrl;
-			options.ProviderOptions.ClientId = apiConfiguration.ClientId;
-			foreach (var scope in apiConfiguration.Scopes)
+			var oidc = builder.Configuration.GetOpenIdConnectOptions();
+			options.ProviderOptions.Authority = oidc.Authority;
+			options.ProviderOptions.ClientId = oidc.ClientId;
+			options.ProviderOptions.ResponseType = oidc.ResponseType;
+			options.ProviderOptions.PostLogoutRedirectUri = oidc.PostLogoutRedirectUri;
+			foreach (var scope in oidc.Scopes)
 				options.ProviderOptions.DefaultScopes.Add(scope);
-			options.ProviderOptions.ResponseType = apiConfiguration.OidcResponseType;
-			options.ProviderOptions.PostLogoutRedirectUri = apiConfiguration.PostLogoutRedirectUri;
 		});
 	}
 

@@ -5,7 +5,7 @@ using Ezrie.AccountManagement.STS.ViewModels.Account;
 
 namespace Ezrie.AccountManagement.STS.Helpers;
 
-public static class ControllerExtensions
+public static class Extensions
 {
 	/// <summary>
 	/// Checks if the redirect URI is for a native client.

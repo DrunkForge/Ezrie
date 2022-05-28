@@ -4,7 +4,6 @@ using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
-using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.UI.Navigation;
 
 namespace Ezrie.TenantService;
@@ -12,7 +11,6 @@ namespace Ezrie.TenantService;
 [DependsOn(typeof(TenantServiceApplicationContractsModule))]
 [DependsOn(typeof(AbpAspNetCoreComponentsWebThemingModule))]
 [DependsOn(typeof(AbpAutoMapperModule))]
-[DependsOn(typeof(AbpTenantManagementBlazorWebAssemblyModule))]
 public class TenantServiceBlazorModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)

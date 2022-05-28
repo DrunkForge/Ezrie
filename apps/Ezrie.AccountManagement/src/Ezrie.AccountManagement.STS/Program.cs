@@ -1,30 +1,26 @@
-using Ezrie.Logging;
 using Serilog;
 using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 
 namespace Ezrie.AccountManagement.STS;
 
-internal static class Program
+public class Program
 {
-	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
-	public static async Task<Int32> Main(String[] args)
+	public static void Main(String[] args)
 	{
+		var configuration = GetConfiguration(args);
+
+		Log.Logger = new LoggerConfiguration()
+			.ReadFrom.Configuration(configuration)
+			.CreateLogger();
 		try
 		{
-			var builder = CreateHostBuilder(args);
+			DockerHelpers.ApplyDockerConfiguration(configuration);
 
-			var host = builder.Build();
-
-			DockerHelpers.ApplyDockerConfiguration(host.Services.GetRequiredService<IConfiguration>());
-
-			await host.RunAsync();
-
-			return 0;
+			CreateHostBuilder(args).Build().Run();
 		}
 		catch (Exception ex)
 		{
 			Log.Fatal(ex, "Host terminated unexpectedly");
-			return 1;
 		}
 		finally
 		{
@@ -32,32 +28,64 @@ internal static class Program
 		}
 	}
 
-	public static IHostBuilder CreateHostBuilder(String[] args) => Host
-		.CreateDefaultBuilder(args)
-		.UseEzrieLogging<Startup>()
-		.ConfigureAppConfiguration((hostContext, configApp) =>
+	private static IConfiguration GetConfiguration(String[] args)
+	{
+		var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+		var isDevelopment = environment == Environments.Development;
+
+		var configurationBuilder = new ConfigurationBuilder()
+			.SetBasePath(Directory.GetCurrentDirectory())
+			.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+			.AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
+			.AddJsonFile("serilog.json", optional: true, reloadOnChange: true)
+			.AddJsonFile($"serilog.{environment}.json", optional: true, reloadOnChange: true);
+
+		if (isDevelopment)
 		{
-			var configurationRoot = configApp.Build();
-			configApp.AddJsonFile("serilog.json", optional: true, reloadOnChange: true);
+			configurationBuilder.AddUserSecrets<Startup>(true);
+		}
 
-			var env = hostContext.HostingEnvironment;
+		var configuration = configurationBuilder.Build();
 
-			configApp.AddJsonFile($"serilog.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+		configuration.AddAzureKeyVaultConfiguration(configurationBuilder);
 
-			if (env.IsDevelopment())
+		configurationBuilder.AddCommandLine(args);
+		configurationBuilder.AddEnvironmentVariables();
+
+		return configurationBuilder.Build();
+	}
+
+	public static IHostBuilder CreateHostBuilder(String[] args) =>
+		Host.CreateDefaultBuilder(args)
+			 .ConfigureAppConfiguration((hostContext, configApp) =>
+			 {
+				 var configurationRoot = configApp.Build();
+
+				 configApp.AddJsonFile("serilog.json", optional: true, reloadOnChange: true);
+
+				 var env = hostContext.HostingEnvironment;
+
+				 configApp.AddJsonFile($"serilog.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+				 if (env.IsDevelopment())
+				 {
+					 configApp.AddUserSecrets<Startup>(true);
+				 }
+
+				 configurationRoot.AddAzureKeyVaultConfiguration(configApp);
+
+				 configApp.AddEnvironmentVariables();
+				 configApp.AddCommandLine(args);
+			 })
+			.ConfigureWebHostDefaults(webBuilder =>
 			{
-				configApp.AddUserSecrets<Startup>(true);
-			}
-
-			configurationRoot.AddAzureKeyVaultConfiguration(configApp);
-
-			configApp.AddEnvironmentVariables();
-			configApp.AddCommandLine(args);
-		})
-		.ConfigureWebHostDefaults(webBuilder =>
-		{
-			webBuilder
-				.ConfigureKestrel(options => options.AddServerHeader = false)
-				.UseStartup<Startup>();
-		});
+				webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
+				webBuilder.UseStartup<Startup>();
+			})
+			.UseSerilog((hostContext, loggerConfig) =>
+			{
+				loggerConfig
+					.ReadFrom.Configuration(hostContext.Configuration)
+					.Enrich.WithProperty("ApplicationName", hostContext.HostingEnvironment.ApplicationName);
+			});
 }

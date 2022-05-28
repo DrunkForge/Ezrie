@@ -6,10 +6,10 @@ public class ExternalLoginConfirmationViewModel
 {
 	[Required]
 	[RegularExpression(@"^[a-zA-Z0-9_@\-\.\+]+$")]
-	public String UserName { get; set; } = String.Empty;
+	public String UserName { get; set; }
 
 	[Required]
 	[EmailAddress]
-	public String Email { get; set; } = String.Empty;
+	public String Email { get; set; }
 }
 

@@ -20,7 +20,6 @@ public static class IdentityServerBuilderExtensions
 	/// <param name="builder"></param>
 	/// <param name="configuration"></param>
 	/// <returns></returns>
-	[SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "The X509Certificate2 is used for the duration of the application. Disposing here would be a disaster.")]
 	public static IIdentityServerBuilder AddCustomSigningCredential(this IIdentityServerBuilder builder, IConfiguration configuration)
 	{
 		var certificateConfiguration = configuration.GetSection(nameof(CertificateConfiguration)).Get<CertificateConfiguration>();
@@ -30,29 +29,26 @@ public static class IdentityServerBuilderExtensions
 		{
 			if (String.IsNullOrWhiteSpace(certificateConfiguration.SigningCertificateThumbprint))
 			{
-				throw new ConfigurationException(SigningCertificateThumbprintNotFound);
+				throw new Exception(SigningCertificateThumbprintNotFound);
 			}
 
-			var storeLocation = StoreLocation.LocalMachine;
+			StoreLocation storeLocation = StoreLocation.LocalMachine;
 			var validOnly = certificateConfiguration.CertificateValidOnly;
 
 			// Parse the Certificate StoreLocation
-			var certStoreLocation = certificateConfiguration.CertificateStoreLocation.ToUpperInvariant();
-			if (certStoreLocation == StoreLocation.CurrentUser.ToString().ToUpperInvariant() ||
-				certificateConfiguration.CertificateStoreLocation == ((Int32)StoreLocation.CurrentUser).ToString(CultureInfo.InvariantCulture))
+			var certStoreLocationLower = certificateConfiguration.CertificateStoreLocation.ToLower();
+			if (certStoreLocationLower == StoreLocation.CurrentUser.ToString().ToLower() ||
+				certificateConfiguration.CertificateStoreLocation == ((Int32)StoreLocation.CurrentUser).ToString())
 			{
 				storeLocation = StoreLocation.CurrentUser;
 			}
-			else if (certStoreLocation == StoreLocation.LocalMachine.ToString().ToUpperInvariant() ||
-					 certStoreLocation == ((Int32)StoreLocation.LocalMachine).ToString(CultureInfo.InvariantCulture))
+			else if (certStoreLocationLower == StoreLocation.LocalMachine.ToString().ToLower() ||
+					 certStoreLocationLower == ((Int32)StoreLocation.LocalMachine).ToString())
 			{
 				storeLocation = StoreLocation.LocalMachine;
 			}
 			else
-			{
-				storeLocation = StoreLocation.LocalMachine;
-				validOnly = true;
-			}
+			{ storeLocation = StoreLocation.LocalMachine; validOnly = true; }
 
 			// Open Certificate
 			var certStore = new X509Store(StoreName.My, storeLocation);
@@ -61,7 +57,7 @@ public static class IdentityServerBuilderExtensions
 			var certCollection = certStore.Certificates.Find(X509FindType.FindByThumbprint, certificateConfiguration.SigningCertificateThumbprint, validOnly);
 			if (certCollection.Count == 0)
 			{
-				throw new ConfigurationException(CertificateNotFound);
+				throw new Exception(CertificateNotFound);
 			}
 
 			var certificate = certCollection[0];
@@ -78,7 +74,7 @@ public static class IdentityServerBuilderExtensions
 		{
 			if (String.IsNullOrWhiteSpace(certificateConfiguration.SigningCertificatePfxFilePath))
 			{
-				throw new ConfigurationException(SigningCertificatePathIsNotSpecified);
+				throw new Exception(SigningCertificatePathIsNotSpecified);
 			}
 
 			if (File.Exists(certificateConfiguration.SigningCertificatePfxFilePath))
@@ -90,12 +86,12 @@ public static class IdentityServerBuilderExtensions
 				}
 				catch (Exception e)
 				{
-					throw new ConfigurationException("There was an error adding the key file - during the creation of the signing key", e);
+					throw new Exception("There was an error adding the key file - during the creation of the signing key", e);
 				}
 			}
 			else
 			{
-				throw new ConfigurationException($"Signing key file: {certificateConfiguration.SigningCertificatePfxFilePath} not found");
+				throw new Exception($"Signing key file: {certificateConfiguration.SigningCertificatePfxFilePath} not found");
 			}
 		}
 		else if (certificateConfiguration.UseTemporarySigningKeyForDevelopment)
@@ -104,7 +100,7 @@ public static class IdentityServerBuilderExtensions
 		}
 		else
 		{
-			throw new ConfigurationException("Signing credential is not specified");
+			throw new Exception("Signing credential is not specified");
 		}
 
 		return builder;
@@ -117,7 +113,6 @@ public static class IdentityServerBuilderExtensions
 	/// <param name="builder"></param>
 	/// <param name="configuration"></param>
 	/// <returns></returns>
-	[SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "The X509Certificate2 is used for the duration of the application.")]
 	public static IIdentityServerBuilder AddCustomValidationKey(this IIdentityServerBuilder builder, IConfiguration configuration)
 	{
 		var certificateConfiguration = configuration.GetSection(nameof(CertificateConfiguration)).Get<CertificateConfiguration>();
@@ -127,16 +122,16 @@ public static class IdentityServerBuilderExtensions
 		{
 			if (String.IsNullOrWhiteSpace(certificateConfiguration.ValidationCertificateThumbprint))
 			{
-				throw new ConfigurationException(ValidationCertificateThumbprintNotFound);
+				throw new Exception(ValidationCertificateThumbprintNotFound);
 			}
 
-			using var certStore = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+			var certStore = new X509Store(StoreName.My, StoreLocation.LocalMachine);
 			certStore.Open(OpenFlags.ReadOnly);
 
 			var certCollection = certStore.Certificates.Find(X509FindType.FindByThumbprint, certificateConfiguration.ValidationCertificateThumbprint, false);
 			if (certCollection.Count == 0)
 			{
-				throw new ConfigurationException(CertificateNotFound);
+				throw new Exception(CertificateNotFound);
 			}
 
 			var certificate = certCollection[0];
@@ -157,7 +152,7 @@ public static class IdentityServerBuilderExtensions
 		{
 			if (String.IsNullOrWhiteSpace(certificateConfiguration.ValidationCertificatePfxFilePath))
 			{
-				throw new ConfigurationException(ValidationCertificatePathIsNotSpecified);
+				throw new Exception(ValidationCertificatePathIsNotSpecified);
 			}
 
 			if (File.Exists(certificateConfiguration.ValidationCertificatePfxFilePath))
@@ -169,12 +164,12 @@ public static class IdentityServerBuilderExtensions
 				}
 				catch (Exception e)
 				{
-					throw new ConfigurationException("There was an error adding the key file - during the creation of the validation key", e);
+					throw new Exception("There was an error adding the key file - during the creation of the validation key", e);
 				}
 			}
 			else
 			{
-				throw new ConfigurationException($"Validation key file: {certificateConfiguration.ValidationCertificatePfxFilePath} not found");
+				throw new Exception($"Validation key file: {certificateConfiguration.ValidationCertificatePfxFilePath} not found");
 			}
 		}
 

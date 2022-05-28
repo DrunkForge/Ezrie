@@ -80,7 +80,7 @@ public class IdentityServiceBlazorHostModule : AbpModule
     {
         context.Services.AddTransient(sp => new HttpClient
         {
-            BaseAddress = new Uri(environment.BaseAddress)
+			BaseAddress = new Uri(environment.BaseAddress)
         });
     }
 

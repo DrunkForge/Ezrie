@@ -1,13 +1,13 @@
 @inject IViewLocalizer Localizer
 @using Microsoft.AspNetCore.Mvc.Localization
-@model 			ExternalLoginsViewModel
+@model Ezrie.AccountManagement.STS.ViewModels.Manage.ExternalLoginsViewModel
 @{
     ViewData["Title"] = Localizer["Title"];
 }
 
 @await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
 
-@if (Model.CurrentLogins?.Count() > 0)
+@if (Model.CurrentLogins?.Count > 0)
 {
     <h4>@Localizer["SubTitle"]</h4>
     <table class="table">
@@ -37,7 +37,7 @@
         </tbody>
     </table>
 }
-@if (Model.OtherLogins?.Count() > 0)
+@if (Model.OtherLogins?.Count > 0)
 {
     <h4>@Localizer["TitleAddAnotherService"]</h4>
     <hr />

@@ -9,9 +9,9 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Admin/Ezrie.AccountManagement.Admin.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Admin/"]
 COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Domain.Shared/Ezrie.AccountManagement.Domain.Shared.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Domain.Shared/"]
-COPY ["shared/src/Ezrie.Logging/Ezrie.Logging.csproj", "shared/src/Ezrie.Logging/"]
-COPY ["shared/src/Ezrie.Domain/Ezrie.Domain.csproj", "shared/src/Ezrie.Domain/"]
 COPY ["shared/src/Ezrie.Domain.Shared/Ezrie.Domain.Shared.csproj", "shared/src/Ezrie.Domain.Shared/"]
+COPY ["shared/src/Ezrie.Core/Ezrie.Core.csproj", "shared/src/Ezrie.Core/"]
+COPY ["shared/src/Ezrie.Logging/Ezrie.Logging.csproj", "shared/src/Ezrie.Logging/"]
 COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore.MySql/Ezrie.AccountManagement.EntityFrameworkCore.MySql.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore.MySql/"]
 COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore/Ezrie.AccountManagement.EntityFrameworkCore.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.EntityFrameworkCore/"]
 COPY ["apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Domain/Ezrie.AccountManagement.Domain.csproj", "apps/Ezrie.AccountManagement/src/Ezrie.AccountManagement.Domain/"]

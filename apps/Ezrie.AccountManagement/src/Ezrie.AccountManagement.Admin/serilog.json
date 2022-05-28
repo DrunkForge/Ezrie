@@ -2,8 +2,8 @@
 	"Serilog": {
 		"MinimumLevel": {
 			"Default": "Debug",
-			"Overrides": {
-				"Microsoft": "Warning"
+			"Override": {
+				"Microsoft.EntityFrameworkCore": "Warning"
 			}
 		},
 		"WriteTo": [

@@ -1,14 +1,13 @@
+using Ezrie.AccountManagement.EntityFrameworkCore;
+using Ezrie.AccountManagement.Identity;
+using Ezrie.AccountManagement.STS.Configuration;
+using Ezrie.AccountManagement.STS.Configuration.Constants;
+using Ezrie.AccountManagement.STS.Configuration.Interfaces;
+using Ezrie.AccountManagement.STS.Helpers;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Ezrie.AccountManagement.STS.Configuration;
-using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 using Serilog;
-using Ezrie.AccountManagement.Identity;
-using Ezrie.AccountManagement.STS.Helpers;
-using Ezrie.AccountManagement.STS.Configuration.Interfaces;
-using Ezrie.AccountManagement.STS.Configuration.Constants;
-using Ezrie.Hosting.AspNetCore;
-using Ezrie.AccountManagement.EntityFrameworkCore;
+using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 
 namespace Ezrie.AccountManagement.STS;
 
@@ -51,14 +50,10 @@ public class Startup
 		RegisterAuthorization(services);
 
 		services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, IdentityServerDataProtectionDbContext>(Configuration);
-
-		services.ConfigureCors();
 	}
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 	{
-		app.UseSerilogRequestLogging();
-
 		app.UseCookiePolicy();
 
 		if (env.IsDevelopment())
@@ -73,13 +68,14 @@ public class Startup
 		app.UsePathBase(Configuration.GetValue<String>("BasePath"));
 
 		app.UseStaticFiles();
-		app.UseIdentityServer();
+		UseAuthentication(app);
 
 		// Add custom security headers
 		app.UseSecurityHeaders(Configuration);
+
 		app.UseMvcLocalizationServices();
+
 		app.UseRouting();
-		app.UseCors();
 		app.UseAuthorization();
 		app.UseEndpoints(endpoint =>
 		{
@@ -106,6 +102,11 @@ public class Startup
 	{
 		var rootConfiguration = CreateRootConfiguration();
 		services.AddAuthorizationPolicies(rootConfiguration);
+	}
+
+	public virtual void UseAuthentication(IApplicationBuilder app)
+	{
+		app.UseIdentityServer();
 	}
 
 	public virtual void RegisterHstsOptions(IServiceCollection services)

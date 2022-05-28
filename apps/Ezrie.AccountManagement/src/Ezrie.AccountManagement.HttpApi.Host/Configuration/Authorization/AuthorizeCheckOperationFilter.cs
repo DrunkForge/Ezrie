@@ -23,16 +23,17 @@ namespace Ezrie.AccountManagement.Configuration.Authorization;
 
 public class AuthorizeCheckOperationFilter : IOperationFilter
 {
-	private readonly AppConfiguration _adminApiConfiguration;
+	private readonly Ezrie.Configuration.HostOptions _httpApiHostOptions;
 
-	public AuthorizeCheckOperationFilter(AppConfiguration adminApiConfiguration)
+	public AuthorizeCheckOperationFilter(Ezrie.Configuration.HostOptions adminApiConfiguration)
 	{
-		_adminApiConfiguration = adminApiConfiguration;
+		_httpApiHostOptions = adminApiConfiguration;
 	}
 	public void Apply(OpenApiOperation operation, OperationFilterContext context)
 	{
-		var hasAuthorize = context.MethodInfo.DeclaringType != null && (context.MethodInfo.DeclaringType.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any()
-																		|| context.MethodInfo.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any());
+		var hasAuthorize = context.MethodInfo.DeclaringType != null
+			&& (context.MethodInfo.DeclaringType.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any()
+				|| context.MethodInfo.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any());
 
 		if (hasAuthorize)
 		{
@@ -49,11 +50,10 @@ public class AuthorizeCheckOperationFilter : IOperationFilter
 									Type = ReferenceType.SecurityScheme,
 									Id = "oauth2"}
 							}
-						] = new[] { _adminApiConfiguration.OidcApiName }
+						] = new[] { _httpApiHostOptions.OidcApiName }
 					}
 				};
 
 		}
 	}
 }
-

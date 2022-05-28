@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Ezrie.AccountManagement.STS.ViewModels.Manage;
 
@@ -8,6 +8,6 @@ public class DeletePersonalDataViewModel
 
 	[DataType(DataType.Password)]
 	[Required]
-	public String Password { get; set; } = String.Empty;
+	public String Password { get; set; }
 }
 

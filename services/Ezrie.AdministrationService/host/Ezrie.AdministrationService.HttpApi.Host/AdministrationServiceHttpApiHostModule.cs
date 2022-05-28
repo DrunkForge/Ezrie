@@ -20,6 +20,7 @@ using Ezrie.Hosting.AspNetCore.Microservices;
 using Ezrie.IdentityService;
 using Ezrie.IdentityService.EntityFrameworkCore;
 using Ezrie.TenantService;
+using Ezrie.TenantService.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
@@ -36,6 +37,7 @@ namespace Ezrie.AdministrationService;
 [DependsOn(typeof(IdentityServiceApplicationContractsModule))]
 [DependsOn(typeof(IdentityServiceEntityFrameworkCoreModule))]
 [DependsOn(typeof(TenantServiceApplicationContractsModule))]
+[DependsOn(typeof(TenantServiceEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpIdentityDomainModule))]
 public class AdministrationServiceHttpApiHostModule : AbpModule
 {

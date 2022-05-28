@@ -26,5 +26,5 @@ public class RemoteServices
 public class RemoteService
 {
 	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "System.Uri doesn't play nicely with IConfiguration")]
-	public String? BaseUrl { get; set; }
+	public String BaseUrl { get; set; } = String.Empty;
 }

@@ -4,15 +4,16 @@
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
 		<RootNamespace>Ezrie.AdministrationService</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Authorization" Version="$(VoloAbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)"/>
-		<PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)"/>
-		<PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="$(VoloAbpPackageVersion)"/>
+		<PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.Authorization" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

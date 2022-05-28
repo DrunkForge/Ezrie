@@ -33,7 +33,7 @@ public static partial class YarpSwaggerUIBuilderExtensions
 		app.UseSwaggerUI(options =>
 		{
 			var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
-			var apiConfiguration = configuration.GetAppConfiguration();
+			var hostOptions = configuration.GetHostOptions();
 			var logger = context.ServiceProvider.GetRequiredService<ILogger<ApplicationInitializationContext>>();
 			var proxyConfigProvider = context.ServiceProvider.GetRequiredService<IProxyConfigProvider>();
 			var yarpConfig = proxyConfigProvider.GetConfig();
@@ -60,8 +60,8 @@ public static partial class YarpSwaggerUIBuilderExtensions
 				}
 
 				options.SwaggerEndpoint($"{clusterGroup.Value.Address}{SwaggerProperties.EndPointUrl}", $"{routeConfig.RouteId} API");
-				options.OAuthClientId(apiConfiguration.ClientId);
-				options.OAuthClientSecret(apiConfiguration.ClientSecret);
+				options.OAuthClientId(hostOptions.ClientId);
+				options.OAuthClientSecret(hostOptions.ClientSecret);
 			}
 		});
 

@@ -81,13 +81,13 @@ public class TenantServiceBlazorHostModule : AbpModule
 	{
 		builder.Services.AddOidcAuthentication(options =>
 		{
-			var apiConfiguration = builder.Configuration.GetAppConfiguration();
-			options.ProviderOptions.Authority = apiConfiguration.IdentityServerBaseUrl;
-			options.ProviderOptions.ClientId = apiConfiguration.ClientId;
-			foreach (var scope in apiConfiguration.Scopes)
+			var authOptions = builder.Configuration.GetAuthenticationOptions();
+			options.ProviderOptions.Authority = authOptions.Authority;
+			options.ProviderOptions.ClientId = authOptions.ClientId;
+			options.ProviderOptions.ResponseType = authOptions.ResponseType;
+			options.ProviderOptions.PostLogoutRedirectUri = authOptions.PostLogoutRedirectUri;
+			foreach (var scope in authOptions.Scopes)
 				options.ProviderOptions.DefaultScopes.Add(scope);
-			options.ProviderOptions.ResponseType = apiConfiguration.OidcResponseType;
-			options.ProviderOptions.PostLogoutRedirectUri = apiConfiguration.PostLogoutRedirectUri;
 		});
 	}
 

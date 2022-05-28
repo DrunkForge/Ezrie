@@ -162,7 +162,7 @@ public class AccountController<TUser, TKey> : Controller
 					}
 
 					// user might have clicked on a malicious link - should be logged
-					throw new AuthenticationException("Invalid return URL");
+					throw new Exception("invalid return URL");
 				}
 
 				if (result.RequiresTwoFactor)
@@ -175,7 +175,6 @@ public class AccountController<TUser, TKey> : Controller
 					return View("Lockout");
 				}
 			}
-
 			await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId: context?.Client.ClientId));
 			ModelState.AddModelError(String.Empty, AccountOptions.InvalidCredentialsErrorMessage);
 		}
@@ -215,7 +214,7 @@ public class AccountController<TUser, TKey> : Controller
 		// build a model so the logged out page knows what to display
 		var vm = await BuildLoggedOutViewModelAsync(model.LogoutId);
 
-		if (User?.Identity?.IsAuthenticated == true)
+		if (User?.Identity.IsAuthenticated == true)
 		{
 			// delete local authentication cookie
 			await _signInManager.SignOutAsync();
@@ -247,7 +246,6 @@ public class AccountController<TUser, TKey> : Controller
 		{
 			return View("Error");
 		}
-
 		var user = await _userManager.FindByIdAsync(userId);
 		if (user == null)
 		{
@@ -270,12 +268,11 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
-	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
 	public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
 	{
 		if (ModelState.IsValid)
 		{
-			TUser? user = null;
+			TUser user = null;
 			switch (model.Policy)
 			{
 				case LoginResolutionPolicy.Email:
@@ -286,10 +283,9 @@ public class AccountController<TUser, TKey> : Controller
 					catch (Exception ex)
 					{
 						// in case of multiple users with the same email this method would throw and reveal that the email is registered
-						_logger.LogError(ex, "Error retrieving user by email {Email} for forgot password functionality.", model.Email);
+						_logger.LogError("Error retrieving user by email ({0}) for forgot password functionality: {1}", model.Email, ex.Message);
 						user = null;
 					}
-
 					break;
 				case LoginResolutionPolicy.Username:
 					try
@@ -298,10 +294,9 @@ public class AccountController<TUser, TKey> : Controller
 					}
 					catch (Exception ex)
 					{
-						_logger.LogError(ex, "Error retrieving user by userName {Username} for forgot password functionality.", model.Username);
+						_logger.LogError("Error retrieving user by userName ({0}) for forgot password functionality: {1}", model.Username, ex.Message);
 						user = null;
 					}
-
 					break;
 			}
 
@@ -314,8 +309,6 @@ public class AccountController<TUser, TKey> : Controller
 			var code = await _userManager.GeneratePasswordResetTokenAsync(user);
 			code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 			var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, HttpContext.Request.Scheme);
-			if (callbackUrl == null)
-				throw new IdentityException("Failed to generate the Reset Password Caallback URL.");
 
 			await _emailSender.SendEmailAsync(user.Email, _localizer["ResetPasswordTitle"], _localizer["ResetPasswordBody", HtmlEncoder.Default.Encode(callbackUrl)]);
 
@@ -327,7 +320,7 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	public IActionResult ResetPassword(String? code = null)
+	public IActionResult ResetPassword(String code = null)
 	{
 		return code == null ? View("Error") : View();
 	}
@@ -341,7 +334,6 @@ public class AccountController<TUser, TKey> : Controller
 		{
 			return View(model);
 		}
-
 		var user = await _userManager.FindByEmailAsync(model.Email);
 		if (user == null)
 		{
@@ -378,7 +370,7 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	public async Task<IActionResult> ExternalLoginCallback(String? returnUrl = null, String? remoteError = null)
+	public async Task<IActionResult> ExternalLoginCallback(String returnUrl = null, String remoteError = null)
 	{
 		if (remoteError != null)
 		{
@@ -386,7 +378,6 @@ public class AccountController<TUser, TKey> : Controller
 
 			return View(nameof(Login));
 		}
-
 		var info = await _signInManager.GetExternalLoginInfoAsync();
 		if (info == null)
 		{
@@ -397,14 +388,12 @@ public class AccountController<TUser, TKey> : Controller
 		var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
 		if (result.Succeeded)
 		{
-			return RedirectToLocal(returnUrl ?? "/");
+			return RedirectToLocal(returnUrl);
 		}
-
 		if (result.RequiresTwoFactor)
 		{
 			return RedirectToAction(nameof(LoginWith2fa), new { ReturnUrl = returnUrl });
 		}
-
 		if (result.IsLockedOut)
 		{
 			return View("Lockout");
@@ -414,7 +403,7 @@ public class AccountController<TUser, TKey> : Controller
 		ViewData["ReturnUrl"] = returnUrl;
 		ViewData["LoginProvider"] = info.LoginProvider;
 		var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-		var userName = info.Principal?.Identity?.Name ?? String.Empty;
+		var userName = info.Principal.Identity.Name;
 
 		return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email, UserName = userName });
 	}
@@ -422,8 +411,7 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[HttpGet]
 	[AllowAnonymous]
-	[SuppressMessage("Security", "CA5391:Use antiforgery tokens in ASP.NET Core MVC controllers", Justification = "POSTs to this action are expected to come from non-local pages.")]
-	public IActionResult ExternalLogin(String provider, String? returnUrl = null)
+	public IActionResult ExternalLogin(String provider, String returnUrl = null)
 	{
 		// Request a redirect to the external login provider.
 		var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
@@ -435,7 +423,7 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, String? returnUrl = null)
+	public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, String returnUrl = null)
 	{
 		returnUrl = returnUrl ?? Url.Content("~/");
 
@@ -477,7 +465,7 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	public async Task<IActionResult> LoginWithRecoveryCode(String? returnUrl = null)
+	public async Task<IActionResult> LoginWithRecoveryCode(String returnUrl = null)
 	{
 		// Ensure the user has gone through the username & password screen first
 		var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -496,7 +484,6 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpPost]
 	[AllowAnonymous]
-	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> LoginWithRecoveryCode(LoginWithRecoveryCodeViewModel model)
 	{
 		if (!ModelState.IsValid)
@@ -510,7 +497,7 @@ public class AccountController<TUser, TKey> : Controller
 			throw new InvalidOperationException(_localizer["Unable2FA"]);
 		}
 
-		var recoveryCode = model.RecoveryCode.Replace(" ", String.Empty, StringComparison.Ordinal);
+		var recoveryCode = model.RecoveryCode.Replace(" ", String.Empty);
 
 		var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
 
@@ -531,7 +518,7 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	public async Task<IActionResult> LoginWith2fa(Boolean rememberMe, String? returnUrl = null)
+	public async Task<IActionResult> LoginWith2fa(Boolean rememberMe, String returnUrl = null)
 	{
 		// Ensure the user has gone through the username & password screen first
 		var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -566,7 +553,7 @@ public class AccountController<TUser, TKey> : Controller
 			throw new InvalidOperationException(_localizer["Unable2FA"]);
 		}
 
-		var authenticatorCode = model.TwoFactorCode.Replace(" ", String.Empty, StringComparison.OrdinalIgnoreCase).Replace("-", String.Empty, StringComparison.OrdinalIgnoreCase);
+		var authenticatorCode = model.TwoFactorCode.Replace(" ", String.Empty).Replace("-", String.Empty);
 
 		var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, model.RememberMe, model.RememberMachine);
 
@@ -587,7 +574,7 @@ public class AccountController<TUser, TKey> : Controller
 
 	[HttpGet]
 	[AllowAnonymous]
-	public IActionResult Register(String? returnUrl = null)
+	public IActionResult Register(String returnUrl = null)
 	{
 		if (!_registerConfiguration.Enabled)
 			return View("RegisterFailure");
@@ -605,7 +592,7 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Register(RegisterViewModel model, String? returnUrl = null, Boolean IsCalledFromRegisterWithoutUsername = false)
+	public async Task<IActionResult> Register(RegisterViewModel model, String returnUrl = null, Boolean IsCalledFromRegisterWithoutUsername = false)
 	{
 		if (!_registerConfiguration.Enabled)
 			return View("RegisterFailure");
@@ -628,10 +615,7 @@ public class AccountController<TUser, TKey> : Controller
 		{
 			var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 			code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
 			var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, HttpContext.Request.Scheme);
-			if (callbackUrl == null)
-				throw new IdentityException("Unable to generated the Account.ConfirmEmail callback URL");
 
 			await _emailSender.SendEmailAsync(model.Email, _localizer["ConfirmEmailTitle"], _localizer["ConfirmEmailBody", HtmlEncoder.Default.Encode(callbackUrl)]);
 
@@ -669,7 +653,7 @@ public class AccountController<TUser, TKey> : Controller
 	[HttpPost]
 	[AllowAnonymous]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> RegisterWithoutUsername(RegisterWithoutUsernameViewModel model, String? returnUrl = null)
+	public async Task<IActionResult> RegisterWithoutUsername(RegisterWithoutUsernameViewModel model, String returnUrl = null)
 	{
 		var registerModel = new RegisterViewModel
 		{
@@ -706,7 +690,7 @@ public class AccountController<TUser, TKey> : Controller
 	private async Task<LoginViewModel> BuildLoginViewModelAsync(String returnUrl)
 	{
 		var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-		if (context != null && context.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
+		if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
 		{
 			var local = context.IdP == IdentityServerConstants.LocalIdentityProvider;
 
@@ -715,7 +699,7 @@ public class AccountController<TUser, TKey> : Controller
 			{
 				EnableLocalLogin = local,
 				ReturnUrl = returnUrl,
-				Username = context.LoginHint ?? String.Empty
+				Username = context?.LoginHint,
 			};
 
 			if (!local)
@@ -756,7 +740,7 @@ public class AccountController<TUser, TKey> : Controller
 			AllowRememberLogin = AccountOptions.AllowRememberLogin,
 			EnableLocalLogin = allowLocal && AccountOptions.AllowLocalLogin,
 			ReturnUrl = returnUrl,
-			Username = context?.LoginHint ?? String.Empty,
+			Username = context?.LoginHint,
 			ExternalProviders = providers.ToArray()
 		};
 	}
@@ -773,7 +757,7 @@ public class AccountController<TUser, TKey> : Controller
 	{
 		var vm = new LogoutViewModel { LogoutId = logoutId, ShowLogoutPrompt = AccountOptions.ShowLogoutPrompt };
 
-		if (User?.Identity?.IsAuthenticated != true)
+		if (User?.Identity.IsAuthenticated != true)
 		{
 			// if the user is not authenticated, then just show logged out page
 			vm.ShowLogoutPrompt = false;
@@ -801,13 +785,13 @@ public class AccountController<TUser, TKey> : Controller
 		var vm = new LoggedOutViewModel
 		{
 			AutomaticRedirectAfterSignOut = AccountOptions.AutomaticRedirectAfterSignOut,
-			PostLogoutRedirectUri = logout?.PostLogoutRedirectUri ?? String.Empty,
-			ClientName = (String.IsNullOrEmpty(logout?.ClientName) ? logout?.ClientId : logout?.ClientName) ?? String.Empty,
-			SignOutIframeUrl = logout?.SignOutIFrameUrl ?? String.Empty,
+			PostLogoutRedirectUri = logout?.PostLogoutRedirectUri,
+			ClientName = String.IsNullOrEmpty(logout?.ClientName) ? logout?.ClientId : logout?.ClientName,
+			SignOutIframeUrl = logout?.SignOutIFrameUrl,
 			LogoutId = logoutId
 		};
 
-		if (User?.Identity?.IsAuthenticated == true)
+		if (User?.Identity.IsAuthenticated == true)
 		{
 			var idp = User.FindFirst(JwtClaimTypes.IdentityProvider)?.Value;
 			if (idp != null && idp != IdentityServerConstants.LocalIdentityProvider)

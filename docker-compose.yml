@@ -1,0 +1,171 @@
+version: '3.4'
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  seq_data:
+
+services:
+  db:
+    image: postgres:latest
+    hostname: db.ezrie.ca
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "myPassword"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U root" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    hostname: pgadmin.ezrie.ca
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@ezrie.ca
+      PGADMIN_DEFAULT_PASSWORD: nji(0okM
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    hostname: rabbitmq.ezrie.ca
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    ports:
+      - "${RABBITMQ_PORT:-15672}:15672"
+      - "5672:5672"
+
+  redis:
+    image: redis:alpine
+    hostname: redis.ezrie.ca
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+    ports:
+      - "6379:6379"
+
+  seq:
+    image: datalust/seq:latest
+    hostname: seq.ezrie.ca
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - seq_data:/data
+    ports:
+      - "5341:80"
+
+  gateway:
+    image: ${DOCKER_REGISTRY-}ezrie/gateway
+    build:
+      context: .
+      dockerfile: gateways/Ezrie.Gateway.Public/Dockerfile
+    hostname: api.ezrie.ca
+    depends_on:
+      - redis
+      - seq
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "10443:443"
+      - "10080:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  auth:
+    image: ${DOCKER_REGISTRY-}ezrie/auth
+    build:
+      context: .
+      dockerfile: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.Admin\Dockerfile
+    hostname: auth.ezrie.ca
+    depends_on:
+      - db
+      - seq
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  account:
+    image: ${DOCKER_REGISTRY-}ezrie/account
+    build:
+      context: .
+      dockerfile: apps\Ezrie.AccountManagement\src\Ezrie.AccountManagement.STS\Dockerfile
+    hostname: account.ezrie.ca
+    depends_on:
+      - db
+      - seq
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  administration:
+    image: ${DOCKER_REGISTRY-}ezrie/administration
+    hostname: administration.ezrie.ca
+    build:
+      context: .
+      dockerfile: services\Ezrie.AdministrationService\host\Ezrie.AdministrationService.HttpApi.Host\Dockerfile
+    depends_on:
+      - db
+      - seq
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  identity:
+    image: ${DOCKER_REGISTRY-}ezrie/identity
+    build:
+      context: .
+      dockerfile: services\Ezrie.IdentityService\host\Ezrie.IdentityService.HttpApi.Host\Dockerfile
+    hostname: identity.ezrie.ca
+    depends_on:
+      - db
+      - seq
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  tenant:
+    image: ${DOCKER_REGISTRY-}ezrie/tenant
+    build:
+      context: .
+      dockerfile: services\Ezrie.TenantService\host\Ezrie.TenantService.HttpApi.Host\Dockerfile
+    hostname: tenant.ezrie.ca
+    depends_on:
+      - db
+      - seq
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

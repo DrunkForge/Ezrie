@@ -8,9 +8,9 @@
 		},
 		"WriteTo": [
 			{
-				"Name": "Console",
+				"Name": "Seq",
 				"Args": {
-					"outputTemplate": "[{Level:u3}] <{SourceContext:l}> {Message}{NewLine}{Exception}"
+					"ServerUrl": "http://localhost:5341"
 				}
 			}
 		]

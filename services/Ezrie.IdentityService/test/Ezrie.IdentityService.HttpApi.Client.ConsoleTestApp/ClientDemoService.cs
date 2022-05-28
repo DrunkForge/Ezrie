@@ -1,6 +1,6 @@
+using Ezrie.IdentityService.Users;
 using IdentityModel.Client;
 using Microsoft.Extensions.Configuration;
-using Ezrie.IdentityService.Samples;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.IdentityModel;
 
@@ -8,16 +8,16 @@ namespace Ezrie.IdentityService;
 
 public class ClientDemoService : ITransientDependency
 {
-    private readonly ISampleAppService _sampleAppService;
+    private readonly IUserAppService _userAppService;
     private readonly IIdentityModelAuthenticationService _authenticationService;
     private readonly IConfiguration _configuration;
 
     public ClientDemoService(
-        ISampleAppService sampleAppService,
+        IUserAppService userAppService,
         IIdentityModelAuthenticationService authenticationService,
         IConfiguration configuration)
     {
-        _sampleAppService = sampleAppService;
+        _userAppService = userAppService;
         _authenticationService = authenticationService;
         _configuration = configuration;
     }
@@ -38,11 +38,8 @@ public class ClientDemoService : ITransientDependency
         Console.WriteLine();
         Console.WriteLine($"***** {nameof(TestWithDynamicProxiesAsync)} *****");
 
-        var result = await _sampleAppService.GetAsync();
-        Console.WriteLine("Result: " + result.Value);
-
-        result = await _sampleAppService.GetAuthorizedAsync();
-        Console.WriteLine("Result (authorized): " + result.Value);
+        var result = await _userAppService.GetAsync();
+        Console.WriteLine("IsAuthenticated: " + result.IsAuthenticated);
     }
 
     /* Shows how to use HttpClient to perform a request to the HTTP API.
@@ -74,7 +71,7 @@ public class ClientDemoService : ITransientDependency
             httpClient.SetBearerToken(accessToken);
 
             var uri = new Uri(_configuration["RemoteServices:IdentityService:BaseUrl"] +
-                      "api/IdentityService/sample/authorized");
+                      "api/IdentityService/user/authorized");
 
             var responseMessage = await httpClient.GetAsync(uri);
             if (responseMessage.IsSuccessStatusCode)
@@ -135,7 +132,7 @@ public class ClientDemoService : ITransientDependency
         {
             httpClient.SetBearerToken(tokenResponse.AccessToken);
 
-            var url = new Uri(_configuration["RemoteServices:IdentityService:BaseUrl"] + "api/IdentityService/sample/authorized");
+            var url = new Uri(_configuration["RemoteServices:IdentityService:BaseUrl"] + "api/IdentityService/user/authorized");
 
             var responseMessage = await httpClient.GetAsync(url);
             if (responseMessage.IsSuccessStatusCode)
