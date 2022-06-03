@@ -12,6 +12,9 @@
 		<PackageReference Include="Volo.Abp.AutoMapper" Version="5.2.2" />
 		<PackageReference Include="Volo.Abp.Ddd.Application" Version="5.2.2" />
 		<PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Ezrie.TenantService.Application.Contracts\Ezrie.TenantService.Application.Contracts.csproj" />
 		<ProjectReference Include="..\Ezrie.TenantService.Domain\Ezrie.TenantService.Domain.csproj" />
 	</ItemGroup>

@@ -12,6 +12,9 @@
 		<PackageReference Include="IdentityModel" Version="6.0.0" />
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="5.2.2" />
 		<PackageReference Include="Volo.Abp.Identity.HttpApi" Version="5.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Ezrie.IdentityService.Application.Contracts\Ezrie.IdentityService.Application.Contracts.csproj" />
 	</ItemGroup>
 

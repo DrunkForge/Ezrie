@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Ezrie.IdentityService.EntityFrameworkCore.Migrations.Migrations
 {
     [DbContext(typeof(IdentityServiceMigrationsDbContext))]
-    [Migration("20220527023535_CreateDatabase")]
+    [Migration("20220602022058_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

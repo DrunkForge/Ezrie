@@ -14,14 +14,14 @@ namespace Ezrie.TenantService.EntityFrameworkCore.Migrations.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    ExtraProperties = table.Column<String>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<String>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    Name = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
-                    IsDeleted = table.Column<Boolean>(type: "boolean", nullable: false, defaultValue: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -35,8 +35,8 @@ namespace Ezrie.TenantService.EntityFrameworkCore.Migrations.Migrations
                 columns: table => new
                 {
                     TenantId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<String>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    Value = table.Column<String>(type: "character varying(1024)", maxLength: 1024, nullable: false)
+                    Name = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    Value = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: false)
                 },
                 constraints: table =>
                 {

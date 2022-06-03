@@ -35,19 +35,6 @@
 				]
 			},
 			{
-				"Name": "address",
-				"Enabled": true,
-				"DisplayName": "Your street address",
-				"Emphasize": true,
-				"UserClaims": [
-					"address",
-					"city",
-					"prov",
-					"postalcode",
-					"country"
-				]
-			},
-			{
 				"Name": "email",
 				"Enabled": true,
 				"DisplayName": "Your email address",
@@ -77,37 +64,37 @@
 		],
 		"ApiResources": [
 			{
-				"Name": "ezrie_account_management_api",
+				"Name": "ezrie-account-management-api",
 				"DisplayName": "Ezrie Account Management API",
 				"Scopes": [
-					"ezrie_account_management_api"
+					"ezrie-account-management-api"
 				]
 			},
 			{
-				"Name": "ezrie_administration_service_api",
+				"Name": "ezrie-administration-service-api",
 				"DisplayName": "Ezrie Administration Service API",
 				"Scopes": [
-					"ezrie_administration_service_api"
+					"ezrie-administration-service-api"
 				]
 			},
 			{
-				"Name": "ezrie_identity_service_api",
+				"Name": "ezrie-identity-service-api",
 				"DisplayName": "Ezrie Identity Service API",
 				"Scopes": [
-					"ezrie_identity_service_api"
+					"ezrie-identity-service-api"
 				]
 			},
 			{
-				"Name": "ezrie_tenant_service_api",
+				"Name": "ezrie-tenant-service-api",
 				"DisplayName": "Ezrie Tenant Service API",
 				"Scopes": [
-					"ezrie_tenant_service_api"
+					"ezrie-tenant-service-api"
 				]
 			}
 		],
 		"ApiScopes": [
 			{
-				"Name": "ezrie_account_management_api",
+				"Name": "ezrie-account-management-api",
 				"DisplayName": "Ezrie Account Management API",
 				"Required": true,
 				"UserClaims": [
@@ -116,7 +103,7 @@
 				]
 			},
 			{
-				"Name": "ezrie_administration_service_api",
+				"Name": "ezrie-administration-service-api",
 				"DisplayName": "Ezrie Administration Service API",
 				"Required": true,
 				"UserClaims": [
@@ -125,7 +112,7 @@
 				]
 			},
 			{
-				"Name": "ezrie_identity_service_api",
+				"Name": "ezrie-identity-service-api",
 				"DisplayName": "Ezrie Identity Service API",
 				"Required": true,
 				"UserClaims": [
@@ -134,7 +121,7 @@
 				]
 			},
 			{
-				"Name": "ezrie_tenant_service_api",
+				"Name": "ezrie-tenant-service-api",
 				"DisplayName": "Ezrie Tenant Service API",
 				"Required": true,
 				"UserClaims": [
@@ -145,11 +132,69 @@
 		],
 		"Clients": [
 			{
-				"ClientId": "ezrie_swaggerui",
+				"ClientId": "ezrie-account-management",
+				"ClientName": "Ezrie Account Management",
+				"ClientUri": "https://localhost:10100",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequirePkce": true,
+				"ClientSecrets": [
+					{
+						"Value": "e2c06464-d26d-4518-b6e8-6b0c271d1da7"
+					}
+				],
+				"RedirectUris": [
+					"https://localhost:10100/signin-oidc"
+				],
+				"FrontChannelLogoutUri": "https://localhost:10100/signout-oidc",
+				"PostLogoutRedirectUris": [
+					"https://localhost:10100/signout-callback-oidc"
+				],
+				"AllowedCorsOrigins": [
+					"https://localhost:10100"
+				],
+				"AllowedScopes": [
+					"openid",
+					"email",
+					"profile",
+					"role"
+				]
+			},
+			{
+				"ClientId": "ezrie-crm-identity-server",
+				"ClientName": "EzrieCRM Identity Server",
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:5250/signin-oidc"
+				],
+				"AllowedScopes": [
+					"ezrie-administration-service-api",
+					"ezrie-identity-service-api",
+					"ezrie-tenant-service-api",
+					"openid",
+					"profile",
+					"email",
+					"role"
+				],
+				"AllowedCorsOrigins": [
+					"https://auth.ezrie.ca",
+					"https://localhost:5000",
+					"https://localhost:5250"
+				]
+			}
+		],
+		"DisabledClients": [
+			{
+				"ClientId": "ezrie-gateway",
 				"ClientName": "Ezrie Swagger UI",
 				"ClientUri": "https://localhost:10000",
 				"AllowedGrantTypes": [
-					"authorization_code"
+					"authorization-code"
 				],
 				"RequirePkce": true,
 				"ClientSecrets": [
@@ -166,18 +211,46 @@
 					"https://localhost:10100"
 				],
 				"AllowedScopes": [
-					"ezrie_account_management_api",
-					"ezrie_relationship_management_api",
-					"ezrie_administration_service_api",
-					"ezrie_identity_service_api",
-					"ezrie_tenant_service_api"
+					"ezrie-account-management-api",
+					"ezrie-relationship-management-api",
+					"ezrie-administration-service-api",
+					"ezrie-identity-service-api",
+					"ezrie-tenant-service-api"
 				]
 			},
 			{
-				"ClientId": "ezrie_administration_service_swaggerui",
+				"ClientId": "ezrie-crm-app",
+				"ClientName": "EzrieCRM Blazor App",
+				"AllowedGrantTypes": [
+					"authorization-code"
+				],
+				"RequireClientSecret": false,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:5000/authentication/login-callback"
+				],
+				"AllowedScopes": [
+					"ezrie-account-management-api",
+					"ezrie-administration-service-api",
+					"ezrie-identity-service-api",
+					"ezrie-tenant-service-api",
+					"openid",
+					"profile",
+					"email",
+					"phone",
+					"role",
+					"role"
+				],
+				"AllowedCorsOrigins": [
+					"https://crm.ezrie.ca",
+					"https://localhost:5000"
+				]
+			},
+			{
+				"ClientId": "ezrie-administration-service-swaggerui",
 				"ClientName": "Ezrie Administration Service Swagger UI",
 				"AllowedGrantTypes": [
-					"authorization_code"
+					"authorization-code"
 				],
 				"RequireClientSecret": false,
 				"RedirectUris": [
@@ -185,8 +258,8 @@
 					"https://localhost:10201/swagger/oauth2-redirect.html"
 				],
 				"AllowedScopes": [
-					"ezrie_administration_service_swaggerui",
-					"ezrie_administration_service_api"
+					"ezrie-administration-service-swaggerui",
+					"ezrie-administration-service-api"
 				],
 				"AllowedCorsOrigins": [
 					"https://localhost:10000",
@@ -195,10 +268,10 @@
 				]
 			},
 			{
-				"ClientId": "ezrie_identity_service_swaggerui",
+				"ClientId": "ezrie-identity-service-swaggerui",
 				"ClientName": "Ezrie Identity Service Swagger UI",
 				"AllowedGrantTypes": [
-					"authorization_code"
+					"authorization-code"
 				],
 				"RequireClientSecret": false,
 				"RedirectUris": [
@@ -206,8 +279,8 @@
 					"https://localhost:5001/swagger/oauth2-redirect.html"
 				],
 				"AllowedScopes": [
-					"ezrie_identity_service_swaggerui",
-					"ezrie_identity_service_api"
+					"ezrie-identity-service-swaggerui",
+					"ezrie-identity-service-api"
 				],
 				"AllowedCorsOrigins": [
 					"https://localhost:10000",
@@ -216,35 +289,7 @@
 				]
 			},
 			{
-				"ClientId": "ezrie-crm-app",
-				"ClientName": "EzrieCRM Blazor App",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequireClientSecret": false,
-				"RequirePkce": true,
-				"RedirectUris": [
-					"https://localhost:5000/authentication/login-callback"
-				],
-				"AllowedScopes": [
-					"ezrie_account_management_api",
-					"ezrie_administration_service_api",
-					"ezrie_identity_service_api",
-					"ezrie_tenant_service_api",
-					"openid",
-					"profile",
-					"email",
-					"phone",
-					"role",
-					"roles"
-				],
-				"AllowedCorsOrigins": [
-					"https://crm.ezrie.ca",
-					"https://localhost:5000"
-				]
-			},
-			{
-				"ClientId": "ezrie_tenant_service_swaggerui",
+				"ClientId": "ezrie-tenant-service-swaggerui",
 				"ClientName": "Ezrie Tenant Service Swagger UI",
 				"AllowedGrantTypes": [
 					"code"
@@ -255,8 +300,8 @@
 					"https://localhost:10301/swagger/oauth2-redirect.html"
 				],
 				"AllowedScopes": [
-					"ezrie_tenant_service_swaggerui",
-					"ezrie_tenant_service_api"
+					"ezrie-tenant-service-swaggerui",
+					"ezrie-tenant-service-api"
 				],
 				"AllowedCorsOrigins": [
 					"https://localhost:10000",
@@ -264,6 +309,7 @@
 					"https://localhost:10301"
 				]
 			}
+
 		]
 	}
 }

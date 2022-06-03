@@ -15,6 +15,7 @@
 *********************************************************************************************/
 
 using Volo.Abp.AspNetCore.Components.WebAssembly.Theming;
+using Volo.Abp.Identity.Blazor.WebAssembly;
 using Volo.Abp.Modularity;
 
 namespace Ezrie.IdentityService;
@@ -22,6 +23,7 @@ namespace Ezrie.IdentityService;
 [DependsOn(typeof(IdentityServiceBlazorModule))]
 [DependsOn(typeof(IdentityServiceHttpApiClientModule))]
 [DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule))]
+[DependsOn(typeof(AbpIdentityBlazorWebAssemblyModule))]
 public class IdentityServiceBlazorWebAssemblyModule : AbpModule
 {
 

@@ -56,7 +56,6 @@ public class CrmBlazorModule : AbpModule
 			options.ProviderOptions.DefaultScopes.Add("email");
 			options.ProviderOptions.DefaultScopes.Add("phone");
 			options.ProviderOptions.DefaultScopes.Add("role");
-			options.ProviderOptions.DefaultScopes.Add("roles");
 		});
 	}
 

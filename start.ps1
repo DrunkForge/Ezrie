@@ -5,11 +5,9 @@ if ($true -ne (Test-Path -Path ".\$root.sln" -IsValid -PathType Leaf))
 	Exit
 }
 
-<# Check development certificates #>
-<# Invoke-CreateCertificate #>
+docker stop ezrie_postgres ezrie_redis ezrie_rabbitmq
+docker rm ezrie_postgres ezrie_redis ezrie_rabbitmq
+docker volume rm docker_ezrie_postgres_data
+docker-compose -f docker-compose-infrastructure.yml up -d 
 
-<# Check Docker containers #>
-<#Start-Containers #>
-
-<# Run all services #>
 tye run --watch

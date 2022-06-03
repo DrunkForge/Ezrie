@@ -9,6 +9,7 @@
     <DockerServiceName>ezrie.tenantservice.httpapi.host</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="docker-compose-infrastructure.yml" />
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>

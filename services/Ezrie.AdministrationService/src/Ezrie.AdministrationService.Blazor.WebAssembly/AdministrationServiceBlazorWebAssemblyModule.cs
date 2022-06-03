@@ -15,7 +15,9 @@
 *********************************************************************************************/
 
 using Volo.Abp.AspNetCore.Components.WebAssembly.Theming;
+using Volo.Abp.FeatureManagement.Blazor.WebAssembly;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement.Blazor.WebAssembly;
 using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 
 namespace Ezrie.AdministrationService;
@@ -23,6 +25,8 @@ namespace Ezrie.AdministrationService;
 [DependsOn(typeof(AdministrationServiceBlazorModule))]
 [DependsOn(typeof(AdministrationServiceHttpApiClientModule))]
 [DependsOn(typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule))]
+[DependsOn(typeof(AbpFeatureManagementBlazorWebAssemblyModule))]
+[DependsOn(typeof(AbpPermissionManagementBlazorWebAssemblyModule))]
 [DependsOn(typeof(AbpSettingManagementBlazorWebAssemblyModule))]
 public class AdministrationServiceBlazorWebAssemblyModule : AbpModule
 {
