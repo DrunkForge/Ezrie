@@ -84,13 +84,8 @@ public class AdministrationServiceBlazorHostModule : AbpModule
 	{
 		builder.Services.AddOidcAuthentication(options =>
 		{
-			var oidc = builder.Configuration.GetOpenIdConnectOptions();
-			options.ProviderOptions.Authority = oidc.Authority;
-			options.ProviderOptions.ClientId = oidc.ClientId;
-			options.ProviderOptions.ResponseType = oidc.ResponseType;
-			options.ProviderOptions.PostLogoutRedirectUri = oidc.PostLogoutRedirectUri;
-			foreach (var scope in oidc.Scopes)
-				options.ProviderOptions.DefaultScopes.Add(scope);
+			builder.Configuration.Bind("AuthServer", options.ProviderOptions);
+			options.ProviderOptions.DefaultScopes.Add("ezrie-administration-service-api");
 		});
 	}
 

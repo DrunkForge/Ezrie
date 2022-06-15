@@ -1,70 +1,80 @@
 {
 	"ReverseProxy": {
-		"Routes": {
-			"Default": {
-				"ClusterId": "ezrie-administration-httpapi-host",
-				"Match": {
-					"Path": "{**catch-all}"
+		"Clusters": {
+			"ezrie-crm-app": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:10000"
+					}
 				}
 			},
-			"Ezrie Account Management": {
-				"ClusterId": "ezrie-account-httpapi-host",
+			"ezrie-administration-service-api": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:10100"
+					}
+				}
+			},
+			"ezrie-identity-service-api": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:10200"
+					}
+				}
+			},
+			"ezrie-tenant-service-api": {
+				"Destinations": {
+					"destination1": {
+						"Address": "https://localhost:10300"
+					}
+				}
+			}
+		},
+		"Routes": {
+			"ABP": {
+				"ClusterId": "ezrie-administration-service-api",
 				"Match": {
-					"Path": "/api/account/{**everything}"
+					"Path": "/api/{**everything}"
 				}
 			},
 			"Ezrie Administration Serivce": {
-				"ClusterId": "ezrie-administration-httpapi-host",
+				"ClusterId": "ezrie-administration-service-api",
 				"Match": {
 					"Path": "/api/administration/{**everything}"
-				}
+				},
+				"Transforms": [
+					{
+						"PathPattern": "/api/{**remainder}"
+					}
+				]
 			},
 			"Ezrie Identity Serivce": {
-				"ClusterId": "ezrie-identity-httpapi-host",
+				"ClusterId": "ezrie-identity-service-api",
 				"Match": {
 					"Path": "/api/identity/{**everything}"
-				}
+				},
+				"Transforms": [
+					{
+						"PathPattern": "/api/{**remainder}"
+					}
+				]
 			},
-			"Ezrie Tenant Serivce": {
-				"ClusterId": "ezrie-tenant-httpapi-host",
+			"tenant": {
+				"ClusterId": "ezrie-tenant-service-api",
 				"Match": {
 					"Path": "/api/tenant/{**everything}"
 				}
 			},
-			"Ezrie Multi-Tenancy": {
-				"ClusterId": "ezrie-tenant-httpapi-host",
+			"multi-tenancy": {
+				"ClusterId": "ezrie-tenant-service-api",
 				"Match": {
 					"Path": "/api/multi-tenancy/{**everything}"
 				}
-			}
-		},
-		"Clusters": {
-			"ezrie-account-httpapi-host": {
-				"Destinations": {
-					"destination1": {
-						"Address": "https://localhost:10101"
-					}
-				}
 			},
-			"ezrie-administration-httpapi-host": {
-				"Destinations": {
-					"destination1": {
-						"Address": "https://localhost:10201"
-					}
-				}
-			},
-			"ezrie-tenant-httpapi-host": {
-				"Destinations": {
-					"destination1": {
-						"Address": "https://localhost:10301"
-					}
-				}
-			},
-			"ezrie-identity-httpapi-host": {
-				"Destinations": {
-					"destination1": {
-						"Address": "https://localhost:10401"
-					}
+			"EzrieCRM": {
+				"ClusterId": "ezrie-crm-app",
+				"Match": {
+					"Path": "{**catch-all}"
 				}
 			}
 		}

@@ -27,7 +27,7 @@ public class Startup
 		var rootConfiguration = CreateRootConfiguration();
 		services.AddSingleton(rootConfiguration);
 		// Register DbContexts for IdentityServer and Identity
-		RegisterDbContexts(services);
+		AddDbContexts(services);
 
 		// Save data protection keys to db, using a common application name shared between Admin and STS
 		services.AddDataProtection<IdentityServerDataProtectionDbContext>(Configuration);
@@ -36,10 +36,10 @@ public class Startup
 		services.AddEmailSenders(Configuration);
 
 		// Add services for authentication, including Identity model and external providers
-		RegisterAuthentication(services);
+		AddAuthentication(services);
 
 		// Add HSTS options
-		RegisterHstsOptions(services);
+		AddHstsOptions(services);
 
 		// Add all dependencies for Asp.Net Core Identity in MVC - these dependencies are injected into generic Controllers
 		// Including settings for MVC and Localization
@@ -47,7 +47,7 @@ public class Startup
 		services.AddMvcWithLocalization<UserIdentity, String>(Configuration);
 
 		// Add authorization policies for MVC
-		RegisterAuthorization(services);
+		AddAuthorization(services);
 
 		services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, IdentityServerDataProtectionDbContext>(Configuration);
 	}
@@ -55,6 +55,7 @@ public class Startup
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 	{
 		app.UseCookiePolicy();
+		app.UseSerilogRequestLogging();
 
 		if (env.IsDevelopment())
 		{
@@ -87,18 +88,18 @@ public class Startup
 		});
 	}
 
-	public virtual void RegisterDbContexts(IServiceCollection services)
+	public virtual void AddDbContexts(IServiceCollection services)
 	{
 		services.RegisterDbContexts<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, IdentityServerDataProtectionDbContext>(Configuration);
 	}
 
-	public virtual void RegisterAuthentication(IServiceCollection services)
+	public virtual void AddAuthentication(IServiceCollection services)
 	{
 		services.AddAuthenticationServices<AdminIdentityDbContext, UserIdentity, UserIdentityRole>(Configuration);
 		services.AddIdentityServer<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, UserIdentity>(Configuration);
 	}
 
-	public virtual void RegisterAuthorization(IServiceCollection services)
+	public virtual void AddAuthorization(IServiceCollection services)
 	{
 		var rootConfiguration = CreateRootConfiguration();
 		services.AddAuthorizationPolicies(rootConfiguration);
@@ -109,7 +110,7 @@ public class Startup
 		app.UseIdentityServer();
 	}
 
-	public virtual void RegisterHstsOptions(IServiceCollection services)
+	public virtual void AddHstsOptions(IServiceCollection services)
 	{
 		services.AddHsts(options =>
 		{
@@ -127,4 +128,3 @@ public class Startup
 		return rootConfiguration;
 	}
 }
-

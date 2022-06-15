@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Ezrie.CRM.Domain.Shared": {
+      "path": "src/Ezrie.CRM.Domain.Shared/Ezrie.CRM.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.Domain": {
+      "path": "src/Ezrie.CRM.Domain/Ezrie.CRM.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.Application.Contracts": {
+      "path": "src/Ezrie.CRM.Application.Contracts/Ezrie.CRM.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.Application": {
+      "path": "src/Ezrie.CRM.Application/Ezrie.CRM.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.EntityFrameworkCore": {
+      "path": "src/Ezrie.CRM.EntityFrameworkCore/Ezrie.CRM.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.MongoDB": {
+      "path": "src/Ezrie.CRM.MongoDB/Ezrie.CRM.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.HttpApi": {
+      "path": "src/Ezrie.CRM.HttpApi/Ezrie.CRM.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.HttpApi.Client": {
+      "path": "src/Ezrie.CRM.HttpApi.Client/Ezrie.CRM.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.TestBase": {
+      "path": "test/Ezrie.CRM.TestBase/Ezrie.CRM.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.CRM.EntityFrameworkCore.Tests": {
+      "path": "test/Ezrie.CRM.EntityFrameworkCore.Tests/Ezrie.CRM.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.CRM.MongoDB.Tests": {
+      "path": "test/Ezrie.CRM.MongoDB.Tests/Ezrie.CRM.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.CRM.Domain.Tests": {
+      "path": "test/Ezrie.CRM.Domain.Tests/Ezrie.CRM.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.CRM.Application.Tests": {
+      "path": "test/Ezrie.CRM.Application.Tests/Ezrie.CRM.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.CRM.HttpApi.Host": {
+      "path": "host/Ezrie.CRM.HttpApi.Host/Ezrie.CRM.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.CRM.Web": {
+      "path": "src/Ezrie.CRM.Web/Ezrie.CRM.Web.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ezrie.CRM.HttpApi.Client.ConsoleTestApp/Ezrie.CRM.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Ezrie.CRM.Web.Host": {
+      "path": "host/Ezrie.CRM.Web.Host/Ezrie.CRM.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.CRM.IdentityServer": {
+      "path": "host/Ezrie.CRM.IdentityServer/Ezrie.CRM.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.CRM.Host.Shared": {
+      "path": "host/Ezrie.CRM.Host.Shared/Ezrie.CRM.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.CRM.Web.Unified": {
+      "path": "host/Ezrie.CRM.Web.Unified/Ezrie.CRM.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.CRM.Blazor": {
+      "path": "src/Ezrie.CRM.Blazor/Ezrie.CRM.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.Blazor.Host": {
+      "path": "host/Ezrie.CRM.Blazor.Host/Ezrie.CRM.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ezrie.CRM.Blazor.Server": {
+      "path": "src/Ezrie.CRM.Blazor.Server/Ezrie.CRM.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.Blazor.WebAssembly": {
+      "path": "src/Ezrie.CRM.Blazor.WebAssembly/Ezrie.CRM.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "Ezrie.CRM.Blazor.Server.Host": {
+      "path": "host/Ezrie.CRM.Blazor.Server.Host/Ezrie.CRM.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

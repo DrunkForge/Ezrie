@@ -8,7 +8,7 @@ volumes:
 services:
 
   db:
-    container_name: postgres
+    container_name: ezrie_postgres
     image: postgres:latest
     hostname: db.ezrie.ca
     environment:
@@ -25,7 +25,7 @@ services:
       - "5432:5432"
 
   pgadmin:
-    container_name: pgadmin_container
+    container_name: ezrie_pgadmin
     image: dpage/pgadmin4:latest
     hostname: pgadmin.ezrie.ca
     environment:
@@ -37,7 +37,7 @@ services:
       - "${PGADMIN_PORT:-5050}:80"
 
   rabbitmq:
-    container_name: rabbitmq
+    container_name: ezrie_rabbitmq
     image: rabbitmq:management-alpine
     hostname: rabbitmq.ezrie.ca
     healthcheck:
@@ -50,7 +50,7 @@ services:
       - "5672:5672"
 
   redis:
-    container_name: redis
+    container_name: ezrie_redis
     image: redis:alpine
     hostname: redis.ezrie.ca
     healthcheck:
@@ -59,7 +59,7 @@ services:
       - "6379:6379"
 
   seq:
-    container_name: seq
+    container_name: ezrie_seq
     image: datalust/seq:latest
     hostname: seq.ezrie.ca
     environment:

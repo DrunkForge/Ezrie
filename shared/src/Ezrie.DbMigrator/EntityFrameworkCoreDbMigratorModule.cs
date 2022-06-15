@@ -15,6 +15,7 @@
 *********************************************************************************************/
 
 using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
+using Ezrie.CRM.EntityFrameworkCore.Migrations;
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
 using Ezrie.Logging;
@@ -31,6 +32,7 @@ namespace Ezrie.DbMigrator;
 
 [DependsOn(typeof(EzrieEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreMigrationsModule))]
+[DependsOn(typeof(CRMEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(IdentityServiceEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(TenantServiceEntityFrameworkCoreMigrationsModule))]
 public class EntityFrameworkCoreDbMigratorModule : AbpModule
@@ -38,10 +40,7 @@ public class EntityFrameworkCoreDbMigratorModule : AbpModule
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		context.Services.Replace(ServiceDescriptor.Transient<IDataSeeder, EzrieDataSeeder>());
-		context.Services.AddLogging(logging => logging
-			.ClearProviders()
-			.AddEzrieLogging<EntityFrameworkCoreDbMigratorModule>(context.Services.GetConfiguration())
-			);
+		context.Services.AddLogging(logging => logging.ClearProviders().Services.AddEzrieLogging<EntityFrameworkCoreDbMigratorModule>());
 
 		Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
 	}

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<Import Project="..\common.props" />
 	<Import Project="..\..\..\..\common.build.props" />
@@ -18,10 +18,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.AspNetCore\Ezrie.Hosting.AspNetCore.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Hosting.Microservices\Ezrie.Hosting.Microservices.csproj" />
 		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\..\..\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore\Ezrie.AdministrationService.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\..\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore\Ezrie.TenantService.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\src\Ezrie.IdentityService.AspNetCore\Ezrie.IdentityService.AspNetCore.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.IdentityService.Application\Ezrie.IdentityService.Application.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.IdentityService.EntityFrameworkCore.Migrations\Ezrie.IdentityService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.IdentityService.HttpApi\Ezrie.IdentityService.HttpApi.csproj" />

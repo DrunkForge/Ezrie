@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-//using Ezrie.Logging;
+using Ezrie.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace Ezrie.TenantService;
@@ -25,7 +25,7 @@ public static class Program
 	{
 		var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-		// builder.UseEzrieLogging<TenantServiceBlazorHostModule>();
+		builder.UseEzrieLogging<TenantServiceBlazorHostModule>();
 
 		var application = await builder.AddApplicationAsync<TenantServiceBlazorHostModule>(options =>
 		{

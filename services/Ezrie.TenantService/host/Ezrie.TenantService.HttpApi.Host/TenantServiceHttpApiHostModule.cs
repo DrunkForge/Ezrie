@@ -38,8 +38,6 @@ public class TenantServiceHttpApiHostModule : AbpModule
 	{
 		ConfigureConventionalControllers();
 		ConfigureVirtualFileSystem(context);
-
-		context.ConfigureJwtAuthentication(TenantServiceOidcProperties.Audience);
 	}
 
 	private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>Ezrie.CRM.EntityFrameworkCore</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore.Migrations\Ezrie.EntityFrameworkCore.Migrations.csproj" />
+		<ProjectReference Include="..\Ezrie.CRM.Application.Contracts\Ezrie.CRM.Application.Contracts.csproj" />
+		<ProjectReference Include="..\Ezrie.CRM.EntityFrameworkCore\Ezrie.CRM.EntityFrameworkCore.csproj" />
+	</ItemGroup>
+
+</Project>

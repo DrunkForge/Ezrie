@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\common.props" />
 	<Import Project="..\..\..\..\common.build.props" />
@@ -13,8 +13,8 @@
 		<PackageReference Include="Azure.Extensions.AspNetCore.DataProtection.Keys" Version="1.1.0" />
 		<PackageReference Include="Azure.Identity" Version="1.6.0" />
 		<PackageReference Include="Azure.Security.KeyVault.Certificates" Version="4.3.0" />
-		<PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.22" />
 		<PackageReference Include="Sendgrid" Version="9.28.0" />
 		<PackageReference Include="Skoruba.IdentityServer4.Admin.BusinessLogic.Identity" Version="2.1.0" />

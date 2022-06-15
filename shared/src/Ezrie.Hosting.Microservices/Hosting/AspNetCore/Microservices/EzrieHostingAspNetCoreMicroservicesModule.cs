@@ -16,9 +16,19 @@
 
 using Ezrie.Configuration;
 using Ezrie.MultiTenancy;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Serilog;
 using Volo.Abp;
+using Volo.Abp.Account.Web;
+using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.Http.Client.IdentityModel.Web;
 using Volo.Abp.Identity;
@@ -29,43 +39,141 @@ namespace Ezrie.Hosting.AspNetCore.Microservices;
 
 [DependsOn(typeof(EzrieHostingAspNetCoreModule))]
 [DependsOn(typeof(AbpAspNetCoreMultiTenancyModule))]
+[DependsOn(typeof(AbpAspNetCoreAuthenticationJwtBearerModule))]
 [DependsOn(typeof(AbpHttpClientIdentityModelWebModule))]
 [DependsOn(typeof(AbpIdentityHttpApiClientModule))]
 [DependsOn(typeof(AbpSwashbuckleModule))]
+[DependsOn(typeof(AbpAccountWebIdentityServerModule))]
 public class EzrieHostingAspNetCoreMicroservicesModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		ArgumentNullException.ThrowIfNull(context);
 
-		context.ConfigureSwaggerWithAuth();
+		ConfigureAuthentication(context);
+		ConfigureCors(context);
+		ConfigureSwaggerWithAuth(context);
+	}
+
+	private static void ConfigureAuthentication(ServiceConfigurationContext context)
+	{
+		var configuration = context.Services.GetConfiguration();
+		context.Services.AddAuthentication()
+			.AddJwtBearer(options =>
+			{
+				configuration.Bind(nameof(JwtBearerOptions), options);
+                options.BackchannelHttpHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback =
+                        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+			});
+			// .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, "Ezrie Account", options =>
+			// {
+			// 	configuration.Bind(nameof(OpenIdConnectOptions), options);
+
+			// 	options.GetClaimsFromUserInfoEndpoint = true;
+			// 	options.SaveTokens = true;
+
+			// 	if (!options.Scope.Contains("email"))
+			// 		options.Scope.Add("email");
+			// 	if (!options.Scope.Contains("role"))
+			// 		options.Scope.Add("role");
+			// });
+
+		context.Services.AddAuthorization();
+	}
+
+    private void ConfigureCors(ServiceConfigurationContext context)
+    {
+		var corsOptions = context.Services.GetCorsOptions();
+		var origins = corsOptions.AllowOrigins.Select(o => o.RemovePostFix("/")).ToArray();
+
+        context.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+               {
+                builder
+                    .WithOrigins(origins)
+                    .WithAbpExposedHeaders()
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+        });
+    }
+
+	private static void ConfigureSwaggerWithAuth(ServiceConfigurationContext context, Dictionary<String, String>? scopes = null)
+	{
+		ArgumentNullException.ThrowIfNull(context);
+
+		var swagger = context.Services.GetSwaggerOptions();
+		if (scopes == null)
+		{
+			scopes = new();
+		}
+
+		foreach (var scope in swagger.Scopes)
+		{
+			scopes.Add(scope.Id, scope.Name);
+		}
+
+		context.Services.AddAbpSwaggerGenWithOAuth(
+			swagger.Authority,
+			scopes: scopes,
+			options =>
+			{
+				options.SwaggerDoc(swagger.ApiVersion, new OpenApiInfo { Title = swagger.ApiName, Version = swagger.ApiVersion });
+				options.DocInclusionPredicate((_, __) => true);
+				options.CustomSchemaIds(type => type.FullName);
+			});
 	}
 
 	public override void OnApplicationInitialization(ApplicationInitializationContext context)
 	{
 		var app = context.GetApplicationBuilder();
-		var configuration = context.GetConfiguration();
-		var hostOptions = configuration.GetHostOptions();
+		var env = context.GetEnvironment();
 
-		if (MultiTenancyConsts.IsEnabled)
+		if (env.IsDevelopment())
 		{
-			app.UseMultiTenancy();
+			app.UseDeveloperExceptionPage();
+		}
+		else
+		{
+			app.UseStatusCodePagesWithReExecute("~/error");
 		}
 
-		app.UseUnitOfWork();
-		app.UseSwagger();
+		app.UseAbpRequestLocalization();
+
+        app.UseCorrelationId();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseCors();
+        app.UseAuthentication();
+        app.UseJwtTokenMiddleware();
+
+        if (MultiTenancyConsts.IsEnabled)
+        {
+            app.UseMultiTenancy();
+        }
+
+        app.UseUnitOfWork();
+        app.UseIdentityServer();
+        app.UseAuthorization();
+
+        app.UseSwagger();
 		app.UseAbpSwaggerUI(options =>
 		{
-			options.SwaggerEndpoint(SwaggerProperties.EndPointUrl, hostOptions.ApiName);
-			options.OAuthClientId(hostOptions.ClientId);
-			options.OAuthClientSecret(hostOptions.ClientSecret);
-			options.OAuthScopes(hostOptions.Scopes.Select(s => s.Id).ToArray());
+			var swaggerOptions = context.GetConfiguration().GetSwaggerOptions();
+			options.SwaggerEndpoint(swaggerOptions.EndPointUrl, swaggerOptions.ApiName);
+			options.OAuthClientId(swaggerOptions.ClientId);
+			options.OAuthClientSecret(swaggerOptions.ClientSecret);
+			options.OAuthScopes(swaggerOptions.Scopes.Select(s => s.Id).ToArray());
 		});
 
-		app.UseConfiguredEndpoints(endpoints =>
-		{
-			endpoints.MapControllers();
-			endpoints.MapDefaultControllerRoute();
-		});
+        app.UseAuditing();
+        app.UseAbpSerilogEnrichers();
+        app.UseConfiguredEndpoints();
 	}
 }

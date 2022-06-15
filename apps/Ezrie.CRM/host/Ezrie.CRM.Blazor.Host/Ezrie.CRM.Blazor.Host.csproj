@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Blazorise.Bootstrap5" Version="1.0.4" />
+		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(MicrosoftPackageVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="5.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Account.Application.Contracts" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.Identity.Blazor.WebAssembly" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="5.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging.WebAssembly\Ezrie.Logging.WebAssembly.csproj" />
+		<ProjectReference Include="..\..\src\Ezrie.CRM.Blazor.WebAssembly\Ezrie.CRM.Blazor.WebAssembly.csproj" />
+	</ItemGroup>
+
+</Project>

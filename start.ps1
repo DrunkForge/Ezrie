@@ -1,3 +1,7 @@
+Param(
+	[Parameter(Mandatory=$false)]
+	[Switch]$Reset 
+)
 Import-Module .\etc\EzriePS\EzriePS.psm1
 if ($true -ne (Test-Path -Path ".\$root.sln" -IsValid -PathType Leaf)) 
 { 
@@ -5,9 +9,14 @@ if ($true -ne (Test-Path -Path ".\$root.sln" -IsValid -PathType Leaf))
 	Exit
 }
 
-docker stop ezrie_postgres ezrie_redis ezrie_rabbitmq
-docker rm ezrie_postgres ezrie_redis ezrie_rabbitmq
-docker volume rm docker_ezrie_postgres_data
+if ($Reset.IsPresent -eq $true)
+{
+	docker stop ezrie_postgres ezrie_redis ezrie_rabbitmq
+	docker rm ezrie_postgres ezrie_redis ezrie_rabbitmq
+	docker volume rm ezrie_postgres_data
+	abp clean
+}
+
 docker-compose -f docker-compose-infrastructure.yml up -d 
 
 tye run --watch

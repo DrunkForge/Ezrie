@@ -5,10 +5,11 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<RootNamespace>Ezrie.AdministrationService.EntityFrameworkCore.Migrations</RootNamespace>
+		<RootNamespace>Ezrie.AdministrationService.EntityFrameworkCore</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore.Migrations\Ezrie.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\Ezrie.AdministrationService.Application.Contracts\Ezrie.AdministrationService.Application.Contracts.csproj" />
 		<ProjectReference Include="..\Ezrie.AdministrationService.EntityFrameworkCore\Ezrie.AdministrationService.EntityFrameworkCore.csproj" />
 	</ItemGroup>

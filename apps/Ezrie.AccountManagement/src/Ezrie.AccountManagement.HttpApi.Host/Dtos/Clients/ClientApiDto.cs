@@ -35,11 +35,11 @@ public class ClientApiDto
 	public Boolean AlwaysSendClientClaims { get; set; }
 	public Int32 AuthorizationCodeLifetime { get; set; } = 300;
 
-	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>")]
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "System.Uri doesn't play nice with IConfiguration")]
 	public String FrontChannelLogoutUri { get; set; } = String.Empty;
 	public Boolean FrontChannelLogoutSessionRequired { get; set; } = true;
 
-	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>")]
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "System.Uri doesn't play nice with IConfiguration")]
 	public String BackChannelLogoutUri { get; set; } = String.Empty;
 	public Boolean BackChannelLogoutSessionRequired { get; set; } = true;
 
@@ -49,7 +49,7 @@ public class ClientApiDto
 	[Required]
 	public String ClientName { get; set; } = String.Empty;
 
-	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>")]
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "System.Uri doesn't play nice with IConfiguration")]
 	public String ClientUri { get; set; } = String.Empty;
 
 	public String Description { get; set; } = String.Empty;
@@ -60,7 +60,7 @@ public class ClientApiDto
 	public Int32 IdentityTokenLifetime { get; set; } = 300;
 	public Boolean IncludeJwtId { get; set; }
 
-	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "<Pending>")]
+	[SuppressMessage("Design", "CA1056:URI-like properties should not be strings", Justification = "System.Uri doesn't play nice with IConfiguration")]
 	public String LogoUri { get; set; } = String.Empty;
 
 	public String ClientClaimsPrefix { get; set; } = "client_";

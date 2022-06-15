@@ -45,8 +45,6 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
 	{
 		ConfigureVirtualFileSystem(context);
 		ConfigureConventionalControllers();
-
-		context.ConfigureJwtAuthentication(AdministrationServiceOidcProperties.Audience);
 	}
 
 	private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)

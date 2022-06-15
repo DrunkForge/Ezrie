@@ -26,6 +26,7 @@ using Volo.Abp.VirtualFileSystem;
 namespace Ezrie.IdentityService;
 
 [DependsOn(typeof(EzrieHostingAspNetCoreMicroservicesModule))]
+[DependsOn(typeof(IdentityServiceAspNetCoreModule))] 
 [DependsOn(typeof(IdentityServiceApplicationModule))]
 [DependsOn(typeof(IdentityServiceEntityFrameworkCoreModule))]
 [DependsOn(typeof(IdentityServiceHttpApiModule))]
@@ -38,8 +39,6 @@ public class IdentityServiceHttpApiHostModule : AbpModule
 	{
 		ConfigureVirtualFileSystem(context);
 		ConfigureConventionalControllers();
-
-		context.ConfigureJwtAuthentication(IdentityServiceOidcProperties.Audience);
 	}
 
 	private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)

@@ -54,29 +54,15 @@ public static class ConfigurationExtensions
 		=> services.GetOptions<CorsOptions>()
 		?? throw new ConfigurationException($"The {nameof(CorsOptions)} section is missing or invalid.");
 
-	public static HostOptions GetHostOptions(this IServiceCollection services)
-		=> services.GetOptions<HostOptions>()
-		?? throw new ConfigurationException($"The {nameof(HostOptions)} section is missing or invalid.");
-	public static HostOptions GetHostOptions(this IServiceProvider serviceProvider)
-		=> serviceProvider.GetOptions<HostOptions>()
-		?? throw new ConfigurationException($"The {nameof(HostOptions)} section is missing or invalid.");
-	public static HostOptions GetHostOptions(this IConfiguration configuration)
-		=> configuration.GetOptions<HostOptions>()
-		?? throw new ConfigurationException($"The {nameof(HostOptions)} section is missing or invalid.");
-
-	public static OpenIdConnectClientOptions GetOpenIdConnectOptions(this ServiceConfigurationContext context)
-		=> context.Services.GetOptions<OpenIdConnectClientOptions>()
-		?? throw new ConfigurationException($"The {nameof(OpenIdConnectClientOptions)} section is missing or invalid.");
-	public static OpenIdConnectClientOptions GetOpenIdConnectOptions(this IConfiguration configuration)
-		=> configuration.GetOptions<OpenIdConnectClientOptions>()
-		?? throw new ConfigurationException($"The {nameof(OpenIdConnectClientOptions)} section is missing or invalid.");
-
-	public static AuthenticationOptions GetAuthenticationOptions(this ServiceConfigurationContext context)
-		=> context.GetOptions<AuthenticationOptions>()
-		?? throw new ConfigurationException($"The {nameof(AuthenticationOptions)} section is missing or invalid.");
-	public static AuthenticationOptions GetAuthenticationOptions(this IConfiguration configuration)
-		=> configuration.GetOptions<AuthenticationOptions>()
-		?? throw new ConfigurationException($"The {nameof(AuthenticationOptions)} section is missing or invalid.");
+	public static SwaggerOptions GetSwaggerOptions(this IServiceCollection services)
+		=> services.GetOptions<SwaggerOptions>()
+		?? throw new ConfigurationException($"The {nameof(SwaggerOptions)} section is missing or invalid.");
+	public static SwaggerOptions GetSwaggerOptions(this IServiceProvider serviceProvider)
+		=> serviceProvider.GetOptions<SwaggerOptions>()
+		?? throw new ConfigurationException($"The {nameof(SwaggerOptions)} section is missing or invalid.");
+	public static SwaggerOptions GetSwaggerOptions(this IConfiguration configuration)
+		=> configuration.GetOptions<SwaggerOptions>()
+		?? throw new ConfigurationException($"The {nameof(SwaggerOptions)} section is missing or invalid.");
 
 	public static RemoteServices GetRemoteServices(this ServiceConfigurationContext context)
 		=> context.Services.GetConfiguration().GetRemoteServices();

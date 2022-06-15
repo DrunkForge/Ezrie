@@ -14,7 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-//using Ezrie.Logging;
+using Ezrie.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace Ezrie.AdministrationService;
@@ -25,7 +25,7 @@ public static class Program
 	{
 		var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-		//builder.UseEzrieLogging<AdministrationServiceBlazorHostModule>();
+		builder.UseEzrieLogging<AdministrationServiceBlazorHostModule>();
 
 		var application = await builder.AddApplicationAsync<AdministrationServiceBlazorHostModule>(options =>
 		{

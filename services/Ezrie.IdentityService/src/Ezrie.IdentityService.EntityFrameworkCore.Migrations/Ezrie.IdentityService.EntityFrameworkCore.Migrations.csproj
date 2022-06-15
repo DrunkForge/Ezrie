@@ -5,7 +5,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<RootNamespace>Ezrie.IdentityService.EntityFrameworkCore.Migrations</RootNamespace>
+		<RootNamespace>Ezrie.IdentityService.EntityFrameworkCore</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

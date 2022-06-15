@@ -24,4 +24,6 @@ public static class EzrieConstants
 	public const String DataProtectionApplicationName = "EzrieCRM";
 	public const String DataProtectionKey = "Ezrie-DataProtection-Key";
 	public const String DistributedCachePrefix = "Ezrie:";
+
+	public const String SuperAdministratorRole = "BOFH";
 }

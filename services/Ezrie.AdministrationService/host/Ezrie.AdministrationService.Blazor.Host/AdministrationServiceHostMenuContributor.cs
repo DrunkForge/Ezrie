@@ -42,12 +42,10 @@ public class AdministrationServiceHostMenuContributor : IMenuContributor
 	{
 		var L = context.GetLocalizer<AdministrationServiceResource>();
 
-		var hostOptions = _configuration.GetHostOptions();
-
 		context.Menu.AddItem(new ApplicationMenuItem(
 			"Account.Manage",
 			L["Menu:ManageYourProfile"],
-			$"{hostOptions.Authority.EnsureEndsWith('/')}Manage?returnUrl={hostOptions.BaseUrl}",
+			$"{_configuration["AuthServer:Authority"].EnsureEndsWith('/')}Manage?returnUrl={_configuration["App:SelfUrl"]}",
 			icon: "fa fa-cog",
 			order: 1000,
 			null).RequireAuthenticated());

@@ -1,6 +1,5 @@
 {
 	"IdentityServerData": {
-
 		"IdentityResources": [
 			{
 				"Name": "openid",
@@ -64,13 +63,6 @@
 		],
 		"ApiResources": [
 			{
-				"Name": "ezrie-account-management-api",
-				"DisplayName": "Ezrie Account Management API",
-				"Scopes": [
-					"ezrie-account-management-api"
-				]
-			},
-			{
 				"Name": "ezrie-administration-service-api",
 				"DisplayName": "Ezrie Administration Service API",
 				"Scopes": [
@@ -93,15 +85,6 @@
 			}
 		],
 		"ApiScopes": [
-			{
-				"Name": "ezrie-account-management-api",
-				"DisplayName": "Ezrie Account Management API",
-				"Required": true,
-				"UserClaims": [
-					"role",
-					"name"
-				]
-			},
 			{
 				"Name": "ezrie-administration-service-api",
 				"DisplayName": "Ezrie Administration Service API",
@@ -132,97 +115,10 @@
 		],
 		"Clients": [
 			{
-				"ClientId": "ezrie-account-management",
-				"ClientName": "Ezrie Account Management",
-				"ClientUri": "https://localhost:10100",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequirePkce": true,
-				"ClientSecrets": [
-					{
-						"Value": "e2c06464-d26d-4518-b6e8-6b0c271d1da7"
-					}
-				],
-				"RedirectUris": [
-					"https://localhost:10100/signin-oidc"
-				],
-				"FrontChannelLogoutUri": "https://localhost:10100/signout-oidc",
-				"PostLogoutRedirectUris": [
-					"https://localhost:10100/signout-callback-oidc"
-				],
-				"AllowedCorsOrigins": [
-					"https://localhost:10100"
-				],
-				"AllowedScopes": [
-					"openid",
-					"email",
-					"profile",
-					"role"
-				]
-			},
-			{
-				"ClientId": "ezrie-crm-identity-server",
-				"ClientName": "EzrieCRM Identity Server",
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequireClientSecret": false,
-				"RequirePkce": true,
-				"RedirectUris": [
-					"https://localhost:5250/signin-oidc"
-				],
-				"AllowedScopes": [
-					"ezrie-administration-service-api",
-					"ezrie-identity-service-api",
-					"ezrie-tenant-service-api",
-					"openid",
-					"profile",
-					"email",
-					"role"
-				],
-				"AllowedCorsOrigins": [
-					"https://auth.ezrie.ca",
-					"https://localhost:5000",
-					"https://localhost:5250"
-				]
-			}
-		],
-		"DisabledClients": [
-			{
-				"ClientId": "ezrie-gateway",
-				"ClientName": "Ezrie Swagger UI",
-				"ClientUri": "https://localhost:10000",
-				"AllowedGrantTypes": [
-					"authorization-code"
-				],
-				"RequirePkce": true,
-				"ClientSecrets": [
-					{
-						"Value": "1q2w3E*"
-					}
-				],
-				"RedirectUris": [
-					"https://localhost:10000/swagger/oauth2-redirect.html"
-				],
-				"AllowedCorsOrigins": [
-					"https://localhost:5000",
-					"https://localhost:10000",
-					"https://localhost:10100"
-				],
-				"AllowedScopes": [
-					"ezrie-account-management-api",
-					"ezrie-relationship-management-api",
-					"ezrie-administration-service-api",
-					"ezrie-identity-service-api",
-					"ezrie-tenant-service-api"
-				]
-			},
-			{
 				"ClientId": "ezrie-crm-app",
 				"ClientName": "EzrieCRM Blazor App",
 				"AllowedGrantTypes": [
-					"authorization-code"
+					"authorization_code"
 				],
 				"RequireClientSecret": false,
 				"RequirePkce": true,
@@ -230,7 +126,6 @@
 					"https://localhost:5000/authentication/login-callback"
 				],
 				"AllowedScopes": [
-					"ezrie-account-management-api",
 					"ezrie-administration-service-api",
 					"ezrie-identity-service-api",
 					"ezrie-tenant-service-api",
@@ -238,78 +133,143 @@
 					"profile",
 					"email",
 					"phone",
-					"role",
+					"roles",
 					"role"
 				],
 				"AllowedCorsOrigins": [
 					"https://crm.ezrie.ca",
-					"https://localhost:5000"
-				]
-			},
-			{
-				"ClientId": "ezrie-administration-service-swaggerui",
-				"ClientName": "Ezrie Administration Service Swagger UI",
-				"AllowedGrantTypes": [
-					"authorization-code"
-				],
-				"RequireClientSecret": false,
-				"RedirectUris": [
-					"https://localhost:10000/api/administration/swagger/oauth2-redirect.html",
-					"https://localhost:10201/swagger/oauth2-redirect.html"
-				],
-				"AllowedScopes": [
-					"ezrie-administration-service-swaggerui",
-					"ezrie-administration-service-api"
-				],
-				"AllowedCorsOrigins": [
+					"https://localhost:5000",
 					"https://localhost:10000",
+					"https://localhost:10100",
 					"https://localhost:10200",
-					"https://localhost:10201"
+					"https://localhost:10300"
 				]
 			},
 			{
-				"ClientId": "ezrie-identity-service-swaggerui",
-				"ClientName": "Ezrie Identity Service Swagger UI",
-				"AllowedGrantTypes": [
-					"authorization-code"
+				"ClientId": "ezrie-account-management-admin",
+				"ClientName": "Ezrie Account Management Admin",
+				"ClientUri": "https://localhost:5750",
+				"ClientSecrets": [
+					{
+						"Value": "1q2w3E*"
+					}
 				],
-				"RequireClientSecret": false,
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequirePkce": true,
 				"RedirectUris": [
-					"https://localhost:10000/api/identity/swagger/oauth2-redirect.html",
-					"https://localhost:5001/swagger/oauth2-redirect.html"
+					"https://localhost:5750/signin-oidc"
+				],
+				"FrontChannelLogoutUri": "https://localhost:5750/signout-oidc",
+				"PostLogoutRedirectUris": [
+					"https://localhost:5750/signout-callback-oidc"
 				],
 				"AllowedScopes": [
-					"ezrie-identity-service-swaggerui",
-					"ezrie-identity-service-api"
+					"openid",
+					"email",
+					"profile",
+					"role"
 				],
 				"AllowedCorsOrigins": [
+					"https://crm.ezrie.ca",
+					"https://localhost:5000",
 					"https://localhost:10000",
-					"https://localhost:10400",
-					"https://localhost:10401"
+					"https://localhost:10100",
+					"https://localhost:10200",
+					"https://localhost:10300"
 				]
 			},
 			{
-				"ClientId": "ezrie-tenant-service-swaggerui",
-				"ClientName": "Ezrie Tenant Service Swagger UI",
-				"AllowedGrantTypes": [
-					"code"
+				"ClientId": "ezrie-administration-service-api",
+				"ClientName": "Ezrie Administration Service API",
+				"ClientSecrets": [
+					{
+						"Value": "1q2w3E*"
+					}
 				],
-				"RequireClientSecret": false,
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": true,
+				"RequirePkce": true,
 				"RedirectUris": [
-					"https://localhost:10000/api/tenant/swagger/oauth2-redirect.html",
-					"https://localhost:10301/swagger/oauth2-redirect.html"
+					"https://localhost:10100/signin-oidc"
 				],
 				"AllowedScopes": [
-					"ezrie-tenant-service-swaggerui",
-					"ezrie-tenant-service-api"
+					"openid",
+					"profile",
+					"role"
 				],
 				"AllowedCorsOrigins": [
+					"https://crm.ezrie.ca",
+					"https://localhost:5000",
 					"https://localhost:10000",
-					"https://localhost:10300",
-					"https://localhost:10301"
+					"https://localhost:10100",
+					"https://localhost:10200",
+					"https://localhost:10300"
+				]
+			},
+			{
+				"ClientId": "ezrie-identity-service-api",
+				"ClientName": "Ezrie Identity Service API",
+				"ClientSecrets": [
+					{
+						"Value": "1q2w3E*"
+					}
+				],
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": true,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:10200/signin-oidc"
+				],
+				"AllowedScopes": [
+					"openid",
+					"profile",
+					"role"
+				],
+				"AllowedCorsOrigins": [
+					"https://crm.ezrie.ca",
+					"https://localhost:5000",
+					"https://localhost:10000",
+					"https://localhost:10100",
+					"https://localhost:10200",
+					"https://localhost:10300"
+				]
+			},
+			{
+				"ClientId": "ezrie-tenant-service-api",
+				"ClientName": "Ezrie Tenant Service API",
+				"ClientSecrets": [
+					{
+						"Value": "1q2w3E*"
+					}
+				],
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": true,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:10300/signin-oidc"
+				],
+				"AllowedScopes": [
+					"openid",
+					"profile",
+					"role"
+				],
+				"AllowedCorsOrigins": [
+					"https://crm.ezrie.ca",
+					"https://localhost:5000",
+					"https://localhost:10000",
+					"https://localhost:10100",
+					"https://localhost:10200",
+					"https://localhost:10300"
 				]
 			}
-
 		]
 	}
 }

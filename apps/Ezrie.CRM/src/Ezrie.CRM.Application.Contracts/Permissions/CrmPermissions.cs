@@ -1,9 +1,13 @@
+using Volo.Abp.Reflection;
+
 namespace Ezrie.CRM.Permissions;
 
-public static class CrmPermissions
+public static class CRMPermissions
 {
     public const String GroupName = "CRM";
 
-    //Add your own permission names. Example:
-    //public const string MyPermission1 = GroupName + ".MyPermission1";
+    public static String[] GetAll()
+    {
+        return ReflectionHelper.GetPublicConstantsRecursively(typeof(CRMPermissions));
+    }
 }

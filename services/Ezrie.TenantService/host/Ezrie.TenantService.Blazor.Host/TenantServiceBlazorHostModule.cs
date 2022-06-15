@@ -81,13 +81,8 @@ public class TenantServiceBlazorHostModule : AbpModule
 	{
 		builder.Services.AddOidcAuthentication(options =>
 		{
-			var authOptions = builder.Configuration.GetAuthenticationOptions();
-			options.ProviderOptions.Authority = authOptions.Authority;
-			options.ProviderOptions.ClientId = authOptions.ClientId;
-			options.ProviderOptions.ResponseType = authOptions.ResponseType;
-			options.ProviderOptions.PostLogoutRedirectUri = authOptions.PostLogoutRedirectUri;
-			foreach (var scope in authOptions.Scopes)
-				options.ProviderOptions.DefaultScopes.Add(scope);
+			builder.Configuration.Bind("AuthServer", options.ProviderOptions);
+			options.ProviderOptions.DefaultScopes.Add("ezrie-tenant-service-api");
 		});
 	}
 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<Import Project="..\common.props" />
 	<Import Project="..\..\..\..\common.build.props" />
@@ -25,7 +25,7 @@
 		<PackageReference Include="Piranha.Manager" Version="10.0.4" />
 		<PackageReference Include="Piranha.Manager.LocalAuth" Version="10.0.4" />
 		<PackageReference Include="Piranha.Manager.TinyMCE" Version="10.0.4" />
-		<PackageReference Include="Volo.Abp.Autofac" Version="5.2.2" />
+		<PackageReference Include="Volo.Abp.Autofac" Version="5.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>

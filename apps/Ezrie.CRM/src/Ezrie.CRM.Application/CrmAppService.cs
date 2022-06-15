@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Ezrie.CRM.Localization;
+﻿using Ezrie.CRM.Localization;
 using Volo.Abp.Application.Services;
 
 namespace Ezrie.CRM;
 
-/* Inherit your application services from this class.
- */
-public abstract class CrmAppService : ApplicationService
+public abstract class CRMAppService : ApplicationService
 {
-	protected CrmAppService()
-	{
-		LocalizationResource = typeof(CrmResource);
-	}
+    protected CRMAppService()
+    {
+        LocalizationResource = typeof(CRMResource);
+        ObjectMapperContext = typeof(CRMApplicationModule);
+    }
 }

@@ -14,27 +14,27 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AspNetCore.HealthChecks.MySql" Version="6.0.1" />
-		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.1" />
-		<PackageReference Include="AspNetCore.HealthChecks.OpenIdConnectServer" Version="6.0.1" />
-		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.1" />
+		<PackageReference Include="AspNetCore.HealthChecks.MySql" Version="6.0.2" />
+		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
+		<PackageReference Include="AspNetCore.HealthChecks.OpenIdConnectServer" Version="6.0.2" />
+		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.2" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.2" />
-		<PackageReference Include="AutoMapper" Version="10.1.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.1" />
+		<PackageReference Include="AutoMapper" Version="11.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
 		<PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
 		<PackageReference Include="Skoruba.IdentityServer4.Admin.BusinessLogic" Version="2.1.0" />
 		<PackageReference Include="Skoruba.IdentityServer4.Admin.BusinessLogic.Identity" Version="2.1.0" />
 		<PackageReference Include="Skoruba.IdentityServer4.Shared.Configuration" Version="2.1.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>

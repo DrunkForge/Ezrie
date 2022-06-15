@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Ezrie.Configuration;
 public class CorsOptions
 {
-	public Boolean CorsAllowAnyOrigin { get; set; }
+	public Boolean AllowAnyOrigin { get; set; }
 	[SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "Arrays play nice with IConfiguration")]
-	public String[] CorsAllowOrigins { get; set; } = Array.Empty<String>();
+	public String[] AllowOrigins { get; set; } = Array.Empty<String>();
 }

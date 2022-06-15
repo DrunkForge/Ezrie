@@ -14,9 +14,13 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.Hosting.AspNetCore.Microservices;
+using Ezrie.Configuration;
 using Ezrie.Hosting.Gateways;
+using Ezrie.MultiTenancy;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Modularity;
@@ -29,30 +33,5 @@ namespace Ezrie.Gateway.Public;
 [DependsOn(typeof(AbpAspNetCoreSerilogModule))]
 public class PublicGatewayModule : AbpModule
 {
-	public override void ConfigureServices(ServiceConfigurationContext context)
-	{
-		ArgumentNullException.ThrowIfNull(context);
 
-		// Requested scopes for authorization code request and descriptions for swagger UI only
-		context.ConfigureSwaggerWithAuth();
-	}
-
-	public override void OnApplicationInitialization(ApplicationInitializationContext context)
-	{
-		var app = context.GetApplicationBuilder();
-		var env = context.GetEnvironment();
-
-		if (env.IsDevelopment())
-		{
-			app.UseDeveloperExceptionPage();
-		}
-
-		app.ConfigureSwaggerUIWithYarp(context);
-
-		app.UseRewriter(new RewriteOptions()
-			// Regex for "", "/" and "" (whitespace)
-			.AddRedirect("^(|\\|\\s+)$", "/swagger"));
-
-		app.UseEndpoints(endpoints => endpoints.MapReverseProxy());
-	}
 }

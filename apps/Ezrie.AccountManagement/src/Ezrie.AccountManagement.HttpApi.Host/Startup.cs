@@ -14,22 +14,22 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using System.IdentityModel.Tokens.Jwt;
+using Ezrie.AccountManagement.Configuration.Authorization;
+using Ezrie.AccountManagement.EntityFrameworkCore;
+using Ezrie.AccountManagement.ExceptionHandling;
+using Ezrie.AccountManagement.Helpers;
+using Ezrie.AccountManagement.Identity;
+using Ezrie.AccountManagement.Mappers;
+using Ezrie.AccountManagement.Resources;
+using Ezrie.Configuration;
+using Ezrie.Hosting.AspNetCore;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
-using Serilog;
-using Ezrie.AccountManagement.Identity;
-using Ezrie.AccountManagement.Resources;
-using Ezrie.AccountManagement.Mappers;
-using Ezrie.AccountManagement.ExceptionHandling;
-using Ezrie.AccountManagement.Helpers;
-using Ezrie.AccountManagement.Configuration.Authorization;
-using Ezrie.Configuration;
-using Ezrie.Hosting.AspNetCore;
-using Ezrie.AccountManagement.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Ezrie.AccountManagement;
 
@@ -48,7 +48,7 @@ public class Startup
 
 	public void ConfigureServices(IServiceCollection services)
 	{
-		var apiConfiguration = Configuration.GetHostOptions();
+		var apiConfiguration = Configuration.GetSwaggerOptions();
 		services.AddSingleton(apiConfiguration);
 
 		// Add DbContexts
@@ -102,7 +102,7 @@ public class Startup
 					{
 						AuthorizationUrl = new Uri($"{apiConfiguration.Authority}/connect/authorize"),
 						TokenUrl = new Uri($"{apiConfiguration.Authority}/connect/token"),
-						Scopes = new Dictionary<String, String> { { apiConfiguration.OidcApiName, apiConfiguration.ApiName } }
+						Scopes = new Dictionary<String, String> { { apiConfiguration.ApiName, apiConfiguration.ApiName } }
 					}
 				}
 			});
@@ -114,14 +114,14 @@ public class Startup
 
 		services.AddAuditEventLogging<AdminAuditLogDbContext, AuditLog>(Configuration);
 
-		services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, AdminLogDbContext, AdminAuditLogDbContext, IdentityServerDataProtectionDbContext>(Configuration, apiConfiguration);
+		services.AddIdSHealthChecks<IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, AdminIdentityDbContext, AdminLogDbContext, AdminAuditLogDbContext, IdentityServerDataProtectionDbContext>(Configuration);
 
 		services.ConfigureCors();
 	}
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 	{
-		var httpApiHostOptions = app.ApplicationServices.GetHostOptions();
+		var swaggerOptions = app.ApplicationServices.GetSwaggerOptions();
 
 		app.UseSerilogRequestLogging();
 		app.AddForwardHeaders();
@@ -134,10 +134,10 @@ public class Startup
 		app.UseSwagger();
 		app.UseSwaggerUI(c =>
 		{
-			c.SwaggerEndpoint($"{httpApiHostOptions.ApiBaseUrl}/swagger/v1/swagger.json", httpApiHostOptions.ApiName);
+			c.SwaggerEndpoint(swaggerOptions.EndPointUrl, swaggerOptions.ApiName);
 
-			c.OAuthClientId(httpApiHostOptions.ClientId);
-			c.OAuthAppName(httpApiHostOptions.ApiName);
+			c.OAuthClientId(swaggerOptions.ClientId);
+			c.OAuthAppName(swaggerOptions.ApiName);
 			c.OAuthUsePkce();
 		});
 

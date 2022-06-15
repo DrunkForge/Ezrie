@@ -3,11 +3,13 @@ using Volo.Abp.Http.Client;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.Identity;
+using Volo.Abp.Account;
 
 namespace Ezrie.IdentityService;
 
 [DependsOn(typeof(IdentityServiceApplicationContractsModule))]
 [DependsOn(typeof(AbpHttpClientModule))]
+[DependsOn(typeof(AbpAccountHttpApiClientModule))]
 [DependsOn(typeof(AbpIdentityHttpApiClientModule))]
 public class IdentityServiceHttpApiClientModule : AbpModule
 {

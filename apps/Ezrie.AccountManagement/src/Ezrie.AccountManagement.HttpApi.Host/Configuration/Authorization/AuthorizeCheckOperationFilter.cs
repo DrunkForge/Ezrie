@@ -23,12 +23,6 @@ namespace Ezrie.AccountManagement.Configuration.Authorization;
 
 public class AuthorizeCheckOperationFilter : IOperationFilter
 {
-	private readonly Ezrie.Configuration.HostOptions _httpApiHostOptions;
-
-	public AuthorizeCheckOperationFilter(Ezrie.Configuration.HostOptions adminApiConfiguration)
-	{
-		_httpApiHostOptions = adminApiConfiguration;
-	}
 	public void Apply(OpenApiOperation operation, OperationFilterContext context)
 	{
 		var hasAuthorize = context.MethodInfo.DeclaringType != null
@@ -50,7 +44,7 @@ public class AuthorizeCheckOperationFilter : IOperationFilter
 									Type = ReferenceType.SecurityScheme,
 									Id = "oauth2"}
 							}
-						] = new[] { _httpApiHostOptions.OidcApiName }
+						] = new[] { EzrieConstants.SuperAdministratorRole }
 					}
 				};
 

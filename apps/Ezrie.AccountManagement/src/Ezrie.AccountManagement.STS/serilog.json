@@ -1,15 +1,17 @@
 {
 	"Serilog": {
 		"MinimumLevel": {
-			"Default": "Debug",
+			"Default": "Verbose",
 			"Override": {
 				"Microsoft": "Warning"
 			}
 		},
 		"WriteTo": [
 			{
-				"Name": "Seq",
-				"Args": { "serverUrl": "http://localhost:5341" }
+				"Name": "Console",
+				"Args": {
+					"outputTemplate": "[{Level:u3}] <{SourceContext:l}> {Message}{NewLine}{Exception}"
+				}
 			}
 		]
 	}

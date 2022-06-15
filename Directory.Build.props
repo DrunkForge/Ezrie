@@ -9,6 +9,7 @@
 
 		<!-- All Microsoft packages -->
 		<MicrosoftPackageVersion>6.0.5</MicrosoftPackageVersion>
+		<MicrosoftBaseVersion>6.0.0</MicrosoftBaseVersion>
 
 		<!-- Microsoft.NET.Test.Sdk https://www.nuget.org/packages/Microsoft.NET.Test.Sdk -->
 		<MicrosoftNETTestSdkPackageVersion>17.2.0</MicrosoftNETTestSdkPackageVersion>
@@ -26,7 +27,7 @@
 		<NSubstitutePackageVersion>4.3.0</NSubstitutePackageVersion>
 
 		<!-- All Volo.Abp packages https://www.nuget.org/packages/Volo.Abp -->
-		<VoloAbpPackageVersion>5.2.2</VoloAbpPackageVersion>
+		<VoloAbpPackageVersion>5.3.0</VoloAbpPackageVersion>
 
 		<!-- xunit https://www.nuget.org/packages/xUnit -->
 		<xUnitPackageVersion>2.4.1</xUnitPackageVersion>

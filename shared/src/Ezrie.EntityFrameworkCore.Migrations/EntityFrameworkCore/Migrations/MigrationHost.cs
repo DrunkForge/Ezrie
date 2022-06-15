@@ -44,7 +44,7 @@ public class MigrationHost<T> : ITransientDependency
 			var configuration = EzrieConfiguration.CreateDefault();
 			options.Services
 				.ReplaceConfiguration(configuration)
-				.AddEzrieLogging<T>(configuration);
+				.AddEzrieLogging<T>();
 		}))
 		{
 			try

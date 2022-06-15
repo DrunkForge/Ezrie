@@ -14,20 +14,20 @@
 
 	<ItemGroup>
 		<PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.6" />
-		<PackageReference Include="AspNetCore.HealthChecks.MySql" Version="6.0.1" />
-		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.1" />
-		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.1" />
+		<PackageReference Include="AspNetCore.HealthChecks.MySql" Version="6.0.2" />
+		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
+		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.2" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Microsoft.Identity.Web" Version="1.22.1" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2" />
 		<PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
@@ -40,6 +40,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.EntityFrameworkCore\Ezrie.AccountManagement.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.AccountManagement.Domain.Shared\Ezrie.AccountManagement.Domain.Shared.csproj" />
 	</ItemGroup>

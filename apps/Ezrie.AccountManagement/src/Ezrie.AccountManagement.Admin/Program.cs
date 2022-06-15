@@ -57,6 +57,7 @@ internal static class Program
 
 	private static async Task<Boolean> ApplyDbMigrationsWithDataSeedAsync(String[] args, IConfiguration configuration, IHost host)
 	{
+		Log.Information("Applying DB Migrations");
 		var applyDbMigrationWithDataSeedFromProgramArguments = args.Any(x => x == SeedArgs);
 		if (applyDbMigrationWithDataSeedFromProgramArguments)
 			args = args.Except(new[] { SeedArgs }).ToArray();
@@ -73,7 +74,6 @@ internal static class Program
 
 	public static IHostBuilder CreateHostBuilder(String[] args) =>
 		Host.CreateDefaultBuilder(args)
-			.UseEzrieLogging<Startup>()
 			.ConfigureAppConfiguration((hostContext, configApp) =>
 			{
 				var configurationRoot = configApp.Build();
@@ -102,5 +102,6 @@ internal static class Program
 			{
 				webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
 				webBuilder.UseStartup<Startup>();
-			});
+			})
+			.UseEzrieLogging<Startup>();
 }

@@ -1,33 +1,26 @@
-using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Account;
-using Volo.Abp.FeatureManagement;
-using Volo.Abp.Identity;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.Http.Client;
 using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement;
-using Volo.Abp.TenantManagement;
-using Volo.Abp.SettingManagement;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Ezrie.CRM;
 
-[DependsOn(typeof(CrmApplicationContractsModule))]
-[DependsOn(typeof(AbpAccountHttpApiClientModule))]
-[DependsOn(typeof(AbpFeatureManagementHttpApiClientModule))]
-[DependsOn(typeof(AbpIdentityHttpApiClientModule))]
-[DependsOn(typeof(AbpPermissionManagementHttpApiClientModule))]
-[DependsOn(typeof(AbpSettingManagementHttpApiClientModule))]
-[DependsOn(typeof(AbpTenantManagementHttpApiClientModule))]
-public class CrmHttpApiClientModule : AbpModule
+[DependsOn(
+    typeof(CRMApplicationContractsModule),
+    typeof(AbpHttpClientModule))]
+public class CRMHttpApiClientModule : AbpModule
 {
-	public const String RemoteServiceName = "Default";
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        context.Services.AddHttpClientProxies(
+            typeof(CRMApplicationContractsModule).Assembly,
+            CRMRemoteServiceConsts.RemoteServiceName
+        );
 
-	public override void ConfigureServices(ServiceConfigurationContext context)
-	{
-		context.Services.AddHttpClientProxies(typeof(CrmApplicationContractsModule).Assembly, RemoteServiceName);
+        Configure<AbpVirtualFileSystemOptions>(options =>
+        {
+            options.FileSets.AddEmbedded<CRMHttpApiClientModule>();
+        });
 
-		Configure<AbpVirtualFileSystemOptions>(options =>
-		{
-			options.FileSets.AddEmbedded<CrmHttpApiClientModule>();
-		});
-	}
+    }
 }

@@ -25,6 +25,9 @@ internal static class Program
 	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
 	public static async Task<Int32> Main(String[] args)
 	{
+		// https://www.npgsql.org/efcore/release-notes/6.0.html#opting-out-of-the-new-timestamp-mapping-logic
+		AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 		try
 		{
 

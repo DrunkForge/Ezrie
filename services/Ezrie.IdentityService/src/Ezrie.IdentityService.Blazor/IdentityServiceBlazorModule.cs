@@ -1,5 +1,6 @@
 using Ezrie.IdentityService.Menus;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.Account.Blazor;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
@@ -11,6 +12,7 @@ namespace Ezrie.IdentityService;
 [DependsOn(typeof(IdentityServiceApplicationContractsModule))]
 [DependsOn(typeof(AbpAspNetCoreComponentsWebThemingModule))]
 [DependsOn(typeof(AbpAutoMapperModule))]
+[DependsOn(typeof(AbpAccountBlazorModule))]
 public class IdentityServiceBlazorModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)

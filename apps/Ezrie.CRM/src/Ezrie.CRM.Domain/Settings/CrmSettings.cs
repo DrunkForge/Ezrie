@@ -1,9 +1,10 @@
-namespace Ezrie.CRM.Settings;
+﻿namespace Ezrie.CRM.Settings;
 
-public static class CrmSettings
+public static class CRMSettings
 {
-    private const String Prefix = "CRM";
+    public const String GroupName = "CRM";
 
-    //Add your own setting names here. Example:
-    //public const string MySetting1 = Prefix + ".MySetting1";
+    /* Add constants for setting names. Example:
+     * public const string MySettingName = GroupName + ".MySettingName";
+     */
 }

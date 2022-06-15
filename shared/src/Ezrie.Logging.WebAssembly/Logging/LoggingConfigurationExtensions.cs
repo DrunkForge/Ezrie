@@ -23,7 +23,7 @@ public static class LoggingConfigurationExtensions
 {
 	public static WebAssemblyHostBuilder UseEzrieLogging<T>(this WebAssemblyHostBuilder builder)
 	{
-		builder.Logging.ClearProviders().AddEzrieLogging(builder.Configuration, typeof(T).Assembly.GetName().Name ?? typeof(T).Name);
+		builder.Logging.ClearProviders().Services.AddEzrieLogging(builder.Configuration, typeof(T).Assembly.GetName().Name ?? typeof(T).Name);
 
 		return builder;
 	}

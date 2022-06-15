@@ -20,7 +20,9 @@ namespace Ezrie.Configuration;
 
 public static class EzrieConfiguration
 {
-	public static IConfiguration CreateDefault()
+	public static IConfiguration CreateDefault() => CreateBuilder().Build();
+
+	public static IConfigurationBuilder CreateBuilder()
 	{
 		var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
@@ -29,7 +31,6 @@ public static class EzrieConfiguration
 			.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 			.AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
 			.AddJsonFile("serilog.json", optional: true, reloadOnChange: true)
-			.AddJsonFile($"serilog.{environment}.json", optional: true, reloadOnChange: true)
-			.Build();
+			.AddJsonFile($"serilog.{environment}.json", optional: true, reloadOnChange: true);
 	}
 }

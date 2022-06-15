@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Ezrie.CRM</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(MicrosoftPackageVersion)" />
+    <ProjectReference Include="..\..\..\..\shared\test\Ezrie.TestBase.EntityFrameworkCore\Ezrie.TestBase.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\Ezrie.CRM.EntityFrameworkCore\Ezrie.CRM.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Ezrie.CRM.TestBase\Ezrie.CRM.TestBase.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.3.0" />
+  </ItemGroup>
+
+</Project>

@@ -64,14 +64,14 @@ public class IdentityServiceBlazorHostModule : AbpModule
 
     private static void ConfigureAuthentication(WebAssemblyHostBuilder builder)
     {
-        builder.Services.AddOidcAuthentication(options =>
-        {
-            builder.Configuration.Bind("AuthServer", options.ProviderOptions);
-            options.ProviderOptions.DefaultScopes.Add("IdentityService");
-        });
-    }
+		builder.Services.AddOidcAuthentication(options =>
+		{
+			builder.Configuration.Bind("AuthServer", options.ProviderOptions);
+			options.ProviderOptions.DefaultScopes.Add("ezrie-identity-service-api");
+		});
+	}
 
-    private static void ConfigureUI(WebAssemblyHostBuilder builder)
+	private static void ConfigureUI(WebAssemblyHostBuilder builder)
     {
         builder.RootComponents.Add<App>("#ApplicationContainer");
     }

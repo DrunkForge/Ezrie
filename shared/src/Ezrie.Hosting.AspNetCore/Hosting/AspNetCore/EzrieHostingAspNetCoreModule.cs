@@ -40,13 +40,7 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 	{
 		ArgumentNullException.ThrowIfNull(context);
 
-		ConfigureCors(context);
 		ConfigureDistributedCache(context);
-	}
-
-	private static void ConfigureCors(ServiceConfigurationContext context)
-	{
-		context.Services.ConfigureCors(builder => builder.WithAbpExposedHeaders());
 	}
 
 	private void ConfigureDistributedCache(ServiceConfigurationContext context)
@@ -65,28 +59,8 @@ public class EzrieHostingAspNetCoreModule : AbpModule
 	public override void OnApplicationInitialization(ApplicationInitializationContext context)
 	{
 		var app = context.GetApplicationBuilder();
-		var env = context.GetEnvironment();
-
-		if (env.IsDevelopment())
-		{
-			app.UseDeveloperExceptionPage();
-		}
-		else
-		{
-			app.UseStatusCodePagesWithReExecute("~/error");
-			//app.UseHsts();
-		}
 
 		app.UseSerilogRequestLogging();
-		//app.UseHttpsRedirection();
-		app.UseCorrelationId();
-		app.UseStaticFiles();
-		app.UseAbpRequestLocalization();
-		app.UseRouting();
-		app.UseCors();
-		app.UseAuthentication();
-		app.UseAuthorization();
-		app.UseAuditing();
 		app.UseAbpSerilogEnrichers();
 	}
 }

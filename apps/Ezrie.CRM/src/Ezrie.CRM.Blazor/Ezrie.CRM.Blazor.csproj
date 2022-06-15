@@ -1,41 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-	<Import Project="..\common.props" />
+    <Import Project="..\common.props" />
 	<Import Project="..\..\..\..\common.build.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<RootNamespace>Ezrie.CRM</RootNamespace>
-	</PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Blazorise.Bootstrap5" Version="1.0.4" />
-		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.4" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Syncfusion.Blazor.Grid" Version="20.1.0.58" />
-		<PackageReference Include="Syncfusion.Blazor.Schedule" Version="20.1.0.58" />
-		<PackageReference Include="Syncfusion.Blazor.Themes" Version="20.1.0.58" />
-		<PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme" Version="5.2.2" />
-		<PackageReference Include="Volo.Abp.Autofac.WebAssembly" Version="5.2.2" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AutoMapper" Version="5.3.0" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Components.Web.Theming" Version="5.3.0" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.Blazor.WebAssembly\Ezrie.AdministrationService.Blazor.WebAssembly.csproj" />
-		<ProjectReference Include="..\..\..\..\services\Ezrie.IdentityService\src\Ezrie.IdentityService.Blazor.WebAssembly\Ezrie.IdentityService.Blazor.WebAssembly.csproj" />
-		<ProjectReference Include="..\..\..\..\services\Ezrie.TenantService\src\Ezrie.TenantService.Blazor.WebAssembly\Ezrie.TenantService.Blazor.WebAssembly.csproj" />
-		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Core\Ezrie.Core.csproj" />
-		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging.WebAssembly\Ezrie.Logging.WebAssembly.csproj" />
-		<ProjectReference Include="..\Ezrie.CRM.HttpApi.Client\Ezrie.CRM.HttpApi.Client.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="Pages\**\*.js">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Update="Pages\**\*.css">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\Ezrie.CRM.Application.Contracts\Ezrie.CRM.Application.Contracts.csproj" />
+    </ItemGroup>
 </Project>

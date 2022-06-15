@@ -1,26 +1,34 @@
+using Ezrie.Configuration;
+using Ezrie.Logging;
 using Serilog;
 using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 
 namespace Ezrie.AccountManagement.STS;
 
-public class Program
+internal static class Program
 {
-	public static void Main(String[] args)
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
+	public static async Task<Int32> Main(String[] args)
 	{
-		var configuration = GetConfiguration(args);
+		// https://www.npgsql.org/efcore/release-notes/6.0.html#opting-out-of-the-new-timestamp-mapping-logic
+		AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-		Log.Logger = new LoggerConfiguration()
-			.ReadFrom.Configuration(configuration)
-			.CreateLogger();
 		try
 		{
+			var host = CreateHostBuilder(args).Build();
+
+			var configuration = host.Services.GetRequiredService<IConfiguration>();
+
 			DockerHelpers.ApplyDockerConfiguration(configuration);
 
-			CreateHostBuilder(args).Build().Run();
+			await host.RunAsync();
+
+			return 0;
 		}
 		catch (Exception ex)
 		{
 			Log.Fatal(ex, "Host terminated unexpectedly");
+			return 1;
 		}
 		finally
 		{
@@ -33,12 +41,7 @@ public class Program
 		var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 		var isDevelopment = environment == Environments.Development;
 
-		var configurationBuilder = new ConfigurationBuilder()
-			.SetBasePath(Directory.GetCurrentDirectory())
-			.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-			.AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
-			.AddJsonFile("serilog.json", optional: true, reloadOnChange: true)
-			.AddJsonFile($"serilog.{environment}.json", optional: true, reloadOnChange: true);
+		var configurationBuilder = EzrieConfiguration.CreateBuilder();
 
 		if (isDevelopment)
 		{
@@ -57,35 +60,28 @@ public class Program
 
 	public static IHostBuilder CreateHostBuilder(String[] args) =>
 		Host.CreateDefaultBuilder(args)
-			 .ConfigureAppConfiguration((hostContext, configApp) =>
-			 {
-				 var configurationRoot = configApp.Build();
+			.UseEzrieLogging<Startup>()
+			.ConfigureAppConfiguration((hostContext, configApp) =>
+			{
+				var env = hostContext.HostingEnvironment;
+				var configurationRoot = configApp.Build();
 
-				 configApp.AddJsonFile("serilog.json", optional: true, reloadOnChange: true);
+				configApp.AddJsonFile("serilog.json", optional: true, reloadOnChange: true);
+				configApp.AddJsonFile($"serilog.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-				 var env = hostContext.HostingEnvironment;
+				if (env.IsDevelopment())
+				{
+					configApp.AddUserSecrets<Startup>(true);
+				}
 
-				 configApp.AddJsonFile($"serilog.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+				configurationRoot.AddAzureKeyVaultConfiguration(configApp);
 
-				 if (env.IsDevelopment())
-				 {
-					 configApp.AddUserSecrets<Startup>(true);
-				 }
-
-				 configurationRoot.AddAzureKeyVaultConfiguration(configApp);
-
-				 configApp.AddEnvironmentVariables();
-				 configApp.AddCommandLine(args);
-			 })
+				configApp.AddEnvironmentVariables();
+				configApp.AddCommandLine(args);
+			})
 			.ConfigureWebHostDefaults(webBuilder =>
 			{
 				webBuilder.ConfigureKestrel(options => options.AddServerHeader = false);
 				webBuilder.UseStartup<Startup>();
-			})
-			.UseSerilog((hostContext, loggerConfig) =>
-			{
-				loggerConfig
-					.ReadFrom.Configuration(hostContext.Configuration)
-					.Enrich.WithProperty("ApplicationName", hostContext.HostingEnvironment.ApplicationName);
 			});
 }

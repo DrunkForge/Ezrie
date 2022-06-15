@@ -9,7 +9,7 @@ public class StartupTest : Startup
 	{
 	}
 
-	public override void RegisterDbContexts(IServiceCollection services)
+	public override void AddDbContexts(IServiceCollection services)
 	{
 		services.RegisterDbContextsStaging<AdminIdentityDbContext, IdentityServerConfigurationDbContext, IdentityServerPersistedGrantDbContext, IdentityServerDataProtectionDbContext>();
 	}
