@@ -16,7 +16,6 @@
 
 #nullable disable
 
-using Ezrie;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;

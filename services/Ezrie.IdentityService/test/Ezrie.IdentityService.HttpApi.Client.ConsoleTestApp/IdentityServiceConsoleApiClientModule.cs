@@ -8,7 +8,7 @@ namespace Ezrie.IdentityService;
     typeof(AbpAutofacModule),
     typeof(IdentityServiceHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
-    )]
+)]
 public class IdentityServiceConsoleApiClientModule : AbpModule
 {
 

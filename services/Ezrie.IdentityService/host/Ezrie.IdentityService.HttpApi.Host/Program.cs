@@ -17,6 +17,7 @@
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Hosting.AspNetCore;
 using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
+using Ezrie.IdentityService.Migrations;
 using Ezrie.Logging;
 using Serilog;
 
@@ -62,10 +63,7 @@ internal static class Program
 		});
 
 	private static async Task MigrateAsync(this IHost host)
-	{
-		var configuration = host.Services.GetRequiredService<IConfiguration>();
-		var logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger<IdentityServiceHttpApiHostModule>();
-
-		await new MigrationHost<IdentityServiceEntityFrameworkCoreMigrationsModule>(logger).MigrateAndSeedAsync();
-	}
+		=> await host.Services
+			.GetRequiredService<IIdentityServiceMigrateAndSeedService>()
+			.MigrateAndSeedAsync();
 }

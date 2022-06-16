@@ -23,6 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.Application\Ezrie.Admin.Application.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.EntityFrameworkCore\Ezrie.Admin.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.HttpApi\Ezrie.Admin.HttpApi.csproj" />

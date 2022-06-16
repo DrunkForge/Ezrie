@@ -1,51 +1,40 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Ezrie.Logging;
 using Serilog;
-using Serilog.Events;
 
 namespace Ezrie.Admin;
 
-public class Program
+internal static class Program
 {
-    public async static Task<int> Main(string[] args)
-    {
-        Log.Logger = new LoggerConfiguration()
-#if DEBUG
-            .MinimumLevel.Debug()
-#else
-            .MinimumLevel.Information()
-#endif
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
-            .Enrich.FromLogContext()
-            .WriteTo.Async(c => c.File("Logs/logs.txt"))
-            .WriteTo.Async(c => c.Console())
-            .CreateLogger();
+	[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The exception is logged and it doesn't matter why it failed.")]
+	public async static Task<Int32> Main(String[] args)
+	{
+		try
+		{
+			var builder = WebApplication.CreateBuilder(args);
 
-        try
-        {
-            Log.Information("Starting Ezrie.Admin.HttpApi.Host.");
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Host.AddAppSettingsSecretsJson()
-                .UseAutofac()
-                .UseSerilog();
-            await builder.AddApplicationAsync<AdminHttpApiHostModule>();
-            var app = builder.Build();
-            await app.InitializeApplicationAsync();
-            await app.RunAsync();
-            return 0;
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Host terminated unexpectedly!");
-            return 1;
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
-    }
+			builder.Host
+				.AddAppSettingsSecretsJson()
+				.UseAutofac()
+				.UseEzrieLogging<AdminHttpApiHostModule>();
+
+			await builder.AddApplicationAsync<AdminHttpApiHostModule>();
+
+			var app = builder.Build();
+
+			await app.InitializeApplicationAsync();
+
+			await app.RunAsync();
+
+			return 0;
+		}
+		catch (Exception ex)
+		{
+			Log.Fatal(ex, "Host terminated unexpectedly!");
+			return 1;
+		}
+		finally
+		{
+			Log.CloseAndFlush();
+		}
+	}
 }

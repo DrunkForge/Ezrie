@@ -14,7 +14,7 @@ if ($true -ne (Test-Path -Path ".\$root.sln" -IsValid -PathType Leaf))
 
 # Reset-Containers
 
-Add-Migration "$Migration" "CRM" "apps"
+Add-Migration "$Migration" "Admin" "apps"
 Add-Migration "$Migration" "AdministrationService" "services"
 Add-Migration "$Migration" "IdentityService" "services"
 Add-Migration "$Migration" "TenantService" "services"

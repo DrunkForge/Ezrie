@@ -15,13 +15,15 @@
 *********************************************************************************************/
 
 using Ezrie.EntityFrameworkCore.Migrations;
+using Ezrie.Migrations;
 using Volo.Abp.DependencyInjection;
 
 namespace Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
 
-public class DbContextMigrator : DbContextMigrator<AdministrationServiceMigrationsDbContext>, IDbContextMigrator, ITransientDependency
+[ExposeServices(typeof(IDbSchemaMigrator))]
+public class AdministrationServiceDbSchemaMigrator : DbSchemaMigrator<AdministrationServiceMigrationsDbContext>, IDbSchemaMigrator, ITransientDependency
 {
-	public DbContextMigrator(IServiceProvider serviceProvider)
+	public AdministrationServiceDbSchemaMigrator(IServiceProvider serviceProvider)
 		: base(serviceProvider)
 	{
 	}

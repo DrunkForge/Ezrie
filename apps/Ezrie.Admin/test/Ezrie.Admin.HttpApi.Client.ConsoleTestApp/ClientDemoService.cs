@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Volo.Abp.Account;
+﻿using Volo.Abp.Account;
 using Volo.Abp.DependencyInjection;
 
 namespace Ezrie.Admin.HttpApi.Client.ConsoleTestApp;

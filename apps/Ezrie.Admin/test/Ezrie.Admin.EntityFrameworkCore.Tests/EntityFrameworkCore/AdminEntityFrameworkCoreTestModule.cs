@@ -14,7 +14,7 @@ namespace Ezrie.Admin.EntityFrameworkCore;
     typeof(AdminEntityFrameworkCoreModule),
     typeof(AdminTestBaseModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
-    )]
+)]
 public class AdminEntityFrameworkCoreTestModule : AbpModule
 {
     private SqliteConnection _sqliteConnection;

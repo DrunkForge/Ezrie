@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Ezrie.Admin.MultiTenancy;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Emailing;
@@ -17,6 +16,7 @@ using Volo.Abp.TenantManagement;
 namespace Ezrie.Admin;
 
 [DependsOn(
+	typeof(EzrieDomainModule),
     typeof(AdminDomainSharedModule),
     typeof(AbpAuditLoggingDomainModule),
     typeof(AbpBackgroundJobsDomainModule),

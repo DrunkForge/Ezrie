@@ -13,7 +13,7 @@ namespace Ezrie.IdentityService;
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
     typeof(IdentityServiceDomainModule)
-    )]
+)]
 public class IdentityServiceTestBaseModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

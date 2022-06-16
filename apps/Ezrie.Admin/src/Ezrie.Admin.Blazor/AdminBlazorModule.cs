@@ -1,11 +1,7 @@
-﻿using System;
-using System.Net.Http;
-using Blazorise.Bootstrap5;
+﻿using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using IdentityModel;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Ezrie.Admin.Blazor.Menus;
 using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;

@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Ezrie.Admin.Models.Test;
+﻿namespace Ezrie.Admin.Models.Test;
 
 public class TestModel
 {
-    public string Name { get; set; }
+    public String Name { get; set; }
 
     public DateTime BirthDate { get; set; }
 }

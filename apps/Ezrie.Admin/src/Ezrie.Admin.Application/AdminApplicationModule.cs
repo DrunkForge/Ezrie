@@ -18,7 +18,7 @@ namespace Ezrie.Admin;
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
     typeof(AbpSettingManagementApplicationModule)
-    )]
+)]
 public class AdminApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

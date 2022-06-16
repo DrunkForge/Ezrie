@@ -11,21 +11,21 @@
 			"ezrie-administration-service-api": {
 				"Destinations": {
 					"destination1": {
-						"Address": "https://localhost:10100"
+						"Address": "https://localhost:10200"
 					}
 				}
 			},
 			"ezrie-identity-service-api": {
 				"Destinations": {
 					"destination1": {
-						"Address": "https://localhost:10200"
+						"Address": "https://localhost:10300"
 					}
 				}
 			},
 			"ezrie-tenant-service-api": {
 				"Destinations": {
 					"destination1": {
-						"Address": "https://localhost:10300"
+						"Address": "https://localhost:10400"
 					}
 				}
 			}

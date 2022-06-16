@@ -4,9 +4,6 @@
 // Original file: https://github.com/IdentityServer/IdentityServer4.Quickstart.UI
 // Modified by Jan Škoruba
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Skoruba.IdentityServer4.Shared.Configuration.Configuration.Identity;
 
 namespace Ezrie.AccountManagement.STS.ViewModels.Account;

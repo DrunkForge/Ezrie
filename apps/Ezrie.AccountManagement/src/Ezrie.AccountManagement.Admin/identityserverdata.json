@@ -140,9 +140,9 @@
 					"https://crm.ezrie.ca",
 					"https://localhost:5000",
 					"https://localhost:10000",
-					"https://localhost:10100",
 					"https://localhost:10200",
-					"https://localhost:10300"
+					"https://localhost:10300",
+					"https://localhost:10400"
 				]
 			},
 			{
@@ -175,44 +175,14 @@
 					"https://crm.ezrie.ca",
 					"https://localhost:5000",
 					"https://localhost:10000",
-					"https://localhost:10100",
 					"https://localhost:10200",
-					"https://localhost:10300"
+					"https://localhost:10300",
+					"https://localhost:10400"
 				]
 			},
 			{
 				"ClientId": "ezrie-administration-service-api",
 				"ClientName": "Ezrie Administration Service API",
-				"ClientSecrets": [
-					{
-						"Value": "1q2w3E*"
-					}
-				],
-				"AllowedGrantTypes": [
-					"authorization_code"
-				],
-				"RequireClientSecret": true,
-				"RequirePkce": true,
-				"RedirectUris": [
-					"https://localhost:10100/signin-oidc"
-				],
-				"AllowedScopes": [
-					"openid",
-					"profile",
-					"role"
-				],
-				"AllowedCorsOrigins": [
-					"https://crm.ezrie.ca",
-					"https://localhost:5000",
-					"https://localhost:10000",
-					"https://localhost:10100",
-					"https://localhost:10200",
-					"https://localhost:10300"
-				]
-			},
-			{
-				"ClientId": "ezrie-identity-service-api",
-				"ClientName": "Ezrie Identity Service API",
 				"ClientSecrets": [
 					{
 						"Value": "1q2w3E*"
@@ -235,14 +205,14 @@
 					"https://crm.ezrie.ca",
 					"https://localhost:5000",
 					"https://localhost:10000",
-					"https://localhost:10100",
 					"https://localhost:10200",
-					"https://localhost:10300"
+					"https://localhost:10300",
+					"https://localhost:10400"
 				]
 			},
 			{
-				"ClientId": "ezrie-tenant-service-api",
-				"ClientName": "Ezrie Tenant Service API",
+				"ClientId": "ezrie-identity-service-api",
+				"ClientName": "Ezrie Identity Service API",
 				"ClientSecrets": [
 					{
 						"Value": "1q2w3E*"
@@ -265,9 +235,39 @@
 					"https://crm.ezrie.ca",
 					"https://localhost:5000",
 					"https://localhost:10000",
-					"https://localhost:10100",
 					"https://localhost:10200",
-					"https://localhost:10300"
+					"https://localhost:10300",
+					"https://localhost:10400"
+				]
+			},
+			{
+				"ClientId": "ezrie-tenant-service-api",
+				"ClientName": "Ezrie Tenant Service API",
+				"ClientSecrets": [
+					{
+						"Value": "1q2w3E*"
+					}
+				],
+				"AllowedGrantTypes": [
+					"authorization_code"
+				],
+				"RequireClientSecret": true,
+				"RequirePkce": true,
+				"RedirectUris": [
+					"https://localhost:10400/signin-oidc"
+				],
+				"AllowedScopes": [
+					"openid",
+					"profile",
+					"role"
+				],
+				"AllowedCorsOrigins": [
+					"https://crm.ezrie.ca",
+					"https://localhost:5000",
+					"https://localhost:10000",
+					"https://localhost:10200",
+					"https://localhost:10300",
+					"https://localhost:10400"
 				]
 			}
 		]

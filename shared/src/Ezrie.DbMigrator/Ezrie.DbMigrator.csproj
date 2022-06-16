@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\common.props" />
 	<Import Project="..\..\..\common.build.props" />
@@ -11,6 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\apps\Ezrie.Admin\src\Ezrie.Admin.EntityFrameworkCore.Migrations\Ezrie.Admin.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\..\services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migrations\Ezrie.AdministrationService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\..\services\Ezrie.IdentityService\src\Ezrie.IdentityService.EntityFrameworkCore.Migrations\Ezrie.IdentityService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\..\services\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore.Migrations\Ezrie.TenantService.EntityFrameworkCore.Migrations.csproj" />
@@ -19,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="appsettings.json" />
+		<!--<None Remove="appsettings.json" />
 		<Content Include="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -34,10 +35,41 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
-		<None Remove="appsettings.Production.json" />
-		<Content Include="appsettings.Production.json">
+
+		<None Remove="appsettings.AdminEntityFrameworkCoreMigrationsModule.json" />
+		<Content Include="appsettings.AdminEntityFrameworkCoreMigrationsModule.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+
+		<None Remove="appsettings.AdministrationServiceEntityFrameworkCoreMigrationsModule.json" />
+		<Content Include="appsettings.AdministrationServiceEntityFrameworkCoreMigrationsModule.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+
+		<None Remove="appsettings.IdentityServiceEntityFrameworkCoreMigrationsModule.json" />
+		<Content Include="appsettings.IdentityServiceEntityFrameworkCoreMigrationsModule.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+
+		<None Remove="appsettings.TenantServiceEntityFrameworkCoreMigrationsModule.json" />
+		<Content Include="appsettings.TenantServiceEntityFrameworkCoreMigrationsModule.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+
+		<None Remove="serilog.json" />
+		<Content Include="serilog.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>-->
+
+		<None Remove="*.json" />
+		<Content Include="*.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 	</ItemGroup>
 

@@ -1,0 +1,19 @@
+{
+	"Serilog": {
+		"MinimumLevel": {
+			"Default": "Debug",
+			"Override": {
+				"Microsoft": "Warning",
+				"~Volo": "Warning"
+			}
+		},
+		"WriteTo": [
+			{
+				"Name": "Console",
+				"Args": {
+					"outputTemplate": "[{Level:u3}] <{SourceContext:l}> {Message}{NewLine}{Exception}"
+				}
+			}
+		]
+	}
+}

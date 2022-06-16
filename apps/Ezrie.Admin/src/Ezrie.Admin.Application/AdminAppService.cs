@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ezrie.Admin.Localization;
+﻿using Ezrie.Admin.Localization;
 using Volo.Abp.Application.Services;
 
 namespace Ezrie.Admin;

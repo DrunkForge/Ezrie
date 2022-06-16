@@ -11,7 +11,7 @@ namespace Ezrie.Admin.DbMigrator;
 
 class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main(String[] args)
     {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information()
@@ -30,7 +30,7 @@ class Program
         await CreateHostBuilder(args).RunConsoleAsync();
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
+    public static IHostBuilder CreateHostBuilder(String[] args) =>
         Host.CreateDefaultBuilder(args)
             .AddAppSettingsSecretsJson()
             .ConfigureLogging((context, logging) => logging.ClearProviders())

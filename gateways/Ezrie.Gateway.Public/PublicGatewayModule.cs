@@ -14,14 +14,7 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
-using Ezrie.Configuration;
 using Ezrie.Hosting.Gateways;
-using Ezrie.MultiTenancy;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Rewrite;
-using Microsoft.OpenApi.Models;
-using Volo.Abp;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;

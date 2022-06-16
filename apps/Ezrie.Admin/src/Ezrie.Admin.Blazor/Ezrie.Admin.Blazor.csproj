@@ -24,6 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging.WebAssembly\Ezrie.Logging.WebAssembly.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.Admin.HttpApi.Client\Ezrie.Admin.HttpApi.Client.csproj" />
 	</ItemGroup>
 

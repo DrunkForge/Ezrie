@@ -9,7 +9,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 #nullable disable
 
-namespace Ezrie.TenantService.EntityFrameworkCore.Migrations.Migrations
+namespace Ezrie.TenantService.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(TenantServiceMigrationsDbContext))]
     partial class TenantServiceMigrationsDbContextModelSnapshot : ModelSnapshot

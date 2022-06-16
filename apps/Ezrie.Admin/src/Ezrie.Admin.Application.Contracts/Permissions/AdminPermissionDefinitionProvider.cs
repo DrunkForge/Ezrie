@@ -13,7 +13,7 @@ public class AdminPermissionDefinitionProvider : PermissionDefinitionProvider
         //myGroup.AddPermission(AdminPermissions.MyPermission1, L("Permission:MyPermission1"));
     }
 
-    private static LocalizableString L(string name)
+    private static LocalizableString L(String name)
     {
         return LocalizableString.Create<AdminResource>(name);
     }

@@ -15,10 +15,8 @@
 *********************************************************************************************/
 
 using Ezrie.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Modularity;
 
 namespace Ezrie.Hosting.AspNetCore;
 

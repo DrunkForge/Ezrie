@@ -1,5 +1,4 @@
 using System.Security.Cryptography.X509Certificates;
-using Ezrie.Configuration;
 using Skoruba.IdentityServer4.Shared.Configuration.Configuration.Common;
 using Skoruba.IdentityServer4.Shared.Configuration.Helpers;
 

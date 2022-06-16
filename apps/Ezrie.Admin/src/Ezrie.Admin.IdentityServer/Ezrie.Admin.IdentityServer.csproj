@@ -38,6 +38,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore.Migrations\Ezrie.EntityFrameworkCore.Migrations.csproj" />
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Logging\Ezrie.Logging.csproj" />
+		<ProjectReference Include="..\Ezrie.Admin.EntityFrameworkCore.Migrations\Ezrie.Admin.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.EntityFrameworkCore\Ezrie.Admin.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 

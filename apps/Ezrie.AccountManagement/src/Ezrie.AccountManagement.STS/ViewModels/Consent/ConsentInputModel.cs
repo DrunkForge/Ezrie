@@ -4,8 +4,6 @@
 // Original file: https://github.com/IdentityServer/IdentityServer4.Quickstart.UI
 // Modified by Jan Škoruba
 
-using System.Collections.Generic;
-
 namespace Ezrie.AccountManagement.STS.ViewModels.Consent;
 
 public class ConsentInputModel

@@ -260,3 +260,6 @@ paket-files/
 **/wwwroot/libs/*
 
 .tye/
+
+**/FodyWeavers.xml
+**/FodyWeavers.xsd

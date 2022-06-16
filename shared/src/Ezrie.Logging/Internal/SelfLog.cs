@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Ezrie.Logging.Internal;
+﻿namespace Ezrie.Logging.Internal;
 
 internal static class SelfLog
 {

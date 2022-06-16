@@ -46,7 +46,7 @@ public class EzrieDataSeeder : IDataSeeder, ITransientDependency
 					.ServiceProvider
 					.GetRequiredService(contributorType);
 
-				logger.LogInformation("Seeding with {Contributor}", contributorType.Name);
+				logger.LogInformation("Seeding with {DataSeedContributor}", contributorType.FullName);
 
 				await contributor.SeedAsync(context);
 			}

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Volo.Abp.Autofac;
 using Volo.Abp.Http.Client;
@@ -12,7 +11,7 @@ namespace Ezrie.Admin.HttpApi.Client.ConsoleTestApp;
     typeof(AbpAutofacModule),
     typeof(AdminHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
-    )]
+)]
 public class AdminConsoleApiClientModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

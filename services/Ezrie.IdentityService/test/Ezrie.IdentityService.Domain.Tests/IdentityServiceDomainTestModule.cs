@@ -9,7 +9,7 @@ namespace Ezrie.IdentityService;
  */
 [DependsOn(
     typeof(IdentityServiceEntityFrameworkCoreTestModule)
-    )]
+)]
 public class IdentityServiceDomainTestModule : AbpModule
 {
 

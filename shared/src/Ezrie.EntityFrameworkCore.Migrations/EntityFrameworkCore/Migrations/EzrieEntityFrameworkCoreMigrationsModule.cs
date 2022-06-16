@@ -15,9 +15,6 @@
 *********************************************************************************************/
 
 using Ezrie.Logging;
-using Ezrie.Seeding;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Data;
@@ -40,8 +37,6 @@ public class EzrieEntityFrameworkCoreMigrationsModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
-		context.Services.Replace(ServiceDescriptor.Transient<IDataSeeder, EzrieDataSeeder>());
-
 		Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
 	}
 }

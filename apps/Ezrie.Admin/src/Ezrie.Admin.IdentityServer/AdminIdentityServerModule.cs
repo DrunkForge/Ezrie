@@ -1,20 +1,11 @@
-using System;
-using System.IO;
-using System.Linq;
 using Localization.Resources.AbpUi;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Ezrie.Admin.Localization;
-using Ezrie.Admin.MultiTenancy;
 using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
@@ -28,21 +19,21 @@ using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
+using Ezrie.Admin.EntityFrameworkCore;
 
 namespace Ezrie.Admin;
 
 [DependsOn(
+    typeof(AdminEntityFrameworkCoreMigrationsModule),
     typeof(AbpAutofacModule),
-    typeof(AbpCachingStackExchangeRedisModule),
-    typeof(AbpAccountWebIdentityServerModule),
     typeof(AbpAccountApplicationModule),
     typeof(AbpAccountHttpApiModule),
+    typeof(AbpAccountWebIdentityServerModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-    typeof(AdminEntityFrameworkCoreModule),
-    typeof(AbpAspNetCoreSerilogModule)
-    )]
+    typeof(AbpAspNetCoreSerilogModule),
+    typeof(AbpCachingStackExchangeRedisModule)
+)]
 public class AdminIdentityServerModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

@@ -1,4 +1,3 @@
-﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -30,9 +29,6 @@ public class AdminEntityFrameworkCoreModule : AbpModule
 {
 	public override void PreConfigureServices(ServiceConfigurationContext context)
 	{
-		// https://www.npgsql.org/efcore/release-notes/6.0.html#opting-out-of-the-new-timestamp-mapping-logic
-		AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
 		AdminEfCoreEntityExtensionMappings.Configure();
 	}
 
@@ -43,13 +39,6 @@ public class AdminEntityFrameworkCoreModule : AbpModule
 			/* Remove "includeAllEntities: true" to create
 			 * default repositories only for aggregate roots */
 			options.AddDefaultRepositories(includeAllEntities: true);
-		});
-
-		Configure<AbpDbContextOptions>(options =>
-		{
-			/* The main point to change your DBMS.
-			 * See also AdminMigrationsDbContextFactory for EF Core tooling. */
-			options.UseNpgsql();
 		});
 	}
 }

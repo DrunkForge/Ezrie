@@ -16,7 +16,6 @@
 
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
-using Ezrie.Configuration;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Volo.Abp.Account;
 using Volo.Abp.AspNetCore.Components.Web.BasicTheme.Themes.Basic;

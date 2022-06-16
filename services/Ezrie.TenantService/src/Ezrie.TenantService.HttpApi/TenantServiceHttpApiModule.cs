@@ -5,7 +5,6 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.TenantManagement;
-using Volo.Abp.VirtualFileSystem;
 
 namespace Ezrie.TenantService;
 

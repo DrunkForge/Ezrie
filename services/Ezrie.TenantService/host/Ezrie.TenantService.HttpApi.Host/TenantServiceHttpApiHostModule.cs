@@ -15,7 +15,6 @@
 *********************************************************************************************/
 
 using Ezrie.AdministrationService.EntityFrameworkCore;
-using Ezrie.Hosting.AspNetCore;
 using Ezrie.Hosting.AspNetCore.Microservices;
 using Ezrie.TenantService.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;

@@ -2,7 +2,7 @@
 
 public static class AdminPermissions
 {
-    public const string GroupName = "Admin";
+    public const String GroupName = "Admin";
 
     //Add your own permission names. Example:
     //public const string MyPermission1 = GroupName + ".MyPermission1";

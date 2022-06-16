@@ -9,7 +9,7 @@ namespace Ezrie.Admin.DbMigrator;
     typeof(AbpAutofacModule),
     typeof(AdminEntityFrameworkCoreMigrationsModule),
     typeof(AdminApplicationContractsModule)
-    )]
+)]
 public class AdminDbMigratorModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

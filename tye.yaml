@@ -22,44 +22,44 @@ services:
     - protocol: https
       port: 5750
 
-# EzrieCRM App
-- name: ezrie-crm-app
-  project: apps\Ezrie.CRM\host\Ezrie.CRM.Blazor.Host\Ezrie.CRM.Blazor.Host.csproj
+# Ezrie Admin App
+- name: ezrie-admin-app
+  project: apps\Ezrie.Admin\src\Ezrie.Admin.Blazor\Ezrie.Admin.Blazor.csproj
   bindings:
     - protocol: https
       port: 10000
 
-# EzrieCRM App
-- name: ezrie-crm-identity
-  project: apps\Ezrie.CRM\host\Ezrie.CRM.IdentityServer\Ezrie.CRM.IdentityServer.csproj
+# Ezrie Admin Identity
+- name: ezrie-admin-identity
+  project: apps\Ezrie.Admin\src\Ezrie.Admin.IdentityServer\Ezrie.Admin.IdentityServer.csproj
   bindings:
     - protocol: https
-      port: 44319
+      port: 5100
 
-# CRM API
-- name: ezrie-crm-httpapi-host
-  project: apps\Ezrie.CRM\host\Ezrie.CRM.HttpApi.Host\Ezrie.CRM.HttpApi.Host.csproj
+# Ezrie Admin API
+- name: ezrie-admin-httpapi-host
+  project: apps\Ezrie.Admin\src\Ezrie.Admin.HttpApi.Host\Ezrie.Admin.HttpApi.Host.csproj
   bindings:
     - protocol: https
-      port: 44377
+      port: 10100
 
 # Administration API
 - name: ezrie-administration-httpapi-host
   project: services\Ezrie.AdministrationService\host\Ezrie.AdministrationService.HttpApi.Host\Ezrie.AdministrationService.HttpApi.Host.csproj
   bindings:
     - protocol: https
-      port: 10100
+      port: 10200
 
 # Identity API
 - name: ezrie-identity-httpapi-host
   project: services\Ezrie.IdentityService\host\Ezrie.IdentityService.HttpApi.Host\Ezrie.IdentityService.HttpApi.Host.csproj
   bindings:
     - protocol: https
-      port: 10200
+      port: 10300
 
 # Tenant API
 - name: ezrie-tenant-httpapi-host
   project: services\Ezrie.TenantService\host\Ezrie.TenantService.HttpApi.Host\Ezrie.TenantService.HttpApi.Host.csproj
   bindings:
     - protocol: https
-      port: 10300
+      port: 10400

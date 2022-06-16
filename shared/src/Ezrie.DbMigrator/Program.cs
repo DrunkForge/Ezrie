@@ -14,10 +14,21 @@
 * program. If not, see <https://www.gnu.org/licenses/>.
 *********************************************************************************************/
 
+using Ezrie.Admin.EntityFrameworkCore;
+using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
+using Ezrie.Configuration;
+using Ezrie.EntityFrameworkCore;
+using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
 using Ezrie.Logging;
+using Ezrie.Migrations;
+using Ezrie.TenantService.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Volo.Abp;
+using Volo.Abp.BackgroundJobs;
+using Volo.Abp.Modularity;
 
 namespace Ezrie.DbMigrator;
 
@@ -28,7 +39,10 @@ internal static class Program
 	{
 		try
 		{
-			await CreateHostBuilder(args).RunConsoleAsync();
+			await MigrateAndSeed.ExecuteAsync<AdminEntityFrameworkCoreMigrationsModule>();
+			await MigrateAndSeed.ExecuteAsync<AdministrationServiceEntityFrameworkCoreMigrationsModule>();
+			await MigrateAndSeed.ExecuteAsync<IdentityServiceEntityFrameworkCoreMigrationsModule>();
+			await MigrateAndSeed.ExecuteAsync<TenantServiceEntityFrameworkCoreMigrationsModule>();
 
 			return 0;
 		}
@@ -42,10 +56,4 @@ internal static class Program
 			Log.CloseAndFlush();
 		}
 	}
-
-	public static IHostBuilder CreateHostBuilder(String[] args) =>
-		Host.CreateDefaultBuilder(args)
-			.AddAppSettingsSecretsJson()
-			.UseEzrieLogging<EntityFrameworkCoreDbMigratorModule>()
-			.ConfigureServices(services => services.AddHostedService<DbMigratorHostedService>());
 }

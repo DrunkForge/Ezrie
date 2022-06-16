@@ -22,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.Domain\Ezrie.Domain.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.Domain.Shared\Ezrie.Admin.Domain.Shared.csproj" />
 	</ItemGroup>
 

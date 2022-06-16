@@ -18,6 +18,7 @@ using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Hosting.AspNetCore;
 using Ezrie.Logging;
 using Ezrie.TenantService.EntityFrameworkCore.Migrations;
+using Ezrie.TenantService.Migrations;
 using Serilog;
 
 namespace Ezrie.TenantService;
@@ -59,11 +60,8 @@ internal static class Program
 			webBuilder.UseStartup<Startup<TenantServiceHttpApiHostModule>>();
 		});
 
-	private static async Task MigrateAsync(this IHost app)
-	{
-		var configuration = app.Services.GetRequiredService<IConfiguration>();
-		var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger<TenantServiceHttpApiHostModule>();
-
-		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationsModule>(logger).MigrateAndSeedAsync();
-	}
+	private static async Task MigrateAsync(this IHost host)
+		=> await host.Services
+			.GetRequiredService<ITenantServiceMigrateAndSeedService>()
+			.MigrateAndSeedAsync();
 }

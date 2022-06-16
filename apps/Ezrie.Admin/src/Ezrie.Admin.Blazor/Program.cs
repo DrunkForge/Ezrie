@@ -1,13 +1,15 @@
-using System.Threading.Tasks;
+using Ezrie.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace Ezrie.Admin.Blazor;
 
-public class Program
+internal static class Program
 {
-    public async static Task Main(string[] args)
+    public async static Task Main(String[] args)
     {
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+		builder.UseEzrieLogging<AdminBlazorModule>();
 
         var application = await builder.AddApplicationAsync<AdminBlazorModule>(options =>
         {

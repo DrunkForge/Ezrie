@@ -15,7 +15,7 @@ namespace Ezrie.Admin;
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
     typeof(AdminDomainModule)
-    )]
+)]
 public class AdminTestBaseModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

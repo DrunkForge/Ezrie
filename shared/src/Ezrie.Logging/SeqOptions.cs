@@ -1,6 +1,5 @@
 ﻿using Serilog.Core;
 using Serilog.Events;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Ezrie.Logging;
 

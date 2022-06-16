@@ -5,7 +5,7 @@ namespace Ezrie.Admin;
 
 [DependsOn(
     typeof(AdminEntityFrameworkCoreTestModule)
-    )]
+)]
 public class AdminDomainTestModule : AbpModule
 {
 
