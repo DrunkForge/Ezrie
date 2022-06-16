@@ -15,7 +15,6 @@
 *********************************************************************************************/
 
 using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
-using Ezrie.CRM.EntityFrameworkCore.Migrations;
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
 using Ezrie.Logging;
@@ -32,7 +31,6 @@ namespace Ezrie.DbMigrator;
 
 [DependsOn(typeof(EzrieEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreMigrationsModule))]
-[DependsOn(typeof(CRMEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(IdentityServiceEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(TenantServiceEntityFrameworkCoreMigrationsModule))]
 public class EntityFrameworkCoreDbMigratorModule : AbpModule

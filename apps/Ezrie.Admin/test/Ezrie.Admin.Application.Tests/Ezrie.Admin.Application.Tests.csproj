@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>Ezrie.Admin</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Ezrie.Admin.Application\Ezrie.Admin.Application.csproj" />
+		<ProjectReference Include="..\Ezrie.Admin.Domain.Tests\Ezrie.Admin.Domain.Tests.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -15,7 +15,6 @@
 *********************************************************************************************/
 
 using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
-using Ezrie.CRM.EntityFrameworkCore.Migrations;
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
 using Ezrie.TenantService.EntityFrameworkCore.Migrations;
@@ -37,8 +36,6 @@ public class DbMigratorHostedService : BackgroundService
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{
-		await new MigrationHost<CRMEntityFrameworkCoreMigrationsModule>(_logger).MigrateAndSeedAsync(stoppingToken);
-
 		await new MigrationHost<IdentityServiceEntityFrameworkCoreMigrationsModule>(_logger).MigrateAndSeedAsync(stoppingToken);
 		
 		await new MigrationHost<TenantServiceEntityFrameworkCoreMigrationsModule>(_logger).MigrateAndSeedAsync(stoppingToken);

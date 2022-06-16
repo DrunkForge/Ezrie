@@ -1,0 +1,12 @@
+{
+	"profiles": {
+		"Ezrie.Admin.HttpApi.Host": {
+			"commandName": "Project",
+			"launchBrowser": true,
+			"applicationUrl": "https://localhost:44390",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
+		}
+	}
+}

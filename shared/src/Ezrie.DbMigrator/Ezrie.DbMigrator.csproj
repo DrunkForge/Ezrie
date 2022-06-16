@@ -11,7 +11,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\apps\Ezrie.CRM\src\Ezrie.CRM.EntityFrameworkCore.Migrations\Ezrie.CRM.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\..\services\Ezrie.AdministrationService\src\Ezrie.AdministrationService.EntityFrameworkCore.Migrations\Ezrie.AdministrationService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\..\services\Ezrie.IdentityService\src\Ezrie.IdentityService.EntityFrameworkCore.Migrations\Ezrie.IdentityService.EntityFrameworkCore.Migrations.csproj" />
 		<ProjectReference Include="..\..\..\services\Ezrie.TenantService\src\Ezrie.TenantService.EntityFrameworkCore.Migrations\Ezrie.TenantService.EntityFrameworkCore.Migrations.csproj" />

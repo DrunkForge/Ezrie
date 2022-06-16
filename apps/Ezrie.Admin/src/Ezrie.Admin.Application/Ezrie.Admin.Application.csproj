@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\common.props" />
+	<Import Project="..\..\..\..\common.build.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>Ezrie.Admin</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Account.Application" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.Identity.Application" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Application" Version="5.3.0" />
+		<PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Ezrie.Admin.Domain\Ezrie.Admin.Domain.csproj" />
+		<ProjectReference Include="..\Ezrie.Admin.Application.Contracts\Ezrie.Admin.Application.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>

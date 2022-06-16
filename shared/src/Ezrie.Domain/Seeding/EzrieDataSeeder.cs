@@ -28,12 +28,10 @@ public class EzrieDataSeeder : IDataSeeder, ITransientDependency
 	protected IServiceScopeFactory ServiceScopeFactory { get; }
 	protected AbpDataSeedOptions Options { get; }
 
-	public EzrieDataSeeder(
-		IOptions<AbpDataSeedOptions> options,
-		IServiceScopeFactory serviceScopeFactory)
+	public EzrieDataSeeder(IOptions<AbpDataSeedOptions> options, IServiceScopeFactory serviceScopeFactory)
 	{
-		ServiceScopeFactory = serviceScopeFactory;
 		Options = options.Value;
+		ServiceScopeFactory = serviceScopeFactory;
 	}
 
 	[UnitOfWork]
@@ -48,8 +46,7 @@ public class EzrieDataSeeder : IDataSeeder, ITransientDependency
 					.ServiceProvider
 					.GetRequiredService(contributorType);
 
-				logger.LogInformation("Seeding {Contributor}",
-					contributor.GetType().Name);
+				logger.LogInformation("Seeding with {Contributor}", contributorType.Name);
 
 				await contributor.SeedAsync(context);
 			}

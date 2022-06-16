@@ -15,6 +15,10 @@
 *********************************************************************************************/
 
 using Ezrie.MultiTenancy;
+using Ezrie.Seeding;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Volo.Abp.Data;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 
@@ -30,5 +34,7 @@ public class EzrieDomainModule : AbpModule
 		{
 			options.IsEnabled = MultiTenancyConsts.IsEnabled;
 		});
+
+		context.Services.Replace(ServiceDescriptor.Transient<IDataSeeder, EzrieDataSeeder>());
 	}
 }
