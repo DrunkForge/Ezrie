@@ -1,4 +1,3 @@
-using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
 using Ezrie.AdministrationService.Migrations;
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Migrations;

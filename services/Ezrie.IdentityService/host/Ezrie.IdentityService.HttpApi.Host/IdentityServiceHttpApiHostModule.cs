@@ -27,7 +27,7 @@ namespace Ezrie.IdentityService;
 [DependsOn(typeof(EzrieHostingAspNetCoreMicroservicesModule))]
 [DependsOn(typeof(IdentityServiceAspNetCoreModule))] 
 [DependsOn(typeof(IdentityServiceApplicationModule))]
-[DependsOn(typeof(IdentityServiceEntityFrameworkCoreModule))]
+[DependsOn(typeof(IdentityServiceEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(IdentityServiceHttpApiModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreModule))]
 [DependsOn(typeof(TenantServiceEntityFrameworkCoreModule))]

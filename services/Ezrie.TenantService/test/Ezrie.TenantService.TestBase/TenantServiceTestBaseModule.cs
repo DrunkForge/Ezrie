@@ -13,7 +13,7 @@ namespace Ezrie.TenantService;
 	typeof(AbpTestBaseModule),
 	typeof(AbpAuthorizationModule),
 	typeof(TenantServiceDomainModule)
-	)]
+)]
 public class TenantServiceTestBaseModule : AbpModule
 {
 	public override void ConfigureServices(ServiceConfigurationContext context)

@@ -1,6 +1,5 @@
 using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Migrations;
-using Ezrie.TenantService.EntityFrameworkCore.Migrations;
 using Ezrie.TenantService.Migrations;
 using Microsoft.Extensions.Logging;
 using Volo.Abp.DependencyInjection;

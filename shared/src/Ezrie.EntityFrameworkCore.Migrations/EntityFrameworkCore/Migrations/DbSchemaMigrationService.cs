@@ -83,9 +83,14 @@ public class DbSchemaMigrationService : IDbSchemaMigrationService, ITransientDep
 	private async Task MigrateTenantsAsync(CancellationToken cancellationToken)
 	{
 		var tenants = await GetTenantsAsync(cancellationToken);
-		if (tenants == null || !tenants.Any())
+		if (tenants == null)
 		{
-			_logger.LogInformation("Tenant migration will be skipped.");
+			_logger.LogError("TenantRepository not provided. Tenant migration will be skipped.");
+			return;
+		}
+		if (!tenants.Any())
+		{
+			_logger.LogWarning("No tenants found. Tenant migration will be skipped.");
 			return;
 		}
 

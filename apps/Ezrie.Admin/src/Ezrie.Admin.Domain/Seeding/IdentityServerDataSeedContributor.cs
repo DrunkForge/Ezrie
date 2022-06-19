@@ -1,5 +1,8 @@
+using Ezrie.Configuration;
 using IdentityServer4.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System.Linq;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -14,214 +17,184 @@ using Volo.Abp.Uow;
 using ApiResource = Volo.Abp.IdentityServer.ApiResources.ApiResource;
 using ApiScope = Volo.Abp.IdentityServer.ApiScopes.ApiScope;
 using Client = Volo.Abp.IdentityServer.Clients.Client;
+using IdentityResource = Volo.Abp.IdentityServer.IdentityResources.IdentityResource;
 
 namespace Ezrie.Admin.Seeding;
 
 public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransientDependency
 {
+	private static readonly IReadOnlyCollection<String> CommonApiUserClaims = new[]
+	{
+		"email",
+		"email_verified",
+		"name",
+		"phone_number",
+		"phone_number_verified",
+		"role"
+	};
+
+	private static readonly IReadOnlyCollection<String> CommonScopes = new[]
+	{
+		"email",
+		"openid",
+		"profile",
+		"role",
+		"phone",
+		"address",
+		"Admin"
+	};
+
 	private readonly IApiResourceRepository _apiResourceRepository;
 	private readonly IApiScopeRepository _apiScopeRepository;
+	private readonly IIdentityResourceRepository _identityResourceRepository;
 	private readonly IClientRepository _clientRepository;
 	private readonly IIdentityResourceDataSeeder _identityResourceDataSeeder;
 	private readonly IGuidGenerator _guidGenerator;
 	private readonly IPermissionDataSeeder _permissionDataSeeder;
 	private readonly IConfiguration _configuration;
 	private readonly ICurrentTenant _currentTenant;
+	private readonly ILogger<IdentityServerDataSeedContributor> _logger;
+	private readonly IdentityServerSeed _data = new();
 
 	public IdentityServerDataSeedContributor(
-		IClientRepository clientRepository,
+		IConfiguration configuration,
+		ICurrentTenant currentTenant,
+		IGuidGenerator guidGenerator,
+		IIdentityResourceDataSeeder identityResourceDataSeeder,
+		IPermissionDataSeeder permissionDataSeeder,
 		IApiResourceRepository apiResourceRepository,
 		IApiScopeRepository apiScopeRepository,
-		IIdentityResourceDataSeeder identityResourceDataSeeder,
-		IGuidGenerator guidGenerator,
-		IPermissionDataSeeder permissionDataSeeder,
-		IConfiguration configuration,
-		ICurrentTenant currentTenant)
+		IClientRepository clientRepository,
+		IIdentityResourceRepository identityResourceRepository,
+		ILogger<IdentityServerDataSeedContributor> logger)
 	{
-		_clientRepository = clientRepository;
+		_configuration = configuration;
+		_configuration.Bind(nameof(IdentityServerSeed), _data);
+
+		_currentTenant = currentTenant;
+		_guidGenerator = guidGenerator;
+		_identityResourceDataSeeder = identityResourceDataSeeder;
+		_permissionDataSeeder = permissionDataSeeder;
 		_apiResourceRepository = apiResourceRepository;
 		_apiScopeRepository = apiScopeRepository;
-		_identityResourceDataSeeder = identityResourceDataSeeder;
-		_guidGenerator = guidGenerator;
-		_permissionDataSeeder = permissionDataSeeder;
-		_configuration = configuration;
-		_currentTenant = currentTenant;
+		_clientRepository = clientRepository;
+		_identityResourceRepository = identityResourceRepository;
+		_logger = logger;
+
 	}
 
+	/// <summary>
+	/// Generate default clients, identity and api resources
+	/// </summary>
 	[UnitOfWork]
 	public virtual async Task SeedAsync(DataSeedContext context)
 	{
 		using (_currentTenant.Change(context?.TenantId))
 		{
-			await _identityResourceDataSeeder.CreateStandardResourcesAsync();
-			await CreateApiResourcesAsync();
-			await CreateApiScopesAsync();
-			await CreateClientsAsync();
+			await EnsureIdentityResources();
+
+			await EnsureApiScopes();
+
+			await EnsureApiResources();
+
+			await EnsureClients();
 		}
 	}
 
-	private async Task CreateApiScopesAsync()
+	private async Task EnsureIdentityResources()
 	{
-		await CreateApiScopeAsync("Admin");
-	}
+		await _identityResourceDataSeeder.CreateStandardResourcesAsync();
 
-	private async Task CreateApiResourcesAsync()
-	{
-		var commonApiUserClaims = new[]
+		foreach (var entry in _data.IdentityResources)
 		{
-				"email",
-				"email_verified",
-				"name",
-				"phone_number",
-				"phone_number_verified",
-				"role"
-			};
-
-		await CreateApiResourceAsync("Admin", commonApiUserClaims);
-	}
-
-	private async Task<ApiResource> CreateApiResourceAsync(String name, IEnumerable<String> claims)
-	{
-		var apiResource = await _apiResourceRepository.FindByNameAsync(name);
-		if (apiResource == null)
-		{
-			apiResource = await _apiResourceRepository.InsertAsync(
-				new ApiResource(
-					_guidGenerator.Create(),
-					name,
-					name + " API"
-				),
-				autoSave: true
-			);
-		}
-
-		foreach (var claim in claims)
-		{
-			if (apiResource.FindClaim(claim) == null)
+			var identityResource = await _identityResourceRepository.FindByNameAsync(entry.Name);
+			if (identityResource == null)
 			{
-				apiResource.AddUserClaim(claim);
+				identityResource = await _identityResourceRepository.InsertAsync(
+					new(
+						_guidGenerator.Create(),
+						entry.Name,
+						entry.DisplayName
+					),
+					autoSave: true
+				);
+				_logger.LogInformation("Added IdentityResource: {Name} ({DisplayName})", identityResource.Name, identityResource.DisplayName);
 			}
 		}
-
-		return await _apiResourceRepository.UpdateAsync(apiResource);
 	}
 
-	private async Task<ApiScope> CreateApiScopeAsync(String name)
+	private async Task EnsureApiScopes()
 	{
-		var apiScope = await _apiScopeRepository.FindByNameAsync(name);
-		if (apiScope == null)
+		foreach (var entry in _data.ApiScopes)
 		{
-			apiScope = await _apiScopeRepository.InsertAsync(
-				new ApiScope(
-					_guidGenerator.Create(),
-					name,
-					name + " API"
-				),
-				autoSave: true
-			);
-		}
-
-		return apiScope;
-	}
-
-	private async Task CreateClientsAsync()
-	{
-		var commonScopes = new[]
-		{
-				"email",
-				"openid",
-				"profile",
-				"role",
-				"phone",
-				"address",
-				"Admin"
-			};
-
-		var configurationSection = _configuration.GetSection("IdentityServer:Clients");
-
-
-		//Console Test / Angular Client
-		var consoleAndAngularClientId = configurationSection["Admin_App:ClientId"];
-		if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
-		{
-			var webClientRootUrl = configurationSection["Admin_App:RootUrl"]?.TrimEnd('/');
-
-			await CreateClientAsync(
-				name: consoleAndAngularClientId,
-				scopes: commonScopes,
-				grantTypes: new[] { "password", "client_credentials", "authorization_code" },
-				secret: (configurationSection["Admin_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
-				requireClientSecret: false,
-				redirectUri: webClientRootUrl,
-				postLogoutRedirectUri: webClientRootUrl,
-				corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
-			);
-		}
-
-
-		// Blazor Client
-		var blazorClientId = configurationSection["Admin_Blazor:ClientId"];
-		if (!blazorClientId.IsNullOrWhiteSpace())
-		{
-			var blazorRootUrl = configurationSection["Admin_Blazor:RootUrl"].TrimEnd('/');
-
-			await CreateClientAsync(
-				name: blazorClientId,
-				scopes: commonScopes,
-				grantTypes: new[] { "authorization_code" },
-				secret: configurationSection["Admin_Blazor:ClientSecret"]?.Sha256(),
-				requireClientSecret: false,
-				redirectUri: $"{blazorRootUrl}/authentication/login-callback",
-				postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback",
-				corsOrigins: new[] { blazorRootUrl.RemovePostFix("/") }
-			);
-		}
-
-
-
-		// Swagger Client
-		var swaggerClientId = configurationSection["Admin_Swagger:ClientId"];
-		if (!swaggerClientId.IsNullOrWhiteSpace())
-		{
-			var swaggerRootUrl = configurationSection["Admin_Swagger:RootUrl"].TrimEnd('/');
-
-			await CreateClientAsync(
-				name: swaggerClientId,
-				scopes: commonScopes,
-				grantTypes: new[] { "authorization_code" },
-				secret: configurationSection["Admin_Swagger:ClientSecret"]?.Sha256(),
-				requireClientSecret: false,
-				redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
-				corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
-			);
+			var apiScope = await _apiScopeRepository.FindByNameAsync(entry.Name);
+			if (apiScope == null)
+			{
+				apiScope = await _apiScopeRepository.InsertAsync(
+					new ApiScope(
+						_guidGenerator.Create(),
+						entry.Name,
+						entry.DisplayName ?? entry.Name + " API"
+					),
+					autoSave: true
+				);
+				_logger.LogInformation("Added ApiScope: {ApiScope} ({DisplayName})", apiScope.Name, apiScope.DisplayName);
+			}
 		}
 	}
 
-	private async Task<Client> CreateClientAsync(
-		String name,
-		IEnumerable<String> scopes,
-		IEnumerable<String> grantTypes,
-		String secret = null,
-		String redirectUri = null,
-		String postLogoutRedirectUri = null,
-		String frontChannelLogoutUri = null,
-		Boolean requireClientSecret = true,
-		Boolean requirePkce = false,
-		IEnumerable<String> permissions = null,
-		IEnumerable<String> corsOrigins = null)
+	private async Task EnsureApiResources()
 	{
-		var client = await _clientRepository.FindByClientIdAsync(name);
+		foreach (var entry in _data.ApiResources)
+		{
+			var apiResource = await _apiResourceRepository.FindByNameAsync(entry.Name);
+			if (apiResource == null)
+			{
+				apiResource = await _apiResourceRepository.InsertAsync(
+					new ApiResource(
+						_guidGenerator.Create(),
+						entry.Name,
+						entry.DisplayName
+					),
+					autoSave: true
+				);
+			}
+
+			foreach (var userClaim in CommonApiUserClaims.Concat(apiResource.UserClaims.Select(c => c.Type)))
+			{
+				if (apiResource.FindClaim(userClaim) == null)
+				{
+					apiResource.AddUserClaim(userClaim);
+					_logger.LogInformation("Added UserClaim to {ApiResource} API resource: {UserClaim}", apiResource.Name, userClaim);
+				}
+			}
+
+			await _apiResourceRepository.UpdateAsync(apiResource);
+		}
+	}
+
+	private async Task EnsureClients()
+	{
+		foreach (var entry in _data.Clients)
+		{
+			await EnsureClientAsync(entry);
+		}
+	}
+
+	private async Task<Client> EnsureClientAsync(ClientSeed entry)
+	{
+		var client = await _clientRepository.FindByClientIdAsync(entry.ClientId);
 		if (client == null)
 		{
 			client = await _clientRepository.InsertAsync(
 				new Client(
 					_guidGenerator.Create(),
-					name
+					entry.ClientId
 				)
 				{
-					ClientName = name,
+					ClientName = entry.ClientName,
 					ProtocolType = "oidc",
-					Description = name,
+					Description = entry.Description ?? entry.ClientName ?? entry.ClientId,
 					AlwaysIncludeUserClaimsInIdToken = true,
 					AllowOfflineAccess = true,
 					AbsoluteRefreshTokenLifetime = 31536000, //365 days
@@ -229,72 +202,88 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
 					AuthorizationCodeLifetime = 300,
 					IdentityTokenLifetime = 300,
 					RequireConsent = false,
-					FrontChannelLogoutUri = frontChannelLogoutUri,
-					RequireClientSecret = requireClientSecret,
-					RequirePkce = requirePkce
+					FrontChannelLogoutUri = entry.FrontChannelLogoutUri,
+					RequireClientSecret = entry.RequireClientSecret,
+					RequirePkce = entry.RequirePkce
 				},
 				autoSave: true
 			);
+			_logger.LogInformation("Added Client: {ClientId} ({ClientName})", client.ClientId, client.ClientName);
 		}
 
-		foreach (var scope in scopes)
+		foreach (var scope in entry.AllowedScopes.Concat(CommonScopes))
 		{
 			if (client.FindScope(scope) == null)
 			{
 				client.AddScope(scope);
+				_logger.LogInformation("Added Scope to {ClientId}: {Scope}", client.ClientId, scope);
 			}
 		}
 
-		foreach (var grantType in grantTypes)
+		foreach (var grantType in entry.AllowedGrantTypes)
 		{
 			if (client.FindGrantType(grantType) == null)
 			{
 				client.AddGrantType(grantType);
+				_logger.LogInformation("Added GrantType to {ClientId}: {GrantType}", client.ClientId, grantType);
 			}
 		}
 
-		if (!secret.IsNullOrEmpty())
+		foreach (var secret in entry.ClientSecrets)
 		{
-			if (client.FindSecret(secret) == null)
+			if (client.FindSecret(secret.Value) == null)
 			{
-				client.AddSecret(secret);
+				client.AddSecret(secret.Value);
 			}
 		}
 
-		if (redirectUri != null)
+		if (entry.FrontChannelLogoutUri != null)
+		{
+			client.FrontChannelLogoutUri = entry.FrontChannelLogoutUri;
+			_logger.LogInformation("Set FrontChannelLogoutUri for {ClientId}: {FrontChannelLogoutUri}", client.ClientId, entry.FrontChannelLogoutUri);
+		}
+
+		if (entry.BackChannelLogoutUri != null)
+		{
+			client.BackChannelLogoutUri = entry.BackChannelLogoutUri;
+			_logger.LogInformation("Set BackChannelLogoutUri for {ClientId}: {BackChannelLogoutUri}", client.ClientId, entry.BackChannelLogoutUri);
+		}
+
+		foreach (var redirectUri in entry.RedirectUris)
 		{
 			if (client.FindRedirectUri(redirectUri) == null)
 			{
 				client.AddRedirectUri(redirectUri);
+				_logger.LogInformation("Added RedirectUri to {ClientId}: {RedirectUri}", client.ClientId, redirectUri);
 			}
 		}
 
-		if (postLogoutRedirectUri != null)
+		foreach (var postLogoutRedirectUri in entry.PostLogoutRedirectUris)
 		{
 			if (client.FindPostLogoutRedirectUri(postLogoutRedirectUri) == null)
 			{
 				client.AddPostLogoutRedirectUri(postLogoutRedirectUri);
+				_logger.LogInformation("Added PostLogoutRedirectUri to {ClientId}: {PostLogoutRedirectUri}", client.ClientId, postLogoutRedirectUri);
 			}
 		}
 
-		if (permissions != null)
+		if (entry.Permissions.Any())
 		{
 			await _permissionDataSeeder.SeedAsync(
 				ClientPermissionValueProvider.ProviderName,
-				name,
-				permissions,
+				entry.ClientId,
+				entry.Permissions,
 				null
 			);
+			_logger.LogInformation("Added Permissions to {ClientId}: {Permissions}", client.ClientId, entry.Permissions.ToArray());
 		}
 
-		if (corsOrigins != null)
+		foreach (var corsOrigin in entry.AllowedCorsOrigins.Select(o => o.RemovePostFix("/")))
 		{
-			foreach (var origin in corsOrigins)
+			if (client.FindCorsOrigin(corsOrigin) == null)
 			{
-				if (!origin.IsNullOrWhiteSpace() && client.FindCorsOrigin(origin) == null)
-				{
-					client.AddCorsOrigin(origin);
-				}
+				client.AddCorsOrigin(corsOrigin);
+				_logger.LogInformation("Added CorsOrigin to {ClientId}: {CorsOrigin}", client.ClientId, corsOrigin);
 			}
 		}
 

@@ -17,7 +17,7 @@
 using Ezrie.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ezrie.IdentityService.EntityFrameworkCore.Migrations;
+namespace Ezrie.IdentityService.EntityFrameworkCore;
 
 public class IdentityServiceMigrationsDbContextFactory : MigrationDbContextFactoryBase<IdentityServiceMigrationsDbContext>
 {

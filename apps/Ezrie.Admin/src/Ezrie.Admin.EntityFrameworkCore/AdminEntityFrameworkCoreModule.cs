@@ -1,8 +1,7 @@
+using Ezrie.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.PostgreSql;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.IdentityServer.EntityFrameworkCore;
@@ -13,18 +12,16 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Ezrie.Admin;
 
-[DependsOn(
-	typeof(AdminDomainModule),
-	typeof(AbpIdentityEntityFrameworkCoreModule),
-	typeof(AbpIdentityServerEntityFrameworkCoreModule),
-	typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-	typeof(AbpSettingManagementEntityFrameworkCoreModule),
-	typeof(AbpEntityFrameworkCorePostgreSqlModule),
-	typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
-	typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-	typeof(AbpTenantManagementEntityFrameworkCoreModule),
-	typeof(AbpFeatureManagementEntityFrameworkCoreModule)
-	)]
+[DependsOn(typeof(AdminDomainModule))]
+[DependsOn(typeof(EzrieEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpAuditLoggingEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpBackgroundJobsEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpFeatureManagementEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpIdentityEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpIdentityServerEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpPermissionManagementEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpSettingManagementEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpTenantManagementEntityFrameworkCoreModule))]
 public class AdminEntityFrameworkCoreModule : AbpModule
 {
 	public override void PreConfigureServices(ServiceConfigurationContext context)

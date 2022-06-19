@@ -28,10 +28,9 @@ public class SeedingService : ITransientDependency
 {
 	private readonly ICurrentTenant _currentTenant;
 	private readonly IDataSeeder _dataSeeder;
+	private readonly ILogger<SeedingService> _logger;
 	private readonly ITenantRepository _tenantRepository;
 	private readonly IUnitOfWorkManager _unitOfWorkManager;
-
-	protected ILogger<SeedingService> Logger { get; set; }
 
 	public SeedingService(
 		ICurrentTenant currentTenant,
@@ -42,40 +41,45 @@ public class SeedingService : ITransientDependency
 	{
 		_currentTenant = currentTenant;
 		_dataSeeder = dataSeeder;
+		_logger = logger;
 		_tenantRepository = tenantRepository;
 		_unitOfWorkManager = unitOfWorkManager;
-		Logger = logger;
 	}
 
 	public async Task SeedAsync(CancellationToken cancellationToken = default)
 	{
-		Logger.LogInformation("Started seeding databases");
+		_logger.LogInformation("Started seeding databases");
 
 		await SeedHostAsync(cancellationToken);
 		await SeedTenantsAsync(cancellationToken);
 
-		Logger.LogInformation("Completed seeding databases");
+		_logger.LogInformation("Completed seeding databases");
 	}
 
 	private async Task SeedHostAsync(CancellationToken cancellationToken)
 	{
-		Logger.LogInformation("Starting Host seeding");
+		_logger.LogInformation("Starting Host seeding");
 
 		await SeedDataAsync(null, cancellationToken);
 
-		Logger.LogInformation("Completed Host seeding");
+		_logger.LogInformation("Completed Host seeding");
 	}
 
 	private async Task SeedTenantsAsync(CancellationToken cancellationToken)
 	{
 		var tenants = await GetTenantsAsync(cancellationToken);
-		if (tenants == null || !tenants.Any())
+		if (tenants == null)
 		{
-			Logger.LogWarning("No tenants found. Tenant seeding will be skipped.");
+			_logger.LogError("TenantRepository not provided. Tenant seeding will be skipped.");
+			return;
+		}
+		if (!tenants.Any())
+		{
+			_logger.LogWarning("No tenants found. Tenant seeding will be skipped.");
 			return;
 		}
 
-		Logger.LogInformation("Starting Tenant seeding");
+		_logger.LogInformation("Starting Tenant seeding");
 
 		foreach (var tenant in tenants)
 		{
@@ -83,7 +87,7 @@ public class SeedingService : ITransientDependency
 
 		}
 
-		Logger.LogInformation("Completed Tenant seeding");
+		_logger.LogInformation("Completed Tenant seeding");
 	}
 
 	private async Task SeedDataAsync(Tenant? tenant, CancellationToken cancellationToken)
@@ -95,17 +99,17 @@ public class SeedingService : ITransientDependency
 				try
 				{
 					var name = tenant == null ? "HOST" : $"{tenant.Name} ({tenant.Id})";
-					Logger.LogInformation("Started Seeding {Name}", name);
+					_logger.LogInformation("Started Seeding {Name}", name);
 
 					await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id));
 
-					Logger.LogInformation("Completed Seeding {Name}", name);
+					_logger.LogInformation("Completed Seeding {Name}", name);
 
 					await uow.CompleteAsync(cancellationToken);
 				}
 				catch (Exception ex)
 				{
-					Logger?.LogException(ex, LogLevel.Error);
+					_logger?.LogException(ex, LogLevel.Error);
 					await uow.RollbackAsync(cancellationToken);
 					throw;
 				}
@@ -122,11 +126,11 @@ public class SeedingService : ITransientDependency
 		}
 		catch (DependencyResolutionException)
 		{
-			Logger.LogWarning("Unable to resolve TenantManagementDbContext.");
+			_logger.LogWarning("Unable to resolve TenantManagementDbContext.");
 		}
 		catch (Exception ex)
 		{
-			Logger.LogWarning(ex, "Unable to retrieve Tenants.");
+			_logger.LogWarning(ex, "Unable to retrieve Tenants.");
 		}
 
 		return new List<Tenant>();

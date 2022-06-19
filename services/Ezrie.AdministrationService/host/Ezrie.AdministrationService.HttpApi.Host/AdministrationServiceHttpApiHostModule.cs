@@ -31,7 +31,7 @@ namespace Ezrie.AdministrationService;
 
 [DependsOn(typeof(EzrieHostingAspNetCoreMicroservicesModule))]
 [DependsOn(typeof(AdministrationServiceApplicationModule))]
-[DependsOn(typeof(AdministrationServiceEntityFrameworkCoreModule))]
+[DependsOn(typeof(AdministrationServiceEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(AdministrationServiceHttpApiModule))]
 [DependsOn(typeof(IdentityServiceApplicationContractsModule))]
 [DependsOn(typeof(IdentityServiceEntityFrameworkCoreModule))]

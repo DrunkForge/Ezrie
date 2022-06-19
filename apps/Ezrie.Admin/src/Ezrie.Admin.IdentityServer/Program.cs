@@ -23,7 +23,6 @@ internal static class Program
 
 			var app = builder.Build();
 
-
 			await app.InitializeApplicationAsync();
 
 			await app.MigrateAsync();

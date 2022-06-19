@@ -9,7 +9,7 @@ namespace Ezrie.TenantService;
  */
 [DependsOn(
 	typeof(TenantServiceEntityFrameworkCoreTestModule)
-	)]
+)]
 public class TenantServiceDomainTestModule : AbpModule
 {
 

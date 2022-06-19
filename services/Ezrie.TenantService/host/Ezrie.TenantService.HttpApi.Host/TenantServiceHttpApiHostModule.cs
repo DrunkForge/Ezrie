@@ -16,6 +16,7 @@
 
 using Ezrie.AdministrationService.EntityFrameworkCore;
 using Ezrie.Hosting.AspNetCore.Microservices;
+using Ezrie.IdentityService.EntityFrameworkCore;
 using Ezrie.TenantService.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Volo.Abp;
@@ -27,8 +28,9 @@ namespace Ezrie.TenantService;
 
 [DependsOn(typeof(EzrieHostingAspNetCoreMicroservicesModule))]
 [DependsOn(typeof(TenantServiceApplicationModule))]
-[DependsOn(typeof(TenantServiceEntityFrameworkCoreModule))]
+[DependsOn(typeof(TenantServiceEntityFrameworkCoreMigrationsModule))]
 [DependsOn(typeof(TenantServiceHttpApiModule))]
+[DependsOn(typeof(IdentityServiceEntityFrameworkCoreModule))]
 [DependsOn(typeof(AdministrationServiceEntityFrameworkCoreModule))]
 public class TenantServiceHttpApiHostModule : AbpModule
 {

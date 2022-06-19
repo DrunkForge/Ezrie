@@ -1,5 +1,4 @@
 using Ezrie.EntityFrameworkCore.Migrations;
-using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
 using Ezrie.IdentityService.Migrations;
 using Ezrie.Migrations;
 using Microsoft.Extensions.Logging;

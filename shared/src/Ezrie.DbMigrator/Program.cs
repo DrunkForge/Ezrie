@@ -15,13 +15,13 @@
 *********************************************************************************************/
 
 using Ezrie.Admin.EntityFrameworkCore;
-using Ezrie.AdministrationService.EntityFrameworkCore.Migrations;
+using Ezrie.AdministrationService.EntityFrameworkCore;
 using Ezrie.Configuration;
 using Ezrie.EntityFrameworkCore;
-using Ezrie.IdentityService.EntityFrameworkCore.Migrations;
+using Ezrie.IdentityService.EntityFrameworkCore;
 using Ezrie.Logging;
 using Ezrie.Migrations;
-using Ezrie.TenantService.EntityFrameworkCore.Migrations;
+using Ezrie.TenantService.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

@@ -8,7 +8,7 @@ namespace Ezrie.TenantService;
 	typeof(AbpAutofacModule),
 	typeof(TenantServiceHttpApiClientModule),
 	typeof(AbpHttpClientIdentityModelModule)
-	)]
+)]
 public class TenantServiceConsoleApiClientModule : AbpModule
 {
 

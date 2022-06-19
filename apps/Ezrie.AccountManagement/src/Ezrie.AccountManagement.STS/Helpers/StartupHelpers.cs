@@ -372,17 +372,6 @@ public static class StartupHelpers
 	{
 		var externalProviderConfiguration = configuration.GetSection(nameof(ExternalProvidersConfiguration)).Get<ExternalProvidersConfiguration>();
 
-		if (externalProviderConfiguration.UseGitHubProvider)
-		{
-			authenticationBuilder.AddGitHub(options =>
-			{
-				options.ClientId = externalProviderConfiguration.GitHubClientId;
-				options.ClientSecret = externalProviderConfiguration.GitHubClientSecret;
-				options.CallbackPath = externalProviderConfiguration.GitHubCallbackPath;
-				options.Scope.Add("user:email");
-			});
-		}
-
 		if (externalProviderConfiguration.UseAzureAdProvider)
 		{
 			authenticationBuilder.AddMicrosoftIdentityWebApp(options =>

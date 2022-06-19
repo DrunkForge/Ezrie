@@ -11,7 +11,7 @@ namespace Ezrie.TenantService;
 	typeof(TenantServiceApplicationContractsModule),
 	typeof(AbpDddApplicationModule),
 	typeof(AbpAutoMapperModule)
-	)]
+)]
 [DependsOn(typeof(AbpTenantManagementApplicationModule))]
 public class TenantServiceApplicationModule : AbpModule
 {

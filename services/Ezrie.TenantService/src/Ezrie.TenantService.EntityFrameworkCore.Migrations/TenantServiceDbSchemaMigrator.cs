@@ -18,7 +18,7 @@ using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Migrations;
 using Volo.Abp.DependencyInjection;
 
-namespace Ezrie.TenantService.EntityFrameworkCore.Migrations;
+namespace Ezrie.TenantService.EntityFrameworkCore;
 
 [ExposeServices(typeof(IDbSchemaMigrator))]
 public class TenantServiceDbSchemaMigrator : DbSchemaMigrator<TenantServiceMigrationsDbContext>, IDbSchemaMigrator, ITransientDependency

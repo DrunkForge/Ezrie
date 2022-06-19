@@ -16,11 +16,12 @@
 
 #nullable disable
 
+using Ezrie;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
-namespace Ezrie.IdentityService.EntityFrameworkCore.Migrations;
+namespace Ezrie.IdentityService.EntityFrameworkCore;
 
 [ConnectionStringName(IdentityServiceDbProperties.ConnectionStringName)]
 public class IdentityServiceMigrationsDbContext : AbpDbContext<IdentityServiceMigrationsDbContext>

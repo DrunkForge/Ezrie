@@ -18,7 +18,7 @@ using Ezrie.EntityFrameworkCore.Migrations;
 using Ezrie.Migrations;
 using Volo.Abp.DependencyInjection;
 
-namespace Ezrie.IdentityService.EntityFrameworkCore.Migrations;
+namespace Ezrie.IdentityService.EntityFrameworkCore;
 
 [ExposeServices(typeof(IDbSchemaMigrator))]
 public class IdentityServiceDbSchemaMigrator : DbSchemaMigrator<IdentityServiceMigrationsDbContext>, IDbSchemaMigrator, ITransientDependency

@@ -2,7 +2,7 @@ using Ezrie.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
 
-namespace Ezrie.IdentityService.EntityFrameworkCore.Migrations;
+namespace Ezrie.IdentityService.EntityFrameworkCore;
 
 [DependsOn(typeof(IdentityServiceApplicationContractsModule))]
 [DependsOn(typeof(IdentityServiceEntityFrameworkCoreModule))]
