@@ -15,4 +15,8 @@
 		<ProjectReference Include="..\Ezrie.Logging\Ezrie.Logging.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
+	</ItemGroup>
+
 </Project>

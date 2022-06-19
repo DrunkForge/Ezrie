@@ -15,5 +15,9 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Ezrie.AccountManagement.Domain.Shared\Ezrie.AccountManagement.Domain.Shared.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
+	</ItemGroup>
 	
 </Project>

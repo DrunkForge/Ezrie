@@ -15,4 +15,8 @@
 		<ProjectReference Include="..\Ezrie.TenantService.Domain\Ezrie.TenantService.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
+	</ItemGroup>
+
 </Project>

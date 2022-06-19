@@ -11,8 +11,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
-		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftPackageVersion)" />
+		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(MicrosoftPackageVersion)" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
 		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="5.3.0" />
@@ -27,6 +27,10 @@
 		<ProjectReference Include="..\Ezrie.Admin.Application\Ezrie.Admin.Application.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.EntityFrameworkCore\Ezrie.Admin.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.HttpApi\Ezrie.Admin.HttpApi.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
 	</ItemGroup>
 
 </Project>

@@ -21,4 +21,8 @@
 		<ProjectReference Include="..\Ezrie.AdministrationService.Domain.Shared\Ezrie.AdministrationService.Domain.Shared.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
+	</ItemGroup>
+
 </Project>

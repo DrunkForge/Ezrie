@@ -13,4 +13,8 @@
 		<ProjectReference Include="..\Ezrie.Admin.EntityFrameworkCore\Ezrie.Admin.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
+	</ItemGroup>
+
 </Project>

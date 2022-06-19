@@ -11,7 +11,6 @@
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="5.3.0" />
 		<PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="5.3.0" />
-		<PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="5.3.0" />
 		<PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="5.3.0" />
 		<PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="5.3.0" />
 		<PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="5.3.0" />
@@ -21,15 +20,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\shared\src\Ezrie.EntityFrameworkCore\Ezrie.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.Application.Contracts\Ezrie.Admin.Application.Contracts.csproj" />
 		<ProjectReference Include="..\Ezrie.Admin.Domain\Ezrie.Admin.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="$(MicrosoftPackageVersion)">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 			<PrivateAssets>compile; contentFiles; build; buildMultitargeting; buildTransitive; analyzers; native</PrivateAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
 	</ItemGroup>
 
 </Project>

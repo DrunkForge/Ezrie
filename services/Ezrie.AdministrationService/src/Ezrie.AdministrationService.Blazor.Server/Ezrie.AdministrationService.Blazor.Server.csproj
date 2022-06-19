@@ -16,4 +16,8 @@
 		<ProjectReference Include="..\Ezrie.AdministrationService.Blazor\Ezrie.AdministrationService.Blazor.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
+	</ItemGroup>
+
 </Project>

@@ -9,12 +9,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(MicrosoftPackageVersion)" />
 		<ProjectReference Include="..\..\..\..\shared\test\Ezrie.TestBase.EntityFrameworkCore\Ezrie.TestBase.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\src\Ezrie.TenantService.EntityFrameworkCore\Ezrie.TenantService.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Ezrie.TenantService.TestBase\Ezrie.TenantService.TestBase.csproj" />
 		<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
 	</ItemGroup>
 
 </Project>

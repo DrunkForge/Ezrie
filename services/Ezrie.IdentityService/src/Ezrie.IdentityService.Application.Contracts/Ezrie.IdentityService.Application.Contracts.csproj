@@ -20,4 +20,8 @@
 		<ProjectReference Include="..\Ezrie.IdentityService.Domain.Shared\Ezrie.IdentityService.Domain.Shared.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
+	</ItemGroup>
+
 </Project>

@@ -22,4 +22,8 @@
 		<ProjectReference Include="..\Ezrie.Admin.Application.Contracts\Ezrie.Admin.Application.Contracts.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="NodaTime" Version="3.1.0" />
+	</ItemGroup>
+
 </Project>
